@@ -1,4 +1,4 @@
-import ContactView from '@/ui/sections/ContactView';
+import ContactView from '@/sections/ContactView';
 
 const page = () => {
   return <ContactView />;

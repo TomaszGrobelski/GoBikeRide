@@ -1,4 +1,4 @@
-import HeroView from '@/ui/sections/HeroView';
+import HeroView from '@/sections/HeroView';
 
 const page = () => {
   return <HeroView />;
