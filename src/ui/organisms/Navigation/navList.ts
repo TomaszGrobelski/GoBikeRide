@@ -1,7 +1,10 @@
 export const menuList = [
-  { title: 'Home', link: '/', icon: 'dsa' },
-  { title: 'Home', link: '/', icon: 'dsa' },
-  { title: 'Home', link: '/', icon: 'dsa' },
-  { title: 'Home', link: '/', icon: 'dsa' },
-  { title: 'Home', link: '/', icon: 'dsa' }
+  { title: 'Home', link: '/dashboard/hero', icon: 'mdi-light:home' },
+  { title: 'Trasy', link: '/dashboard/trasy', icon: 'subway:world-1' },
+  { title: 'Rower', link: '/dashboard/rower', icon: 'mingcute:bike-line' },
+  {
+    title: 'Contact',
+    link: '/dashboard/contact',
+    icon: 'grommet-icons:contact'
+  }
 ];

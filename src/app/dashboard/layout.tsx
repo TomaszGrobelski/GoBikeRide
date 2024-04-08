@@ -8,7 +8,7 @@ const Layout = ({ children }: Props) => {
   return (
     <div className='flex gap-20'>
       <Nav />
-      <div >{children}</div>
+      <div>{children}</div>
     </div>
   );
 };
