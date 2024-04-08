@@ -5,12 +5,12 @@ import Image from 'next/image';
 const Page = () => {
   return (
     <div>
-      <Link href='/dashboard' >dashboard</Link>
+      <Link href='/dashboard/hero'>dashboard</Link>
       <Image
         src='/assets/MainPhoto.jpg'
         alt='Zdjęcie strony wejściowej'
         width={1300}
-        height={729}
+        height={1300}
         layout='responsive'
       />
     </div>

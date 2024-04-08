@@ -5,7 +5,7 @@ const ThemeSwitch = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className='flex gap-6 w-24 items-center justify-center border-[1px] border-black p-2 px-4 rounded-2xl'>
+    <div className='flex gap-6 w-24 items-center justify-center border-[1px] border-black p-2 px-4 rounded-2xl dark:border-white'>
       <button onClick={() => setTheme('light')}>
         <Icon icon='entypo:light-up' />
       </button>
