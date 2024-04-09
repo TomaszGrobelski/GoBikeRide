@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect } from 'react';
 
 function useIsSmallScreen() {
@@ -8,6 +9,8 @@ function useIsSmallScreen() {
       setIsSmallScreen(window.innerWidth < 700);
     }
 
+    handleResize()
+    
     window.addEventListener('resize', handleResize);
 
     return () => {

@@ -7,11 +7,11 @@ import { Typography } from '@mui/material';
 const BlogView = () => {
   return (
     <div className=''>
-      <Typography variant='h1' className=' text-slate-50 text-[3rem] text-nowrap'>
+      <Typography variant='h1' sx={{fontSize:'2rem'}} className=' text-slate-50 text-nowrap'>
         Posty z trasy
       </Typography>
-      <div className='w-4/5 bg-white'>
-        <Box className='bg-blue-500 p-10 w-full' >
+      <div className='w-full bg-white'>
+        <Box className='bg-white p-10 w-full' >
 
         <RHFTextField label='Opisz swoją podróż' variant={TextFieldVariants.FILLED} />
         </Box>

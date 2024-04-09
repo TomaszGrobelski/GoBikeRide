@@ -27,7 +27,7 @@ const Nav = () => {
   const isSmallScreen= useIsSmallScreen();
 
   return (
-    <nav className={` flex h-screen ${isSmallScreen?'w-20 p-3':'w-72 p-6'}  flex-col items-start justify-between border-r-[1px]`}>
+    <nav className={` flex h-screen ${isSmallScreen?'w-20 p-3':'w-72 p-6'}  flex-col items-start justify-between border-r-[1px] z-20`}>
       <ul className='flex flex-col items-center justify-center gap-2 space-y-4'>
         <p className={`flex items-center gap-2 text-[28px] ${isSmallScreen&&'self-start'}`}>
           <Image src={logoSrc} width={50} alt='Logo' />

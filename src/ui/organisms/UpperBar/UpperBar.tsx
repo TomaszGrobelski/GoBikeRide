@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const UpperBar = () => {
   return (
-    <div className='fixed p-2 px-4 top-0 right-0 flex justify-end gap-4'>
+    <div className='fixed bg-purple-400 w-full p-2 px-4 top-0 right-0 flex z-0 justify-end gap-4'>
       <ThemeSwitch />
 
         <DropdownMenu.Root>
