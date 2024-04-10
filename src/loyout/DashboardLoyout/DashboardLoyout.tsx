@@ -32,8 +32,9 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
         alt='Photo'
       />
       <Nav />
-      <div className='flex w-full max-w-[1300px] flex-col p-6'>
+      <div className='flex w-full flex-col  p-6'>
         <UpperBar />
+
         <Typography
           variant='h1'
           sx={{ fontSize: '2rem' }}

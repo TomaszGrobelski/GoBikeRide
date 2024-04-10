@@ -12,12 +12,13 @@ import GBRDarkTransparent from '../../../../public/assets/Logo/GRB-DarkTranspare
 import GBRLightTransparent from '../../../../public/assets/Logo/GBR-LightTransparent.png';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useIsSmallScreen from '@/hooks/use-IsSmallScreen';
 
 const Nav = () => {
   const router = usePathname();
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const logoSrc = theme === 'light' ? GBRDark : GBRLight;
   const transparentSrc =
     theme === 'light' ? GBRDarkTransparent : GBRLightTransparent;
@@ -25,6 +26,18 @@ const Nav = () => {
   const selectedItem = theme === 'light' ? 'bg-white' : 'bg-black';
 
   const isSmallScreen = useIsSmallScreen();
+
+  useEffect(() => {
+    setMounted(true);
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme && storedTheme !== theme) {
+      setTheme(storedTheme);
+    }
+  }, [theme, setTheme]);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <nav

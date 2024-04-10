@@ -5,15 +5,18 @@ import Link from 'next/link';
 
 const UpperBar = () => {
   return (
-    <div className=' flex w-full justify-end gap-4 px-2'>
-      <button className='IconButton' aria-label='Customise options'>
+    <div className=' flex w-full items-center justify-end gap-4 px-2'>
+      <button
+        className='IconButton flex h-10 w-10 items-center justify-center rounded-full hover:bg-slate-300'
+        aria-label='Customise options'
+      >
         <Icon icon='ic:round-notification-important' fontSize={20} />
       </button>
       <ThemeSwitch />
 
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
-          <button className='IconButton' aria-label='Customise options'>
+          <button className='IconButton flex h-10 w-10 items-center justify-center rounded-full hover:bg-slate-300' aria-label='Customise options'>
             <Icon icon='teenyicons:user-solid' fontSize={20} />
           </button>
         </DropdownMenu.Trigger>
