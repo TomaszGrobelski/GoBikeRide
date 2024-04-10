@@ -11,7 +11,7 @@ const RHFTextField = ({multiline,variant,label}:IRHFTextField) => {
   
 
   return (
-    <TextField label={label} multiline={multiline} variant={variant} />
+    <TextField className='w-full min-h-10' label={label} multiline={multiline} variant={variant} />
   );
 };
 

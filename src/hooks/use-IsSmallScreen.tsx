@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 
 function useIsSmallScreen() {
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 600);
+  const [isSmallScreen, setIsSmallScreen] = useState(typeof window !== 'undefined' && window.innerWidth < 600);
 
   useEffect(() => {
     function handleResize() {

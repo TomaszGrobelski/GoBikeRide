@@ -1,7 +1,7 @@
-import HeroView from '@/sections/HeroView';
+import HomeView from "@/sections/Home/HomeView";
 
 const page = () => {
-  return <HeroView />;
+  return <HomeView />;
 };
 
 export default page;
