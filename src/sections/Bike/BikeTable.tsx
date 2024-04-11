@@ -15,6 +15,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { rows } from '@/Mock/bikeTableMocked';
 import { tableHeaders } from '@/constans/BikeTableConstans';
+import IconButton from '@/ui/atmos/IconButton';
 
 export default function BikeTable() {
   const [condition, setCondition] = useState('');
@@ -23,8 +24,8 @@ export default function BikeTable() {
     setCondition(event.target.value as string);
   };
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+    <TableContainer sx={{boxShadow: '2px 2px 8px  '}} component={Paper}>
+      <Table sx={{ minWidth: 650, boxShadow: 30 }} aria-label='simple table'>
         <TableHead>
           <TableRow>
             {tableHeaders.map((header) => (
@@ -72,10 +73,10 @@ export default function BikeTable() {
               <TableCell align='right'>{row.mileage}</TableCell>
               <TableCell align='right'>{row.maintenanceCost}</TableCell>
               <TableCell align='right'>
-                <Icon icon='ic:baseline-edit' width={20} />
+                <IconButton icon='ic:baseline-edit' ariaLabel={`Edytuj ${row.name} `} />
               </TableCell>
               <TableCell align='right'>
-                <Icon icon='basil:trash-solid' width={20} />
+                <IconButton icon='basil:trash-solid' ariaLabel={`Usuń ${row.name} `} />
               </TableCell>
             </TableRow>
           ))}

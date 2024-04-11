@@ -27,7 +27,7 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
   return (
     <div className={`flex dark:bg-[#11111D] `}>
       <Image
-        className='absolute -z-10 h-full w-full'
+        className='absolute -z-10 w-full object-cover'
         src={LightBackGround}
         alt='Photo'
       />
