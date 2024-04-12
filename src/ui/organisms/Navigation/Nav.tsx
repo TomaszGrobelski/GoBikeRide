@@ -17,27 +17,14 @@ import useIsSmallScreen from '@/hooks/use-IsSmallScreen';
 
 const Nav = () => {
   const router = usePathname();
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const { theme } = useTheme();
   const logoSrc = theme === 'light' ? GBRDark : GBRLight;
   const transparentSrc =
     theme === 'light' ? GBRDarkTransparent : GBRLightTransparent;
 
-  const selectedItem = theme === 'light' ? 'bg-white' : 'bg-black';
+  const selectedItem = theme === 'light' ? 'bg-white' : 'bg-[#F8207F]';
 
   const isSmallScreen = useIsSmallScreen();
-
-  useEffect(() => {
-    setMounted(true);
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme && storedTheme !== theme) {
-      setTheme(storedTheme);
-    }
-  }, [theme, setTheme]);
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <nav
@@ -54,12 +41,12 @@ const Nav = () => {
         </p>
         {menuList.map((item) => (
           <li
-            className={`flex w-full  justify-start text-nowrap rounded-lg border-[1px] border-gray-300 hover:bg-slate-400 
-              ${router.includes(item.link) ? selectedItem : ' '} `}
+            className={`flex w-full  justify-start text-nowrap rounded-lg border-[1px] border-gray-300 backdrop-blur-xl shadow-md
+              ${router.includes(item.link) ? selectedItem : 'hover:bg-slate-400'} `}
             key={item.title}
           >
             <Link
-              className={`flex w-full items-center justify-start gap-4 py-3 pl-4 ${isSmallScreen ? 'pr-4' : 'pr-20'}`}
+              className={`flex w-full items-center justify-start gap-4 py-3 pl-4 ${isSmallScreen ? 'pr-4' : 'pr-20'} `}
               href={item.link}
             >
               <Icon icon={item.icon} width={20} height={20} />
@@ -70,7 +57,7 @@ const Nav = () => {
           </li>
         ))}
       </ul>
-      <div className='text-[18px] '>
+      <div className='text-[18px]'>
         <Logout />
       </div>
     </nav>

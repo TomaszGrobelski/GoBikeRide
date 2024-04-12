@@ -6,13 +6,11 @@ import Link from 'next/link';
 
 const UpperBar = () => {
   return (
-    <div className=' flex w-full items-center justify-end gap-4 px-2'>
+    <div className=' flex w-full items-center justify-end gap-4 pr-2'>
       <IconButton
         icon='ic:round-notification-important'
         ariaLabel='Otwórz powiadomienia'
       />
-
-      <ThemeSwitch />
 
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
@@ -25,7 +23,10 @@ const UpperBar = () => {
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Portal>
-          <DropdownMenu.Content className='DropdownMenuContent' sideOffset={5}>
+          <DropdownMenu.Content
+            className='DropdownMenuContent rounded-md bg-white p-4 text-slate-900'
+            sideOffset={5}
+          >
             <DropdownMenu.Item className='DropdownMenuItem'>
               <Link href='/dashboard/profile'>Profil</Link>
             </DropdownMenu.Item>
@@ -35,6 +36,8 @@ const UpperBar = () => {
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
+
+      <ThemeSwitch />
     </div>
   );
 };

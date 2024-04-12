@@ -19,7 +19,7 @@ const BlogView = () => {
             <Button variant='contained'>Opublikuj</Button>
           </div>
         </Box>
-        <Box className='flex w-full max-w-[800px] flex-col items-center gap-4 rounded-xl bg-white p-10 '>
+        <Box className='flex w-full max-w-[800px] flex-col items-center gap-4 rounded-xl bg-white p-10 dark:text-black '>
           Nie opublikowano jeszcze żadnego postu
         </Box>
       </div>

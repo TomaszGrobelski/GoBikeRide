@@ -7,7 +7,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Icon } from '@iconify/react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -24,7 +23,10 @@ export default function BikeTable() {
     setCondition(event.target.value as string);
   };
   return (
-    <TableContainer sx={{boxShadow: '2px 2px 8px  '}} component={Paper}>
+    <TableContainer
+      sx={{ boxShadow: '2px 2px 8px', borderRadius: 5, p: 1 }}
+      component={Paper}
+    >
       <Table sx={{ minWidth: 650, boxShadow: 30 }} aria-label='simple table'>
         <TableHead>
           <TableRow>
@@ -73,10 +75,20 @@ export default function BikeTable() {
               <TableCell align='right'>{row.mileage}</TableCell>
               <TableCell align='right'>{row.maintenanceCost}</TableCell>
               <TableCell align='right'>
-                <IconButton icon='ic:baseline-edit' ariaLabel={`Edytuj ${row.name} `} />
+                <div className='flex justify-end'>
+                  <IconButton
+                    icon='ic:baseline-edit'
+                    ariaLabel={`Edytuj ${row.name} `}
+                  />
+                </div>
               </TableCell>
               <TableCell align='right'>
-                <IconButton icon='basil:trash-solid' ariaLabel={`Usuń ${row.name} `} />
+                <div className='flex justify-end'>
+                  <IconButton
+                    icon='basil:trash-solid'
+                    ariaLabel={`Usuń ${row.name} `}
+                  />
+                </div>
               </TableCell>
             </TableRow>
           ))}
