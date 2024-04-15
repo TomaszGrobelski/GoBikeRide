@@ -22,7 +22,10 @@ const Nav = () => {
   const transparentSrc =
     theme === 'light' ? GBRDarkTransparent : GBRLightTransparent;
 
-  const selectedItem = theme === 'light' ? 'bg-white' : 'bg-[#F8207F]';
+  const selectedItem =
+    theme === 'light'
+      ? 'bg-white underline decoration-[#E468A5] '
+      : 'bg-[#F8207F]';
 
   const isSmallScreen = useIsSmallScreen();
 
@@ -30,7 +33,7 @@ const Nav = () => {
     <nav
       className={` flex h-screen ${isSmallScreen ? 'w-20 p-3' : 'w-72 p-6'}  z-20 flex-col items-start justify-between border-r-[1px]`}
     >
-      <ul className='flex flex-col items-center justify-center gap-2 space-y-4'>
+      <ul className='flex flex-col items-center  justify-center gap-2 space-y-4'>
         <p
           className={`flex items-center gap-2 text-[28px] ${isSmallScreen && 'self-start'}`}
         >
@@ -41,7 +44,7 @@ const Nav = () => {
         </p>
         {menuList.map((item) => (
           <li
-            className={`flex w-full  justify-start text-nowrap rounded-lg border-[1px] border-gray-300 backdrop-blur-xl shadow-md
+            className={`flex w-full  justify-start text-nowrap rounded-lg border-[1px] border-gray-300 shadow-md backdrop-blur-xl
               ${router.includes(item.link) ? selectedItem : 'hover:bg-slate-400'} `}
             key={item.title}
           >

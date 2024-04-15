@@ -5,7 +5,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif']
+        poppins: ['Poppins', 'sans-serif'],
+        justMe: ['JustMeAgainDownHere', 'cursive'],
+        kurale: ['Kurale', 'serif']
       },
       fontWeight: {
         500: '500',
