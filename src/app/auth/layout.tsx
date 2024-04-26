@@ -1,15 +1,14 @@
-'use client';
-
-import '../styles/global.css';
+import { FC, ReactNode } from 'react';
 import Image from 'next/image';
-import SignIn from '@/sections/SignIn/SignIn';
 
-// https://www.youtube.com/watch?v=bicCg4GxOP8
+interface AuthLayoutProps {
+  children: ReactNode;
+}
 
-const Page = () => {
+const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
   return (
     <div className='flex h-screen w-full items-center justify-evenly p-10'>
-      {/* <Image
+      <Image
         src='/assets/LoginPage/LoginImg.jpg'
         alt='Zdjęcie strony wejściowej'
         objectFit='cover'
@@ -17,10 +16,10 @@ const Page = () => {
         layout='fill'
       />
       <div className='flex h-[600px] w-full flex-col items-center justify-center rounded-lg bg-white text-black opacity-95 shadow-lg shadow-black'>
-        <SignIn />
-      </div> */}
+        {children}
+      </div>
     </div>
   );
 };
 
-export default Page;
+export default AuthLayout;
