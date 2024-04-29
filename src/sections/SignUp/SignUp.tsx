@@ -16,6 +16,7 @@ import {
   FormMessage
 } from '@/ui/atmos/form';
 import { Input } from '@/ui/atmos/Form/Input';
+import SubmitButton from '@/ui/atmos/SubmitButton';
 
 const SignUp = () => {
   const router = useRouter();
@@ -52,7 +53,7 @@ const SignUp = () => {
   return (
     <>
       <Form {...form}>
-        <form className='flex flex-col' onSubmit={form.handleSubmit(onSubmit)}>
+        <form className='flex flex-col gap-3' onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
             name='username'
@@ -88,7 +89,7 @@ const SignUp = () => {
                 <FormControl>
                   <Input
                     type='password'
-                    placeholder='Enter your password'
+                    placeholder='Wprowadź hasło'
                     {...field}
                   />
                 </FormControl>
@@ -98,14 +99,14 @@ const SignUp = () => {
           />
           <FormField
             control={form.control}
-            name='password'
+            name='confirmPassword'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Powtórz hasło</FormLabel>
                 <FormControl>
                   <Input
                     type='password'
-                    placeholder='Enter your password'
+                    placeholder='Powtórz swoje hasło'
                     {...field}
                   />
                 </FormControl>
@@ -117,11 +118,11 @@ const SignUp = () => {
               href='/dashboard/hero'
               className='rounded-md bg-[#EA9E41] p-2 text-[1.1rem] font-bold text-white'
             > */}
-          <button type='submit'>Zaloguj</button>
+          <SubmitButton>Zarejestrój</SubmitButton>
           {/* </Link> */}
         </form>
       </Form>
-      <div className='text-[14px]'>
+      <div className='text-[14px] mt-3 flex justify-end'>
         <Link href='/auth/sign-in'>
           <button className='text-blue-700'>Powrot do logowania</button>
         </Link>

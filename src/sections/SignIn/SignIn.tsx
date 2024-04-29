@@ -16,6 +16,7 @@ import {
   FormMessage
 } from '@/ui/atmos/form';
 import { Input } from '@/ui/atmos/Form/Input';
+import SubmitButton from '@/ui/atmos/SubmitButton';
 
 const SignIn = () => {
   const router = useRouter();
@@ -52,7 +53,10 @@ const SignIn = () => {
   return (
     <>
       <Form {...form}>
-        <form className='flex flex-col' onSubmit={form.handleSubmit(onSubmit)}>
+        <form
+          className='flex flex-col gap-3'
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
           <FormField
             control={form.control}
             name='email'
@@ -87,11 +91,11 @@ const SignIn = () => {
               href='/dashboard/hero'
               className='rounded-md bg-[#EA9E41] p-2 text-[1.1rem] font-bold text-white'
             > */}
-          <button type='submit'>Zaloguj</button>
+          <SubmitButton>Zaloguj</SubmitButton>
           {/* </Link> */}
         </form>
       </Form>
-      <div className='text-[14px]'>
+      <div className='mt-3 flex justify-end text-[14px]'>
         <p>Jeśli jeszcze nie masz konta:</p>
         <Link href='/auth/sign-up'>
           <button className='text-blue-700'>Zarejestruj się</button>
