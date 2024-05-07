@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const ContactView = () => {
   return (
-    <section>Contact View ...</section>
-  )
-}
+    <section>
+      KONTAKT
+    </section>
+  );
+};
 
-export default ContactView
+export default ContactView;

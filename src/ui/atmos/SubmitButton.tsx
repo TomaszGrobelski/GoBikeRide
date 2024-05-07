@@ -7,7 +7,7 @@ interface ISubmitButton {
 const SubmitButton = ({ children }: ISubmitButton) => {
   return (
     <button
-      className='rounded-xl border-[1px] p-2 font-bold text-purple-700'
+      className='rounded-xl border-[1px] p-2 font-bold bg-gradient-to-br from-[#38B98C] to-[#3AA8AE] text-white'
       type='submit'
     >
       {children}

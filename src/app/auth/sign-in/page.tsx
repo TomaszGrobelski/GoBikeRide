@@ -1,12 +1,8 @@
-import SignIn from '@/sections/SignIn/SignIn'
-import React from 'react'
+import SignIn from '@/sections/SignIn/SignIn';
+import React from 'react';
 
 const page = () => {
-  return (
-    <div>
-        <SignIn />
-    </div>
-  )
-}
+  return <SignIn />;
+};
 
-export default page
+export default page;

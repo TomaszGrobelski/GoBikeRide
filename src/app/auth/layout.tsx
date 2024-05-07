@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react';
 import Image from 'next/image';
+import { RegistrationProvider } from '@/contexts/RegistrationContext';
 
 interface AuthLayoutProps {
   children: ReactNode;
@@ -13,10 +14,11 @@ const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
         alt='Zdjęcie strony wejściowej'
         objectFit='cover'
         className='absolute left-0 top-0 -z-10 h-screen w-full '
-        layout='fill'
+        width={1300}
+        height={1300}
       />
-      <div className='flex h-[600px] w-full flex-col items-center justify-center rounded-lg bg-white text-black opacity-95 shadow-lg shadow-black'>
-        {children}
+      <div className='flex h-full w-full items-center justify-between rounded-lg bg-white text-black shadow-lg shadow-black'>
+        <RegistrationProvider>{children}</RegistrationProvider>
       </div>
     </div>
   );
