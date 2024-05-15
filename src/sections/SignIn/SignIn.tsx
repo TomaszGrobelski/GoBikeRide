@@ -77,11 +77,11 @@ const SignIn = () => {
         position='top-right'
       />
       <div className='flex h-full w-1/2 flex-col items-center justify-center gap-4'>
-        <h1 className='text-center text-[50px]'>
+        <h1 className='text-center md:text-[20px] text-[50px]'>
           Zaloguj się do swojego konta
         </h1>
         <p className='text-center text-[20px]'>
-          Zaloguj się za pomocą portali społecznościowych
+          Zaloguj się za pomocą portalu społecznościowego
         </p>
         <div className='flex items-center gap-4'>
           <IconButton
