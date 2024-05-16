@@ -1,4 +1,4 @@
-import ContactView from '@/sections/ContactView';
+import ContactView from '@/sections/Contact/ContactView';
 
 const page = () => {
   return <ContactView />;

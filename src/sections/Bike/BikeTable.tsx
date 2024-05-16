@@ -1,22 +1,24 @@
 'use client';
+
 import { useEffect, useState } from 'react';
+import { tableHeaders } from '@/constans/BikeTableConstans';
+import { rows } from '@/Mock/bikeTableMocked';
+import TabsTable from '@/sections/Bike/TabsTable';
+import IconButton from '@/ui/atmos/IconButton';
+import { sortByProperty } from '@/utils/table-utils';
+import { Icon } from '@iconify/react';
+import Box from '@mui/material/Box';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Paper from '@mui/material/Paper';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { rows } from '@/Mock/bikeTableMocked';
-import { tableHeaders } from '@/constans/BikeTableConstans';
-import IconButton from '@/ui/atmos/IconButton';
-import { Icon } from '@iconify/react';
-import { sortByProperty } from '@/utils/table-utils';
 
 interface BikeTableRow {
   name: string;
@@ -46,6 +48,7 @@ export default function BikeTable() {
 
       filtredData = sortByProperty(rows, sortBy, sortDirection);
       setDisplayedData(filtredData);
+      console.log(sortDirection);
     }
   }, [filters, sortBy, sortDirection]);
 
@@ -67,7 +70,11 @@ export default function BikeTable() {
       sx={{ boxShadow: '2px 2px 8px', borderRadius: 5, p: 1 }}
       component={Paper}
     >
-      <Table sx={{ minWidth: 650, boxShadow: 30 }} aria-label='simple table'>
+      <TabsTable />
+      <Table
+        sx={{ minWidth: 650, boxShadow: 30, paddingTop: 50 }}
+        aria-label='simple table'
+      >
         <TableHead>
           <TableRow>
             {tableHeaders.map((header) => (
@@ -83,11 +90,20 @@ export default function BikeTable() {
                   sx={{
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    width: 160
                   }}
                 >
                   {header.name}
-                  <Icon icon={header.icon} />
+                  {sortBy === header.value && (
+                    <Icon
+                      icon={
+                        sortDirection === 'asc'
+                          ? 'mingcute:arrow-up-fill'
+                          : 'mingcute:arrow-down-fill'
+                      }
+                    />
+                  )}
                 </Box>
               </TableCell>
             ))}
@@ -100,8 +116,7 @@ export default function BikeTable() {
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-
-              <TableCell component='th' scope='row'>
+              <TableCell component='th' scope='row' align='center'>
                 {row.name}
               </TableCell>
 
@@ -109,7 +124,7 @@ export default function BikeTable() {
                 {row.lastMaintenanceDate.toLocaleDateString()}
               </TableCell>
 
-              <TableCell align='right'>
+              <TableCell align='center'>
                 <Box sx={{ minWidth: 120 }}>
                   <FormControl fullWidth>
                     <InputLabel id='demo-simple-select-label'>
@@ -132,28 +147,22 @@ export default function BikeTable() {
                 </Box>
               </TableCell>
 
-              <TableCell align='right'>{row.mileage}</TableCell>
+              <TableCell align='center'>{row.mileage}</TableCell>
 
-              <TableCell align='right'>{row.maintenanceCost}</TableCell>
+              <TableCell align='center'>{row.maintenanceCost}</TableCell>
 
-              <TableCell align='right'>
-                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <TableCell align='center'>
+                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                   <IconButton
                     icon='ic:baseline-edit'
                     ariaLabel={`Edytuj ${row.name} `}
                   />
-                </Box>
-              </TableCell>
-
-              <TableCell align='right'>
-                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   <IconButton
                     icon='basil:trash-solid'
                     ariaLabel={`Usuń ${row.name} `}
                   />
                 </Box>
               </TableCell>
-              
             </TableRow>
           ))}
         </TableBody>

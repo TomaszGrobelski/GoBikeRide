@@ -1,6 +1,6 @@
 'use client';
 
-import { MapContainer, Popup, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 
 const GoBikeMap = () => {
   return (

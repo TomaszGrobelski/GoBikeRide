@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const UpperBar = () => {
   return (
-    <div className=' flex w-full items-center justify-end gap-4 pr-2'>
+    <div className='absolute right-0 top-0 p-2 flex w-full items-center justify-end gap-4 border-b-[1px] border-white pr-2 backdrop-blur-sm '>
       <IconButton
         icon='ic:round-notification-important'
         ariaLabel='Otwórz powiadomienia'

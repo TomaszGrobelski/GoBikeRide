@@ -1,27 +1,30 @@
 'use client';
 
 import Link from 'next/link';
+
 import '../../styles/global.css';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
+
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { FormSchema } from './form.schema';
+import { useRegistration } from '@/contexts/RegistrationContext';
+import { FormSchema } from '@/sections/SignIn/form.schema';
 import {
   Form,
+  FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormControl,
   FormMessage
 } from '@/ui/atmos/form';
 import { Input } from '@/ui/atmos/Form/Input';
-import SubmitButton from '@/ui/atmos/SubmitButton';
-import { useRegistration } from '@/contexts/RegistrationContext';
-import { Toaster, toast } from 'sonner';
-import { useEffect } from 'react';
-import { useBoolean } from '@/hooks/use-Boolean';
 import IconButton from '@/ui/atmos/IconButton';
+import SubmitButton from '@/ui/atmos/SubmitButton';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { toast, Toaster } from 'sonner';
+import * as z from 'zod';
+
+import { useBoolean } from '@/hooks/use-Boolean';
 
 const SignIn = () => {
   const router = useRouter();
@@ -77,10 +80,10 @@ const SignIn = () => {
         position='top-right'
       />
       <div className='flex h-full w-1/2 flex-col items-center justify-center gap-4'>
-        <h1 className='text-center md:text-[20px] text-[50px]'>
+        <h1 className='text-center text-[20px] md:text-[40px]'>
           Zaloguj się do swojego konta
         </h1>
-        <p className='text-center text-[20px]'>
+        <p className='text-center text-[18px] md:text-[20px]'>
           Zaloguj się za pomocą portalu społecznościowego
         </p>
         <div className='flex items-center gap-4'>
@@ -144,8 +147,10 @@ const SignIn = () => {
         </Form>
       </div>
       <div className='flex h-full w-1/2 flex-col items-center justify-center space-y-4 rounded-br-lg rounded-tr-lg bg-gradient-to-br from-[#38B98C] to-[#3AA8AE] text-[14px]  text-white'>
-        <h2 className='text-center  text-[50px]'>Jesteś nowy ?</h2>
-        <p className='text-center text-[20px]'>
+        <h2 className='text-center text-[20px] md:text-[40px]'>
+          Jesteś nowy ?
+        </h2>
+        <p className='text-center text-[18px]  md:text-[20px]'>
           Zarejestruj się i odkryj mnóstwo nowych możliwości !{' '}
         </p>
         <Link href='/auth/sign-up'>

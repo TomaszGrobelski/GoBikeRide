@@ -1,14 +1,14 @@
 'use client';
+
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Nav from '@/ui/organisms/Navigation/Nav';
-import UpperBar from '@/ui/organisms/UpperBar/UpperBar';
-import React from 'react';
-import { Typography } from '@mui/material';
 import { usePathname } from 'next/navigation';
 import dashboardBG from '@/assets/photos/dashboardBG.jpg';
-import { useTheme } from 'next-themes';
 import light from '@/assets/photos/ftuy4.jpg';
-import { useEffect, useState } from 'react';
+import Nav from '@/ui/organisms/Navigation/Nav';
+import UpperBar from '@/ui/organisms/UpperBar/UpperBar';
+import { Typography } from '@mui/material';
+import { useTheme } from 'next-themes';
 
 interface IDashboardLayout {
   children: React.ReactNode;
@@ -19,12 +19,12 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
   const router = usePathname();
 
   const sectionNames = {
-    bike: 'Rower',
+    bike: 'Rowery',
     'go-bike': 'Go Bike',
     road: 'Trasa',
     hero: 'Strona Główna',
     blog: 'Blog',
-    contact: 'Kontakt'
+    contact: ''
   };
 
   const sectionName =
@@ -51,13 +51,13 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
         alt='Photo'
       />
       <Nav />
-      <div className='flex w-full flex-col p-6 '>
+      <div className='relative flex w-full flex-col p-6 gap-5 backdrop-blur-md '>
         <UpperBar />
 
         <Typography
           variant='h1'
           sx={{ fontSize: '2rem' }}
-          className=' text-nowrap  text-black dark:text-slate-50'
+          className=' text-nowrap font-rammetto  text-black dark:text-slate-50 pt-10'
         >
           {sectionName}
         </Typography>

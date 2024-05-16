@@ -1,19 +1,22 @@
 'use client';
 
 import Link from 'next/link';
+
 import '../../../styles/global.css';
-import { menuList } from './navList';
-import { Icon } from '@iconify/react';
+
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import Logout from '@/ui/atmos/Logout';
+import { Icon } from '@iconify/react';
+import { useTheme } from 'next-themes';
+
+import useIsSmallScreen from '@/hooks/use-IsSmallScreen';
+
 import GBRDark from '../../../../public/assets/Logo/GBR-Dark.png';
 import GBRLight from '../../../../public/assets/Logo/GBR-Light.png';
-import GBRDarkTransparent from '../../../../public/assets/Logo/GRB-DarkTransparent.png';
 import GBRLightTransparent from '../../../../public/assets/Logo/GBR-LightTransparent.png';
-import Image from 'next/image';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
-import useIsSmallScreen from '@/hooks/use-IsSmallScreen';
+import GBRDarkTransparent from '../../../../public/assets/Logo/GRB-DarkTransparent.png';
+import { menuList } from './navList';
 
 const Nav = () => {
   const router = usePathname();
@@ -31,7 +34,7 @@ const Nav = () => {
 
   return (
     <nav
-      className={` flex h-screen ${isSmallScreen ? 'w-20 p-3' : 'w-72 p-6'}  z-20 flex-col items-start justify-between border-r-[1px]`}
+      className={` flex h-screen ${isSmallScreen ? 'w-20 p-3' : 'w-72 p-6'}  z-20 flex-col items-start justify-between border-r-[1px] backdrop-blur-sm`}
     >
       <ul className='flex  flex-col items-center  justify-center gap-2 space-y-4'>
         <p

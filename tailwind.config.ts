@@ -7,9 +7,11 @@ const config: Config = {
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
         justMe: ['JustMeAgainDownHere', 'cursive'],
-        kurale: ['Kurale', 'serif']
+        kurale: ['Kurale', 'serif'],
+        rammetto: ['Rammetto One', 'sans-serif']
       },
       fontWeight: {
+        rammetto: '400',
         500: '500',
         600: '600'
       },

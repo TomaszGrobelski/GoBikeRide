@@ -1,12 +1,13 @@
-import L from 'leaflet'
-import GoBikeMap from './GoBikeMap'
+import L from 'leaflet';
+
+import GoBikeMap from './GoBikeMap';
 
 const GoBike = () => {
   return (
     // <div className='flex flex-col'>
-      <GoBikeMap />
+    <GoBikeMap />
     // </div>
-  )
-}
+  );
+};
 
-export default GoBike
+export default GoBike;

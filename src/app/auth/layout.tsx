@@ -8,7 +8,7 @@ interface AuthLayoutProps {
 
 const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
   return (
-    <div className='flex h-screen w-full items-center justify-evenly p-10'>
+    <div className='flex h-screen w-full items-center justify-evenly md:p-10'>
       <Image
         src='/assets/LoginPage/LoginImg.jpg'
         alt='Zdjęcie strony wejściowej'
