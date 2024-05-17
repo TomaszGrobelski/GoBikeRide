@@ -10,13 +10,13 @@ const ContactView = () => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          alignContent: 'center',
+          alignItems: 'center',
           gap: 10,
           paddingTop: 10
         }}
       >
         <HeaderContact />
-        <Grid container spacing={2}>
+        <Grid container spacing={4}>
           <Grid item xs={12} sm={6} md={4}>
             <ContactBox title='Adres' icon='ph:map-pin-bold'>
               <Typography>ul. Floriańska 25/4 </Typography>
@@ -28,9 +28,9 @@ const ContactView = () => {
             <ContactBox title='Telefon' icon='bi:telephone'>
               <Typography>
                 W przypadku pilnej potrzeby pomocy, prosimy o niezwłoczny
-                kontakt telefoniczny. Nasz
-                zespół jest gotowy, by udzielić Ci niezbędnej pomocy i rozwiązać
-                wszelkie problemy, jak najszybciej.
+                kontakt telefoniczny. Nasz zespół jest gotowy, by udzielić Ci
+                niezbędnej pomocy i rozwiązać wszelkie problemy, jak
+                najszybciej.
               </Typography>
               <CopyButton textToCopy='795 003 227'>+48 795 003 227</CopyButton>
             </ContactBox>
