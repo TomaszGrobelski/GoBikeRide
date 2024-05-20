@@ -1,4 +1,4 @@
-import ChatView from '@/sections/GoBike/GoBikeView';
+import ChatView from '@/sections/Chat/ChatView';
 
 const GoBike = () => {
   return <ChatView />;
