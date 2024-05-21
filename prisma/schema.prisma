@@ -20,6 +20,32 @@ model User {
   password String 
   createdAt DateTime @default(now())
   updateAt DateTime @updatedAt
-
+  // bikes Bike []
 
 }
+
+// model Bike {
+//   id        Int         @id @default(autoincrement())
+//   userId    Int
+//   user      User        @relation(fields: [userId], references: [id])
+//   brand     String
+//   model     String
+//   createdAt DateTime    @default(now())
+//   updateAt  DateTime    @updatedAt
+//   components Component[] 
+// }
+
+// model Component {
+//   id                Int      @id @default(autoincrement())
+//   bikeId            Int
+//   bike              Bike     @relation(fields: [bikeId], references: [id])
+//   type              String
+//   brand             String
+//   model             String
+//   maintenanceDate   DateTime
+//   currentState      String
+//   currentMileageKm  Float
+//   maintenanceCost   Float
+//   createdAt         DateTime @default(now())
+//   updateAt          DateTime @updatedAt
+// }
