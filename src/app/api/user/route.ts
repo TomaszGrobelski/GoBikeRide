@@ -17,7 +17,6 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { email, username, password } = userSchema.parse(body);
 
-    //check if email already exists
     const existringUserByEmail = await db.user.findUnique({
       where: { email: email }
     });

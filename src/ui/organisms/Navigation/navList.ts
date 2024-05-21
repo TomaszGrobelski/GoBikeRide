@@ -9,12 +9,17 @@ export const menuList = [
     icon: 'bi:chat'
   },
   {
+    title: 'Użytkownicy',
+    link: '/dashboard/users',
+    icon: 'clarity:users-line'
+  },
+  {
     title: 'Kontakt',
     link: '/dashboard/contact',
     icon: 'grommet-icons:contact'
   },
   {
-    title: 'Go Premium',
+    title: 'Premium',
     link: '/dashboard/premium',
     icon: 'fluent:premium-16-regular'
   }

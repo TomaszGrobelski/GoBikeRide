@@ -4,7 +4,7 @@ export const rows = [
     lastMaintenanceDate: new Date('2024-04-10'),
     condition: 'Dobry',
     mileage: 1000,
-    maintenanceCost: 50,
+    maintenanceCost: 50
   },
   {
     name: 'Koło przednie',
@@ -42,3 +42,47 @@ export const rows = [
     maintenanceCost: 70
   }
 ];
+
+function randomDate(startDate: Date, endDate: Date) {
+  return new Date(
+    startDate.getTime() +
+      Math.random() * (endDate.getTime() - startDate.getTime())
+  );
+}
+
+// Tworzenie mock danych dla podzespołów dla różnych rodzajów rowerów Gravel
+export const gravelBikes = {
+  standard: {
+    category: 'szosa',
+    parts: Array.from({ length: 7 }, (_, index) => ({
+      bikeName: 'Szosa',
+      name: `Podzespół ${index + 1}`,
+      lastMaintenanceDate: randomDate(new Date('2023-01-01'), new Date()),
+      condition: index % 2 === 0 ? 'Dobry' : 'Bardzo dobry',
+      mileage: Math.floor(Math.random() * 1000) + 500,
+      maintenanceCost: Math.floor(Math.random() * 100) + 50
+    }))
+  },
+  premium: {
+    category: 'gravel',
+    parts: Array.from({ length: 7 }, (_, index) => ({
+      bikeName: 'Gravel',
+      name: `Podzespół ${index + 1}`,
+      lastMaintenanceDate: randomDate(new Date('2023-01-01'), new Date()),
+      condition: index % 2 === 0 ? 'Dobry' : 'Bardzo dobry',
+      mileage: Math.floor(Math.random() * 1000) + 500,
+      maintenanceCost: Math.floor(Math.random() * 100) + 50
+    }))
+  },
+  premium2: {
+    category: 'góral',
+    parts: Array.from({ length: 7 }, (_, index) => ({
+      bikeName: 'Góral',
+      name: `Podzespół ${index + 1}`,
+      lastMaintenanceDate: randomDate(new Date('2023-01-01'), new Date()),
+      condition: index % 2 === 0 ? 'Dobry' : 'Bardzo dobry',
+      mileage: Math.floor(Math.random() * 1000) + 500,
+      maintenanceCost: Math.floor(Math.random() * 100) + 50
+    }))
+  }
+};

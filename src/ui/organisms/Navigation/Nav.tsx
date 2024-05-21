@@ -27,14 +27,14 @@ const Nav = () => {
 
   return (
     <div //NavbarContainer
-      className={` flex  ${isSmallScreen ? 'w-20 p-3' : 'w-72 p-6'}  z-20 flex-col items-start gap-8 border-r-[1px] backdrop-blur-sm`}
+      className={` flex  ${isSmallScreen ? 'w-20 p-3' : 'w-72 p-6'} ${theme === 'light' ? 'bg-white' : 'bg-[#010315]'}  z-20 flex-col items-start gap-8 border-r-[1px] backdrop-blur-sm`}
     >
       <NavbarLogo />
       <nav>
         <ul className='flex  flex-col items-center  justify-center gap-2 space-y-4'>
           {menuList.map((item) => (
             <li
-              className={`flex w-[95%]  justify-start text-nowrap rounded-lg border-[1px] border-b-8 border-r-8 border-[#5F286B] shadow-md backdrop-blur-xl duration-300 hover:translate-x-[4px] hover:translate-y-[4px] hover:border-b-4 hover:border-r-4
+              className={`flex w-full justify-start text-nowrap rounded-lg border-[1px] border-b-8 border-r-8 border-[#5F286B] shadow-md backdrop-blur-xl duration-300 hover:translate-x-[4px] hover:translate-y-[4px] hover:border-b-4 hover:border-r-4
               ${router.includes(item.link) ? selectedItem : 'hover:bg-slate-400'} `}
               key={item.title}
             >
@@ -44,7 +44,7 @@ const Nav = () => {
               >
                 <Icon icon={item.icon} width={20} height={20} />
                 {!isSmallScreen && (
-                  <p className='text-[18px] flex-grow '>{item.title}</p>
+                  <p className='text-[16px] flex-grow '>{item.title}</p>
                 )}
               </Link>
             </li>

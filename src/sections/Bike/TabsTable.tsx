@@ -1,7 +1,9 @@
 import * as React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+
+
 
 export default function TabsTable() {
   const [value, setValue] = React.useState('one');
@@ -15,13 +17,14 @@ export default function TabsTable() {
       <Tabs
         value={value}
         onChange={handleChange}
-        textColor="secondary"
-        indicatorColor="secondary"
-        aria-label="secondary tabs example"
+        textColor='secondary'
+        indicatorColor='secondary'
+        aria-label='secondary tabs example'
       >
-        <Tab value="one" label="Szosa" />
-        <Tab value="two" label="Gravel" />
-        <Tab value="three" label="Górski" />
+
+        <Tab value='one' label='Gravel' />
+        <Tab value='two' label='Gravel' />
+        <Tab value='three' label='Górski' />
       </Tabs>
     </Box>
   );

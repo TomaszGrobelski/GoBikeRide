@@ -18,7 +18,9 @@ const config: Config = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'custom-gradient':
+          'linear-gradient(to top,#110A36,#251462, #341B82, #4C27B5, #6B3AEF, #8961F2, #A587F5)'
       },
       boxShadow: {
         custom: '10px 10px 10px black'

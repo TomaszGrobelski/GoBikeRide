@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { tableHeaders } from '@/constans/BikeTableConstans';
-import { rows } from '@/Mock/bikeTableMocked';
+import { gravelBikes, rows } from '@/Mock/bikeTableMocked';
 import TabsTable from '@/sections/Bike/TabsTable';
 import IconButton from '@/ui/atmos/IconButton';
 import { sortByProperty } from '@/utils/table-utils';
@@ -35,20 +35,20 @@ const defaultFilters: IFilters = {
 export default function BikeTable() {
   const [condition, setCondition] = useState('');
   const [filters, setFilters] = useState<IFilters>(defaultFilters);
+  const [bikeType, setBikeType] = useState('');
   const [sortBy, setSortBy] = useState<keyof BikeTableRow>('name');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [displayedData, setDisplayedData] = useState<BikeTableRow[]>([]);
   const handleChange = (event: SelectChangeEvent) => {
     setCondition(event.target.value as string);
   };
-
+  console.log(gravelBikes);
   useEffect(() => {
     if (rows) {
       let filtredData;
 
       filtredData = sortByProperty(rows, sortBy, sortDirection);
       setDisplayedData(filtredData);
-      console.log(sortDirection);
     }
   }, [filters, sortBy, sortDirection]);
 

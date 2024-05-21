@@ -1,4 +1,5 @@
 import '../styles/global.css';
+
 import { ThemeProvider } from 'next-themes';
 
 export const metadata = {

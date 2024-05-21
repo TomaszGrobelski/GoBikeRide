@@ -44,23 +44,29 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
     return null;
   }
   return (
-    <div className="relative flex h-full min-h-screen">
-      <div className="absolute inset-0 -z-10">
-        <Image
+    <div
+      className={`relative flex h-full min-h-screen ${theme === 'light' ? 'bg-white' : 'bg-[#030014]'} `}
+    >
+      <div
+        className={`absolute inset-0 -z-10 
+        
+        `}
+      >
+        {/* <Image
           src={dashboardBackGround}
           alt="Background"
           layout="fill"
           objectFit="cover"
           quality={100}
-        />
+        /> */}
       </div>
       <Nav />
-      <div className="relative flex w-full flex-col p-6 gap-5 backdrop-blur-md">
+      <div className='relative flex w-full flex-col p-6 gap-5 backdrop-blur-md'>
         <UpperBar />
         <Typography
-          variant="h1"
+          variant='h1'
           sx={{ fontSize: '2rem' }}
-          className="text-nowrap font-rammetto text-black dark:text-slate-50 pt-10"
+          className='text-nowrap font-rammetto text-black dark:text-slate-50 pt-10'
         >
           {sectionName}
         </Typography>

@@ -19,7 +19,7 @@ const Logout = () => {
 
   return (
     <li
-      className={`text-[18px] flex  w-[95%] justify-start text-nowrap rounded-lg border-[1px] border-b-8 border-r-8 border-[#5F286B] shadow-md backdrop-blur-xl duration-300 hover:translate-x-[4px] hover:translate-y-[4px] hover:border-b-4 hover:border-r-4
+      className={`text-[16px] flex  w-full justify-start text-nowrap rounded-lg border-[1px] border-b-8 border-r-8 border-[#5F286B] shadow-md backdrop-blur-xl duration-300 hover:translate-x-[4px] hover:translate-y-[4px] hover:border-b-4 hover:border-r-4
         ${router.includes('/logout') ? selectedItem : 'hover:bg-slate-400'} `}
     >
       <Link href='/'>
