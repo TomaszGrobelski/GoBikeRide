@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useFetchBikes } from '@/api/bikes/useBike';
 import { tableHeaders } from '@/constans/BikeTableConstans';
 import { gravelBikes, rows } from '@/Mock/bikeTableMocked';
 import TabsTable from '@/sections/Bike/TabsTable';
@@ -20,6 +21,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
+import AddBikeButton from './AddBikeButton';
+
 interface BikeTableRow {
   name: string;
   lastMaintenanceDate: Date;
@@ -33,6 +36,9 @@ const defaultFilters: IFilters = {
   // sortDirection: 'asc'
 };
 export default function BikeTable() {
+  // const { data: bikes, isLoading, isError } = useFetchBikes(19);
+  // console.log(bikes);
+
   const [condition, setCondition] = useState('');
   const [filters, setFilters] = useState<IFilters>(defaultFilters);
   const [bikeType, setBikeType] = useState('');
@@ -70,7 +76,10 @@ export default function BikeTable() {
       sx={{ boxShadow: '2px 2px 8px', borderRadius: 5, p: 1 }}
       component={Paper}
     >
-      <TabsTable />
+      <Box sx={{ display: 'flex' }}>
+        <TabsTable />
+        <AddBikeButton />
+      </Box>
       <Table
         sx={{ minWidth: 650, boxShadow: 30, paddingTop: 50 }}
         aria-label='simple table'
