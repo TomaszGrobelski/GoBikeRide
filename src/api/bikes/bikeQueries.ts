@@ -3,7 +3,7 @@ import { IBike } from '@/types/Bike/bike.types';
 import { endpoints } from '../endpoints/endpoints';
 
 
-export const fetchBikes = async (userId: number): Promise<IBike[]> => {
+export const fetchBikes = async (userId: number): Promise<IBike[] | undefined> => {
   const response = await axios.get(`${endpoints.bike.all}?userId=${userId}`);
   return response.data;
 };

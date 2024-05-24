@@ -1,4 +1,4 @@
-import BikeTable from './BikeTable';
+import BikeTable from './Table/BikeTable';
 
 const BikeView = () => {
   return (

@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
@@ -25,36 +24,26 @@ export async function GET() {
   }
 }
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest) {
   try {
-    console.log(req);
-    console.log(req.body);
-    const { userId: addUserId, brand, model } = req.body;
-    console.log(brand, addUserId, model);
-    if (!addUserId || !brand || !model) {
-      return NextResponse.json({ message: 'Missing required fields' });
+    const body = await req.json();
+    const { userId, brand, model } = body;
+
+    if (!userId || !brand || !model) {
+      return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
     }
 
     const bike = await prisma.bike.create({
       data: {
-        userId: Number(addUserId),
+        userId: Number(userId),
         brand,
         model
       }
     });
-    console.log(bike);
 
-    // const bike = await prisma.bike.create({
-    //   data: {
-    //     userId: Number(19),
-    //     brand: 'inny',
-    //     model: 'ten'
-    //   }
-    // });
-
-    return NextResponse.json(bike);
+    return NextResponse.json(bike, { status: 201 });
   } catch (error) {
     console.error('Error adding bike:', error);
-    return NextResponse.json({ message: 'Internal server error' });
+    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   }
 }
