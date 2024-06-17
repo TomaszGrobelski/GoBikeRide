@@ -20,6 +20,7 @@ import { Input } from '@/ui/atmos/Form/Input';
 import IconButton from '@/ui/atmos/IconButton';
 import SubmitButton from '@/ui/atmos/SubmitButton';
 import { zodResolver } from '@hookform/resolvers/zod';
+// import { parseCookies, setCookie } from 'nookies';
 import { useForm } from 'react-hook-form';
 import { toast, Toaster } from 'sonner';
 import * as z from 'zod';
@@ -62,6 +63,10 @@ const SignIn = () => {
     });
 
     if (response.ok) {
+      // const expires = new Date(Date.now() + 10 * 1000);
+      // const session = await encrypt({ user, expires });
+      // cookies().set('session', session, { expires, httpOnly: true });
+
       router.push('/dashboard/hero');
     } else {
       console.error('Registration failed');

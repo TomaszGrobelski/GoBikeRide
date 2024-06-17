@@ -6,6 +6,7 @@ import { tableHeaders } from '@/constans/BikeTableConstans';
 import { gravelBikes, rows } from '@/Mock/bikeTableMocked';
 import BikeTableTabs from '@/sections/Bike/Table/BikeTableTabs';
 import IconButton from '@/ui/atmos/IconButton';
+import BasicModal from '@/ui/organisms/Modals/BasicModal';
 import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
 import { sortByProperty } from '@/utils/table-utils';
 import { Icon } from '@iconify/react';
@@ -25,7 +26,7 @@ import TableRow from '@mui/material/TableRow';
 import { IBike } from '@/types/Bike/bike.types';
 import { IComponents } from '@/types/Bike/Components/components.types';
 
-import AddBikeButton from './AddBikeButton';
+import AddBikeModal from './AddBikeModal/AddBikeModal';
 import BikeTableBody from './BikeTableBody';
 
 interface IFilters {}
@@ -89,7 +90,7 @@ export default function BikeTable() {
           selectedBike={selectedBike}
           setSelectedBike={setSelectedBike}
         />
-        <AddBikeButton />
+        <AddBikeModal />
       </Box>
       <Table
         sx={{ minWidth: 650, boxShadow: 30, paddingTop: 50 }}
