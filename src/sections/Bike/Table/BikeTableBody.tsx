@@ -71,10 +71,12 @@ const BikeTableBody = ({
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <IconButton
                 icon='ic:baseline-edit'
+                color='#5F286B'
                 ariaLabel={`Edytuj ${row.type} `}
               />
               <IconButton
                 icon='basil:trash-solid'
+                color='#5F286B'
                 ariaLabel={`Usuń ${row.type} `}
               />
             </Box>

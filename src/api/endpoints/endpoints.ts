@@ -5,6 +5,9 @@ export const endpoints = {
     all: `${baseUrl}/api/getUsers`
   },
   bike: {
-    all: `${baseUrl}/api/bikes`
+    all: `${baseUrl}/api/bikes`,
+    components: {
+      all: `${baseUrl}/api/bikes/components`
+    }
   }
 };

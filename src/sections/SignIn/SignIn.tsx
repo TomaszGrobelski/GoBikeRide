@@ -63,9 +63,6 @@ const SignIn = () => {
     });
 
     if (response.ok) {
-      // const expires = new Date(Date.now() + 10 * 1000);
-      // const session = await encrypt({ user, expires });
-      // cookies().set('session', session, { expires, httpOnly: true });
 
       router.push('/dashboard/hero');
     } else {

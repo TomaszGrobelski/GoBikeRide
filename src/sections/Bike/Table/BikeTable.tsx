@@ -22,11 +22,13 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import { IBike } from '@/types/Bike/bike.types';
 import { IComponents } from '@/types/Bike/Components/components.types';
 
 import AddBikeModal from './AddBikeModal/AddBikeModal';
+import AddNewComponent from './AddNewComponent';
 import BikeTableBody from './BikeTableBody';
 
 interface IFilters {}
@@ -136,62 +138,8 @@ export default function BikeTable() {
           handleChange={handleChange}
           condition={condition}
         />
-        {/* <TableBody>
-          {displayedData.map((row) => (
-            <TableRow
-              key={row.type}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component='th' scope='row' align='center'>
-                {row.brand}
-              </TableCell>
 
-              <TableCell align='center'>
-                {convertToDdMmYyyyFormat({ date: row.maintenanceDate })}
-              </TableCell>
-
-              <TableCell align='center'>
-                <Box sx={{ minWidth: 120 }}>
-                  <FormControl fullWidth>
-                    <InputLabel id='demo-simple-select-label'>
-                      {row.currentState}
-                    </InputLabel>
-                    <Select
-                      labelId='demo-simple-select-label'
-                      id='demo-simple-select'
-                      value={condition}
-                      label={row.currentState}
-                      onChange={handleChange}
-                    >
-                      <MenuItem value={5}>Bardzo Dobry</MenuItem>
-                      <MenuItem value={4}>Dobry</MenuItem>
-                      <MenuItem value={3}>Sredni</MenuItem>
-                      <MenuItem value={2}>Zły</MenuItem>
-                      <MenuItem value={1}>Bardo zły</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Box>
-              </TableCell>
-
-              <TableCell align='center'>{row.currentMileageKm}</TableCell>
-
-              <TableCell align='center'>{row.maintenanceCost}</TableCell>
-
-              <TableCell align='center'>
-                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                  <IconButton
-                    icon='ic:baseline-edit'
-                    ariaLabel={`Edytuj ${row.type} `}
-                  />
-                  <IconButton
-                    icon='basil:trash-solid'
-                    ariaLabel={`Usuń ${row.type} `}
-                  />
-                </Box>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody> */}
+        <AddNewComponent />
       </Table>
     </TableContainer>
   );
