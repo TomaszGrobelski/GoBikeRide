@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useState, useContext } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 interface RegistrationContextType {
   registeredSuccessfully: boolean;
@@ -9,12 +9,11 @@ interface RegistrationContextType {
 
 const defaultValue: RegistrationContextType = {
   registeredSuccessfully: false,
-  setRegisteredSuccessfully: () => {},
+  setRegisteredSuccessfully: () => {}
 };
 
-const RegistrationContext = createContext<RegistrationContextType>(
-  defaultValue
-);
+const RegistrationContext =
+  createContext<RegistrationContextType>(defaultValue);
 
 type Props = {
   children: React.ReactNode;

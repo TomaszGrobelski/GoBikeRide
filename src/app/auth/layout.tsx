@@ -13,7 +13,7 @@ const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
         src='/assets/LoginPage/LoginImg.jpg'
         alt='Zdjęcie strony wejściowej'
         objectFit='cover'
-        className='absolute left-0 top-0 -z-10 h-screen w-full '
+        className='absolute left-0 top-0 -z-10 h-screen w-full'
         width={1300}
         height={1300}
       />

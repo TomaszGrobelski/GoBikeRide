@@ -1,17 +1,20 @@
-import  TextField  from '@mui/material/TextField';
+import TextField from '@mui/material/TextField';
+
 import { TextFieldVariants } from './RHFConstans';
 
-
-interface IRHFTextField{
-    multiline?:boolean;
-    variant?: TextFieldVariants;
-    label:string;
+interface IRHFTextField {
+  multiline?: boolean;
+  variant?: TextFieldVariants;
+  label: string;
 }
-const RHFTextField = ({multiline,variant,label}:IRHFTextField) => {
-  
-
+const RHFTextField = ({ multiline, variant, label }: IRHFTextField) => {
   return (
-    <TextField className='w-full min-h-10' label={label} multiline={multiline} variant={variant} />
+    <TextField
+      className='min-h-10 w-full'
+      label={label}
+      multiline={multiline}
+      variant={variant}
+    />
   );
 };
 

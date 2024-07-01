@@ -1,4 +1,4 @@
-export const sortByProperty= <T>(
+export const sortByProperty = <T>(
   data: T[],
   key: keyof T,
   direction: 'asc' | 'desc' = 'asc'

@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,38 +8,40 @@ datasource db {
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  username    String @unique
-  password String 
-  createdAt DateTime @default(now())
-  updateAt DateTime @updatedAt
-  bikes Bike []
-
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  username     String   @unique
+  password     String
+  createdAt    DateTime @default(now())
+  updateAt     DateTime @updatedAt
+  posts_count  Float   @default(0) 
+  routes_count Float   @default(0) 
+  bikes_count  Float   @default(0) 
+  bikes        Bike[]
 }
 
 model Bike {
-  id        Int         @id @default(autoincrement())
-  userId    Int
-  user      User        @relation(fields: [userId], references: [id])
-  brand     String
-  model     String
-  createdAt DateTime    @default(now())
-  updateAt  DateTime    @updatedAt
-  components Component[] 
+  id         Int         @id @default(autoincrement())
+  userId     Int
+  brand      String
+  model      String
+  createdAt  DateTime    @default(now())
+  updateAt   DateTime    @updatedAt
+  user       User        @relation(fields: [userId], references: [id])
+  components Component[]
 }
 
 model Component {
-  id                Int      @id @default(autoincrement())
-  bikeId            Int
-  bike              Bike     @relation(fields: [bikeId], references: [id])
-  type              String
-  brand             String
-  model             String
-  maintenanceDate   DateTime
-  currentState      String
-  currentMileageKm  Float
-  maintenanceCost   Float
-  createdAt         DateTime @default(now())
-  updateAt          DateTime @updatedAt
+  id               Int      @id @default(autoincrement())
+  bikeId           Int
+  type             String
+  brand            String
+  model            String
+  maintenanceDate  DateTime
+  currentState     String
+  currentMileageKm Float
+  maintenanceCost  Float
+  createdAt        DateTime @default(now())
+  updateAt         DateTime @updatedAt
+  bike             Bike     @relation(fields: [bikeId], references: [id])
 }

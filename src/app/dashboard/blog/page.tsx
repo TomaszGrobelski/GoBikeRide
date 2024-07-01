@@ -1,9 +1,7 @@
-import BlogView from "@/sections/Blog/BlogView"
+import BlogView from '@/sections/Blog/BlogView';
 
 const Blog = () => {
-  return (
-    <BlogView />
-  )
-}
+  return <BlogView />;
+};
 
-export default Blog
+export default Blog;

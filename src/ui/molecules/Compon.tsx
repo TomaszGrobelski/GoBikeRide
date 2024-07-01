@@ -1,9 +1,5 @@
-
 const Compon = () => {
+  return <div>Compon</div>;
+};
 
-  return (
-    <div>Compon</div>
-  )
-}
-
-export default Compon
+export default Compon;

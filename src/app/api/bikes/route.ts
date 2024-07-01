@@ -30,7 +30,10 @@ export async function POST(req: NextRequest) {
     const { userId, brand, model } = body;
 
     if (!userId || !brand || !model) {
-      return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
+      return NextResponse.json(
+        { message: 'Missing required fields' },
+        { status: 400 }
+      );
     }
 
     const bike = await prisma.bike.create({
@@ -44,6 +47,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(bike, { status: 201 });
   } catch (error) {
     console.error('Error adding bike:', error);
-    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
+    return NextResponse.json(
+      { message: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }

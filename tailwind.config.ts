@@ -22,6 +22,9 @@ const config: Config = {
         'custom-gradient':
           'linear-gradient(to top,#110A36,#251462, #341B82, #4C27B5, #6B3AEF, #8961F2, #A587F5)'
       },
+      colors:{
+        mainPurple: '#5F286B',
+      },
       boxShadow: {
         custom: '10px 10px 10px black'
       }

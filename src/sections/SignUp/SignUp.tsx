@@ -1,24 +1,27 @@
 'use client';
 
 import Link from 'next/link';
+
 import '../../styles/global.css';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
+
 import { useRouter } from 'next/navigation';
-import { FormSchema } from '../SignIn/form.schema';
+import { useRegistration } from '@/contexts/RegistrationContext';
 import {
   Form,
+  FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormControl,
   FormMessage
 } from '@/ui/atmos/form';
 import { Input } from '@/ui/atmos/Form/Input';
 import SubmitButton from '@/ui/atmos/SubmitButton';
-import { Toaster, toast } from 'sonner';
-import { useRegistration } from '@/contexts/RegistrationContext';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { toast, Toaster } from 'sonner';
+import * as z from 'zod';
+
+import { FormSchema } from '../SignIn/form.schema';
 
 const SignUp = () => {
   const router = useRouter();
@@ -144,10 +147,10 @@ const SignUp = () => {
           </form>
         </Form>
       </div>
-      <div className='flex h-full w-1/2 flex-col items-center justify-center space-y-4 rounded-br-lg rounded-tr-lg bg-gradient-to-br from-[#38B98C] to-[#3AA8AE] text-[14px]  text-white'>
-        <h2 className='text-center  text-[50px]'>Masz już konto ?</h2>
+      <div className='flex h-full w-1/2 flex-col items-center justify-center space-y-4 rounded-br-lg rounded-tr-lg bg-gradient-to-br from-[#38B98C] to-[#3AA8AE] text-[14px] text-white'>
+        <h2 className='text-center text-[50px]'>Masz już konto ?</h2>
         <Link href='/auth/sign-in'>
-          <button className='rounded-full bg-white  px-9 py-4 font-bold text-black'>
+          <button className='rounded-full bg-white px-9 py-4 font-bold text-black'>
             Powrot do logowania
           </button>
         </Link>

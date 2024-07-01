@@ -1,5 +1,7 @@
-'use client'
+'use client';
+
 import * as React from 'react';
+import { cn } from '@/utils/classMerge';
 import * as LabelPrimitive from '@radix-ui/react-label';
 import { Slot } from '@radix-ui/react-slot';
 import {
@@ -8,10 +10,9 @@ import {
   FieldPath,
   FieldValues,
   FormProvider,
-  useFormContext,
+  useFormContext
 } from 'react-hook-form';
 
-import { cn } from '@/utils/classMerge';
 import { Label } from './Label';
 
 const Form = FormProvider;
@@ -59,7 +60,7 @@ const useFormField = () => {
     formItemId: `${id}-form-item`,
     formDescriptionId: `${id}-form-item-description`,
     formMessageId: `${id}-form-item-message`,
-    ...fieldState,
+    ...fieldState
   };
 };
 
@@ -130,7 +131,7 @@ const FormDescription = React.forwardRef<
     <p
       ref={ref}
       id={formDescriptionId}
-      className={cn('text-sm text-muted-foreground', className)}
+      className={cn('text-muted-foreground text-sm', className)}
       {...props}
     />
   );
@@ -152,7 +153,10 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn('text-sm font-medium text-destructive text-red-500', className)}
+      className={cn(
+        'text-destructive text-sm font-medium text-red-500',
+        className
+      )}
       {...props}
     >
       {body}
@@ -169,5 +173,5 @@ export {
   FormControl,
   FormDescription,
   FormMessage,
-  FormField,
+  FormField
 };

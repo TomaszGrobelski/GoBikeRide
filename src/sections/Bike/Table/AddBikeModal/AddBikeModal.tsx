@@ -73,29 +73,29 @@ export default function AddBikeModal() {
             <label htmlFor=''>Marka roweru</label>
             <input
               {...register('brand')}
-              className=' rounded-md border-[1px] border-[#5F286B]  bg-white pl-2 pt-1 text-black outline-none  '
+              className='rounded-md border-[1px] border-[#5F286B] bg-white pl-2 pt-1 text-black outline-none'
               type='text'
               placeholder='Marka roweru'
             />
             {errors.brand && (
-              <div className=' text-red-500'>{errors.brand.message}</div>
+              <div className='text-red-500'>{errors.brand.message}</div>
             )}
 
             <label htmlFor=''>Model roweru</label>
             <input
               {...register('model')}
-              className=' rounded-md border-[1px] border-[#5F286B]  bg-white pl-2 pt-1 text-black outline-none  '
+              className='rounded-md border-[1px] border-[#5F286B] bg-white pl-2 pt-1 text-black outline-none'
               type='text'
               placeholder='Model roweru'
             />
             {errors.model && (
-              <div className=' text-red-500'>{errors.model.message}</div>
+              <div className='text-red-500'>{errors.model.message}</div>
             )}
 
             <button
               type='submit'
               disabled={isSubmitting}
-              className='flex h-[26px] w-[70px] items-center justify-center self-end rounded-md border-[1px] border-[#5F286B] font-poppins '
+              className='flex h-[26px] w-[70px] items-center justify-center self-end rounded-md border-[1px] border-[#5F286B] font-poppins'
             >
               {isSubmitting ? (
                 <Icon icon='line-md:loading-loop' fontSize={20} />

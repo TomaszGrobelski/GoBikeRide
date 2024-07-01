@@ -1,12 +1,12 @@
+import Link from 'next/link';
 import IconButton from '@/ui/atmos/IconButton';
 import ThemeSwitch from '@/ui/atmos/ThemeSwitch';
 import { Icon } from '@iconify/react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import Link from 'next/link';
 
 const UpperBar = () => {
   return (
-    <div className='absolute right-0 top-0 p-2 flex w-full items-center justify-end gap-4 border-b-[1px] border-white pr-2 backdrop-blur-sm '>
+    <div className='absolute right-0 top-0 flex w-full items-center justify-end gap-4 border-b-[1px] border-white p-2 pr-2 backdrop-blur-sm'>
       <IconButton
         icon='ic:round-notification-important'
         ariaLabel='Otwórz powiadomienia'

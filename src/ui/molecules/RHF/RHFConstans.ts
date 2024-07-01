@@ -1,5 +1,5 @@
-export enum TextFieldVariants{
-    FILLED='filled',
-    OUTLINED='outlined',
-    STANDARD="standard"
+export enum TextFieldVariants {
+  FILLED = 'filled',
+  OUTLINED = 'outlined',
+  STANDARD = 'standard'
 }

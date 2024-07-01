@@ -1,6 +1,6 @@
-import { useTheme } from 'next-themes';
-import { Icon } from '@iconify/react';
 import { useState } from 'react';
+import { Icon } from '@iconify/react';
+import { useTheme } from 'next-themes';
 
 const ThemeSwitch = () => {
   const { theme, setTheme } = useTheme();

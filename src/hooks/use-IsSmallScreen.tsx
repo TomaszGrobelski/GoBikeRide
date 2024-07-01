@@ -1,16 +1,19 @@
-'use client'
-import { useState, useEffect } from 'react';
+'use client';
+
+import { useEffect, useState } from 'react';
 
 function useIsSmallScreen() {
-  const [isSmallScreen, setIsSmallScreen] = useState(typeof window !== 'undefined' && window.innerWidth < 800);
+  const [isSmallScreen, setIsSmallScreen] = useState(
+    typeof window !== 'undefined' && window.innerWidth < 800
+  );
 
   useEffect(() => {
     function handleResize() {
       setIsSmallScreen(window.innerWidth < 800);
     }
 
-    handleResize()
-    
+    handleResize();
+
     window.addEventListener('resize', handleResize);
 
     return () => {

@@ -1,9 +1,7 @@
-import BikeView from "@/sections/Bike/BikeView"
+import BikeView from '@/sections/Bike/BikeView';
 
 const Rower = () => {
-  return (
-    <BikeView />
-  )
-}
+  return <BikeView />;
+};
 
-export default Rower
+export default Rower;

@@ -1,41 +1,30 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { useUsersQuery } from '@/api/users/useUser';
+import ErrorCard from '@/ui/molecules/Error/ErrorCard';
 
 import { IUser } from '@/types/User/user.types';
 
+import UsersCards from './UsersCards';
+
 const UsersView = () => {
-  const { data, isError } = useUsersQuery();
+  const { data, refetch, isError } = useUsersQuery();
 
   const [users, setUsers] = useState<IUser[]>([]);
+
   useEffect(() => {
     if (data) {
       console.log(data);
       setUsers(data);
     }
   }, [data]);
+
   if (isError) {
-    <div>Error</div>;
+    return <ErrorCard refetch={refetch} />;
   }
-  return (
-    <div>
-      <ul>
-        {users.map((user) => (
-          <li key={user.username}>
-            <Image
-              src='https://www.pngwing.com/en/free-png-zwxqf'
-              alt='zdjęcie avatara'
-              width={60}
-              height={60}
-            />
-            {user.username}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+
+  return <UsersCards users={users} />;
 };
 
 export default UsersView;

@@ -34,5 +34,5 @@ export const tableHeaders = [
     value: 'edit',
     align: 'right' as const,
     sortable: false
-  },
+  }
 ];

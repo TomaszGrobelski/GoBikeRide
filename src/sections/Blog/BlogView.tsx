@@ -1,13 +1,14 @@
 'use client';
-import RHFTextField from '@/ui/molecules/RHF/RHFTextField';
+
 import React, { ChangeEvent, useState } from 'react';
-import Box from '@mui/material/Box';
-import { TextFieldVariants } from '@/ui/molecules/RHF/RHFConstans';
-import { Typography } from '@mui/material';
-import Button from '@mui/material/Button';
-import { Icon } from '@iconify/react';
-import IconButton from '@/ui/atmos/IconButton';
 import Image from 'next/image';
+import IconButton from '@/ui/atmos/IconButton';
+import { TextFieldVariants } from '@/ui/molecules/RHF/RHFConstans';
+import RHFTextField from '@/ui/molecules/RHF/RHFTextField';
+import { Icon } from '@iconify/react';
+import { Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 const BlogView = () => {
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
@@ -27,8 +28,8 @@ const BlogView = () => {
 
   return (
     <>
-      <div className='flex w-full flex-col items-center gap-4 p-2 '>
-        <Box className='flex w-full max-w-[800px] flex-col items-center gap-4 rounded-xl bg-white p-10 '>
+      <div className='flex w-full flex-col items-center gap-4 p-2'>
+        <Box className='flex w-full max-w-[800px] flex-col items-center gap-4 rounded-xl bg-white p-10'>
           {image && (
             <Image
               src={image}
@@ -70,7 +71,7 @@ const BlogView = () => {
             </div>
           </div>
         </Box>
-        <Box className='flex w-full max-w-[800px] flex-col items-center gap-4 rounded-xl bg-white p-10 dark:text-black '>
+        <Box className='flex w-full max-w-[800px] flex-col items-center gap-4 rounded-xl bg-white p-10 dark:text-black'>
           Nie opublikowano jeszcze żadnego postu
         </Box>
       </div>

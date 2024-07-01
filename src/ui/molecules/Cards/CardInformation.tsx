@@ -7,8 +7,8 @@ interface iCardInfromation {
 
 const CardInformation = ({ icon, description }: iCardInfromation) => {
   return (
-    <div className='flex flex-col gap-3 items-center'>
-      <div className=' rounded-xl border-gray-200 border-[1px] w-12 h-12 flex justify-center items-center  bg-[#221C42] '>
+    <div className='flex flex-col items-center gap-3'>
+      <div className='flex h-12 w-12 items-center justify-center rounded-xl border-[1px] border-gray-200 bg-[#221C42]'>
         <Icon
           icon={icon}
           className='text-white'
@@ -16,7 +16,7 @@ const CardInformation = ({ icon, description }: iCardInfromation) => {
           style={{ color: 'white' }}
         />
       </div>
-      <p className='text-center text-[12px] font-poppins  max-w-14 flex justify-center '>
+      <p className='flex max-w-14 justify-center text-center font-poppins text-[12px]'>
         {description}
       </p>
     </div>
