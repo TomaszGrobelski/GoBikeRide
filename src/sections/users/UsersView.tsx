@@ -1,30 +1,35 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useUsersQuery } from '@/api/users/useUser';
 import ErrorCard from '@/ui/molecules/Error/ErrorCard';
+import LoadingPage from '@/ui/molecules/Loading/LoadingPage';
 
-import { IUser } from '@/types/User/user.types';
+import { UsersList } from '@/styles/Users/UsersCards.styles';
 
-import UsersCards from './UsersCards';
+import NoUsersMessage from './UserCard/NoUsersMessage';
+import UserCard from './UserCard/UserCard';
 
 const UsersView = () => {
-  const { data, refetch, isError } = useUsersQuery();
-
-  const [users, setUsers] = useState<IUser[]>([]);
-
-  useEffect(() => {
-    if (data) {
-      console.log(data);
-      setUsers(data);
-    }
-  }, [data]);
+  const { data: users, refetch, isError, isLoading } = useUsersQuery();
 
   if (isError) {
     return <ErrorCard refetch={refetch} />;
   }
 
-  return <UsersCards users={users} />;
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
+  if (!users || users.length === 0) {
+    return <NoUsersMessage />;
+  }
+
+  return (
+    <UsersList>
+      {users &&
+        users.map((user) => <UserCard key={user.username} user={user} />)}
+    </UsersList>
+  );
 };
 
 export default UsersView;

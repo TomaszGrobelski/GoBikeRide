@@ -54,7 +54,7 @@ const BlogView = () => {
               <Icon
                 icon='clarity:picture-solid'
                 aria-label='Add image'
-                className='cursor-pointer rounded-md text-[#031F56]'
+                className='cursor-pointer rounded-md text-[#5f286b]'
                 width={30}
               />
             </label>
@@ -67,11 +67,13 @@ const BlogView = () => {
             />
 
             <div className='flex w-full justify-end'>
-              <Button variant='contained'>Opublikuj</Button>
+              <Button sx={{ background: '#5f286b' }} variant='contained'>
+                Opublikuj
+              </Button>
             </div>
           </div>
         </Box>
-        <Box className='flex w-full max-w-[800px] flex-col items-center gap-4 rounded-xl bg-white p-10 dark:text-black'>
+        <Box className='flex w-full max-w-[800px] flex-col items-center gap-4 rounded-xl bg-white p-10 text-[20px] dark:text-black'>
           Nie opublikowano jeszcze żadnego postu
         </Box>
       </div>
