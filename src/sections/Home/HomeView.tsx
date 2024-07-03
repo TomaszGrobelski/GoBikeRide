@@ -20,7 +20,7 @@ const HomeView = () => {
         <p className='font-kurale'>
           Jesteśmy podekscytowani, że dołączyliście do naszej społeczności
           pasjonatów jazdy na rowerze! Zachęcamy do dzielenia się swoimi
-          preżyciami z innymi oraz do wspólnego rozwijania społecznosci
+          preżyciami z innymi oraz do wspólnego rozwijania społecznosci!
         </p>
         <Image
           src={arrow}

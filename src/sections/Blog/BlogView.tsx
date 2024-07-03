@@ -10,15 +10,19 @@ import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
+import PostsList from './Posts/PostsList';
+
 const BlogView = () => {
-  const [image, setImage] = useState<string | ArrayBuffer | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null); //podgląd zdjęcia
+  const [imageFile, setImageFile] = useState<File | null>(null); // zdjęcie które jest wysyłane
+  const [description, setDescription] = useState<string>('');
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     const reader = new FileReader();
 
     reader.onloadend = () => {
-      setImage(reader.result);
+      setImagePreview(reader.result as string);
     };
 
     if (file) {
@@ -26,19 +30,24 @@ const BlogView = () => {
     }
   };
 
+  const handlePublish = async () => {
+    if (!imageFile) {
+    }
+  };
+
   return (
     <>
-      <div className='flex w-full flex-col items-center gap-4 p-2'>
+      <div className='flex w-full flex-col items-center gap-4 border-[1px] p-2'>
         <Box className='flex w-full max-w-[800px] flex-col items-center gap-4 rounded-xl bg-white p-10'>
-          {image && (
+          {imagePreview && (
             <Image
-              src={image}
+              src={imagePreview}
               alt='Uploaded'
               style={{ maxWidth: '100%', marginBottom: '1rem' }}
               width={800}
               height={400}
             />
-          )}{' '}
+          )}
           <RHFTextField
             label='Opisz swoją podróż'
             variant={TextFieldVariants.STANDARD}
@@ -73,9 +82,10 @@ const BlogView = () => {
             </div>
           </div>
         </Box>
-        <Box className='flex w-full max-w-[800px] flex-col items-center gap-4 rounded-xl bg-white p-10 text-[20px] dark:text-black'>
+        {/* <Box className='flex w-full max-w-[800px] flex-col items-center gap-4 rounded-xl bg-white p-10 text-[20px] dark:text-black'>
           Nie opublikowano jeszcze żadnego postu
-        </Box>
+        </Box> */}
+        <PostsList />
       </div>
     </>
   );

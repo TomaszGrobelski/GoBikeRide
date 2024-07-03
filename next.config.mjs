@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['randomuser.me', 'www.pngwing.com'] // Chwilowe zezwolenie na pobranie zdj ze strony do wysweitlania avatarw w sekcji Czat.
+    domains: [
+      'randomuser.me',
+      'www.pngwing.com',
+      'zzntmujpyfyxzfyqwerd.supabase.co'
+    ] // Chwilowe zezwolenie na pobranie zdj ze strony do wysweitlania avatarw w sekcji Czat.
   },
   async redirects() {
     return [
