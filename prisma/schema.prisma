@@ -14,10 +14,11 @@ model User {
   password     String
   createdAt    DateTime @default(now())
   updateAt     DateTime @updatedAt
-  posts_count  Float   @default(0) 
-  routes_count Float   @default(0) 
-  bikes_count  Float   @default(0) 
+  posts_count  Float?   @default(0) @db.Real
+  routes_count Float?   @default(0) @db.Real
+  bikes_count  Float?   @default(0) @db.Real
   bikes        Bike[]
+   posts       Post[]
 }
 
 model Bike {
@@ -44,4 +45,13 @@ model Component {
   createdAt        DateTime @default(now())
   updateAt         DateTime @updatedAt
   bike             Bike     @relation(fields: [bikeId], references: [id])
+}
+
+model Post {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  imageUrl    String
+  description String
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])  
 }

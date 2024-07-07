@@ -21,6 +21,8 @@ import { useForm } from 'react-hook-form';
 import { toast, Toaster } from 'sonner';
 import * as z from 'zod';
 
+import { supabase } from '@/lib/supabase';
+
 import { FormSchema } from '../SignIn/form.schema';
 
 const SignUp = () => {
@@ -36,35 +38,64 @@ const SignUp = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+    const { email, password } = values;
     try {
-      const response = await fetch('/api/user', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          username: values.username,
-          email: values.email,
-          password: values.password
-        })
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password
       });
 
-      if (response.ok) {
+      if (error) {
+        toast.error(
+          'Nie udało się utworzyć konta. Sprawdź dane i spróbuj ponownie.'
+        );
+        console.error('Błąd podczas rejestracji:', error.message);
+      } else if (data) {
+        console.log(data);
         router.push('/auth/sign-in');
         setRegisteredSuccessfully(true);
-        toast.success('Konto zostało utworzone');
-      } else {
-        const errorResponse = await response.json();
-        if (errorResponse && errorResponse.message) {
-          toast.error(errorResponse.message);
-        } else {
-          toast.error('Konto nie zostało utworzone');
-        }
+        toast.success(
+          'Konto zostało pomyślnie utworzone. Zaloguj się, aby kontynuować.'
+        );
       }
     } catch (error: any) {
-      toast.error('Konto nie zostalo utworzone', error.message);
+      toast.error('Wystąpił błąd podczas rejestracji.');
+      console.error('Błąd podczas rejestracji:', error.message);
     }
   };
+
+  // const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+
+  //   try {
+
+  //     const response = await fetch('/api/user', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify({
+  //         username: values.username,
+  //         email: values.email,
+  //         password: values.password
+  //       })
+  //     });
+
+  //     if (response.ok) {
+  //       router.push('/auth/sign-in');
+  //       setRegisteredSuccessfully(true);
+  //       toast.success('Konto zostało utworzone');
+  //     } else {
+  //       const errorResponse = await response.json();
+  //       if (errorResponse && errorResponse.message) {
+  //         toast.error(errorResponse.message);
+  //       } else {
+  //         toast.error('Konto nie zostało utworzone');
+  //       }
+  //     }
+  //   } catch (error: any) {
+  //     toast.error('Konto nie zostalo utworzone', error.message);
+  //   }
+  // };
 
   return (
     <>

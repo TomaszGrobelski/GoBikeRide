@@ -10,6 +10,8 @@ import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
+import { supabase } from '@/lib/supabase';
+
 import PostsList from './Posts/PostsList';
 
 const BlogView = () => {
@@ -30,10 +32,22 @@ const BlogView = () => {
     }
   };
 
-  const handlePublish = async () => {
-    if (!imageFile) {
+  async function testSupabaseConnection() {
+    try {
+      const { data, error } = await supabase.from('User').select('*');
+
+      if (error) {
+        throw error;
+      }
+
+      console.log('Lista użytkowników:', data);
+    } catch (error) {
+      console.error('Błąd podczas pobierania użytkowników:', error as string);
     }
-  };
+  }
+
+  testSupabaseConnection();
+  console.log(supabase);
 
   return (
     <>
