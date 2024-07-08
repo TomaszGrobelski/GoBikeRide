@@ -5,6 +5,7 @@ import Link from 'next/link';
 import '../../styles/global.css';
 
 import { useEffect } from 'react';
+import { cookies } from 'next/headers';
 import { useRouter } from 'next/navigation';
 import { useRegistration } from '@/contexts/RegistrationContext';
 // import { FormSchema } from '@/sections/SignIn/form.schema';
@@ -19,6 +20,7 @@ import {
 import { Input } from '@/ui/atmos/Form/Input';
 import SubmitButton from '@/ui/atmos/SubmitButton';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Cookies from 'js-cookie';
 import { useForm } from 'react-hook-form';
 import { toast, Toaster } from 'sonner';
 import * as z from 'zod';
@@ -74,12 +76,19 @@ const SignIn = () => {
         email,
         password
       });
+      // const { data: user } = await supabase.auth.getUser();
+      // console.log(user);
 
       if (error) {
         console.error('Błąd logowania:', error.message);
         toast.error('Nie udało się zalogować. Sprawdź dane logowania.');
       } else if (data) {
-        console.log('Zalogowano pomyślnie:', data);
+        Cookies.set('my-access-token', data.session.access_token, {
+          expires: 1
+        });
+        Cookies.set('my-refresh-token', data.session.refresh_token, {
+          expires: 1
+        });
         router.push('/dashboard/hero');
       }
     } catch (error) {

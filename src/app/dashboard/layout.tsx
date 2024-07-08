@@ -1,5 +1,6 @@
 'use client';
 
+import AuthProvider from '@/contexts/AuthProvider';
 import DashboardLoyout from '@/loyout/DashboardLoyout/DashboardLoyout';
 import DateLocalizationProvider from '@/ui/providers/LocalizationProvider';
 import { QueryClientProvider } from 'react-query';
@@ -14,7 +15,9 @@ const Layout = ({ children }: Props) => {
   return (
     <QueryClientProvider client={queryClient}>
       <DateLocalizationProvider>
-        <DashboardLoyout>{children}</DashboardLoyout>;
+        <AuthProvider>
+          <DashboardLoyout>{children}</DashboardLoyout>;
+        </AuthProvider>
       </DateLocalizationProvider>
     </QueryClientProvider>
   );

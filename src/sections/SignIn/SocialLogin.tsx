@@ -1,6 +1,21 @@
+import { useRouter } from 'next/router';
 import IconButton from '@/ui/atmos/IconButton';
 
+import { signInWithGoogle } from '@/lib/signInWithGoogle';
+
 const SocialLogin = () => {
+  // const router = useRouter();
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle(
+        // router
+      );
+    } catch (error) {
+      console.error('Błąd logowania przez Google:', error);
+    }
+  };
+
   return (
     <div className='flex items-center gap-4'>
       <IconButton
@@ -10,6 +25,7 @@ const SocialLogin = () => {
         size={50}
       />
       <IconButton
+        onClick={handleGoogleSignIn}
         icon='devicon:google'
         ariaLabel='Zaloguj się za pomocą Google'
         color='#4267B2'
