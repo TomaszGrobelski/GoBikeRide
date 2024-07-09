@@ -1,14 +1,10 @@
 'use client';
 
-import Link from 'next/link';
-
 import '../../styles/global.css';
 
 import { useEffect } from 'react';
-import { cookies } from 'next/headers';
 import { useRouter } from 'next/navigation';
 import { useRegistration } from '@/contexts/RegistrationContext';
-// import { FormSchema } from '@/sections/SignIn/form.schema';
 import {
   Form,
   FormControl,
@@ -20,31 +16,20 @@ import {
 import { Input } from '@/ui/atmos/Form/Input';
 import SubmitButton from '@/ui/atmos/SubmitButton';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Cookies from 'js-cookie';
 import { useForm } from 'react-hook-form';
 import { toast, Toaster } from 'sonner';
 import * as z from 'zod';
 
-import { supabase } from '@/lib/supabase';
 import { useBoolean } from '@/hooks/use-Boolean';
+import { signInAction } from '@/app/api/auth/singin';
 
 import CustomLine from './CustomLine';
+import { LoginFormSchema } from './form.schema';
 import RegistrationBox from './RegistrationBox';
 import SignInHeader from './SignInHeader';
 import SocialLogin from './SocialLogin';
 
-const FormSchema = z.object({
-  email: z
-    .string()
-    .min(1, 'Email jest wymagany')
-    .email('Nieprawidłowy adres email'),
-  password: z
-    .string()
-    .min(1, 'Hasło jest wymagane')
-    .min(8, 'Hasło musi mieć co najmniej 8 znaków')
-});
-
-type FormValues = z.infer<typeof FormSchema>;
+type FormValues = z.infer<typeof LoginFormSchema>;
 
 const SignIn = () => {
   const router = useRouter();
@@ -58,10 +43,10 @@ const SignIn = () => {
       toast.success('Pomyślnie utworzono konto');
       setRegisteredSuccessfully(false);
     }
-  }, [registeredSuccessfully, setRegisteredSuccessfully, toastMounted]);
+  }, [registeredSuccessfully, setRegisteredSuccessfully, toastMounted, router]);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(FormSchema),
+    resolver: zodResolver(LoginFormSchema),
     defaultValues: {
       email: '',
       password: ''
@@ -69,26 +54,14 @@ const SignIn = () => {
   });
 
   const onSubmit = async (formData: FormValues) => {
-    const { email, password } = formData;
-    console.log(email, password);
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
-      // const { data: user } = await supabase.auth.getUser();
-      // console.log(user);
+      const { message, success } = await signInAction(formData);
 
-      if (error) {
-        console.error('Błąd logowania:', error.message);
+      if (!success) {
+        console.error('Błąd logowania:', message);
         toast.error('Nie udało się zalogować. Sprawdź dane logowania.');
-      } else if (data) {
-        Cookies.set('my-access-token', data.session.access_token, {
-          expires: 1
-        });
-        Cookies.set('my-refresh-token', data.session.refresh_token, {
-          expires: 1
-        });
+      } else if (success) {
+        console.log('Succes logged', message);
         router.push('/dashboard/hero');
       }
     } catch (error) {

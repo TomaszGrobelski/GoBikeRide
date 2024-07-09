@@ -23,21 +23,21 @@ import * as z from 'zod';
 
 import { supabase } from '@/lib/supabase';
 
-import { FormSchema } from '../SignIn/form.schema';
+import { RegisterFormSchema } from './form.schema';
 
 const SignUp = () => {
   const router = useRouter();
   const { setRegisteredSuccessfully } = useRegistration();
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof RegisterFormSchema>>({
+    resolver: zodResolver(RegisterFormSchema),
     defaultValues: {
       email: '',
       password: ''
     }
   });
 
-  const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+  const onSubmit = async (values: z.infer<typeof RegisterFormSchema>) => {
     const { email, password } = values;
     try {
       const { data, error } = await supabase.auth.signUp({
@@ -63,39 +63,6 @@ const SignUp = () => {
       console.error('Błąd podczas rejestracji:', error.message);
     }
   };
-
-  // const onSubmit = async (values: z.infer<typeof FormSchema>) => {
-
-  //   try {
-
-  //     const response = await fetch('/api/user', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify({
-  //         username: values.username,
-  //         email: values.email,
-  //         password: values.password
-  //       })
-  //     });
-
-  //     if (response.ok) {
-  //       router.push('/auth/sign-in');
-  //       setRegisteredSuccessfully(true);
-  //       toast.success('Konto zostało utworzone');
-  //     } else {
-  //       const errorResponse = await response.json();
-  //       if (errorResponse && errorResponse.message) {
-  //         toast.error(errorResponse.message);
-  //       } else {
-  //         toast.error('Konto nie zostało utworzone');
-  //       }
-  //     }
-  //   } catch (error: any) {
-  //     toast.error('Konto nie zostalo utworzone', error.message);
-  //   }
-  // };
 
   return (
     <>
