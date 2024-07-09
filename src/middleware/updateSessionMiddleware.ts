@@ -5,7 +5,7 @@ export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request
   });
-
+  console.log('działa');
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_KEY!,
@@ -39,7 +39,7 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   console.log(user);
-  console.log(error);
+  console.log(error, 'errormiddleware');
 
   if (
     !user &&
@@ -69,6 +69,3 @@ export async function updateSession(request: NextRequest) {
   return supabaseResponse;
 }
 
-export const config = {
-  matcher: ['/', '/dashboard/:path*']
-};

@@ -15,9 +15,9 @@ const Layout = ({ children }: Props) => {
   return (
     <QueryClientProvider client={queryClient}>
       <DateLocalizationProvider>
-        <AuthProvider>
+        {/* <AuthProvider> */}
           <DashboardLoyout>{children}</DashboardLoyout>;
-        </AuthProvider>
+        {/* </AuthProvider> */}
       </DateLocalizationProvider>
     </QueryClientProvider>
   );

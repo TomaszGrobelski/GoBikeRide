@@ -7,27 +7,34 @@ import { supabase } from '@/lib/supabase';
 interface AuthProviderProps {
   children: React.ReactNode;
 }
+// NIE DZIAŁA Bo ciasteczka httpOnlly wiec JS nie może ich odczytać.
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const router = useRouter();
+
+  const redirectToSignIn = () => {
+    router.push('/sign-in');
+  };
+
   useEffect(() => {
     const checkSession = async () => {
-      const accessToken = Cookies.get('my-access-token');
-      const refreshToken = Cookies.get('my-refresh-token');
+      const authToken = Cookies.get('sb-zzntmujpyfyxzfyqwerd-auth-token');
 
-      if (accessToken && refreshToken) {
+      console.log(authToken);
+      if (authToken) {
         try {
           const { data: session, error } = await supabase.auth.getSession();
-          if (error) {
-            router.push('/sign-in');
-          } else if (session) {
+          if (error || !session) {
+            redirectToSignIn();
+          } else {
             console.log('Sesja jest aktywna:', session);
           }
         } catch (error) {
-          router.push('/sign-in');
+          console.error('Błąd podczas pobierania sesji:', error);
+          redirectToSignIn();
         }
       } else {
-        router.push('/sign-in');
+        redirectToSignIn();
       }
     };
 
