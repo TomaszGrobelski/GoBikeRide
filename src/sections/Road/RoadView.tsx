@@ -76,7 +76,7 @@ const RoadView = () => {
       if (map) map.remove();
       if (polyline) polyline.remove();
     };
-  }, [polyline, map]);
+  }, [polyline, map, userLocation]);
 
   return (
     <div>
