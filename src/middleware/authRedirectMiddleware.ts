@@ -1,18 +1,17 @@
-import { NextResponse, type NextRequest } from 'next/server';
-import Cookies from 'js-cookie';
+import { NextRequest, NextResponse } from 'next/server';
 
-
-// DOKOŃCZYĆ, żeby działało jak trzeba !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 export async function authRedirectMiddleware(request: NextRequest) {
-  const { pathname } = request.nextUrl; 
+  const authToken = request.cookies.get('sb-zzntmujpyfyxzfyqwerd-auth-token');
 
-  if (!pathname.startsWith('/auth/sign-in') && !pathname.startsWith('/auth')) {
-    const authToken = Cookies.get('sb-zzntmujpyfyxzfyqwerd-auth-token');
-
-    if (authToken) {
-      return NextResponse.redirect('/dashboard/hero');
-    }
+  if (
+    authToken &&
+    (request.nextUrl.pathname.startsWith('/auth/sign-in') ||
+      request.nextUrl.pathname.startsWith('/auth/sign-up'))
+  ) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/dashboard/hero';
+    return NextResponse.redirect(url);
   }
 
-  return NextResponse.next({ request });
+  return NextResponse.next();
 }

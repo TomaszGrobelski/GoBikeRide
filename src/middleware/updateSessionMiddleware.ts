@@ -5,7 +5,7 @@ export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request
   });
-  console.log('działa');
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_KEY!,
@@ -34,20 +34,14 @@ export async function updateSession(request: NextRequest) {
   // issues with users being randomly logged out.
 
   const {
-    data: { user },
-    error
+    data: { user }
   } = await supabase.auth.getUser();
-
-  console.log(user);
-  console.log(error, 'errormiddleware');
 
   if (
     !user &&
     !request.nextUrl.pathname.startsWith('/auth/sign-in') &&
     !request.nextUrl.pathname.startsWith('/auth')
   ) {
-    // no user, potentially respond by redirecting the user to the login page
-    console.log('nie ma usera');
     const url = request.nextUrl.clone();
     url.pathname = '/auth/sign-in';
     return NextResponse.redirect(url);
@@ -68,4 +62,3 @@ export async function updateSession(request: NextRequest) {
 
   return supabaseResponse;
 }
-
