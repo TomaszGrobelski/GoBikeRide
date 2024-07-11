@@ -4,21 +4,19 @@ import { useRouter } from 'next/navigation';
 import { Icon } from '@iconify/react';
 import Cookies from 'js-cookie';
 
-import { supabase } from '@/lib/supabase';
+import { logoutUser } from '@/lib/logoutUser';
 import useIsSmallScreen from '@/hooks/use-IsSmallScreen';
 
 const Logout = () => {
   const router = useRouter();
 
   const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
+    const { success, message } = await logoutUser();
 
-    if (error) {
+    if (!success) {
       router.push('/auth/sign-in');
     }
 
-    Cookies.remove('my-access-token');
-    Cookies.remove('my-refresh-token');
     router.push('/auth/sign-in');
   };
 

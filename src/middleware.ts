@@ -7,6 +7,7 @@ export async function middleware(request: NextRequest) {
   let response = await updateSession(request);
 
   if (response.headers.get('location')) {
+    //Nagłówek location jest używany do przekierowań HTTP. Jeśli jest obecny, oznacza to, że updateSession chce przekierować użytkownika na inną stronę. i kończy działanie return.
     return response;
   }
 
