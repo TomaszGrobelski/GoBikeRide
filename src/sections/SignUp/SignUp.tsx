@@ -6,6 +6,7 @@ import '../../styles/global.css';
 
 import { useRouter } from 'next/navigation';
 import { useRegistration } from '@/contexts/RegistrationContext';
+import { paths } from '@/routes/paths';
 import {
   Form,
   FormControl,
@@ -52,7 +53,7 @@ const SignUp = () => {
         console.error('Błąd podczas rejestracji:', error.message);
       } else if (data) {
         console.log(data);
-        router.push('/auth/sign-in');
+        router.push(paths.auth.signIn);
         setRegisteredSuccessfully(true);
         toast.success(
           'Konto zostało pomyślnie utworzone. Zaloguj się, aby kontynuować.'
@@ -147,7 +148,7 @@ const SignUp = () => {
       </div>
       <div className='flex h-full w-1/2 flex-col items-center justify-center space-y-4 rounded-br-lg rounded-tr-lg bg-gradient-to-br from-[#38B98C] to-[#3AA8AE] text-[14px] text-white'>
         <h2 className='text-center text-[50px]'>Masz już konto ?</h2>
-        <Link href='/auth/sign-in'>
+        <Link href={paths.auth.signIn}>
           <button className='rounded-full bg-white px-9 py-4 font-bold text-black'>
             Powrot do logowania
           </button>

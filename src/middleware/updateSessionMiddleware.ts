@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
+import { paths } from '@/routes/paths';
 import { createServerClient } from '@supabase/ssr';
 
 export async function updateSession(request: NextRequest) {
@@ -39,11 +40,11 @@ export async function updateSession(request: NextRequest) {
 
   if (
     !user &&
-    !request.nextUrl.pathname.startsWith('/auth/sign-in') &&
-    !request.nextUrl.pathname.startsWith('/auth')
+    !request.nextUrl.pathname.startsWith(paths.auth.signIn) &&
+    !request.nextUrl.pathname.startsWith(paths.auth.root)
   ) {
     const url = request.nextUrl.clone();
-    url.pathname = '/auth/sign-in';
+    url.pathname = paths.auth.signIn;
     return NextResponse.redirect(url);
   }
 

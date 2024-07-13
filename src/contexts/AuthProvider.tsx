@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { paths } from '@/routes/paths';
 import Cookies from 'js-cookie';
 
 import { supabase } from '@/lib/supabase';
@@ -13,7 +14,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const router = useRouter();
 
   const redirectToSignIn = () => {
-    router.push('/sign-in');
+    router.push(paths.auth.signIn);
   };
 
   useEffect(() => {

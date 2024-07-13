@@ -1,8 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { paths } from '@/routes/paths';
 import { Icon } from '@iconify/react';
-import Cookies from 'js-cookie';
 
 import { logoutUser } from '@/lib/logoutUser';
 import useIsSmallScreen from '@/hooks/use-IsSmallScreen';
@@ -14,10 +14,10 @@ const Logout = () => {
     const { success, message } = await logoutUser();
 
     if (!success) {
-      router.push('/auth/sign-in');
+      router.push(paths.auth.signIn);
     }
 
-    router.push('/auth/sign-in');
+    router.push(paths.auth.signIn);
   };
 
   const isSmallScreen = useIsSmallScreen();
