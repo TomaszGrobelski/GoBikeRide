@@ -1,44 +1,46 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
-import { supabase } from '@/lib/supabase';
-
 const prisma = new PrismaClient();
+
+export async function GET() {
+  try {
+    const posts = await prisma.post.findMany({
+      select: {
+        userId: true,
+        description: true,
+        imageUrl: true
+      }
+    });
+
+    return NextResponse.json(posts);
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    return NextResponse.json(
+      { message: 'Error fetching posts' },
+      { status: 500 }
+    );
+  }
+}
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { userId, description, imageFile } = body;
+    const { userId, description, imageUrl } = body;
 
-    if (!userId || !description || !imageFile) {
+    if (!userId || !description) {
       return NextResponse.json(
         { message: 'Missing required fields' },
         { status: 400 }
       );
     }
 
-    // Upload image to Supabase
-    const fileName = `${userId}-${Date.now()}-${imageFile.name}`;
-    const { data, error } = await supabase.storage
-      .from('your-bucket-name')
-      .upload(fileName, imageFile);
-
-    if (error) {
-      throw error;
-    }
-
-    const { data: publicUrlData } = supabase.storage
-      .from('your-bucket-name')
-      .getPublicUrl(data.path);
-
-    const publicUrl = publicUrlData.publicUrl;
-    // Save post to database
-
     const post = await prisma.post.create({
       data: {
-        userId: Number(userId),
+        // userId: Number(userId),
+        userId: 1,
         description,
-        imageUrl: publicUrl // Assuming your Post model has a `url` field to store the image URL
+        imageUrl
       }
     });
 

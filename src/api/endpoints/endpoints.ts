@@ -9,5 +9,8 @@ export const endpoints = {
     components: {
       all: `${baseUrl}/api/bikes/components`
     }
+  },
+  blog: {
+    all: `${baseUrl}/api/blog`
   }
 };

@@ -2,21 +2,24 @@
 
 import React, { ChangeEvent, useState } from 'react';
 import Image from 'next/image';
-import IconButton from '@/ui/atmos/IconButton';
+import { endpoints } from '@/api/endpoints/endpoints';
 import { TextFieldVariants } from '@/ui/molecules/RHF/RHFConstans';
 import RHFTextField from '@/ui/molecules/RHF/RHFTextField';
+import { getCurrentUser } from '@/utils/auth/getCurrentUser';
 import { Icon } from '@iconify/react';
-import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import axios from 'axios';
+import { toast, Toaster } from 'sonner';
 
 import { supabase } from '@/lib/supabase';
 
+import NoPostsMessage from './Posts/NoPostsMessage';
 import PostsList from './Posts/PostsList';
 
 const BlogView = () => {
-  const [imagePreview, setImagePreview] = useState<string | null>(null); //podgląd zdjęcia
-  const [imageFile, setImageFile] = useState<File | null>(null); // zdjęcie które jest wysyłane
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [description, setDescription] = useState<string>('');
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,26 +31,66 @@ const BlogView = () => {
     };
 
     if (file) {
+      setImageFile(file);
       reader.readAsDataURL(file);
     }
   };
 
-  async function testSupabaseConnection() {
-    try {
-      const { data, error } = await supabase.from('User').select('*');
+  const handleDescriptionChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setDescription(e.target.value);
+  };
 
-      if (error) {
-        throw error;
+  const handlePublishPost = async () => {
+    if (!imageFile || !description) {
+      toast.error('Proszę wybrać zdjęcie i wpisać opis.');
+      return;
+    }
+
+    try {
+      const user = await getCurrentUser();
+      if (!user) {
+        toast.error('Użytkownik nie zalogowany.');
+        return;
       }
 
-      console.log('Lista użytkowników:', data);
-    } catch (error) {
-      console.error('Błąd podczas pobierania użytkowników:', error as string);
-    }
-  }
+      const userId = user.id;
+      // const userId = 1;
+      const filePath = `${userId}/${imageFile.name}`;
 
-  testSupabaseConnection();
-  console.log(supabase);
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('Blog')
+        .upload(filePath, imageFile);
+
+      if (uploadError) {
+        throw uploadError;
+      }
+      console.log(uploadData);
+      const imageUrl =
+        'https://zzntmujpyfyxzfyqwerd.supabase.co/storage/v1/object/public/' +
+        uploadData.fullPath;
+
+      if (uploadData) {
+        try {
+          const response = await axios.post(endpoints.blog.all, {
+            userId,
+            description,
+            imageUrl
+          });
+          toast.success('Post został dodany');
+          setDescription('');
+          setImagePreview(null);
+        } catch (error) {
+          console.error('Upload error:', error);
+          toast.error('Wystąpił błąd podczas przesyłania danych.');
+        }
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      toast.error('Wystąpił błąd podczas przesyłania pliku.');
+    }
+  };
 
   return (
     <>
@@ -66,6 +109,7 @@ const BlogView = () => {
             label='Opisz swoją podróż'
             variant={TextFieldVariants.STANDARD}
             multiline
+            onChange={handleDescriptionChange}
           />
           <div className='flex w-full items-center justify-end'>
             <label htmlFor='imageUpload'>
@@ -90,17 +134,30 @@ const BlogView = () => {
             />
 
             <div className='flex w-full justify-end'>
-              <Button sx={{ background: '#5f286b' }} variant='contained'>
+              <Button
+                onClick={handlePublishPost}
+                sx={{ background: '#5f286b' }}
+                variant='contained'
+              >
                 Opublikuj
               </Button>
             </div>
           </div>
         </Box>
-        {/* <Box className='flex w-full max-w-[800px] flex-col items-center gap-4 rounded-xl bg-white p-10 text-[20px] dark:text-black'>
-          Nie opublikowano jeszcze żadnego postu
-        </Box> */}
+
         <PostsList />
+        
+        <NoPostsMessage />
       </div>
+      <Toaster
+        toastOptions={{
+          style: {
+            fontSize: '1.2rem'
+          }
+        }}
+        richColors
+        position='top-right'
+      />
     </>
   );
 };

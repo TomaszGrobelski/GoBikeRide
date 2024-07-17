@@ -1,52 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import axios from 'axios';
+
+import { Post } from '@/types/Blog/blog.types';
 
 const PostsList = () => {
-  //   const [images, setImages] = useState([]);
+  const [posts, setPosts] = useState<Post[]>([]);
 
-  //   useEffect(() => {
-  //     const fetchImages = async () => {
-  //       const { data, error } = await supabase.storage
-  //         .from('your-bucket-name')
-  //         .list('public', {
-  //           limit: 100, // Zmień limit na odpowiednią wartość
-  //           offset: 0,
-  //           sortBy: { column: 'name', order: 'asc' }
-  //         });
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get('/api/blog'); // Endpoint do pobierania postów
+        setPosts(response.data); // Ustawienie pobranych postów w stanie
+        console.log(response);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
 
-  //       if (error) {
-  //         console.error('Error fetching images:', error);
-  //         return;
-  //       }
-
-  //       const urls = await Promise.all(
-  //         data.map(async (file) => {
-  //           const { publicUrl } = supabase.storage
-  //             .from('your-bucket-name')
-  //             .getPublicUrl(`public/${file.name}`);
-
-  //           return publicUrl;
-  //         })
-  //       );
-
-  //       setImages(urls);
-  //     };
-
-  //     fetchImages();
-  //   }, []);
+    fetchPosts();
+  }, []); 
 
   return (
     <div>
-      {/* {images.map((url, index) => ( */}
-      <div >
-        <Image
-          src='https://zzntmujpyfyxzfyqwerd.supabase.co/storage/v1/object/public/Blog/Zalew_buczyna.jpg'
-          alt={`Image`}
-          width={100}
-          height={100}
-        />
-      </div>
-      {/* ))} */}
+      {posts.map((post) => (
+        <div key={post.id}>
+          <Image
+            src={post.imageUrl}
+            // src='https://zzntmujpyfyxzfyqwerd.supabase.co/storage/v1/object/public/Blog/3c22369d-66ba-4011-b383-508b8cf7976c/sz.jpg'
+            alt={`Post ${post.id}`}
+            width={100}
+            height={100}
+          />
+          <p>{post.description}</p>
+        </div>
+      ))}
     </div>
   );
 };
