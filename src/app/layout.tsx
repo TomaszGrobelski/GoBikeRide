@@ -1,7 +1,5 @@
 import '../styles/global.css';
 
-import { ThemeProvider } from 'next-themes';
-
 export const metadata = {
   title: 'Bikers',
   description: 'Bikers - ',
@@ -16,11 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='pl' suppressHydrationWarning>
-      <body>
-        <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          {children}
-        </ThemeProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

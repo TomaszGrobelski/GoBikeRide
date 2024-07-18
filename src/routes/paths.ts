@@ -17,7 +17,7 @@ export const paths = {
     home: `${BASE_PATHS.DASHBOARD}/hero`,
     bike: `${BASE_PATHS.DASHBOARD}/bike`,
     routes: `${BASE_PATHS.DASHBOARD}/road`,
-    blog: `${BASE_PATHS.DASHBOARD}/blog`,
+    posts: `${BASE_PATHS.DASHBOARD}/posts`,
     chat: `${BASE_PATHS.DASHBOARD}/chat`,
     users: `${BASE_PATHS.DASHBOARD}/users`,
     contact: `${BASE_PATHS.DASHBOARD}/contact`,

@@ -55,7 +55,8 @@ const SignIn = () => {
 
   const onSubmit = async (formData: FormValues) => {
     try {
-      const { message, success } = await signInAction(formData);
+      const { message, success, session } = await signInAction(formData);
+      console.log(session, 'nmowa');
 
       if (!success) {
         console.error('Błąd logowania:', message);

@@ -8,20 +8,21 @@ import { createServerClient } from '@/lib/supabase/server-client';
 export async function signInAction(formData: z.infer<typeof LoginFormSchema>) {
   const supabase = createServerClient();
 
-  const signInResult = await supabase.auth.signInWithPassword({
+  const { data, error } = await supabase.auth.signInWithPassword({
     email: formData.email,
     password: formData.password
   });
 
-  if (signInResult.error) {
+  if (error) {
     return {
       success: false,
-      message: signInResult.error.message
+      message: error.message
     };
   }
-
+  console.log('Sign in result:', data);
   return {
     success: true,
-    message: 'Sign in successful'
+    message: 'Sign in successful',
+    session: data.session
   };
 }

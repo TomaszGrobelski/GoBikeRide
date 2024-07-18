@@ -1,8 +1,8 @@
 'use client';
 
-import AuthProvider from '@/contexts/AuthProvider';
 import DashboardLoyout from '@/loyout/DashboardLoyout/DashboardLoyout';
 import DateLocalizationProvider from '@/ui/providers/LocalizationProvider';
+import { ThemeProvider } from 'next-themes';
 import { QueryClientProvider } from 'react-query';
 
 import queryClient from '@/lib/queryClient';
@@ -15,9 +15,9 @@ const Layout = ({ children }: Props) => {
   return (
     <QueryClientProvider client={queryClient}>
       <DateLocalizationProvider>
-        {/* <AuthProvider> */}
+        <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <DashboardLoyout>{children}</DashboardLoyout>;
-        {/* </AuthProvider> */}
+        </ThemeProvider>
       </DateLocalizationProvider>
     </QueryClientProvider>
   );

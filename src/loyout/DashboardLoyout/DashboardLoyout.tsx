@@ -23,7 +23,7 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
     'go-bike': 'Go Bike',
     road: 'Trasa',
     hero: 'Strona Główna',
-    blog: 'Blog',
+    posts: 'Posty',
     users: 'Lista użytkowników',
     contact: ''
   };

@@ -18,6 +18,7 @@ import {
 import { Input } from '@/ui/atmos/Form/Input';
 import SubmitButton from '@/ui/atmos/SubmitButton';
 import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { toast, Toaster } from 'sonner';
 import * as z from 'zod';
@@ -39,7 +40,7 @@ const SignUp = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof RegisterFormSchema>) => {
-    const { email, password } = values;
+    const { email, password, username } = values;
     try {
       const { data, error } = await supabase.auth.signUp({
         email,
@@ -53,17 +54,67 @@ const SignUp = () => {
         console.error('Błąd podczas rejestracji:', error.message);
       } else if (data) {
         console.log(data);
-        router.push(paths.auth.signIn);
-        setRegisteredSuccessfully(true);
-        toast.success(
-          'Konto zostało pomyślnie utworzone. Zaloguj się, aby kontynuować.'
-        );
+
+ 
+        try {
+          const response = await axios.post('http://localhost:3000/api/users', {
+            email,
+            username,
+            password
+          });
+
+          if (response.status === 201) {
+            router.push(paths.auth.signIn);
+            setRegisteredSuccessfully(true);
+            toast.success(
+              'Konto zostało pomyślnie utworzone. Zaloguj się, aby kontynuować.'
+            );
+          } else {
+            toast.error(
+              `Wystąpił błąd podczas rejestracji: ${response.data.message}`
+            );
+          }
+        } catch (error: any) {
+          toast.error(
+            `Wystąpił błąd podczas rejestracji: ${error.response?.data?.message || error.message}`
+          );
+          console.error('Błąd podczas rejestracji:', error);
+        }
       }
     } catch (error: any) {
       toast.error('Wystąpił błąd podczas rejestracji.');
       console.error('Błąd podczas rejestracji:', error.message);
     }
   };
+
+  // const onSubmit = async (values: z.infer<typeof RegisterFormSchema>) => {
+  //   const { email, password } = values;
+  //   try {
+  //     const { data, error } = await supabase.auth.signUp({
+  //       email,
+  //       password
+  //     });
+
+  //     if (error) {
+  //       toast.error(
+  //         'Nie udało się utworzyć konta. Sprawdź dane i spróbuj ponownie.'
+  //       );
+  //       console.error('Błąd podczas rejestracji:', error.message);
+  //     }
+  //     else if (data) {
+  //       console.log(data);
+  //       router.push(paths.auth.signIn);
+  //       setRegisteredSuccessfully(true);
+  //       toast.success(
+  //         'Konto zostało pomyślnie utworzone. Zaloguj się, aby kontynuować.'
+  //       );
+  //     }
+
+  //   } catch (error: any) {
+  //     toast.error('Wystąpił błąd podczas rejestracji.');
+  //     console.error('Błąd podczas rejestracji:', error.message);
+  //   }
+  // };
 
   return (
     <>

@@ -10,7 +10,10 @@ export const endpoints = {
       all: `${baseUrl}/api/bikes/components`
     }
   },
-  blog: {
-    all: `${baseUrl}/api/blog`
+  posts: {
+    all: `${baseUrl}/api/posts`
+  },
+  session: {
+    current: `${baseUrl}/api/session`
   }
 };

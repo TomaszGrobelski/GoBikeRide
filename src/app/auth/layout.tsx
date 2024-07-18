@@ -1,3 +1,5 @@
+'use client';
+
 import { FC, ReactNode } from 'react';
 import Image from 'next/image';
 import { RegistrationProvider } from '@/contexts/RegistrationContext';
