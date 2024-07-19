@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import IconButton from '@/ui/atmos/IconButton';
 import ThemeSwitch from '@/ui/atmos/ThemeSwitch';
-import { Icon } from '@iconify/react';
+import UserAvatar from '@/ui/atmos/UserAvatar/UserAvatar';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 const UpperBar = () => {
@@ -15,10 +15,9 @@ const UpperBar = () => {
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
           <div>
-            <IconButton
-              icon='teenyicons:user-solid'
-              ariaLabel='Customise options'
-            />
+            <button>
+              <UserAvatar />
+            </button>
           </div>
         </DropdownMenu.Trigger>
 

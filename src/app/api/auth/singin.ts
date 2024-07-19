@@ -19,7 +19,7 @@ export async function signInAction(formData: z.infer<typeof LoginFormSchema>) {
       message: error.message
     };
   }
-  console.log('Sign in result:', data);
+
   return {
     success: true,
     message: 'Sign in successful',

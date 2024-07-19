@@ -20,6 +20,7 @@ import { useForm } from 'react-hook-form';
 import { toast, Toaster } from 'sonner';
 import * as z from 'zod';
 
+import { supabase } from '@/lib/supabase';
 import { useBoolean } from '@/hooks/use-Boolean';
 import { signInAction } from '@/app/api/auth/singin';
 
@@ -56,17 +57,17 @@ const SignIn = () => {
   const onSubmit = async (formData: FormValues) => {
     try {
       const { message, success, session } = await signInAction(formData);
-      console.log(session, 'nmowa');
 
       if (!success) {
-        console.error('Błąd logowania:', message);
         toast.error('Nie udało się zalogować. Sprawdź dane logowania.');
       } else if (success) {
-        console.log('Succes logged', message);
+        if (session) {
+          const { error } = await supabase.auth.setSession(session);
+          toast.error(error?.message);
+        }
         router.push('/dashboard/hero');
       }
     } catch (error) {
-      console.error('Błąd logowania:', error);
       toast.error('Wystąpił błąd podczas logowania.');
     }
   };

@@ -18,7 +18,7 @@ const PostsView = () => {
 
   return (
     <>
-      <div className='flex w-full flex-col items-center gap-4 border-[1px] p-2'>
+      <div className='flex w-full flex-col items-center gap-4 mt-20 p-2'>
         <PostsForm refetch={refetch} />
 
         <PostsList posts={posts} />

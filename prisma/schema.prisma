@@ -8,22 +8,23 @@ datasource db {
 }
 
 model User {
-  id           Int      @id @default(autoincrement())
+  id           String   @id @default(uuid())
   email        String   @unique
   username     String   @unique
   password     String
   createdAt    DateTime @default(now())
   updateAt     DateTime @updatedAt
+  bikes_count  Float?   @default(0) @db.Real
   posts_count  Float?   @default(0) @db.Real
   routes_count Float?   @default(0) @db.Real
-  bikes_count  Float?   @default(0) @db.Real
+  avatar_url   String?
   bikes        Bike[]
-   posts       Post[]
+  posts        Post[]
 }
 
 model Bike {
   id         Int         @id @default(autoincrement())
-  userId     Int
+  userId     String
   brand      String
   model      String
   createdAt  DateTime    @default(now())
@@ -49,9 +50,9 @@ model Component {
 
 model Post {
   id          Int      @id @default(autoincrement())
-  userId      Int
+  userId      String
   imageUrl    String
   description String
   createdAt   DateTime @default(now())
-  user        User     @relation(fields: [userId], references: [id])  
+  user        User     @relation(fields: [userId], references: [id])
 }

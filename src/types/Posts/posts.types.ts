@@ -3,4 +3,5 @@ export interface IPost {
   userId: number;
   imageUrl: string;
   description: string;
+  createdAt: Date;
 }

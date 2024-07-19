@@ -1,6 +1,7 @@
 'use client';
 
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { cookies } from 'next/headers';
 import Image from 'next/image';
 import { endpoints } from '@/api/endpoints/endpoints';
 import { useFetchPosts } from '@/api/posts/usePost';
@@ -27,8 +28,6 @@ const PostsForm = ({ refetch }: IPostsForm) => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [description, setDescription] = useState<string>('');
 
-
-  
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     const reader = new FileReader();
@@ -43,14 +42,11 @@ const PostsForm = ({ refetch }: IPostsForm) => {
     }
   };
 
-
   const handleDescriptionChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setDescription(e.target.value);
   };
-
-
 
   const handlePublishPost = async () => {
     if (!imageFile || !description) {
@@ -59,17 +55,13 @@ const PostsForm = ({ refetch }: IPostsForm) => {
     }
 
     try {
-      console.log(user);
       const userId = user?.id;
-      console.log(userId, ' userID');
       const uniqueFileName = `${Date.now()}-${imageFile.name}`;
       const filePath = `${userId}/${uniqueFileName}`;
 
       const { data: uploadData, error: uploadError } = await supabase.storage
         .from('Posts')
         .upload(filePath, imageFile);
-      console.log(uploadData);
-      console.log(uploadError);
 
       if (uploadError) {
         throw uploadError;
@@ -78,23 +70,23 @@ const PostsForm = ({ refetch }: IPostsForm) => {
         'https://zzntmujpyfyxzfyqwerd.supabase.co/storage/v1/object/public/' +
         uploadData.fullPath;
 
-      // if (uploadData) {
-      //   try {
-      //     const response = await axios.post(endpoints.posts.all, {
-      //       userId,
-      //       description,
-      //       imageUrl
-      //     });
-      //     console.log(response, 'response');
-      //     toast.success('Post został dodany');
-      //     setDescription('');
-      //     setImagePreview(null);
-      //     refetch();
-      //   } catch (error) {
-      //     console.log(error);
-      //     toast.error('Wystąpił błąd podczas przesyłania danych.');
-      //   }
-      // }
+      if (uploadData) {
+        try {
+          const response = await axios.post(endpoints.posts.all, {
+            userId,
+            description,
+            imageUrl
+          });
+          console.log(response, 'response');
+          toast.success('Post został dodany');
+          await refetch();
+          setDescription('');
+          setImagePreview(null);
+        } catch (error) {
+          console.log(error);
+          toast.error('Wystąpił błąd podczas przesyłania danych.');
+        }
+      }
     } catch (error) {
       console.log(error);
       toast.error('Wystąpił błąd podczas przesyłania pliku.');
@@ -102,7 +94,7 @@ const PostsForm = ({ refetch }: IPostsForm) => {
   };
 
   return (
-    <Box className='flex w-full max-w-[800px] flex-col items-center gap-4 rounded-xl bg-white p-10'>
+    <Box className='flex w-full max-w-[800px] flex-col items-center gap-4 rounded-xl bg-white p-10 shadow-xl'>
       {imagePreview && (
         <Image
           src={imagePreview}
@@ -113,7 +105,7 @@ const PostsForm = ({ refetch }: IPostsForm) => {
         />
       )}
       <RHFTextField
-        label='Opisz swoją podróż'
+        label='Opisz swoją podróż 🚴'
         variant={TextFieldVariants.STANDARD}
         multiline
         onChange={handleDescriptionChange}

@@ -3,7 +3,7 @@
   "useTabs": false,
   "semi": true,
   "singleQuote": true,
-  "trailingComma": "none",
+  "trailingComma": "all",
   "jsxSingleQuote": true,
   "jsxBracketSameLine": false,
   "printWidth": 80,
