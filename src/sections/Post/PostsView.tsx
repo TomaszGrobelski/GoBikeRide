@@ -1,13 +1,8 @@
 'use client';
 
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { endpoints } from '@/api/endpoints/endpoints';
 import { useFetchPosts } from '@/api/posts/usePost';
 import { useUser } from '@/api/user/useUser';
-import axios from 'axios';
-import { toast, Toaster } from 'sonner';
-
-import { supabase } from '@/lib/supabase';
+import { Toaster } from 'sonner';
 
 import NoPostsMessage from './Posts/NoPostsMessage';
 import PostsForm from './Posts/PostsForm';
@@ -15,13 +10,15 @@ import PostsList from './Posts/PostsList';
 
 const PostsView = () => {
   const { data: posts, refetch } = useFetchPosts();
+  const { data: user, isLoading, error } = useUser();
+  // TEN TOASTER chyba nie potrzebny tutaj jest.......
 
   return (
     <>
-      <div className='flex w-full flex-col items-center gap-4 mt-20 p-2'>
-        <PostsForm refetch={refetch} />
+      <div className='mt-20 flex w-full flex-col items-center gap-4 p-2'>
+        <PostsForm refetch={refetch} user={user} />
 
-        <PostsList posts={posts} />
+        <PostsList posts={posts} user={user} refetch={refetch} />
 
         {posts?.length === 0 && <NoPostsMessage />}
       </div>
@@ -29,8 +26,8 @@ const PostsView = () => {
       <Toaster
         toastOptions={{
           style: {
-            fontSize: '1.2rem'
-          }
+            fontSize: '1.2rem',
+          },
         }}
         richColors
         position='top-right'

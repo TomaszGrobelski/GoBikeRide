@@ -5,6 +5,7 @@ import Link from 'next/link';
 import '../../styles/global.css';
 
 import { useRouter } from 'next/navigation';
+import { endpoints } from '@/api/endpoints/endpoints';
 import { useRegistration } from '@/contexts/RegistrationContext';
 import { paths } from '@/routes/paths';
 import {
@@ -13,7 +14,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from '@/ui/atmos/form';
 import { Input } from '@/ui/atmos/Form/Input';
 import SubmitButton from '@/ui/atmos/SubmitButton';
@@ -27,6 +28,8 @@ import { supabase } from '@/lib/supabase';
 
 import { RegisterFormSchema } from './form.schema';
 
+// CI/CD dodać do projektu
+
 const SignUp = () => {
   const router = useRouter();
   const { setRegisteredSuccessfully } = useRegistration();
@@ -34,9 +37,10 @@ const SignUp = () => {
   const form = useForm<z.infer<typeof RegisterFormSchema>>({
     resolver: zodResolver(RegisterFormSchema),
     defaultValues: {
+      username: '',
       email: '',
-      password: ''
-    }
+      password: '',
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof RegisterFormSchema>) => {
@@ -44,39 +48,36 @@ const SignUp = () => {
     try {
       const { data, error } = await supabase.auth.signUp({
         email,
-        password
+        password,
       });
 
       if (error) {
-        toast.error(
-          'Nie udało się utworzyć konta. Sprawdź dane i spróbuj ponownie.'
-        );
-        console.error('Błąd podczas rejestracji:', error.message);
+        console.log(error);
+        toast.error('Użytkownicy mogą założyć jedno konto raz na 5 minuty');
       } else if (data) {
         console.log(data);
-
- 
         try {
-          const response = await axios.post('http://localhost:3000/api/users', {
+          const response = await axios.post(endpoints.user.all, {
             email,
             username,
-            password
+            password,
           });
 
           if (response.status === 201) {
             router.push(paths.auth.signIn);
             setRegisteredSuccessfully(true);
             toast.success(
-              'Konto zostało pomyślnie utworzone. Zaloguj się, aby kontynuować.'
+              'Konto zostało pomyślnie utworzone. Zaloguj się, aby kontynuować.',
             );
           } else {
             toast.error(
-              `Wystąpił błąd podczas rejestracji: ${response.data.message}`
+              `Wystąpił błąd podczas rejestracji: ${response.data.message}`,
             );
           }
         } catch (error: any) {
+          console.log(error);
           toast.error(
-            `Wystąpił błąd podczas rejestracji: ${error.response?.data?.message || error.message}`
+            `Wystąpił błąd podczas rejestracji: ${error.response?.data?.message || error.message}`,
           );
           console.error('Błąd podczas rejestracji:', error);
         }
@@ -87,43 +88,15 @@ const SignUp = () => {
     }
   };
 
-  // const onSubmit = async (values: z.infer<typeof RegisterFormSchema>) => {
-  //   const { email, password } = values;
-  //   try {
-  //     const { data, error } = await supabase.auth.signUp({
-  //       email,
-  //       password
-  //     });
-
-  //     if (error) {
-  //       toast.error(
-  //         'Nie udało się utworzyć konta. Sprawdź dane i spróbuj ponownie.'
-  //       );
-  //       console.error('Błąd podczas rejestracji:', error.message);
-  //     }
-  //     else if (data) {
-  //       console.log(data);
-  //       router.push(paths.auth.signIn);
-  //       setRegisteredSuccessfully(true);
-  //       toast.success(
-  //         'Konto zostało pomyślnie utworzone. Zaloguj się, aby kontynuować.'
-  //       );
-  //     }
-
-  //   } catch (error: any) {
-  //     toast.error('Wystąpił błąd podczas rejestracji.');
-  //     console.error('Błąd podczas rejestracji:', error.message);
-  //   }
-  // };
-
   return (
     <>
       <Toaster
         toastOptions={{
           style: {
-            fontSize: '1.2rem'
-          }
+            fontSize: '1.2rem',
+          },
         }}
+        duration={8000}
         richColors
         position='top-right'
       />

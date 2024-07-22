@@ -4,4 +4,5 @@ export interface IPost {
   imageUrl: string;
   description: string;
   createdAt: Date;
+  likes: []
 }

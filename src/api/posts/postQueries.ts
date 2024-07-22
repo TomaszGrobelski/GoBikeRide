@@ -5,6 +5,28 @@ import { IPost } from '@/types/Posts/posts.types';
 import { endpoints } from '../endpoints/endpoints';
 
 export const fetchPosts = async (): Promise<IPost[] | undefined> => {
-  const response = await axios.get(`${endpoints.posts.all}`);
-  return response.data;
+  try {
+    const response = await axios.get(`${endpoints.posts.all}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const likePost = async ({
+  userId,
+  postId,
+}: {
+  userId: number;
+  postId: number;
+}) => {
+  try {
+    const response = await axios.post(endpoints.posts.like, {
+      userId,
+      postId,
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
 };

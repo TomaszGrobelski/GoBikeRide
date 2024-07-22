@@ -12,6 +12,7 @@ export async function GET() {
         description: true,
         imageUrl: true,
         createdAt: true,
+        likes: true,
       },
       orderBy: {
         createdAt: 'desc',

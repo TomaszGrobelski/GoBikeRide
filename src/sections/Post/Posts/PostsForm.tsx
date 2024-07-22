@@ -15,15 +15,15 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import { toast, Toaster } from 'sonner';
 
+import { IUser } from '@/types/User/user.types';
 import { supabase } from '@/lib/supabase';
 
 interface IPostsForm {
   refetch: () => Promise<any>;
+  user: IUser | undefined;
 }
 
-const PostsForm = ({ refetch }: IPostsForm) => {
-  const { data: user, isLoading, error } = useUser();
-
+const PostsForm = ({ refetch, user }: IPostsForm) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [description, setDescription] = useState<string>('');
@@ -43,7 +43,7 @@ const PostsForm = ({ refetch }: IPostsForm) => {
   };
 
   const handleDescriptionChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setDescription(e.target.value);
   };
@@ -75,7 +75,7 @@ const PostsForm = ({ refetch }: IPostsForm) => {
           const response = await axios.post(endpoints.posts.all, {
             userId,
             description,
-            imageUrl
+            imageUrl,
           });
           console.log(response, 'response');
           toast.success('Post został dodany');
@@ -142,11 +142,12 @@ const PostsForm = ({ refetch }: IPostsForm) => {
           </Button>
         </div>
       </div>
+
       <Toaster
         toastOptions={{
           style: {
-            fontSize: '1.2rem'
-          }
+            fontSize: '1.2rem',
+          },
         }}
         richColors
         position='top-right'

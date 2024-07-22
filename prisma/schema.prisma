@@ -20,6 +20,7 @@ model User {
   avatar_url   String?
   bikes        Bike[]
   posts        Post[]
+  likes        Like[]
 }
 
 model Bike {
@@ -55,4 +56,16 @@ model Post {
   description String
   createdAt   DateTime @default(now())
   user        User     @relation(fields: [userId], references: [id])
+  likes       Like[]
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  postId    Int
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id])
+
+  @@unique([userId, postId])
 }

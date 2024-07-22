@@ -5,12 +5,18 @@ import UserAvatar from '@/ui/atmos/UserAvatar/UserAvatar';
 import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
 
 import { IPost } from '@/types/Posts/posts.types';
+import { IUser } from '@/types/User/user.types';
 
 interface IPostsList {
+  refetch: () => Promise<any>;
   posts: IPost[] | undefined;
+  user: IUser | undefined;
 }
-const PostsList = ({ posts }: IPostsList) => {
-  console.log(posts);
+const PostsList = ({ posts, user, refetch }: IPostsList) => {
+  if (!user) {
+    return <p>Loading user...</p>;
+  }
+
   return (
     <div className='flex w-full flex-col items-center gap-16'>
       {posts &&
@@ -34,7 +40,13 @@ const PostsList = ({ posts }: IPostsList) => {
               height={500}
               className='max-h-[600px] w-full object-contain'
             />
-            <LikeButton />
+
+            <LikeButton
+              likes={post.likes || []}
+              postId={post.id}
+              userId={user.id}
+              refetch={refetch}
+            />
           </div>
         ))}
     </div>

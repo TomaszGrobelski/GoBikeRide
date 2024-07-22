@@ -5,4 +5,5 @@ export interface IUser {
   posts_count: number;
   routes_count: number;
   bikes_count: number;
+  avatar_url?: string;
 }

@@ -1,8 +1,11 @@
 import { NextResponse } from 'next/server';
+import { PrismaClient } from '@prisma/client';
 import { hash } from 'bcrypt';
 import * as z from 'zod';
 
 import { db } from '@/lib/db';
+
+const prisma = new PrismaClient();
 
 const userSchema = z.object({
   username: z.string().min(1, 'Username is required').max(100),
@@ -10,7 +13,7 @@ const userSchema = z.object({
   password: z
     .string()
     .min(1, 'Password is required')
-    .min(8, 'Password must have than 8 characters')
+    .min(8, 'Password must have than 8 characters'),
 });
 
 export async function POST(req: Request) {
@@ -18,25 +21,33 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { email, username, password } = userSchema.parse(body);
 
-    const existringUserByEmail = await db.user.findUnique({
-      where: { email: email }
+    const existringUserByEmail = await prisma.user.findUnique({
+      where: { email: email },
     });
 
     if (existringUserByEmail) {
       return NextResponse.json(
-        { user: null, message: 'User with this email already exisst' },
-        { status: 409 }
+        {
+          user: null,
+          message:
+            'Użytkownik z tym adres emial już istnieję, proszę wybrać inny email',
+        },
+        { status: 409 },
       );
     }
 
     const existringUserByUsername = await db.user.findUnique({
-      where: { username: username }
+      where: { username: username },
     });
 
     if (existringUserByUsername) {
       return NextResponse.json(
-        { user: null, message: 'User with this username already exisst' },
-        { status: 409 }
+        {
+          user: null,
+          message:
+            'Użytkownik z tą nazwą już istnieje, proszę zmienić nazwe użytkownika',
+        },
+        { status: 409 },
       );
     }
 
@@ -45,24 +56,24 @@ export async function POST(req: Request) {
       data: {
         username,
         email,
-        password: hashedPassword
-      }
+        password: hashedPassword,
+      },
     });
     const { password: newUserPassword, ...rest } = newUser;
 
     return NextResponse.json(
       {
         user: rest,
-        message: ' User created successfuly'
+        message: ' Użytkownik zostal stworzony pomyślnie',
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     return NextResponse.json(
       {
-        message: `Something went wrong!, ${error}`
+        message: `Coś poszło nie tak!, ${error}`,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
