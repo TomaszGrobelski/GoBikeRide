@@ -25,6 +25,7 @@ import { toast, Toaster } from 'sonner';
 import * as z from 'zod';
 
 import { supabase } from '@/lib/supabase';
+import { useBoolean } from '@/hooks/use-Boolean';
 
 import { RegisterFormSchema } from './form.schema';
 
@@ -33,6 +34,7 @@ import { RegisterFormSchema } from './form.schema';
 const SignUp = () => {
   const router = useRouter();
   const { setRegisteredSuccessfully } = useRegistration();
+  const isSubmitting = useBoolean(false);
 
   const form = useForm<z.infer<typeof RegisterFormSchema>>({
     resolver: zodResolver(RegisterFormSchema),
@@ -44,6 +46,8 @@ const SignUp = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof RegisterFormSchema>) => {
+    isSubmitting.setTrue();
+
     const { email, password, username } = values;
     try {
       const { data, error } = await supabase.auth.signUp({
@@ -53,18 +57,20 @@ const SignUp = () => {
 
       if (error) {
         console.log(error);
-        toast.error('Użytkownicy mogą założyć jedno konto raz na 5 minuty');
+        toast.error('Użytkownicy mogą założyć jedno konto raz na 30 minuty');
       } else if (data) {
-        console.log(data);
+        const userId = data.user?.id;
         try {
           const response = await axios.post(endpoints.user.all, {
+            id: userId,
             email,
             username,
             password,
           });
 
           if (response.status === 201) {
-            router.push(paths.auth.signIn);
+            // router.push(paths.auth.signIn);
+            router.push(paths.dashboard.home);
             setRegisteredSuccessfully(true);
             toast.success(
               'Konto zostało pomyślnie utworzone. Zaloguj się, aby kontynuować.',
@@ -85,6 +91,8 @@ const SignUp = () => {
     } catch (error: any) {
       toast.error('Wystąpił błąd podczas rejestracji.');
       console.error('Błąd podczas rejestracji:', error.message);
+    } finally {
+      isSubmitting.setFalse();
     }
   };
 
@@ -166,7 +174,9 @@ const SignUp = () => {
                 </FormItem>
               )}
             />
-            <SubmitButton>Zarejestrój</SubmitButton>
+            <SubmitButton disabled={isSubmitting.value}>
+              Zarejestrój
+            </SubmitButton>
           </form>
         </Form>
       </div>

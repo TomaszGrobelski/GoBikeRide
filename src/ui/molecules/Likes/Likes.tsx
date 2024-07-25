@@ -4,14 +4,14 @@ import { Icon } from '@iconify/react/dist/iconify.js';
 
 import { IUser } from '@/types/User/user.types';
 
-interface Likes {
+interface ILikes {
   refetch: () => Promise<any>;
   likes: IUser[];
   postId: number;
   userId: number;
 }
 
-const LikeButton = ({ likes, postId, userId, refetch }: Likes) => {
+const Likes = ({ likes, postId, userId, refetch }: ILikes) => {
   const { mutate: likePost, isLoading } = useLike();
 
   const handleLike = async () => {
@@ -56,4 +56,4 @@ const LikeButton = ({ likes, postId, userId, refetch }: Likes) => {
   );
 };
 
-export default LikeButton;
+export default Likes;

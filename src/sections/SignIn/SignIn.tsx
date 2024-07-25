@@ -11,7 +11,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from '@/ui/atmos/form';
 import { Input } from '@/ui/atmos/Form/Input';
 import SubmitButton from '@/ui/atmos/SubmitButton';
@@ -32,6 +32,7 @@ import SocialLogin from './SocialLogin';
 
 type FormValues = z.infer<typeof LoginFormSchema>;
 
+// Obsługa błędu z konsoli: Email not confirmed, żeby użytkownikowi wyświetlić
 const SignIn = () => {
   const router = useRouter();
   const toastMounted = useBoolean();
@@ -41,7 +42,9 @@ const SignIn = () => {
   useEffect(() => {
     toastMounted.setTrue();
     if (toastMounted.value && registeredSuccessfully) {
-      toast.success('Pomyślnie utworzono konto');
+      toast.success(
+        'Pomyślnie utworzono konto, aby móc się zalogować, potwierdź swój adres e-mail',
+      );
       setRegisteredSuccessfully(false);
     }
   }, [registeredSuccessfully, setRegisteredSuccessfully, toastMounted, router]);
@@ -50,8 +53,8 @@ const SignIn = () => {
     resolver: zodResolver(LoginFormSchema),
     defaultValues: {
       email: '',
-      password: ''
-    }
+      password: '',
+    },
   });
 
   const onSubmit = async (formData: FormValues) => {
@@ -60,6 +63,7 @@ const SignIn = () => {
 
       if (!success) {
         toast.error('Nie udało się zalogować. Sprawdź dane logowania.');
+        console.log(message);
       } else if (success) {
         if (session) {
           const { error } = await supabase.auth.setSession(session);
@@ -124,8 +128,8 @@ const SignIn = () => {
       <Toaster
         toastOptions={{
           style: {
-            fontSize: '1.2rem'
-          }
+            fontSize: '1.2rem',
+          },
         }}
         richColors
         position='top-right'

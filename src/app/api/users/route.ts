@@ -8,6 +8,7 @@ import { db } from '@/lib/db';
 const prisma = new PrismaClient();
 
 const userSchema = z.object({
+  id: z.string().min(1, 'User ID is required'),
   username: z.string().min(1, 'Username is required').max(100),
   email: z.string().min(1, 'Email is required').email('Invalid email'),
   password: z
@@ -19,7 +20,7 @@ const userSchema = z.object({
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { email, username, password } = userSchema.parse(body);
+    const { id, email, username, password } = userSchema.parse(body);
 
     const existringUserByEmail = await prisma.user.findUnique({
       where: { email: email },
@@ -54,6 +55,7 @@ export async function POST(req: Request) {
     const hashedPassword = await hash(password, 10);
     const newUser = await db.user.create({
       data: {
+        id,
         username,
         email,
         password: hashedPassword,

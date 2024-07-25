@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import LikeButton from '@/ui/atmos/Buttons/LikeButton';
 import UserAvatar from '@/ui/atmos/UserAvatar/UserAvatar';
+import Likes from '@/ui/molecules/Likes/Likes';
 import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
 
 import { IPost } from '@/types/Posts/posts.types';
 import { IUser } from '@/types/User/user.types';
+
+import DeletePostButton from './DeletePostButton';
 
 interface IPostsList {
   refetch: () => Promise<any>;
@@ -23,7 +25,7 @@ const PostsList = ({ posts, user, refetch }: IPostsList) => {
         posts.map((post) => (
           <div
             key={post.id}
-            className='w-full max-w-[800px] space-y-5 rounded-3xl border-[1px] p-10 shadow-xl'
+            className='relative w-full max-w-[800px] space-y-5 rounded-3xl border-[1px] p-10 shadow-xl'
           >
             <div className='flex gap-4'>
               <UserAvatar />
@@ -41,12 +43,14 @@ const PostsList = ({ posts, user, refetch }: IPostsList) => {
               className='max-h-[600px] w-full object-contain'
             />
 
-            <LikeButton
+            <Likes
               likes={post.likes || []}
               postId={post.id}
               userId={user.id}
               refetch={refetch}
             />
+
+            {post.userId === user.id && <DeletePostButton postId={post.id} />}
           </div>
         ))}
     </div>
