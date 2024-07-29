@@ -6,12 +6,12 @@ import { Toaster } from 'sonner';
 
 import NoPostsMessage from './Posts/NoPostsMessage';
 import PostsForm from './Posts/PostsForm';
+import PostSkeleton from './Posts/PostSkeleton';
 import PostsList from './Posts/PostsList';
 
 const PostsView = () => {
   const { data: posts, refetch } = useFetchPosts();
   const { data: user, isLoading, error } = useUser();
-  // TEN TOASTER chyba nie potrzebny tutaj jest.......
 
   return (
     <>
@@ -22,16 +22,6 @@ const PostsView = () => {
 
         {posts?.length === 0 && <NoPostsMessage />}
       </div>
-
-      <Toaster
-        toastOptions={{
-          style: {
-            fontSize: '1.2rem',
-          },
-        }}
-        richColors
-        position='top-right'
-      />
     </>
   );
 };

@@ -8,6 +8,7 @@ import { IPost } from '@/types/Posts/posts.types';
 import { IUser } from '@/types/User/user.types';
 
 import DeletePostButton from './DeletePostButton';
+import PostSkeleton from './PostSkeleton';
 
 interface IPostsList {
   refetch: () => Promise<any>;
@@ -15,8 +16,8 @@ interface IPostsList {
   user: IUser | undefined;
 }
 const PostsList = ({ posts, user, refetch }: IPostsList) => {
-  if (!user) {
-    return <p>Loading user...</p>;
+  if (!user || !posts) {
+    return <PostSkeleton />;
   }
 
   return (

@@ -19,6 +19,7 @@ import {
 import { Input } from '@/ui/atmos/Form/Input';
 import SubmitButton from '@/ui/atmos/SubmitButton';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Icon } from '@iconify/react/dist/iconify.js';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { toast, Toaster } from 'sonner';
@@ -175,12 +176,16 @@ const SignUp = () => {
               )}
             />
             <SubmitButton disabled={isSubmitting.value}>
-              Zarejestrój
+              {isSubmitting.value ? (
+                <Icon icon='line-md:loading-loop' fontSize={22} />
+              ) : (
+                <p>Zarejestrój</p>
+              )}
             </SubmitButton>
           </form>
         </Form>
       </div>
-      <div className='flex h-full w-1/2 flex-col items-center justify-center space-y-4 rounded-br-lg rounded-tr-lg bg-gradient-to-br from-[#38B98C] to-[#3AA8AE] text-[14px] text-white'>
+      <div className='flex-c{ol flex h-full w-1/2 items-center justify-center space-y-4 rounded-br-lg rounded-tr-lg bg-gradient-to-br from-[#38B98C] to-[#3AA8AE] text-[14px] text-white'>
         <h2 className='text-center text-[50px]'>Masz już konto ?</h2>
         <Link href={paths.auth.signIn}>
           <button className='rounded-full bg-white px-9 py-4 font-bold text-black'>

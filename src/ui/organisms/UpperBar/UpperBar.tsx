@@ -1,10 +1,13 @@
 import Link from 'next/link';
+import { useUser } from '@/api/user/useUser';
 import IconButton from '@/ui/atmos/IconButton';
 import ThemeSwitch from '@/ui/atmos/ThemeSwitch';
 import UserAvatar from '@/ui/atmos/UserAvatar/UserAvatar';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 const UpperBar = () => {
+  const { data: user, isLoading, error } = useUser();
+
   return (
     <div className='absolute right-0 top-0 flex w-full items-center justify-end gap-4 border-b-[1px] border-white p-2 pr-2 backdrop-blur-sm'>
       <IconButton
@@ -27,7 +30,7 @@ const UpperBar = () => {
             sideOffset={5}
           >
             <DropdownMenu.Item className='DropdownMenuItem'>
-              <Link href='/dashboard/profile'>Profil</Link>
+              <Link href={`/dashboard/profile/${user?.id}`}>Profil</Link>
             </DropdownMenu.Item>
             <DropdownMenu.Item className='DropdownMenuItem'>
               <Link href='/dashboard/settings'>Ustawienia</Link>
