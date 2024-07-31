@@ -9,7 +9,7 @@ import Nav from '@/ui/organisms/Navigation/Nav';
 import UpperBar from '@/ui/organisms/UpperBar/UpperBar';
 import { Typography } from '@mui/material';
 import { useTheme } from 'next-themes';
-
+import useIsSmallScreen from '@/hooks/use-IsSmallScreen';
 interface IDashboardLayout {
   children: React.ReactNode;
 }
@@ -17,6 +17,7 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   const router = usePathname();
+  const isSmallScreen = useIsSmallScreen();
 
   const sectionNames = {
     bike: 'Rowery',
@@ -58,7 +59,7 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
         /> */}
       </div>
       <Nav />
-      <div className='relative flex w-full flex-col gap-5 p-6 backdrop-blur-md'>
+      <div className={`${isSmallScreen ? 'ml-20' : 'ml-72'} relative flex w-full flex-col gap-5 p-6 backdrop-blur-md`}>
         <UpperBar />
         <Typography
           variant='h1'

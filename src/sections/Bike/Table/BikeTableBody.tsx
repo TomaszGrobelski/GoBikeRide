@@ -23,7 +23,7 @@ interface IBikeTableBody {
 const BikeTableBody = ({
   displayedData,
   handleChange,
-  condition
+  condition,
 }: IBikeTableBody) => {
   return (
     <TableBody>
@@ -37,7 +37,7 @@ const BikeTableBody = ({
           </TableCell>
 
           <TableCell align='center'>
-            {convertToDdMmYyyyFormat({ date: row.maintenanceDate })}
+            {convertToDdMmYyyyFormat(row.maintenanceDate)}
           </TableCell>
 
           <TableCell align='center'>

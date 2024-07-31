@@ -1,10 +1,13 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function DELETE(context: { params: { postId: number } }) {
-  const { postId } = context.params;
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { postId: number } },
+) {
+  const { postId } = params;
   try {
     if (!postId) {
       return NextResponse.json({ message: 'Missing postId' }, { status: 400 });

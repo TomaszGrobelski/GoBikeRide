@@ -3,6 +3,7 @@ import { useUser } from '@/api/user/useUser';
 import IconButton from '@/ui/atmos/IconButton';
 import ThemeSwitch from '@/ui/atmos/ThemeSwitch';
 import UserAvatar from '@/ui/atmos/UserAvatar/UserAvatar';
+import Tooltip from '@mui/material/Tooltip';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 const UpperBar = () => {
@@ -10,18 +11,24 @@ const UpperBar = () => {
 
   return (
     <div className='absolute right-0 top-0 flex w-full items-center justify-end gap-4 border-b-[1px] border-white p-2 pr-2 backdrop-blur-sm'>
-      <IconButton
-        icon='ic:round-notification-important'
-        ariaLabel='Otwórz powiadomienia'
-      />
+      <Tooltip title='Powiadomienia' placement='bottom'>
+        <div>
+          <IconButton
+            icon='ic:round-notification-important'
+            ariaLabel='Otwórz powiadomienia'
+          />
+        </div>
+      </Tooltip>
 
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
-          <div>
-            <button>
-              <UserAvatar />
-            </button>
-          </div>
+          <Tooltip title='Użytkownik' placement='bottom'>
+            <div>
+              <button>
+                <UserAvatar />
+              </button>
+            </div>
+          </Tooltip>
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Portal>

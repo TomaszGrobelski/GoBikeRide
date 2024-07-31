@@ -27,7 +27,7 @@ const Nav = () => {
 
   return (
     <div //NavbarContainer
-      className={`flex ${isSmallScreen ? 'w-20 p-3' : 'w-72 p-6'} ${theme === 'light' ? 'bg-white' : 'bg-[#010315]'} z-20 flex-col items-start gap-8 border-r-[1px] backdrop-blur-sm`}
+      className={`fixed left-0 top-0 flex ${isSmallScreen ? 'w-20 p-3' : 'w-72 p-6'} ${theme === 'light' ? 'bg-white' : 'bg-[#010315]'} z-20 flex-col items-start gap-8 border-r-[1px] backdrop-blur-sm`}
     >
       <NavbarLogo />
       <nav>

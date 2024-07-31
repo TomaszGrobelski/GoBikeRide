@@ -10,8 +10,8 @@ export async function GET() {
         userId: true,
         brand: true,
         model: true,
-        components: true
-      }
+        components: true,
+      },
     });
 
     return NextResponse.json(bikes);
@@ -19,7 +19,7 @@ export async function GET() {
     console.error('Error fetching bikes:', error);
     return NextResponse.json(
       { message: 'Error fetching bikes' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -32,16 +32,16 @@ export async function POST(req: NextRequest) {
     if (!userId || !brand || !model) {
       return NextResponse.json(
         { message: 'Missing required fields' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     const bike = await prisma.bike.create({
       data: {
-        userId: Number(userId),
+        userId: String(userId),
         brand,
-        model
-      }
+        model,
+      },
     });
 
     return NextResponse.json(bike, { status: 201 });
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
     console.error('Error adding bike:', error);
     return NextResponse.json(
       { message: 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

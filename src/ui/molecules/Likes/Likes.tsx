@@ -26,7 +26,7 @@ const Likes = ({ likes, postId, userId, refetch }: ILikes) => {
   const handleLike = async () => {
     try {
       await likePost({ userId, postId });
-      await refetch();
+      // await refetch();
     } catch (error) {
       console.error('Error liking/unliking the post:', error);
     }
