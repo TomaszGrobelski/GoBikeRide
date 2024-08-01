@@ -15,6 +15,7 @@ import { homeCardInfromation } from './homeCardInformation';
 const HomeView = () => {
   return (
     <section className='mt-10 flex flex-col items-center justify-between gap-20 p-10'>
+      <Image className=' shadow-md shadow-mainPurple object-fill rounded-xl max-w-[1200px] max-h-[500px]' src={'/images/mainBike.jpg'} alt='tło_roweru' width={1000} height={300} />
       <div className='flex justify-between gap-[200px]'>
         <div className='relative w-96 space-y-4 rounded-xl bg-white from-[#7d399a] to-[#4e1f51] p-6 shadow-md shadow-pink-500 dark:bg-gradient-to-t dark:shadow-purple-400'>
           <h2 className='font-justMe text-xl'>

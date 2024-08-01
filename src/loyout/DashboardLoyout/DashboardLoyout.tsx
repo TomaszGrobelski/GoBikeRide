@@ -9,7 +9,9 @@ import Nav from '@/ui/organisms/Navigation/Nav';
 import UpperBar from '@/ui/organisms/UpperBar/UpperBar';
 import { Typography } from '@mui/material';
 import { useTheme } from 'next-themes';
+
 import useIsSmallScreen from '@/hooks/use-IsSmallScreen';
+
 interface IDashboardLayout {
   children: React.ReactNode;
 }
@@ -26,7 +28,7 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
     hero: 'Strona Główna',
     posts: 'Posty',
     users: 'Lista użytkowników',
-    contact: ''
+    contact: '',
   };
 
   const sectionName =
@@ -49,17 +51,11 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
     <div
       className={`relative flex h-full min-h-screen ${theme === 'light' ? 'bg-white' : 'bg-[#030014]'} `}
     >
-      <div className={`absolute inset-0 -z-10`}>
-        {/* <Image
-          src={dashboardBackGround}
-          alt="Background"
-          layout="fill"
-          objectFit="cover"
-          quality={100}
-        /> */}
-      </div>
+      <div className={`absolute inset-0 -z-10`}></div>
       <Nav />
-      <div className={`${isSmallScreen ? 'ml-20' : 'ml-72'} relative flex w-full flex-col gap-5 p-6 backdrop-blur-md`}>
+      <div
+        className={`${isSmallScreen ? 'ml-20' : 'ml-72'} relative flex w-full flex-col gap-5 p-6 backdrop-blur-md`}
+      >
         <UpperBar />
         <Typography
           variant='h1'

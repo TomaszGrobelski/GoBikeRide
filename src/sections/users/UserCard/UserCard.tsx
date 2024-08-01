@@ -4,6 +4,7 @@ import UserProfileButton from '@/ui/atmos/Buttons/UserProfilButton';
 import { Box, Typography } from '@mui/material';
 
 import { IUser } from '@/types/User/user.types';
+import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
 
 import CounterItem from './CounterItem';
 import { CardItem, MainMethod } from './UserCard.styles';
@@ -19,6 +20,8 @@ const UserCard = ({ user }: IUserCard) => {
       <Image src={userImg} alt='zdjęcie avatara' width={100} height={100} />
 
       <Typography>{user.username}</Typography>
+
+      <Typography sx={{ fontSize:14}}>Dołączył: {convertToDdMmYyyyFormat(user.createdAt)}</Typography>
 
       <MainMethod>Gravel</MainMethod>
 

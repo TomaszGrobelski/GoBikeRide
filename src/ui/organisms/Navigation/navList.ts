@@ -4,23 +4,18 @@ export const menuList = [
   { title: 'Trasy', link: '/dashboard/road', icon: 'fluent:road-20-filled' },
   { title: 'Posty', link: '/dashboard/posts', icon: 'jam:write' },
   {
-    title: 'Czat',
-    link: '/dashboard/chat',
-    icon: 'bi:chat'
-  },
-  {
     title: 'Użytkownicy',
     link: '/dashboard/users',
-    icon: 'clarity:users-line'
+    icon: 'clarity:users-line',
   },
   {
     title: 'Kontakt',
     link: '/dashboard/contact',
-    icon: 'grommet-icons:contact'
+    icon: 'grommet-icons:contact',
   },
   {
     title: 'Premium',
     link: '/dashboard/premium',
-    icon: 'fluent:premium-16-regular'
-  }
+    icon: 'fluent:premium-16-regular',
+  },
 ];
