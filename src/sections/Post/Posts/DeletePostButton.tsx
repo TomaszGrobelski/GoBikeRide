@@ -14,7 +14,10 @@ const DeletePostButton = ({ postId }: Props) => {
   };
 
   return (
-    <button onClick={handleDeletePost} className='absolute right-5 top-0'>
+    <button
+      onClick={handleDeletePost}
+      className='absolute right-5 top-0 transition-all duration-300 hover:rotate-180 hover:text-red-700'
+    >
       <Icon icon='streamline:delete-1-solid' />
     </button>
   );

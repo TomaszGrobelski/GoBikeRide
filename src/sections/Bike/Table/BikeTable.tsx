@@ -26,6 +26,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import { IBike } from '@/types/Bike/bike.types';
 import { IComponents } from '@/types/Bike/Components/components.types';
+import { IUser } from '@/types/User/user.types';
 
 import AddBikeModal from './AddBikeModal/AddBikeModal';
 import AddNewComponent from './AddNewComponent';
@@ -36,15 +37,25 @@ const defaultFilters: IFilters = {
   // sortBy: 'name',
   // sortDirection: 'asc'
 };
-export default function BikeTable() {
-  const { data: bikes, isLoading, isError } = useFetchBikes(19);
+
+interface BikeTableProps {
+  user: IUser | undefined;
+}
+
+export default function BikeTable({ user }: BikeTableProps) {
+  if (!user) {
+    throw new Error('User is not defined');
+  }
+
+  const { data: bikes, isLoading, isError } = useFetchBikes(user.id);
 
   const [condition, setCondition] = useState('');
-  const [filters, setFilters] = useState<IFilters>(defaultFilters);
   const [selectedBike, setSelectedBike] = useState<string>('');
+  const [displayedData, setDisplayedData] = useState<IComponents[]>([]);
+
+  // const [filters, setFilters] = useState<IFilters>(defaultFilters);
   // const [sortBy, setSortBy] = useState<keyof IBike>('brand');
   // const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
-  const [displayedData, setDisplayedData] = useState<IComponents[]>([]);
 
   useEffect(() => {
     if (bikes && bikes.length > 0) {
@@ -92,8 +103,9 @@ export default function BikeTable() {
           selectedBike={selectedBike}
           setSelectedBike={setSelectedBike}
         />
-        <AddBikeModal />
+        <AddBikeModal user={user} />
       </Box>
+
       <Table
         sx={{ minWidth: 650, boxShadow: 30, paddingTop: 50 }}
         aria-label='simple table'
@@ -114,7 +126,7 @@ export default function BikeTable() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    width: 160
+                    width: 160,
                   }}
                 >
                   {header.name}

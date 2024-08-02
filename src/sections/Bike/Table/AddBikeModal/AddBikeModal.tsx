@@ -10,19 +10,25 @@ import Typography from '@mui/material/Typography';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { IUser } from '@/types/User/user.types';
+
 import { schema } from './add-bike-modal.schema';
 import { style } from './add-bike-modal.style';
 
 type FormFields = z.infer<typeof schema>;
 
-export default function AddBikeModal() {
+interface AddBikeModalProps {
+  user: IUser | undefined;
+}
+
+export default function AddBikeModal({ user }: AddBikeModalProps) {
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting },
   } = useForm<FormFields>({
-    resolver: zodResolver(schema)
+    resolver: zodResolver(schema),
   });
 
   const addBikeMutation = useAddBike();
@@ -35,10 +41,14 @@ export default function AddBikeModal() {
   };
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    if(!user){
+      return
+    }
+    
     await addBikeMutation.mutateAsync({
-      userId: 19,
+      userId: user?.id,
       brand: data.brand,
-      model: data.model
+      model: data.model,
     });
     reset();
     handleClose();

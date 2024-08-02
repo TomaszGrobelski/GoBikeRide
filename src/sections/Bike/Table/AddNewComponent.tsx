@@ -10,19 +10,18 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker, DatePickerProps  } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import dayjs, { Dayjs } from 'dayjs';
+
+import 'dayjs/locale/pl';
+
+import TextField from '@mui/material/TextField';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-const schema = z.object({
-  type: z.string().min(1, 'Nazwa jest wymagana'),
-  maintenanceDate: z
-    .date()
-    .min(new Date(), 'Data konserwacji nie może być z przeszłości'),
-  currentState: z.string().min(1, 'Stan jest wymagany'),
-  currentMileageKm: z.string().min(1, 'Przebieg jest wymagany'),
-  maintenanceCost: z.string().min(1, 'Koszt konserwacji jest wymagany')
-});
+import { schema } from './new-component.schema';
 
 type FormFields = z.infer<typeof schema>;
 
@@ -31,22 +30,31 @@ const AddNewComponent = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting }
+    control,
+    formState: { errors, isSubmitting },
   } = useForm<FormFields>({
-    resolver: zodResolver(schema)
+    resolver: zodResolver(schema),
   });
-  const addComponentMutation = useAddComponent();
+
+  const { mutate: addComponent, isLoading } = useAddComponent();
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    await addComponentMutation.mutateAsync({
-      bikeId: 12,
+    console.log(data);
+    await addComponent({
+      bikeId: 3,
       type: data.type,
       maintenanceDate: data.maintenanceDate,
       currentState: data.currentState,
       currentMileageKm: parseFloat(data.currentMileageKm),
-      maintenanceCost: parseFloat(data.maintenanceCost)
+      maintenanceCost: parseFloat(data.maintenanceCost),
     });
-    reset();
+    reset({
+      type: '',
+      maintenanceDate: undefined,
+      currentState: '',
+      currentMileageKm: '',
+      maintenanceCost: '',
+    });
   };
 
   return (
@@ -59,16 +67,29 @@ const AddNewComponent = () => {
           {...register('type')}
           type='text'
           id='type'
-          placeholder='Nazwa'
+          placeholder='Nazwa osprzętu'
           className='text-center outline-none'
         />
+        {errors.type && <p>errors.type.message</p>}
       </TableCell>
 
       <TableCell align='center' className='w-3/4'>
-        <DatePicker
-          // {...register('maintenanceDate')}
-          label='Wybierz datę konserwacji'
-        />
+        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='pl'>
+        <Controller
+            name='maintenanceDate'
+            control={control}
+            render={({ field: { onChange, onBlur, value, ref } }) => (
+              <DatePicker
+                value={value ? dayjs(value) : null}
+                onChange={(date: Dayjs | null) => onChange(date ? date.toDate() : null)}
+                renderInput={(params: DatePickerProps<Dayjs, false>['renderInput']) => <TextField {...params} />}
+                onBlur={onBlur}
+                ref={ref}
+              />
+            )}
+          />
+        </LocalizationProvider>
+        {errors.maintenanceDate && <p>{errors.maintenanceDate.message}</p>}
       </TableCell>
 
       <TableCell align='center'>
@@ -76,20 +97,20 @@ const AddNewComponent = () => {
           <FormControl fullWidth>
             <InputLabel id='demo-simple-select-label'></InputLabel>
             <Select
+              {...register('currentState')}
               labelId='demo-simple-select-label'
               id='demo-simple-select'
-              //   value={condition}
-              label=''
-              //   onChange={handleChange}
+              label='Stan'
             >
-              <MenuItem value={5}>Bardzo Dobry</MenuItem>
-              <MenuItem value={4}>Dobry</MenuItem>
-              <MenuItem value={3}>Sredni</MenuItem>
-              <MenuItem value={2}>Zły</MenuItem>
-              <MenuItem value={1}>Bardo zły</MenuItem>
+              <MenuItem value='Bardzo Dobry'>Bardzo Dobry</MenuItem>
+              <MenuItem value='Dobry'>Dobry</MenuItem>
+              <MenuItem value='Sredni'>Sredni</MenuItem>
+              <MenuItem value='Zły'>Zły</MenuItem>
+              <MenuItem value='Bardo zły'>Bardo zły</MenuItem>
             </Select>
           </FormControl>
         </Box>
+        {errors.currentState && <p>{errors.currentState.message}</p>}
       </TableCell>
 
       <TableCell align='center'>
@@ -100,6 +121,7 @@ const AddNewComponent = () => {
           placeholder='Przebieg'
           className='text-center outline-none'
         />
+        {errors.currentMileageKm && <p>{errors.currentMileageKm.message}</p>}
       </TableCell>
 
       <TableCell align='center'>
@@ -110,6 +132,7 @@ const AddNewComponent = () => {
           placeholder='Koszt konserwacji'
           className='text-center outline-none'
         />
+        {errors.maintenanceCost && <p>{errors.maintenanceCost.message}</p>}
       </TableCell>
 
       <TableCell align='center'>
@@ -118,7 +141,8 @@ const AddNewComponent = () => {
             icon='basil:add-outline'
             ariaLabel='Dodaj nowy element'
             color='#5F286B'
-            // onClick={handleSubmit(handleAddComponent)}
+            onClick={handleSubmit(onSubmit)}
+            disabled={isLoading || isSubmitting}
           />
         </Box>
       </TableCell>

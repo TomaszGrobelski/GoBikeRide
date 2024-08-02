@@ -37,7 +37,7 @@ const Likes = ({ likes, postId, userId, refetch }: ILikes) => {
       <button
         disabled={isLoading}
         onClick={handleLike}
-        className='flex items-center gap-3 rounded-xl border-[1px] px-3 py-1'
+        className='flex items-center gap-3 rounded-xl border-[1px] px-3 py-1 hover:border-red-600 transition-all duration-300'
       >
         <Icon
           icon='prime:heart-fill'
@@ -50,7 +50,7 @@ const Likes = ({ likes, postId, userId, refetch }: ILikes) => {
         />
         <span>Polub</span>
       </button>
-      <div className='flex flex-wrap'>
+      <div className='flex flex-wrap -space-x-3'>
         {likes &&
           likes.map((like) => (
             <Link
@@ -64,9 +64,9 @@ const Likes = ({ likes, postId, userId, refetch }: ILikes) => {
                     like.user.avatar_url || '/default-avatars/male-avatar.png'
                   }
                   alt={`${like.user.username} avatar`}
-                  className='h-6 w-6 cursor-pointer rounded-full'
-                  width={40}
-                  height={40}
+                  className='h-8 w-8 cursor-pointer rounded-full ring-1 bg-white inline-block ring-mainPurple '
+                  width={50}
+                  height={50}
                 />
               </Tooltip>
             </Link>

@@ -9,19 +9,19 @@ export async function POST(req: NextRequest) {
     const {
       bikeId,
       type,
-      brand,
-      model,
+      // brand,
+      // model,
       maintenanceDate,
       currentState,
       currentMileageKm,
-      maintenanceCost
+      maintenanceCost,
     } = body;
 
     if (
       !bikeId ||
       !type ||
-      !brand ||
-      !model ||
+      // !brand ||
+      // !model ||
       !maintenanceDate ||
       !currentState ||
       !currentMileageKm ||
@@ -29,13 +29,12 @@ export async function POST(req: NextRequest) {
     ) {
       return NextResponse.json(
         { message: 'Missing required fields' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     const bike = await prisma.bike.findMany({
       where: { id: Number(bikeId) },
-      include: { user: true } // Include the user if needed
     });
 
     if (!bike || bike.length === 0) {
@@ -46,13 +45,13 @@ export async function POST(req: NextRequest) {
       data: {
         bikeId: Number(bikeId),
         type,
-        brand,
-        model,
+        brand: 'coś',
+        model: 'Ktos',
         maintenanceDate: new Date(maintenanceDate),
         currentState,
         currentMileageKm,
-        maintenanceCost
-      }
+        maintenanceCost,
+      },
     });
 
     return NextResponse.json(component, { status: 201 });
@@ -60,7 +59,7 @@ export async function POST(req: NextRequest) {
     console.error('Error adding bike component:', error);
     return NextResponse.json(
       { message: 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

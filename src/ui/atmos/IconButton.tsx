@@ -7,6 +7,7 @@ interface IIconButton {
   onClick?: VoidFunction;
   className?: string;
   color?: string;
+  disabled?: boolean;
 }
 
 const IconButton = ({
@@ -15,13 +16,15 @@ const IconButton = ({
   onClick,
   ariaLabel,
   className,
-  color
+  color,
+  disabled,
 }: IIconButton) => {
   return (
     <button
       onClick={onClick}
       className={`IconButton flex h-10 w-10 items-center justify-center rounded-full hover:scale-110 ${className} `}
       aria-label={ariaLabel}
+      disabled={disabled}
     >
       <Icon icon={icon} fontSize={size} color={color} />
     </button>

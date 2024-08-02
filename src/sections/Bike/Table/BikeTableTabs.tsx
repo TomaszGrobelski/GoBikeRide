@@ -15,7 +15,7 @@ interface IBikeTableTabs {
 export default function BikeTableTabs({
   bikes,
   setSelectedBike,
-  selectedBike
+  selectedBike,
 }: IBikeTableTabs) {
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setSelectedBike(newValue);
@@ -35,7 +35,7 @@ export default function BikeTableTabs({
             <Tab key={bike.brand} value={bike.brand} label={bike.brand} />
           ))
         ) : (
-          <div>nie ma</div>
+          <p>Nie dodano jeszcze żadnego roweru</p>
         )}
       </Tabs>
     </Box>

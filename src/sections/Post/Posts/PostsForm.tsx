@@ -80,7 +80,7 @@ const PostsForm = ({ refetch, user }: IPostsForm) => {
           console.log(response, 'response');
           toast.success('Post został dodany');
           await refetch();
-          setDescription('');
+          setDescription(' ');
           setImagePreview(null);
         } catch (error) {
           console.log(error);

@@ -3,9 +3,21 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const userId = req.nextUrl.searchParams.get('userId');
+
+    if (!userId) {
+      return NextResponse.json(
+        { message: 'Missing userId parameter' },
+        { status: 400 },
+      );
+    }
+
     const bikes = await prisma.bike.findMany({
+      where: {
+        userId: String(userId),
+      },
       select: {
         userId: true,
         brand: true,

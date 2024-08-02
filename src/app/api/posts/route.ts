@@ -12,6 +12,11 @@ export async function GET() {
         description: true,
         imageUrl: true,
         createdAt: true,
+        user: {
+          select: {
+            username: true,
+          },
+        },
         likes: {
           select: {
             id: true,
