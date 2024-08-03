@@ -11,17 +11,17 @@ import Select from '@mui/material/Select';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker, DatePickerProps  } from '@mui/x-date-pickers/DatePicker';
+import { DatePicker, DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs, { Dayjs } from 'dayjs';
 
 import 'dayjs/locale/pl';
 
-import TextField from '@mui/material/TextField';
+import TextField, { TextFieldProps } from '@mui/material/TextField';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { schema } from './new-component.schema';
+import { schema } from '../new-component.schema';
 
 type FormFields = z.infer<typeof schema>;
 
@@ -75,16 +75,23 @@ const AddNewComponent = () => {
 
       <TableCell align='center' className='w-3/4'>
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='pl'>
-        <Controller
+          <Controller
             name='maintenanceDate'
             control={control}
-            render={({ field: { onChange, onBlur, value, ref } }) => (
+            render={({ field: { onChange, value, ref } }) => (
               <DatePicker
                 value={value ? dayjs(value) : null}
-                onChange={(date: Dayjs | null) => onChange(date ? date.toDate() : null)}
-                renderInput={(params: DatePickerProps<Dayjs, false>['renderInput']) => <TextField {...params} />}
-                onBlur={onBlur}
-                ref={ref}
+                onChange={(date: Dayjs | null) =>
+                  onChange(date ? date.toDate() : null)
+                }
+                slotProps={{
+                  textField: {
+                    fullWidth: true,
+                    inputRef: ref,
+                    error: !!errors.maintenanceDate,
+                    helperText: errors.maintenanceDate?.message,
+                  } as TextFieldProps,
+                }}
               />
             )}
           />

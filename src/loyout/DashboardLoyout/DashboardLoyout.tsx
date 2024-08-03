@@ -54,13 +54,13 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
       <div className={`absolute inset-0 -z-10`}></div>
       <Nav />
       <div
-        className={`${isSmallScreen ? 'ml-20' : 'ml-72'} relative flex w-full flex-col gap-5 p-6 backdrop-blur-md`}
+        className={`${isSmallScreen ? 'ml-20' : 'ml-72'} relative flex w-full flex-col gap-5 backdrop-blur-md`}
       >
         <UpperBar />
         <Typography
           variant='h1'
           sx={{ fontSize: '2rem' }}
-          className='text-nowrap pt-10 font-rammetto text-black dark:text-slate-50'
+          className='text-nowrap pt-16 pl-6 font-rammetto text-black  dark:text-slate-50'
         >
           {sectionName}
         </Typography>

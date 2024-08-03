@@ -29,7 +29,7 @@ import { IComponents } from '@/types/Bike/Components/components.types';
 import { IUser } from '@/types/User/user.types';
 
 import AddBikeModal from './AddBikeModal/AddBikeModal';
-import AddNewComponent from './AddNewComponent';
+import AddNewComponent from './AddNewComponent/AddNewComponent';
 import BikeTableBody from './BikeTableBody';
 
 interface IFilters {}
