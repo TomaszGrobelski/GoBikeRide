@@ -28,7 +28,7 @@ const PostsList = ({ posts, user, refetch }: IPostsList) => {
         posts.map((post) => (
           <div
             key={post.id}
-            className='relative w-full max-w-[800px] space-y-5 rounded-3xl border-[1px] p-10 shadow-xl'
+            className='relative w-full max-w-[800px] space-y-5 rounded-3xl border-[1px] p-10 shadow-sm shadow-white'
           >
             <div className='flex gap-4'>
               <Link

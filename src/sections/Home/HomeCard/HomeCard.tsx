@@ -23,7 +23,7 @@ const HomeCard: React.FC<HomeCardProps> = ({
 }) => {
   return (
     <div
-      className={`flex h-auto flex-col gap-10 lg:w-full lg:flex-row lg:justify-between max-w-[1500px] border-b-[1px] py-32 ${
+      className={`relative z-20 bg-white flex h-auto flex-col px-5 gap-10 lg:w-full lg:flex-row lg:justify-between max-w-[1500px] border-b-[1px] py-44 ${
         reverseLayout ? 'lg:flex-row-reverse' : ''
       }`}
     >
@@ -33,12 +33,12 @@ const HomeCard: React.FC<HomeCardProps> = ({
           alt={altText}
           layout='fill'
           objectFit='cover'
-          className='rounded-lg'
+          className='rounded-2xl shadow-md shadow-white'
         />
       </div>
 
       <div className='space-y-10 font-poppins lg:w-1/2'>
-        <h2 className='text-wrap text-[38px]'>{title}</h2>
+        <h2 className='text-wrap text-[24px] sm:text-[38px] text-secoundSea'>{title}</h2>
 
         <p className='text-balance indent-4'>
           {description}

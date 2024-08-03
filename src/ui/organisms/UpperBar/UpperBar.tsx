@@ -10,7 +10,7 @@ const UpperBar = () => {
   const { data: user, isLoading, error } = useUser();
 
   return (
-    <div className='absolute right-0 top-0 flex w-full items-center justify-end gap-4 border-b-[1px] border-white p-2 pr-2 backdrop-blur-sm'>
+    <div className='absolute z-10 right-0 top-0 flex w-full items-center justify-end gap-4  p-2 pr-2 backdrop-blur-sm'>
       <Tooltip title='Powiadomienia' placement='bottom'>
         <div>
           <IconButton

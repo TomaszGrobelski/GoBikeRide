@@ -16,7 +16,7 @@ const CardInformation = ({ icon, description }: iCardInfromation) => {
           style={{ color: 'white' }}
         />
       </div>
-      <p className='flex max-w-14 justify-center text-center font-poppins text-[12px]'>
+      <p className='flex max-w-14 justify-center text-center font-poppins text-[10px] sm:text-[12px]'>
         {description}
       </p>
     </div>

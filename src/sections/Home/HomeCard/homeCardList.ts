@@ -13,7 +13,7 @@ export const homeCardList = [
     linkHref: '/dashboard/road',
   },
   {
-    imageSrc: '/images/home/advice.jpg', 
+    imageSrc: '/images/home/advice.jpg',
     altText: 'tips-articles',
     title: 'Porady i artykuły',
     description:
@@ -27,12 +27,12 @@ export const homeCardList = [
     reverseLayout: true,
   },
   {
-    imageSrc: '/images/home/news.jpg', 
+    imageSrc: '/images/home/news.jpg',
     altText: 'news-updates',
     title: 'Aktualności i ogłoszenia',
     description:
-      'Bądź na bieżąco z najnowszymi informacjami i aktualizacjami w naszej aplikacji. Sprawdź, co nowego w świecie rowerów i naszej platformy.',
+      'Nie przegap żadnej z najnowszych funkcji i udoskonaleń, które regularnie dodajemy do naszej aplikacji, aby zapewnić Ci najlepsze doświadczenia i najwyższą jakość usług. Jesteśmy zawsze na bieżąco z najnowszymi trendami i technologiami, co pozwala nam wprowadzać innowacje, które ułatwiają Ci korzystanie z aplikacji. Nasze aktualizacje obejmują nie tylko poprawki błędów i optymalizację wydajności, ale również wprowadzenie nowych funkcji, które zwiększają komfort i efektywność korzystania z aplikacji.',
     listItems: ['Nowe trasy dodane!', 'Aktualizacja aplikacji w wersji 2.0.'],
-    linkHref: '/news', 
+    linkHref: '/news',
   },
 ];

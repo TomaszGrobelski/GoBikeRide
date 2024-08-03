@@ -94,7 +94,7 @@ const PostsForm = ({ refetch, user }: IPostsForm) => {
   };
 
   return (
-    <Box className='flex w-full max-w-[800px] flex-col items-center gap-4 rounded-xl bg-white p-10 shadow-xl'>
+    <Box className='flex w-full max-w-[800px] flex-col items-center gap-4 rounded-xl bg-white p-10 shadow-sm shadow-gray-300'>
       {imagePreview && (
         <Image
           src={imagePreview}
