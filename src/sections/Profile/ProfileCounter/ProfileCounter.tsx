@@ -17,6 +17,7 @@ const ProfileCounter = ({ user }: IProfileCounter) => {
         icon={iconList.rowery.icon}
       />
       <CounterCard value={0} title='Trasy' icon={iconList.trasy.icon} />
+      <CounterCard value={0} title='Kilometry' icon={iconList.kilometry.icon} />
       <CounterCard
         value={user.posts_count}
         title='Posty'

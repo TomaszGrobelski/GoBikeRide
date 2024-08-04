@@ -1,10 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
 import UserProfileButton from '@/ui/atmos/Buttons/UserProfilButton';
+import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
 import { Box, Typography } from '@mui/material';
+import { CalendarCheck } from 'lucide-react';
 
 import { IUser } from '@/types/User/user.types';
-import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
 
 import CounterItem from './CounterItem';
 import { CardItem, MainMethod } from './UserCard.styles';
@@ -21,7 +22,9 @@ const UserCard = ({ user }: IUserCard) => {
 
       <Typography>{user.username}</Typography>
 
-      <Typography sx={{ fontSize:14}}>Dołączył: {convertToDdMmYyyyFormat(user.createdAt)}</Typography>
+      <Typography sx={{ fontSize: 14, display: 'flex', alignItems: 'center', gap:1 }}>
+        <CalendarCheck /> {convertToDdMmYyyyFormat(user.createdAt)}
+      </Typography>
 
       <MainMethod>Gravel</MainMethod>
 

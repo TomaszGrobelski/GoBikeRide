@@ -29,7 +29,7 @@ const CopyButton = ({ children, textToCopy }: ICopyButton) => {
         richColors
         position='bottom-right'
       />
-      <CopyButtonStyle onClick={copyToClipboard}>
+      <CopyButtonStyle className='mt-5' onClick={copyToClipboard}>
         {children} <Icon icon='mage:copy' fontSize={22} />
       </CopyButtonStyle>
     </>

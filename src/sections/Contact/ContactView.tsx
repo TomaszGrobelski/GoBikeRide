@@ -12,7 +12,7 @@ const ContactView = () => {
           flexDirection: 'column',
           alignItems: 'center',
           gap: 10,
-          paddingTop: 10
+          paddingTop: 10,
         }}
       >
         <HeaderContact />
@@ -26,7 +26,7 @@ const ContactView = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <ContactBox title='Telefon' icon='bi:telephone'>
-              <Typography>
+              <Typography className='text-balance text-center h-[160px]'>
                 W przypadku pilnej potrzeby pomocy, prosimy o niezwłoczny
                 kontakt telefoniczny. Nasz zespół jest gotowy, by udzielić Ci
                 niezbędnej pomocy i rozwiązać wszelkie problemy, jak
@@ -37,15 +37,17 @@ const ContactView = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <ContactBox title='Email' icon='ic:sharp-alternate-email'>
-              <Typography variant='body1'>
+              <Typography className='text-balance text-center h-[160px]' variant='body1'>
                 Jeśli napotkałeś jakiekolwiek problemy podczas korzystania z
                 naszej strony lub masz pytania, jesteśmy tutaj, aby pomóc!
                 Prosimy o kontaktowanie się z nami za pośrednictwem naszego
                 adresu e-mail:
               </Typography>
-              <CopyButton textToCopy='Tomasz.grobelski98@gmail.com'>
-                Tomasz.grobelski98@gmail.com
-              </CopyButton>
+              <Box sx={{ marginTop: 'auto' }}>
+                <CopyButton textToCopy='Tomasz.grobelski98@gmail.com'>
+                  Tomasz.grobelski98@gmail.com
+                </CopyButton>
+              </Box>
             </ContactBox>
           </Grid>
         </Grid>

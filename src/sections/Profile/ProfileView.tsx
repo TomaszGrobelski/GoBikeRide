@@ -26,7 +26,7 @@ const ProfileView = () => {
   }
 
   return (
-    <div className='flex max-w-[1000px] flex-col justify-evenly gap-10'>
+    <div className='flex max-w-[1000px] flex-col ml-20 justify-evenly gap-10 '>
       <ProfileTabs />
 
       <ProfileInformation user={user} />

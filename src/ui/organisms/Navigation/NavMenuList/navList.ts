@@ -1,6 +1,6 @@
 export const menuList = [
   { title: 'Główna', link: '/dashboard/hero', icon: 'flowbite:home-outline' },
-  { title: 'Rowery', link: '/dashboard/bike', icon: 'icon-park-outline:bike' },
+  { title: 'Rowerownia', link: '/dashboard/bike', icon: 'icon-park-outline:bike' },
   { title: 'Trasy', link: '/dashboard/road', icon: 'fluent:road-20-filled' },
   { title: 'Posty', link: '/dashboard/posts', icon: 'jam:write' },
   {

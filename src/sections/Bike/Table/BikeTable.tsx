@@ -94,7 +94,7 @@ export default function BikeTable({ user }: BikeTableProps) {
 
   return (
     <TableContainer
-      sx={{ boxShadow: '2px 2px 8px', borderRadius: 5, p: 1 }}
+      sx={{ boxShadow: '2px 2px 8px', borderRadius: 5, p: 1, maxWidth:1200 }}
       component={Paper}
     >
       <Box sx={{ display: 'flex' }}>

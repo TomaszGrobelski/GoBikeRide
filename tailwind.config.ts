@@ -34,11 +34,11 @@ const config: Config = {
       keyframes: {
         slideRightAndBack: {
           '0%, 100%': { transform: 'translateX(0)' },
-          '50%': { transform: 'translateX(-500px)' },
+          '50%': { transform: 'translateX(-600px)' },
         },
       },
       animation: {
-        slideRightAndBack: 'slideRightAndBack 3s ease-in-out infinite',
+        slideRightAndBack: 'slideRightAndBack 4s ease-in-out infinite',
       },
     },
   },

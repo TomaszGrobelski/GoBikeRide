@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import GradientBox from '@/ui/atmos/Boxes/GradientBox';
 import CardInformation from '@/ui/molecules/Cards/CardInformation';
 import { Icon } from '@iconify/react/dist/iconify.js';
@@ -13,10 +14,10 @@ import { homeCardInfromation } from './homeCardInformation';
 
 const HomeView = () => {
   return (
-    <section className='relative mt-10 flex flex-col items-center justify-between overflow-x-clip'>
-      <div className='font-weight-[400] sticky top-16 mx-5 mt-20 flex h-[500px] w-full flex-col items-center justify-center gap-10 pb-32 pl-10 font-poppins text-[#102532]'>
-        <div className='animate-slideRightAndBack absolute -top-80 left-[800px] -z-30 h-[1000px] w-[1000px] rounded-full bg-purple-100 blur-[500px]'></div>
-        <h1 className='font-roboto max-w-[1000px] text-[48px] font-500 leading-tight tracking-tight'>
+    <section className='relative mt-10 flex flex-col items-center justify-between overflow-x-clip bg-white'>
+      <div className='font-weight-[400] sticky top-16 mx-5 mt-20 flex min-h-[500px] w-full flex-col items-center justify-center gap-10 pb-32 pl-10 font-poppins text-[#102532]'>
+        <div className='absolute -top-80 left-[800px] -z-30 h-[1000px] w-[1000px] animate-slideRightAndBack rounded-full bg-purple-200 blur-[500px]'></div>
+        <h1 className='max-w-[1000px] font-roboto text-[48px] font-500 leading-tight tracking-tight'>
           Tworzymy wyjątkowe produkty dzięki kompleksowemu wsparciu i fachowym
           wskazówkom
         </h1>
@@ -56,29 +57,36 @@ const HomeView = () => {
         />
       ))}
 
-      <GradientBox>
-        <p className='relative mx-2 self-center pt-10 text-center font-poppins text-[20px] text-white sm:mx-8 md:text-[30px] lg:text-[40px]'>
-          Dołącz do GoBikeRide Premium i korzystaj ze wszystkich funkcji, jakie
-          oferuje aplikacja:
-        </p>
-        <div className='grid grid-cols-4 gap-8 p-4 text-white lg:gap-12 xl:grid-cols-8'>
-          {homeCardInfromation.map((item) => (
-            <CardInformation
-              key={item.icon}
-              icon={item.icon}
-              description={item.description}
-            />
-          ))}
-        </div>
-      </GradientBox>
+      <div className='relative z-10 flex min-h-[400px] max-w-[1500px] flex-col items-center justify-center bg-white p-3 py-40 font-poppins text-white lg:flex-row'>
+        <GradientBox>
+          <p className='relative mx-2 self-center pt-10 text-center font-poppins text-[20px] text-white sm:mx-8 md:text-[30px] lg:text-[40px]'>
+            Dołącz do GoBikeRide Premium i korzystaj ze wszystkich funkcji,
+            jakie oferuje aplikacja:
+          </p>
+          <div className='grid grid-cols-4 gap-8 p-4 text-white lg:gap-12 xl:grid-cols-8'>
+            {homeCardInfromation.map((item) => (
+              <CardInformation
+                key={item.icon}
+                icon={item.icon}
+                description={item.description}
+              />
+            ))}
+          </div>
+          <Link href='/dashboard/premium'>
+            <button className='mb-5 rounded-lg border-[1px] bg-mainPurple px-3 py-2 text-white'>
+              Sprawdź!
+            </button>
+          </Link>
+        </GradientBox>
+      </div>
 
-      <div className='space-y-4 p-6'>
+      {/* <div className='space-y-4 p-6'>
         <h3 className='text-xl font-bold'>Wsparcie i kontakt:</h3>
         <p>
           Jeśli masz pytania lub potrzebujesz pomocy, skontaktuj się z naszym
           zespołem wsparcia: support@gobikeride.com
         </p>
-      </div>
+      </div> */}
     </section>
   );
 };

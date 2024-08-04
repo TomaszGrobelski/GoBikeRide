@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
+import { CalendarCheck, Instagram, User } from 'lucide-react';
 
 import { IUser } from '@/types/User/user.types';
 
@@ -36,8 +37,14 @@ const ProfileInformation = ({ user }: IProfileInformation) => {
           </div>
         </div>
       </div>
-      <p>Nazwa użytkownika: {user.username}</p>
-      <p>Data dołączenia: {convertToDdMmYyyyFormat(user.createdAt)}</p>
+      <p className='flex items-center gap-2'>
+        <User /> {user.username}
+      </p>
+      <p className='flex items-center gap-2'>
+        <CalendarCheck />
+        {convertToDdMmYyyyFormat(user.createdAt)}
+      </p>
+      
       <div className='flex items-center'>
         <p>Preferowany styl jazdy:</p>
         <ProfileRidingStyle />

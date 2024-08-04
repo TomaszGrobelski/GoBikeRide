@@ -8,7 +8,7 @@ interface ICounterCard {
 const CounterCard = ({ value, title, icon }: ICounterCard) => {
   return (
     <div className='flex items-center gap-3'>
-      <div className='rounded-full bg-mainPurple p-3 text-white'>
+      <div className='rounded-full  bg-secoundSea p-3 text-white'>
         <Icon icon={icon} width={25} height={25} />
       </div>
       <div className='flex flex-col items-center'>
