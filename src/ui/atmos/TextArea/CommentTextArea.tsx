@@ -11,7 +11,7 @@ const CommentTextArea = ({ onChange, ...props }: ICommentTextArea) => {
   };
   return (
     <textarea
-      className='w-full resize-none overflow-hidden rounded-md border border-gray-300 p-2 focus:border-secoundSea focus:outline-none'
+      className='w-full resize-none overflow-hidden rounded-md border border-gray-300 p-2 py-4 focus:border-secoundSea focus:outline-none'
       placeholder='Napisz komentarz...'
       rows={1}
       onInput={autoResize}

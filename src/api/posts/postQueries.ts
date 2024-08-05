@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-import { IPost } from '@/types/Posts/posts.types';
+import { IPostResponse } from '@/types/Api/apiResponse';
 
 import { endpoints } from '../endpoints/endpoints';
 
-export const fetchPosts = async (): Promise<IPost[] | undefined> => {
+export const fetchPosts = async (): Promise<IPostResponse> => {
   try {
     const response = await axios.get(endpoints.posts.all);
     return response.data;

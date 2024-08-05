@@ -32,8 +32,21 @@ export async function GET() {
             },
           },
         },
+        comments: {
+          select: {
+            id: true,
+            content: true,
+            createdAt: true,
+            user: {
+              select: {
+                id: true,
+                username: true,
+                avatar_url: true,
+              },
+            },
+          },
+        },
       },
-      // comments: true,
       orderBy: {
         createdAt: 'desc',
       },

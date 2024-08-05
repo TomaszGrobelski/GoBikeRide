@@ -13,6 +13,9 @@ const PostsView = () => {
   const { data: posts, refetch } = useFetchPosts();
   const { data: user, isLoading, error } = useUser();
 
+  // Pobieranie po 10 postów i dopiero jak sie dojedzie do końca to pobiera kolejne 10....
+  
+  console.log(posts);
   return (
     <>
       <div className='mt-20 flex w-full flex-col items-center gap-4 p-2'>

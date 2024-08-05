@@ -1,4 +1,5 @@
 import { IUser } from '../User/user.types';
+import { IComment } from './comment/comment.types';
 
 export interface IPost {
   id: number;
@@ -8,5 +9,5 @@ export interface IPost {
   createdAt: Date;
   likes: [];
   user: IUser;
-  comments: [];
+  comments: IComment[];
 }

@@ -6,11 +6,12 @@ import CommentTextArea from '@/ui/atmos/TextArea/CommentTextArea';
 import { IUser } from '@/types/User/user.types';
 
 interface CommentFormProps {
+  refetch: () => Promise<any>;
   user: IUser;
   postId: number;
 }
 
-const CommentForm = ({ user, postId }: CommentFormProps) => {
+const CommentForm = ({ refetch, user, postId }: CommentFormProps) => {
   const [commentContent, setCommentContent] = useState<string>('');
   const { mutate: addComment, isLoading } = useAddComment();
 
@@ -20,11 +21,12 @@ const CommentForm = ({ user, postId }: CommentFormProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (commentContent.trim() === '') return; // Unikaj dodawania pustych komentarzy
+    if (commentContent.trim() === '') return;
 
     try {
       await addComment({ userId: user.id, postId, content: commentContent });
       setCommentContent('');
+      await refetch();
     } catch (error) {
       console.error('Error adding comment:', error);
     }
@@ -41,8 +43,12 @@ const CommentForm = ({ user, postId }: CommentFormProps) => {
         />
         <CommentTextArea onChange={handleTextAreaChange} />
       </div>
-      <button onClick={handleSubmit} disabled={isLoading} className='self-end'>
-        Skomentuj
+      <button
+        onClick={handleSubmit}
+        disabled={isLoading}
+        className='self-end rounded-lg border-[1px] bg-mainPurple px-4 py-2 text-white'
+      >
+        {isLoading ? 'dodaje' : 'Skomentuj'}
       </button>
     </div>
   );

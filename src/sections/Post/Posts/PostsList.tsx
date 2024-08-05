@@ -65,9 +65,9 @@ const PostsList = ({ posts, user, refetch }: IPostsList) => {
               refetch={refetch}
             />
 
-            <CommentForm user={user} postId={post.id} />
+            <CommentForm user={user} postId={post.id} refetch={refetch} />
 
-            <CommentsList />
+            <CommentsList comments={post.comments} />
           </div>
         ))}
     </div>
