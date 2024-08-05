@@ -23,7 +23,7 @@ const HomeCard: React.FC<HomeCardProps> = ({
 }) => {
   return (
     <div
-      className={`relative z-20 flex h-auto max-w-[1500px] flex-col gap-10 border-b-[1px] bg-white px-5 py-44 lg:w-full lg:flex-row lg:justify-between ${
+      className={`relative z-20 flex h-auto max-w-[1500px] flex-col gap-10 border-b-[1px] bg-white/ bg-white px-5 py-44 lg:w-full lg:flex-row lg:justify-between ${
         reverseLayout ? 'lg:flex-row-reverse' : ''
       }`}
     >

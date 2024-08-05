@@ -25,16 +25,14 @@ const NavbarLogo = ({ isExpanded }: NavbarLogoProps) => {
     <div
       className={`mt-12 flex items-center gap-2 text-[28px] ${isExpanded && 'self-start'}`}
     >
-      {/* Główne logo */}
       <div>
-        <Image src={logoSrc} width={50} alt='Logo' />
+        <Image src={logoSrc} width={50} height={50} alt='Logo' />
       </div>
 
-      {/* Transparentne logo */}
       <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: isExpanded ? 0 : 1, x: isExpanded ? 20 : 0 }}
-        exit={{ opacity: 0, x: 20 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isExpanded ? 0 : 1 }}
+        exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
       >
         {!isExpanded && (

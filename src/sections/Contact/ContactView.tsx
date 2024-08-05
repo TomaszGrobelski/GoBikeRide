@@ -44,7 +44,7 @@ const ContactView = () => {
                 adresu e-mail:
               </Typography>
               <Box sx={{ marginTop: 'auto' }}>
-                <CopyButton textToCopy='Tomasz.grobelski98@gmail.com'>
+                <CopyButton  textToCopy='Tomasz.grobelski98@gmail.com'>
                   Tomasz.grobelski98@gmail.com
                 </CopyButton>
               </Box>

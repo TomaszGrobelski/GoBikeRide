@@ -1,23 +1,24 @@
-const baseUrl = 'http://localhost:3000';
+const baseUrl = 'http://localhost:3000/api';
 
 export const endpoints = {
   users: {
-    all: `${baseUrl}/api/getUsers`,
+    all: `${baseUrl}/getUsers`,
   },
   user: {
-    all: `${baseUrl}/api/users`,
+    all: `${baseUrl}/users`,
   },
   bike: {
-    all: `${baseUrl}/api/bikes`,
+    all: `${baseUrl}/bikes`,
     components: {
-      all: `${baseUrl}/api/bikes/components`,
+      all: `${baseUrl}/bikes/components`,
     },
   },
   posts: {
-    all: `${baseUrl}/api/posts`,
-    like: `${baseUrl}/api/posts/like`,
+    all: `${baseUrl}/posts`,
+    like: `${baseUrl}/posts/like`,
+    comment: `${baseUrl}/posts/comment`,
   },
   session: {
-    current: `${baseUrl}/api/session`,
+    current: `${baseUrl}/session`,
   },
 };

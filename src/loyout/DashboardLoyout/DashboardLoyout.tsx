@@ -58,8 +58,8 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
       <UpperBar />
       <motion.div
         className={` relative z-0 flex w-full flex-col gap-5 backdrop-blur-md`}
-        initial={{ marginLeft: isExpanded ? '5rem' : '18rem' }}  // Tailwind class for ml-20 is 5rem and ml-72 is 18rem
-        animate={{ marginLeft: isExpanded ? '5rem' : '18rem' }}
+        initial={{ marginLeft: isExpanded ? '5rem' : '16rem' }}  
+        animate={{ marginLeft: isExpanded ? '5rem' : '16rem' }}
         transition={{ duration: 0.5, ease: 'easeInOut' }}
       >
         <Typography

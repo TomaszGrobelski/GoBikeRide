@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import Link from 'next/link';
 
-interface UserProfileButtonProps {
+interface UserProfileButtonProps extends HTMLAttributes<HTMLButtonElement> {
   userId: number;
 }
 
-const UserProfileButton = ({ userId }: UserProfileButtonProps) => {
+const UserProfileButton = ({ userId, ...props }: UserProfileButtonProps) => {
   return (
     <Link href={`profile/${userId}`}>
-      <button className='bg-mainPurple rounded-2xl border-[1px] p-2 px-6 text-white'>
-      Zobacz profil
+      <button
+        className='rounded-2xl border-[1px] bg-mainPurple p-2 px-6 text-white '
+        {...props}
+      >
+        Zobacz profil
       </button>
     </Link>
   );

@@ -8,4 +8,5 @@ export interface IPost {
   createdAt: Date;
   likes: [];
   user: IUser;
+  comments: [];
 }

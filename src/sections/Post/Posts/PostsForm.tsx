@@ -120,7 +120,7 @@ const PostsForm = ({ refetch, user }: IPostsForm) => {
           <Icon
             icon='clarity:picture-solid'
             aria-label='Add image'
-            className='cursor-pointer rounded-md text-[#5f286b]'
+            className='cursor-pointer rounded-md text-mainPurple'
             width={30}
           />
         </label>

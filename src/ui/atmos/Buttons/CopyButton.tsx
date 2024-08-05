@@ -1,18 +1,18 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import copy from 'copy-to-clipboard';
 import { toast, Toaster } from 'sonner';
 
 import { CopyButtonStyle } from '@/styles/Components/Buttons/Buttons.styles';
 
-interface ICopyButton {
+interface ICopyButton extends HTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   textToCopy: string;
 }
 
-const CopyButton = ({ children, textToCopy }: ICopyButton) => {
+const CopyButton = ({ children, textToCopy, ...props }: ICopyButton) => {
   const copyToClipboard = () => {
     copy(textToCopy);
     toast.success(`${textToCopy} został skopiowany`);
@@ -23,13 +23,13 @@ const CopyButton = ({ children, textToCopy }: ICopyButton) => {
       <Toaster
         toastOptions={{
           style: {
-            fontSize: '1rem'
-          }
+            fontSize: '1rem',
+          },
         }}
         richColors
         position='bottom-right'
       />
-      <CopyButtonStyle className='mt-5' onClick={copyToClipboard}>
+      <CopyButtonStyle className='mt-5' onClick={copyToClipboard} {...props}>
         {children} <Icon icon='mage:copy' fontSize={22} />
       </CopyButtonStyle>
     </>

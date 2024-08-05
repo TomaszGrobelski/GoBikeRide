@@ -33,6 +33,7 @@ export async function GET() {
           },
         },
       },
+      // comments: true,
       orderBy: {
         createdAt: 'desc',
       },

@@ -26,6 +26,7 @@ const config: Config = {
       },
       colors: {
         mainPurple: '#5F286B',
+        // mainPurple: '#102532',
         secoundSea: '#102532',
       },
       boxShadow: {
