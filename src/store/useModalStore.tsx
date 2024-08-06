@@ -13,7 +13,7 @@ export const useModalStore = create<ModalState>()((set) => ({
   isOpen: false,
   children: null,
   openModal: ({ children }) => set({ children, isOpen: true }),
-  closeModal: () => set({ isOpen: false }),
+  closeModal: () => set({ isOpen: false, children: null }),
 }));
 
 export default function Modal() {
@@ -21,5 +21,9 @@ export default function Modal() {
   const closeModal = useModalStore((state) => state.closeModal);
   const children = useModalStore((state) => state.children);
 
-  return <CustomModal isOpen={isOpen} onOpenChange={closeModal}>{children}</CustomModal>;
+  return (
+    <CustomModal isOpen={isOpen} onOpenChange={closeModal}>
+      {children}
+    </CustomModal>
+  );
 }
