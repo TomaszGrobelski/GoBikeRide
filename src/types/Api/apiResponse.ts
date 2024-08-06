@@ -6,4 +6,4 @@ type IApiResponse<T> = T | undefined;
 
 export type IPostResponse = IApiResponse<IPost[]>;
 export type IUserResponse = IApiResponse<IUser>;
-export type IBikeResponse = IApiResponse<IBike>;
+export type IBikeResponse = IApiResponse<IBike[]>;

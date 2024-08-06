@@ -1,17 +1,17 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import dashboardBG from '@/assets/photos/dashboardBG.jpg';
 import light from '@/assets/photos/ftuy4.jpg';
+import Modal from '@/store/useModalStore';
 import NavBar from '@/ui/organisms/Navigation/NavBar';
 import UpperBar from '@/ui/organisms/UpperBar/UpperBar';
 import { Typography } from '@mui/material';
+import { motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
 
 import useIsSmallScreen from '@/hooks/use-IsSmallScreen';
-import { motion } from 'framer-motion';
 
 interface IDashboardLayout {
   children: React.ReactNode;
@@ -51,14 +51,15 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
   }
   return (
     <div
-      className={`relative flex h-full font-poppins min-h-screen ${theme === 'light' ? 'bg-white' : 'bg-[#030014]'} `}
+      className={`relative flex h-full min-h-full font-poppins ${theme === 'light' ? 'bg-white' : 'bg-[#030014]'} `}
     >
       <div className={`absolute inset-0 -z-10`}></div>
       <NavBar isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
       <UpperBar />
+      <Modal />
       <motion.div
-        className={` relative z-0 flex w-full flex-col gap-5 backdrop-blur-md`}
-        initial={{ marginLeft: isExpanded ? '5rem' : '16rem' }}  
+        className={`relative z-0 flex w-full flex-col gap-5 backdrop-blur-md`}
+        initial={{ marginLeft: isExpanded ? '5rem' : '16rem' }}
         animate={{ marginLeft: isExpanded ? '5rem' : '16rem' }}
         transition={{ duration: 0.5, ease: 'easeInOut' }}
       >

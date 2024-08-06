@@ -6,7 +6,6 @@ import { tableHeaders } from '@/constans/BikeTableConstans';
 import { gravelBikes, rows } from '@/Mock/bikeTableMocked';
 import BikeTableTabs from '@/sections/Bike/Table/BikeTableTabs';
 import IconButton from '@/ui/atmos/IconButton';
-import BasicModal from '@/ui/organisms/Modals/BasicModal';
 import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
 import { sortByProperty } from '@/utils/table-utils';
 import { Icon } from '@iconify/react';

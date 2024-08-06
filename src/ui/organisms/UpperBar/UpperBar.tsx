@@ -4,6 +4,7 @@ import IconButton from '@/ui/atmos/IconButton';
 import ThemeSwitch from '@/ui/atmos/ThemeSwitch';
 import { LightTooltip } from '@/ui/atmos/Tooltip/LightTooltip';
 import UserAvatar from '@/ui/atmos/UserAvatar/UserAvatar';
+import { Icon } from '@iconify/react/dist/iconify.js';
 import Tooltip from '@mui/material/Tooltip';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
@@ -34,13 +35,16 @@ const UpperBar = () => {
 
         <DropdownMenu.Portal>
           <DropdownMenu.Content
-            className='DropdownMenuContent rounded-md bg-white p-4 text-slate-900'
+            className='DropdownMenuContent realtive min-h-[100px] min-w-[150px] space-y-3 rounded-md border-[1px] bg-white px-3 py-4 text-secoundSea font-poppins shadow-md'
             sideOffset={5}
           >
-            <DropdownMenu.Item className='DropdownMenuItem'>
+            <DropdownMenu.Item className='DropdownMenuItem absolute top-3 w-[120px] hover:border-b-1 flex cursor-pointer items-center gap-2 p-1  transition-all duration-150 hover:border-mainPurple'>
+              <Icon icon='iconamoon:profile-circle-light' />
               <Link href={`/dashboard/profile/${user?.id}`}>Profil</Link>
             </DropdownMenu.Item>
-            <DropdownMenu.Item className='DropdownMenuItem'>
+
+            <DropdownMenu.Item className='DropdownMenuItem absolute top-10  w-[120px]  hover:border-b-1 h-8 flex cursor-pointer items-center gap-2 p-1  transition-all duration-150 hover:border-mainPurple'>
+              <Icon icon='carbon:settings' />
               <Link href='/dashboard/settings'>Ustawienia</Link>
             </DropdownMenu.Item>
           </DropdownMenu.Content>

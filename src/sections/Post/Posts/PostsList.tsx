@@ -4,7 +4,6 @@ import Link from 'next/link';
 import UserAvatar from '@/ui/atmos/UserAvatar/UserAvatar';
 import Likes from '@/ui/molecules/Likes/Likes';
 import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
-import Tooltip from '@mui/material/Tooltip';
 
 import { IPost } from '@/types/Posts/posts.types';
 import { IUser } from '@/types/User/user.types';
@@ -33,6 +32,8 @@ const PostsList = ({ posts, user, refetch }: IPostsList) => {
             className='relative w-full max-w-[800px] space-y-6 rounded-3xl border-[1px] p-10 shadow-sm shadow-white'
           >
             {post.userId === user.id && <DeletePostButton postId={post.id} />}
+
+            
 
             <div className='flex gap-4'>
               <Link
