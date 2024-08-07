@@ -1,43 +1,53 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 import { deletePost, fetchPosts, likePost } from './postQueries';
 
-export const useFetchPosts = () => {
-  return useQuery(['posts'], () => fetchPosts());
+// export const useFetchPosts = () => {
+//   return useQuery(['posts'], () => fetchPosts());
+// };
+
+export const useInfiniteFetchPosts = () => {
+  return useInfiniteQuery({
+    queryKey: ['posts'],
+    queryFn: fetchPosts,
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => lastPage.nextPage,
+  });
 };
 
 export const useDeletePost = () => {
   const queryClient = useQueryClient();
 
-  return useMutation(
-    async (postId: number) => {
+  return useMutation({
+    mutationFn: async (postId: number) => {
       await deletePost({ postId });
     },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['posts']);
-      },
-      onError: (error) => {
-        console.error('Error deleting the post:', error);
-      },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
     },
-  );
+    onError: (error: unknown) => {
+      console.error('Error deleting post:', error);
+    },
+  });
 };
 
 export const useLike = () => {
   const queryClient = useQueryClient();
 
-  return useMutation(
-    async ({ userId, postId }: { userId: number; postId: number }) => {
+  return useMutation<void, Error, { userId: number; postId: number }>({
+    mutationFn: async ({ userId, postId }) => {
       await likePost({ userId, postId });
     },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['posts']);
-      },
-      onError: (error) => {
-        console.error('Error liking/unliking the post:', error);
-      },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
     },
-  );
+    onError: (error: Error) => {
+      console.error('Error liking/unliking the post:', error);
+    },
+  });
 };

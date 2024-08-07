@@ -1,30 +1,39 @@
 'use client';
 
-import { useFetchPosts } from '@/api/posts/usePost';
+import { useEffect } from 'react';
+import { useInfiniteFetchPosts } from '@/api/posts/usePost';
 import { useUser } from '@/api/user/useUser';
-import { Toaster } from 'sonner';
+import { useInView } from 'react-intersection-observer';
 
+import LoadingNextPosts from './Posts/LoadingNextPosts';
 import NoPostsMessage from './Posts/NoPostsMessage';
 import PostsForm from './Posts/PostsForm';
-import PostSkeleton from './Posts/PostSkeleton';
 import PostsList from './Posts/PostsList';
 
 const PostsView = () => {
-  const { data: posts, refetch } = useFetchPosts();
-  const { data: user, isLoading, error } = useUser();
+  const { data: user, isLoading, error: userError } = useUser();
+  const { data, error, status, fetchNextPage, isFetchingNextPage, refetch } =
+    useInfiniteFetchPosts();
+  const { ref, inView } = useInView();
 
-  // Pobieranie po 10 postów i dopiero jak sie dojedzie do końca to pobiera kolejne 10....
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
+
+  const posts = data?.pages.flatMap((page) => page.data) || [];
 
   return (
-    <>
-      <div className='mt-20 flex w-full flex-col items-center gap-4 p-2'>
-        <PostsForm refetch={refetch} user={user} />
+    <div className='mt-20 flex w-full flex-col items-center gap-4 p-2'>
+      <PostsForm refetch={refetch} user={user} />
 
-        <PostsList posts={posts} user={user} refetch={refetch} />
+      <PostsList posts={posts} user={user} refetch={refetch} />
 
-        {posts?.length === 0 && <NoPostsMessage />}
-      </div>
-    </>
+      <LoadingNextPosts ref={ref} isFetchingNextPage={isFetchingNextPage} />
+
+      {posts?.length === 0 && <NoPostsMessage />}
+    </div>
   );
 };
 

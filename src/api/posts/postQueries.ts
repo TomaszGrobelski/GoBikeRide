@@ -1,17 +1,40 @@
 import axios from 'axios';
 
 import { IPostResponse } from '@/types/Api/apiResponse';
+import { IPost } from '@/types/Posts/posts.types';
 
 import { endpoints } from '../endpoints/endpoints';
 
-export const fetchPosts = async (): Promise<IPostResponse> => {
+
+const LIMIT = 5;
+export async function fetchPosts({
+  pageParam = 1,
+  limit = LIMIT,
+}: {
+  pageParam?: number;
+  limit?: number;
+}): Promise<{
+  data: IPost[];
+  currentPage: number;
+  nextPage: number | null;
+}> {
   try {
-    const response = await axios.get(endpoints.posts.all);
-    return response.data;
+    const response = await axios.get(endpoints.posts.all, {
+      params: { page: pageParam, limit },
+    });
+
+    const posts: IPost[] = response.data;
+
+    return {
+      data: posts.slice(pageParam, pageParam + LIMIT),
+      currentPage: pageParam,
+      nextPage: pageParam + LIMIT < posts.length ? pageParam + LIMIT : null,
+    };
   } catch (error) {
+    console.error('Error fetching posts:', error);
     throw error;
   }
-};
+}
 
 export const deletePost = async ({ postId }: { postId: number }) => {
   try {

@@ -78,7 +78,7 @@ const SignIn = () => {
 
   return (
     <>
-      <div className='flex h-full w-1/2 flex-col items-center justify-center gap-4'>
+      <div className='flex h-full w-1/2 flex-col items-center justify-center gap-4 p-4'>
         <SignInHeader />
         <SocialLogin />
         <CustomLine />

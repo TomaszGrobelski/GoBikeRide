@@ -185,10 +185,12 @@ const SignUp = () => {
           </form>
         </Form>
       </div>
-      <div className='flex-c{ol flex h-full w-1/2 items-center justify-center space-y-4 rounded-br-lg rounded-tr-lg bg-gradient-to-br from-[#38B98C] to-[#3AA8AE] text-[14px] text-white'>
-        <h2 className='text-center text-[50px]'>Masz już konto ?</h2>
+      <div className='flex h-full w-1/2 flex-col items-center justify-center space-y-6 rounded-br-lg rounded-tr-lg bg-gradient-to-br from-[#38B98C] to-[#3AA8AE] font-poppins text-[14px] text-white'>
+        <h2 className='text-center  text-[50px] font-semibold'>
+          Masz już konto ?
+        </h2>
         <Link href={paths.auth.signIn}>
-          <button className='rounded-full bg-white px-9 py-4 font-bold text-black'>
+          <button className='rounded-full bg-white px-9 py-4 font-bold text-black tracking-wider'>
             Powrot do logowania
           </button>
         </Link>

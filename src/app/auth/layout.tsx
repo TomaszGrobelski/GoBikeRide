@@ -10,16 +10,15 @@ interface AuthLayoutProps {
 
 const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
   return (
-    <div className='flex h-screen w-full items-center justify-evenly md:p-10'>
+    <div className='flex h-screen w-full items-center justify-evenly md:p-40 md:py-54'>
       <Image
-        src='/assets/LoginPage/LoginImg.jpg'
+        src='/assets/LoginPage/ridingBikers.jpg'
         alt='Zdjęcie strony wejściowej'
-        objectFit='cover'
-        className='absolute left-0 top-0 -z-10 h-screen w-full'
+        className='absolute left-0 top-0 -z-10 h-screen w-full object-cover'
         width={1300}
         height={1300}
       />
-      <div className='flex h-full w-full items-center justify-between rounded-lg bg-white text-black shadow-lg shadow-black'>
+      <div className='flex h-full w-full items-center justify-between rounded-lg bg-white text-black opacity-95 shadow-lg shadow-black'>
         <RegistrationProvider>{children}</RegistrationProvider>
       </div>
     </div>

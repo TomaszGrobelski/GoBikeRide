@@ -1,6 +1,6 @@
 export const homeCardList = [
   {
-    imageSrc: '/images/home/newRoads.jpg',
+    imageSrc: '/images/home/bikerWithMap.jpg',
     altText: 'new-roads',
     title: 'Najpopularniejsze trasy',
     description:
