@@ -73,7 +73,7 @@ const HomeView = () => {
             ))}
           </div>
           <Link href='/dashboard/premium'>
-            <button className='mb-5 rounded-lg border-[1px] bg-mainPurple px-3 py-2 text-white'>
+            <button className='mb-5 rounded-lg  shadow-md border-[1px] bg-mainPurple px-3 py-2 text-white'>
               Sprawdź!
             </button>
           </Link>
