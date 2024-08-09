@@ -21,7 +21,9 @@ const PricingCard = ({
   isPremium,
 }: IPricingCard) => {
   return (
-    <div className='flex min-h-[700px] w-full max-w-[400px] flex-col space-y-8 rounded-lg border-[1px] border-[#793794] p-8 text-black'>
+    <div className='relative flex min-h-[700px] w-full max-w-[500px] flex-col space-y-8 overflow-clip rounded-lg border-[1px] p-8 text-black shadow-sm shadow-mainPurple'>
+      <div className='absolute -right-[30rem] -top-[30rem] h-96 w-96 rounded-full bg-mainPurple blur-[400px]'></div>
+      <div className='absolute -bottom-[30rem] -left-[30rem] h-96 w-96 rounded-full bg-mainPurple blur-[400px]'></div>
       <div className='space-y-2 border-b-[1px] pb-2'>
         <p className='flex h-10 items-center gap-4 text-[22px] font-bold text-secoundSea'>
           {title}{' '}
@@ -53,8 +55,8 @@ const PricingCard = ({
       <button
         className={`flex w-full items-center justify-center gap-4 rounded-lg bg-green-500 shadow-sm shadow-green-500 ${isPremium && 'bg-yellow-500 shadow-yellow-500'} py-2 text-white hover:bg-[#793794] hover:text-white`}
       >
-        <span>Start Free Trial</span>
-        <Icon icon='ei:arrow-right' fontSize={22} />
+        <span className='font-bold tracking-wider'>Start Free Trial</span>
+        <Icon icon='ei:arrow-right' fontSize={24} />
       </button>
     </div>
   );

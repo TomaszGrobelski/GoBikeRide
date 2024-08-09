@@ -1,6 +1,6 @@
-import { transform } from 'next/dist/build/swc';
 import { nextui } from '@nextui-org/theme';
 import type { Config } from 'tailwindcss';
+import plugin from 'tailwindcss/plugin';
 
 const config: Config = {
   content: [
@@ -29,7 +29,7 @@ const config: Config = {
           'linear-gradient(to top,#110A36,#251462, #341B82, #4C27B5, #6B3AEF, #8961F2, #A587F5)',
       },
       colors: {
-        mainPurple: '#5F286B',
+        mainPurple: '#874491',
         // mainPurple: '#102532',
         secoundSea: '#102532',
       },
@@ -47,7 +47,46 @@ const config: Config = {
       },
     },
   },
-  plugins: [nextui()],
+  plugins: [
+    nextui(),
+    plugin(function ({ addUtilities }) {
+      const newUtilities = {
+        '.gradient-text': {
+          backgroundImage: 'linear-gradient(to right, #5F286B, #A057B5)',
+          backgroundClip: 'text',
+          WebkitBackgroundClip: 'text', 
+          color: 'transparent', 
+          fontWeight: 'bold'
+  
+        },
+        '.text-clip': {
+          backgroundClip: 'text',
+          WebkitBackgroundClip: 'text', // Wsparcie dla Webkit
+        },
+        '.text-transparent': {
+          color: 'transparent',
+        },
+        '.border-bottom-gradient': {
+          position: 'relative',
+          display: 'inline-block',
+        },
+        '.border-bottom-gradient::after': {
+          content: '""',
+          position: 'absolute',
+          left: '0',
+          bottom: '0',
+          width: '100%',
+          height: '4px', // Wysokość granicy
+          background:
+            'linear-gradient(to right, transparent, #5F286B, transparent)',
+          transform: 'scaleY(0.5)', // Skala Y dla efektu kurczenia się
+          transformOrigin: 'center bottom',
+        },
+      };
+
+      addUtilities(newUtilities);
+    }),
+  ],
   darkMode: 'class',
 };
 export default config;

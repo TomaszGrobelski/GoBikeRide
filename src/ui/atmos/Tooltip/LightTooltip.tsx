@@ -12,3 +12,4 @@ export const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
       padding: '10px 16px',
     },
   }));
+

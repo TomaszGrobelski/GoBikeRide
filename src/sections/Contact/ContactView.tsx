@@ -3,9 +3,11 @@ import HeaderContact from '@/ui/atmos/Contact/HeaderContact';
 import ContactBox from '@/ui/molecules/Contact/ContactBox';
 import { Box, Container, Grid, Typography } from '@mui/material';
 
+import FrequentlyAskedQuestions from './FrequentlyAskedQuestions/FrequentlyAskedQuestions';
+
 const ContactView = () => {
   return (
-    <section>
+    <section className='flex flex-col items-center gap-40 px-5'>
       <Container
         sx={{
           display: 'flex',
@@ -13,6 +15,7 @@ const ContactView = () => {
           alignItems: 'center',
           gap: 10,
           paddingTop: 10,
+          maxWidth: 1500
         }}
       >
         <HeaderContact />
@@ -55,6 +58,8 @@ const ContactView = () => {
           </Grid>
         </Grid>
       </Container>
+
+      <FrequentlyAskedQuestions />
     </section>
   );
 };

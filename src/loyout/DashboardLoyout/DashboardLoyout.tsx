@@ -51,7 +51,7 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
   }
 
   //Tak samo jak Modala chyba trzeba zrobić Toasta żeby był dostepna z tego miejsca dla calej aplikacji
-  
+
   return (
     <div
       className={`relative flex h-full min-h-full font-poppins ${theme === 'light' ? 'bg-white' : 'bg-[#030014]'} `}
@@ -69,7 +69,7 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
         <Typography
           variant='h1'
           sx={{ fontSize: '2rem' }}
-          className='text-nowrap pl-6 pt-16 font-roboto text-black dark:text-slate-50'
+          className='pl-6 pt-16 font-roboto font-bold text-black dark:text-slate-50'
         >
           {sectionName}
         </Typography>
