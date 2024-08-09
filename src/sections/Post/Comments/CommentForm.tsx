@@ -13,7 +13,7 @@ interface CommentFormProps {
 
 const CommentForm = ({ refetch, user, postId }: CommentFormProps) => {
   const [commentContent, setCommentContent] = useState<string>('');
-  const { mutate: addComment, isLoading } = useAddComment();
+  const { mutate: addComment, isPending } = useAddComment();
 
   const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCommentContent(e.target.value);
@@ -39,16 +39,16 @@ const CommentForm = ({ refetch, user, postId }: CommentFormProps) => {
           width={40}
           height={40}
           alt='awatar użytkownika'
-          className='self-start rounded-full ring-1 ring-secoundSea'
+          className='self-start rounded-full ring-1 ring-secoundSea mt-2'
         />
         <CommentTextArea onChange={handleTextAreaChange} />
       </div>
       <button
         onClick={handleSubmit}
-        disabled={isLoading}
+        disabled={isPending}
         className='self-end rounded-lg border-[1px] bg-mainPurple px-4 py-2 text-white'
       >
-        {isLoading ? 'dodaje' : 'Skomentuj'}
+        {isPending ? 'dodaje' : 'Skomentuj'}
       </button>
     </div>
   );

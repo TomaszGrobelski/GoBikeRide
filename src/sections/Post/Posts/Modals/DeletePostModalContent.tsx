@@ -6,7 +6,7 @@ interface DeletePostModalContentProps {
 }
 
 const DeletePostModalContent = ({ postId }: DeletePostModalContentProps) => {
-  const { mutate: deleteMutation, isLoading } = useDeletePost();
+  const { mutate: deleteMutation, isPending } = useDeletePost();
   const closeModal = useModalStore((state) => state.closeModal);
 
   const handleDeletePost = () => {
@@ -30,7 +30,7 @@ const DeletePostModalContent = ({ postId }: DeletePostModalContentProps) => {
         </button>
         <button
           onClick={handleDeletePost}
-          disabled={isLoading}
+          disabled={isPending}
           className='self-end rounded-md border-[1px] bg-red-600 p-1 px-6 text-white hover:bg-red-500'
         >
           Usuń

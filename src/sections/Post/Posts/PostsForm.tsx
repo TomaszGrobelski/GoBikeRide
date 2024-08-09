@@ -1,14 +1,10 @@
 'use client';
 
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { cookies } from 'next/headers';
+import React, { ChangeEvent, useState } from 'react';
 import Image from 'next/image';
 import { endpoints } from '@/api/endpoints/endpoints';
-import { useFetchPosts } from '@/api/posts/usePost';
-import { useUser } from '@/api/user/useUser';
 import { TextFieldVariants } from '@/ui/molecules/RHF/RHFConstans';
 import RHFTextField from '@/ui/molecules/RHF/RHFTextField';
-import { getCurrentUser } from '@/utils/auth/getCurrentUser';
 import { Icon } from '@iconify/react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';

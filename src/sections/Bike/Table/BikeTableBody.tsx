@@ -2,6 +2,7 @@
 
 import { ChangeEvent } from 'react';
 import IconButton from '@/ui/atmos/IconButton';
+import { LightTooltip } from '@/ui/atmos/Tooltip/LightTooltip';
 import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
@@ -69,16 +70,24 @@ const BikeTableBody = ({
 
           <TableCell align='center'>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              <IconButton
-                icon='ic:baseline-edit'
-                color='#5F286B'
-                ariaLabel={`Edytuj ${row.type} `}
-              />
-              <IconButton
-                icon='basil:trash-solid'
-                color='#5F286B'
-                ariaLabel={`Usuń ${row.type} `}
-              />
+              <LightTooltip title='Edytuj' placement='top'>
+                <div>
+                  <IconButton
+                    icon='ic:baseline-edit'
+                    color='#5F286B'
+                    ariaLabel={`Edytuj ${row.type} `}
+                  />
+                </div>
+              </LightTooltip>
+              <LightTooltip title='Usuń' placement='top'>
+                <div>
+                  <IconButton
+                    icon='basil:trash-solid'
+                    color='#5F286B'
+                    ariaLabel={`Usuń ${row.type} `}
+                  />
+                </div>
+              </LightTooltip>
             </Box>
           </TableCell>
         </TableRow>

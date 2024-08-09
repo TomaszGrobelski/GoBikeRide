@@ -26,7 +26,7 @@ const ContactView = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <ContactBox title='Telefon' icon='bi:telephone'>
-              <Typography className='text-balance text-center h-[160px]'>
+              <Typography className='h-[160px] text-balance text-center'>
                 W przypadku pilnej potrzeby pomocy, prosimy o niezwłoczny
                 kontakt telefoniczny. Nasz zespół jest gotowy, by udzielić Ci
                 niezbędnej pomocy i rozwiązać wszelkie problemy, jak
@@ -37,15 +37,18 @@ const ContactView = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <ContactBox title='Email' icon='ic:sharp-alternate-email'>
-              <Typography className='text-balance text-center h-[160px]' variant='body1'>
+              <Typography
+                className='h-[160px] text-balance text-center'
+                variant='body1'
+              >
                 Jeśli napotkałeś jakiekolwiek problemy podczas korzystania z
                 naszej strony lub masz pytania, jesteśmy tutaj, aby pomóc!
                 Prosimy o kontaktowanie się z nami za pośrednictwem naszego
                 adresu e-mail:
               </Typography>
               <Box sx={{ marginTop: 'auto' }}>
-                <CopyButton  textToCopy='Tomasz.grobelski98@gmail.com'>
-                  Tomasz.grobelski98@gmail.com
+                <CopyButton textToCopy='supportGoBikRide@.gmail.com'>
+                  supportGoBikRide@.gmail.com
                 </CopyButton>
               </Box>
             </ContactBox>

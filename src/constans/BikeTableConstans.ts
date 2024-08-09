@@ -30,8 +30,8 @@ export const tableHeaders = [
     sortable: true
   },
   {
-    name: 'Edytuj',
-    value: 'edit',
+    name: '',
+    value: '',
     align: 'right' as const,
     sortable: false
   }

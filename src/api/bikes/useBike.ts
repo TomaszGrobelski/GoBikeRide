@@ -32,7 +32,7 @@ export const useRemoveBike = () => {
   return useMutation({
     mutationFn: (bikeId: number) => removeBike(bikeId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['bikes'] }); // Poprawne użycie klucza zapytania
+      queryClient.invalidateQueries({ queryKey: ['bikes'] });
     },
   });
 };
@@ -49,7 +49,7 @@ export const useAddComponent = () => {
       maintenanceCost: number;
     }) => addComponent(newComponent),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['bikes'] }); // Poprawne użycie klucza zapytania
+      queryClient.invalidateQueries({ queryKey: ['bikes'] }); 
     },
   });
 };

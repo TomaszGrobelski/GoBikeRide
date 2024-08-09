@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useInfiniteFetchPosts } from '@/api/posts/usePost';
 import { useUser } from '@/api/user/useUser';
+import LoadingPage from '@/ui/molecules/Loading/LoadingPage';
 import { useInView } from 'react-intersection-observer';
 
 import LoadingNextPosts from './Posts/LoadingNextPosts';
@@ -11,18 +12,24 @@ import PostsForm from './Posts/PostsForm';
 import PostsList from './Posts/PostsList';
 
 const PostsView = () => {
-  const { data: user, isLoading, error: userError } = useUser();
-  const { data, error, status, fetchNextPage, isFetchingNextPage, refetch } =
-    useInfiniteFetchPosts();
+  const { data: user, isLoading: isLoadingUser, error: userError } = useUser();
+  const {
+    data: postsData,
+    isLoading: isLoadingPosts,
+    error,
+    status,
+    fetchNextPage,
+    isFetchingNextPage,
+    refetch,
+  } = useInfiniteFetchPosts();
   const { ref, inView } = useInView();
-
   useEffect(() => {
     if (inView) {
       fetchNextPage();
     }
   }, [fetchNextPage, inView]);
 
-  const posts = data?.pages.flatMap((page) => page.data) || [];
+  const posts = postsData?.pages.flatMap((page) => page.data) || [];
 
   return (
     <div className='mt-20 flex w-full flex-col items-center gap-4 p-2'>
@@ -32,7 +39,8 @@ const PostsView = () => {
 
       <LoadingNextPosts ref={ref} isFetchingNextPage={isFetchingNextPage} />
 
-      {posts?.length === 0 && <NoPostsMessage />}
+      {isLoadingPosts && <LoadingPage />}
+      {!isLoadingPosts && posts?.length === 0 && <NoPostsMessage />}
     </div>
   );
 };

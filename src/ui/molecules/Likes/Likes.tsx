@@ -21,7 +21,7 @@ interface ILikes {
 }
 
 const Likes = ({ likes, postId, userId, refetch }: ILikes) => {
-  const { mutate: likePost, isLoading } = useLike();
+  const { mutate: likePost, isPending } = useLike();
 
   const handleLike = async () => {
     try {
@@ -35,9 +35,9 @@ const Likes = ({ likes, postId, userId, refetch }: ILikes) => {
   return (
     <div className='flex items-center gap-4'>
       <button
-        disabled={isLoading}
+        disabled={isPending}
         onClick={handleLike}
-        className='flex items-center gap-3 rounded-xl border-[1px] px-3 py-1 hover:border-red-600 transition-all duration-300'
+        className='flex items-center gap-3 rounded-xl border-[1px] px-3 py-1 transition-all duration-300 hover:border-red-600'
       >
         <Icon
           icon='prime:heart-fill'
@@ -64,7 +64,7 @@ const Likes = ({ likes, postId, userId, refetch }: ILikes) => {
                     like.user.avatar_url || '/default-avatars/male-avatar.png'
                   }
                   alt={`${like.user.username} avatar`}
-                  className='h-8 w-8 cursor-pointer rounded-full ring-1 bg-white inline-block ring-mainPurple '
+                  className='inline-block h-8 w-8 cursor-pointer rounded-full bg-white ring-1 ring-mainPurple'
                   width={50}
                   height={50}
                 />

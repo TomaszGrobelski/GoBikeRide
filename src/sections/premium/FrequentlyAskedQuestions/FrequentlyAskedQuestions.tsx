@@ -1,5 +1,6 @@
 import * as React from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -7,9 +8,9 @@ import Typography from '@mui/material/Typography';
 
 const FrequentlyAskedQuestions = () => {
   return (
-    <div className='mt-10 flex flex-col items-center gap-4'>
-      <h2 className='text-[48px] font-bold'>Często zadawane pytania</h2>
-      <p className='text-center text-gray-500'>
+    <div className='mb-40 flex flex-col items-center gap-10'>
+      <h2 className='text-[48px] font-bold text-center'>Często zadawane pytania</h2>
+      <p className='text-center text-balance text-gray-500'>
         Jeśli nie możesz znaleść tutaj odpowiedzi, sprawdz nasze
         <span className='text-wite mx-1 font-bold text-secoundSea'>
           forum pomocy

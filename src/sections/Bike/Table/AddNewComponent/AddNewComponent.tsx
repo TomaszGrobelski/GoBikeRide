@@ -36,7 +36,7 @@ const AddNewComponent = () => {
     resolver: zodResolver(schema),
   });
 
-  const { mutate: addComponent, isLoading } = useAddComponent();
+  const { mutate: addComponent, isPending } = useAddComponent();
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     console.log(data);
@@ -149,7 +149,7 @@ const AddNewComponent = () => {
             ariaLabel='Dodaj nowy element'
             color='#5F286B'
             onClick={handleSubmit(onSubmit)}
-            disabled={isLoading || isSubmitting}
+            disabled={isPending || isSubmitting}
           />
         </Box>
       </TableCell>

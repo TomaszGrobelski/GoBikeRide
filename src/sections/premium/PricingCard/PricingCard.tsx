@@ -21,7 +21,7 @@ const PricingCard = ({
   isPremium,
 }: IPricingCard) => {
   return (
-    <div className='flex min-h-60 w-full max-w-[400px] flex-col space-y-8 rounded-lg border-[1px] border-[#793794] p-8 text-black'>
+    <div className='flex min-h-[700px] w-full max-w-[400px] flex-col space-y-8 rounded-lg border-[1px] border-[#793794] p-8 text-black'>
       <div className='space-y-2 border-b-[1px] pb-2'>
         <p className='flex h-10 items-center gap-4 text-[22px] font-bold text-secoundSea'>
           {title}{' '}
