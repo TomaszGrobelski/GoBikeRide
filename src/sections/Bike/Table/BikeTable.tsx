@@ -6,6 +6,7 @@ import { tableHeaders } from '@/constans/BikeTableConstans';
 import { gravelBikes, rows } from '@/Mock/bikeTableMocked';
 import BikeTableTabs from '@/sections/Bike/Table/BikeTableTabs';
 import IconButton from '@/ui/atmos/IconButton';
+import LoadingPage from '@/ui/molecules/Loading/LoadingPage';
 import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
 import { sortByProperty } from '@/utils/table-utils';
 import { Icon } from '@iconify/react';
@@ -90,10 +91,12 @@ export default function BikeTable({ user }: BikeTableProps) {
   //     setSortDirection(newSortDirection);
   //   }
   // };
+  
 
+  //na małymekranie jak są nazwy kolumn to żeby dało sie przewijać w bk zamiast zeby znikały po prawo
   return (
     <TableContainer
-      sx={{ boxShadow: '2px 2px 8px', borderRadius: 5, p: 1, maxWidth:1200 }}
+      sx={{ boxShadow: '2px 2px 8px', borderRadius: 5, p: 1, maxWidth: 1200 }}
       component={Paper}
     >
       <Box sx={{ display: 'flex' }}>
@@ -106,8 +109,14 @@ export default function BikeTable({ user }: BikeTableProps) {
       </Box>
 
       <Table
-        sx={{ minWidth: 650, boxShadow: 30, paddingTop: 50 }}
-        aria-label='simple table'
+        sx={{
+          minWidth:'100%',
+          minHeight:500,
+          boxShadow: 30,
+          paddingTop: 50,
+          position: 'relative',
+        }}
+        aria-label='Tablica komponentów rowerowych'
       >
         <TableHead>
           <TableRow>
@@ -144,13 +153,21 @@ export default function BikeTable({ user }: BikeTableProps) {
           </TableRow>
         </TableHead>
 
-        <BikeTableBody
-          displayedData={displayedData}
-          handleChange={handleChange}
-          condition={condition}
-        />
+        {isLoading ? (
+          <div className='absolute left-1/3  flex h-[400px] items-center justify-center'>
+            <LoadingPage />
+          </div>
+        ) : (
+          <>
+            <BikeTableBody
+              displayedData={displayedData}
+              handleChange={handleChange}
+              condition={condition}
+            />
 
-        <AddNewComponent />
+            <AddNewComponent />
+          </>
+        )}
       </Table>
     </TableContainer>
   );

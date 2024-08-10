@@ -33,6 +33,9 @@ const config: Config = {
         // mainPurple: '#102532',
         secoundSea: '#102532',
       },
+      backgroundColor: {
+        lightBackground: '#F8F9F9',
+      },
       boxShadow: {
         custom: '10px 10px 10px black',
       },
@@ -54,14 +57,13 @@ const config: Config = {
         '.gradient-text': {
           backgroundImage: 'linear-gradient(to right, #5F286B, #A057B5)',
           backgroundClip: 'text',
-          WebkitBackgroundClip: 'text', 
-          color: 'transparent', 
-          fontWeight: 'bold'
-  
+          WebkitBackgroundClip: 'text',
+          color: 'transparent',
+          fontWeight: 'bold',
         },
         '.text-clip': {
           backgroundClip: 'text',
-          WebkitBackgroundClip: 'text', // Wsparcie dla Webkit
+          WebkitBackgroundClip: 'text',
         },
         '.text-transparent': {
           color: 'transparent',

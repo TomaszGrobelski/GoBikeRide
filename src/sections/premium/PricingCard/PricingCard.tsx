@@ -21,7 +21,7 @@ const PricingCard = ({
   isPremium,
 }: IPricingCard) => {
   return (
-    <div className='relative flex min-h-[700px] w-full max-w-[500px] flex-col space-y-8 overflow-clip rounded-lg border-[1px] p-8 text-black shadow-sm shadow-mainPurple'>
+    <div className='relative flex min-h-[700px] w-full max-w-[500px] flex-col space-y-8 overflow-clip rounded-lg  p-8 text-black shadow-md shadow-gray-400'>
       <div className='absolute -right-[30rem] -top-[30rem] h-96 w-96 rounded-full bg-mainPurple blur-[400px]'></div>
       <div className='absolute -bottom-[30rem] -left-[30rem] h-96 w-96 rounded-full bg-mainPurple blur-[400px]'></div>
       <div className='space-y-2 border-b-[1px] pb-2'>

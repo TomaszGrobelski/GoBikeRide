@@ -28,7 +28,7 @@ const NavBar = ({ isExpanded, setIsExpanded }: NavBarProps) => {
         padding: isExpanded ? '12px' : '24px',
       }} 
       transition={{ duration: 0.5, ease: 'easeInOut' }}
-      className={`fixed left-0 top-0 flex h-full ${theme === 'light' ? 'bg-white' : 'bg-[#010315]'} z-20 flex-col items-start gap-8 border-r-[1px] backdrop-blur-sm`}
+      className={`fixed left-0 top-0 flex h-full ${theme === 'light' ? 'bg-lightBackground' : 'bg-[#010315]'} z-20 flex-col items-start gap-8 border-r-[1px] backdrop-blur-sm`}
     >
       <NavBarExpandButton
         isExpanded={isExpanded}

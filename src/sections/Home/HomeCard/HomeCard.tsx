@@ -38,7 +38,7 @@ const HomeCard: React.FC<HomeCardProps> = ({
       </div>
 
       <div className='space-y-10 font-poppins lg:w-1/2'>
-        <h2 className='text-wrap text-[24px] text-secoundSea sm:text-[38px]'>
+        <h2 className='text-wrap text-[24px] text-secoundSea sm:text-[38px] gradient-text border-bottom-gradient'>
           {title}
         </h2>
 

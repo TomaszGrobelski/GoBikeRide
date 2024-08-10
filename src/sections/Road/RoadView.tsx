@@ -79,7 +79,7 @@ const RoadView = () => {
   }, [polyline, map, userLocation]);
 
   return (
-    <div>
+    <section>
       <h1>Mapa Twojej lokalizacji</h1>
       {error && <p>Błąd: {error}</p>}
       {/* <div
@@ -87,7 +87,7 @@ const RoadView = () => {
         id='map'
         style={{ width: '100%', height: '500px' }}
       ></div> */}
-    </div>
+    </section>
   );
 };
 

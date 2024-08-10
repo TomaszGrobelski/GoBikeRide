@@ -54,7 +54,7 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
 
   return (
     <div
-      className={`relative flex h-full min-h-full font-poppins ${theme === 'light' ? 'bg-white' : 'bg-[#030014]'} `}
+      className={`relative flex h-full min-h-full font-poppins ${theme === 'light' ? 'bg-lightBackground' : 'bg-[#030014]'} `}
     >
       <div className={`absolute inset-0 -z-10`}></div>
       <NavBar isExpanded={isExpanded} setIsExpanded={setIsExpanded} />

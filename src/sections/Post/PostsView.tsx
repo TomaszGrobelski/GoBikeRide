@@ -32,7 +32,7 @@ const PostsView = () => {
   const posts = postsData?.pages.flatMap((page) => page.data) || [];
 
   return (
-    <div className='mt-20 flex w-full flex-col items-center gap-4 p-2'>
+    <section className='mt-20 flex w-full flex-col items-center gap-4 p-2'>
       <PostsForm refetch={refetch} user={user} />
 
       <PostsList posts={posts} user={user} refetch={refetch} />
@@ -41,7 +41,7 @@ const PostsView = () => {
 
       {isLoadingPosts && <LoadingPage />}
       {!isLoadingPosts && posts?.length === 0 && <NoPostsMessage />}
-    </div>
+    </section>
   );
 };
 
