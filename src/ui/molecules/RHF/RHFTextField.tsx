@@ -22,6 +22,7 @@ const RHFTextField = ({
       multiline={multiline}
       variant={variant}
       onChange={onChange}
+      autoFocus
     />
   );
 };

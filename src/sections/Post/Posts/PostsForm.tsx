@@ -126,6 +126,7 @@ const PostsForm = ({ refetch, user }: IPostsForm) => {
           onChange={handleImageUpload}
           id='imageUpload'
           className='hidden'
+          
         />
 
         <div className='flex w-full justify-end'>

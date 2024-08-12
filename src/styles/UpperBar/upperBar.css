@@ -1,0 +1,8 @@
+.upperBar-bottom-border {
+  border-bottom-left-radius: 80% 20%;
+  border-bottom-right-radius: 80% 20%;
+}
+
+.custom-width {
+  width: calc(100% - 5rem);
+}

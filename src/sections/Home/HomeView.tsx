@@ -16,7 +16,7 @@ import { TextEffect } from './TextEffect';
 
 const HomeView = () => {
   return (
-    <section className='relative mt-10 flex flex-col items-center justify-between overflow-x-clip bg-white'>
+    <section className='relative pt-10 flex flex-col items-center justify-between overflow-x-clip bg-white'>
       <div className='font-weight-[400] sticky top-16 mx-5 mt-20 flex min-h-[500px] w-full flex-col items-center justify-center gap-10 pb-32 pl-10 font-poppins text-[#102532]'>
         <div className='absolute -top-80 left-[800px] -z-30 h-[1000px] w-[1000px] animate-slideRightAndBack rounded-full bg-purple-200 blur-[500px]'></div>
         <TextEffect as='h1' className='max-w-[1000px] font-roboto text-[48px] font-500 leading-tight tracking-tight'>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useUsersQuery } from '@/api/users/useUser';
+import SearchBar from '@/ui/atmos/SearchBar/SearchBar';
 import ErrorCard from '@/ui/molecules/Error/ErrorCard';
 import LoadingPage from '@/ui/molecules/Loading/LoadingPage';
 
@@ -26,7 +27,10 @@ const UsersView = () => {
 
   // czemu h nie jest 100% ?
   return (
-    <section className='h-full '>
+    <section className='flex h-full flex-col pb-20'>
+      <div className='px-5 max-w-[300px]'>
+        <SearchBar onChange={() => {}} placeholder='Wpisz nazwę użytkownika' />
+      </div>
       <UsersList>
         {users &&
           users.map((user) => <UserCard key={user.username} user={user} />)}
