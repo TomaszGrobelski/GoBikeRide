@@ -1,9 +1,9 @@
 'use client';
 
+import DateLocalizationProvider from '@/contexts/LocalizationProvider';
 import DashboardLoyout from '@/loyout/DashboardLoyout/DashboardLoyout';
-import DateLocalizationProvider from '@/ui/providers/LocalizationProvider';
-import { ThemeProvider } from 'next-themes';
 import { QueryClientProvider } from '@tanstack/react-query';
+import { ThemeProvider } from 'next-themes';
 
 import queryClient from '@/lib/queryClient';
 
@@ -16,7 +16,7 @@ const Layout = ({ children }: Props) => {
     <QueryClientProvider client={queryClient}>
       <DateLocalizationProvider>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          <DashboardLoyout>{children}</DashboardLoyout>;
+          <DashboardLoyout>{children}</DashboardLoyout>
         </ThemeProvider>
       </DateLocalizationProvider>
     </QueryClientProvider>

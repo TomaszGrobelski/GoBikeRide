@@ -54,14 +54,13 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
 
   return (
     <div
-      className={`relative flex h-full min-h-full font-poppins ${theme === 'light' ? 'bg-lightBackground' : 'bg-[#030014]'} `}
+      className={`relative flex min-h-full font-poppins ${theme === 'light' ? 'bg-lightBackground' : 'bg-[#030014]'} `}
     >
-      <div className={`absolute inset-0 -z-10`}></div>
       <NavBar isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
       <UpperBar />
       <Modal />
       <motion.div
-        className={`relative z-0 flex w-full flex-col gap-5 backdrop-blur-md`}
+        className={`relative z-0 flex min-h-full w-full flex-col gap-5 backdrop-blur-md`}
         initial={{ marginLeft: isExpanded ? '5rem' : '16rem' }}
         animate={{ marginLeft: isExpanded ? '5rem' : '16rem' }}
         transition={{ duration: 0.5, ease: 'easeInOut' }}

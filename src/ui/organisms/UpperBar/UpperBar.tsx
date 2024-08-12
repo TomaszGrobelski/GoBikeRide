@@ -14,7 +14,7 @@ const UpperBar = () => {
   return (
     <div className='absolute right-0 top-0 z-10 flex w-full items-center justify-end gap-4 p-2 pr-2 backdrop-blur-sm'>
       <LightTooltip title='Powiadomienia' placement='bottom'>
-        <div>
+        <div className='hover:bg-gray-200 rounded-full'>
           <IconButton
             icon='ic:round-notification-important'
             ariaLabel='Otwórz powiadomienia'

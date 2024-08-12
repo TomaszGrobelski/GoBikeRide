@@ -1,6 +1,6 @@
 'use client';
 
-import '../../../styles/global.css';
+import '@/styles/NavBar/navbar.css';
 
 import { motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
@@ -18,17 +18,17 @@ const NavBar = ({ isExpanded, setIsExpanded }: NavBarProps) => {
   const { theme } = useTheme();
 
   return (
-    <motion.div 
+    <motion.div
       initial={{
-        width: isExpanded ? '80px' : '256px',
+        width: isExpanded ? '90px' : '256px',
         padding: isExpanded ? '12px' : '24px',
-      }} 
+      }}
       animate={{
-        width: isExpanded ? '80px' : '256px',
+        width: isExpanded ? '90px' : '256px',
         padding: isExpanded ? '12px' : '24px',
-      }} 
-      transition={{ duration: 0.5, ease: 'easeInOut' }}
-      className={`fixed left-0 top-0 flex h-full ${theme === 'light' ? 'bg-lightBackground' : 'bg-[#010315]'} z-20 flex-col items-start gap-8 border-r-[1px] backdrop-blur-sm`}
+      }}
+      transition={{ duration: 0.4, ease: 'easeInOut' }}
+      className={`NavBar fixed left-0 top-0 flex h-full overflow-y-auto overflow-x-hidden ${theme === 'light' ? 'bg-lightBackground' : 'bg-[#010315]'} z-20 flex-col items-start gap-8 border-r-[1px] backdrop-blur-sm`}
     >
       <NavBarExpandButton
         isExpanded={isExpanded}

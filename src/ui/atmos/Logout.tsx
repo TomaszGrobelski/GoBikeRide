@@ -34,7 +34,7 @@ const Logout = ({ isExpanded }: LogoutProps) => {
       placement='right'
     >
       <li
-        className={`absolute bottom-0 flex w-full justify-start text-nowrap rounded-lg border-[1px] border-b-8 border-r-8 border-mainPurple text-[16px] shadow-md backdrop-blur-xl duration-300 hover:translate-x-[4px] hover:translate-y-[4px] hover:border-b-4 hover:border-r-4 hover:bg-mainPurple hover:text-white `}
+        className={`mt-auto flex w-full justify-start text-nowrap rounded-lg border-[1px] border-b-8 border-r-8 border-mainPurple text-[16px] shadow-md backdrop-blur-xl duration-300 hover:translate-x-[4px] hover:translate-y-[4px] hover:border-b-4 hover:border-r-4 hover:bg-mainPurple hover:text-white`}
       >
         <button onClick={handleLogout}>
           <div

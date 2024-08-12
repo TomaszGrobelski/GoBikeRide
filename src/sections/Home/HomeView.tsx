@@ -5,22 +5,26 @@ import GradientBox from '@/ui/atmos/Boxes/GradientBox';
 import CardInformation from '@/ui/molecules/Cards/CardInformation';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { Item } from '@radix-ui/react-dropdown-menu';
+import { motion, Variants } from 'framer-motion';
 
 import PricingCard from '../premium/PricingCard/PricingCard';
 import Carousel from './Carousel/Carousel';
 import HomeCard from './HomeCard/HomeCard';
 import { homeCardList } from './HomeCard/homeCardList';
 import { homeCardInfromation } from './homeCardInformation';
+import { TextEffect } from './TextEffect';
 
 const HomeView = () => {
   return (
     <section className='relative mt-10 flex flex-col items-center justify-between overflow-x-clip bg-white'>
       <div className='font-weight-[400] sticky top-16 mx-5 mt-20 flex min-h-[500px] w-full flex-col items-center justify-center gap-10 pb-32 pl-10 font-poppins text-[#102532]'>
         <div className='absolute -top-80 left-[800px] -z-30 h-[1000px] w-[1000px] animate-slideRightAndBack rounded-full bg-purple-200 blur-[500px]'></div>
-        <h1 className='max-w-[1000px] font-roboto text-[48px] font-500 leading-tight tracking-tight'>
-          Tworzymy wyjątkową aplikację dzięki kompleksowemu wsparciu i fachowym
-          wskazówkom
-        </h1>
+        <TextEffect as='h1' className='max-w-[1000px] font-roboto text-[48px] font-500 leading-tight tracking-tight'>
+          {/* <h1 className='max-w-[1000px] font-roboto text-[48px] font-500 leading-tight tracking-tight'> */}
+            Tworzymy wyjątkową aplikację dzięki kompleksowemu wsparciu i
+            fachowym wskazówkom
+          {/* </h1> */}
+        </TextEffect>
         <p className='max-w-[1000px] text-[24px] italic leading-tight tracking-tight'>
           Wspieramy Cię na każdym etapie Twojej rowerowej przygody: od
           pierwszych kroków, przez planowanie tras i rozwój umiejętności, aż po
@@ -73,7 +77,7 @@ const HomeView = () => {
             ))}
           </div>
           <Link href='/dashboard/premium'>
-            <button className='mb-5 rounded-lg  shadow-md border-[1px] bg-mainPurple px-3 py-2 text-white'>
+            <button className='mb-5 rounded-lg border-[1px] bg-mainPurple px-3 py-2 text-white shadow-md'>
               Sprawdź!
             </button>
           </Link>

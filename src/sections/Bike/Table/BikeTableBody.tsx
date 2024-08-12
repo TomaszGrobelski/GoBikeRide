@@ -1,6 +1,7 @@
 'use client';
 
 import { ChangeEvent } from 'react';
+import { useModalStore } from '@/store/useModalStore';
 import IconButton from '@/ui/atmos/IconButton';
 import { LightTooltip } from '@/ui/atmos/Tooltip/LightTooltip';
 import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
@@ -15,6 +16,9 @@ import TableRow from '@mui/material/TableRow';
 
 import { IComponents } from '@/types/Bike/Components/components.types';
 
+import DeleteComponentModalContent from './ModalContent/DeleteComponentModalContent';
+import EditComponentModalContent from './ModalContent/EditComponentModalContent';
+
 interface IBikeTableBody {
   displayedData: IComponents[];
   handleChange: (event: SelectChangeEvent<string>) => void;
@@ -26,6 +30,12 @@ const BikeTableBody = ({
   handleChange,
   condition,
 }: IBikeTableBody) => {
+  const openModal = useModalStore((state) => state.openModal);
+  const openEditModal = () =>
+    openModal({ children: <EditComponentModalContent /> });
+  const openDeleteModal = () =>
+    openModal({ children: <DeleteComponentModalContent /> });
+
   return (
     <TableBody>
       {displayedData.map((row) => (
@@ -70,24 +80,29 @@ const BikeTableBody = ({
 
           <TableCell align='center'>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              <LightTooltip title='Edytuj' placement='top'>
-                <div>
-                  <IconButton
-                    icon='ic:baseline-edit'
-                    color='#5F286B'
-                    ariaLabel={`Edytuj ${row.type} `}
-                  />
-                </div>
-              </LightTooltip>
-              <LightTooltip title='Usuń' placement='top'>
-                <div>
-                  <IconButton
-                    icon='basil:trash-solid'
-                    color='#5F286B'
-                    ariaLabel={`Usuń ${row.type} `}
-                  />
-                </div>
-              </LightTooltip>
+              <button onClick={openEditModal}>
+                <LightTooltip title='Edytuj' placement='top'>
+                  <div>
+                    <IconButton
+                      icon='ic:baseline-edit'
+                      color='#5F286B'
+                      ariaLabel={`Edytuj ${row.type} `}
+                    />
+                  </div>
+                </LightTooltip>
+              </button>
+
+              <button onClick={openDeleteModal}>
+                <LightTooltip title='Usuń' placement='top'>
+                  <div>
+                    <IconButton
+                      icon='basil:trash-solid'
+                      color='#5F286B'
+                      ariaLabel={`Usuń ${row.type} `}
+                    />
+                  </div>
+                </LightTooltip>
+              </button>
             </Box>
           </TableCell>
         </TableRow>

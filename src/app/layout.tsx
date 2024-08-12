@@ -3,12 +3,12 @@ import '../styles/global.css';
 export const metadata = {
   title: 'Bikers',
   description: 'Bikers - ',
-  keywords: 'bike'
+  keywords: 'bike',
   // manifest: '/manifest.json',
 };
 
 export default function RootLayout({
-  children
+  children,
 }: {
   children: React.ReactNode;
 }) {
@@ -16,5 +16,5 @@ export default function RootLayout({
     <html lang='pl' suppressHydrationWarning>
       <body>{children}</body>
     </html>
-  );
+  )
 }

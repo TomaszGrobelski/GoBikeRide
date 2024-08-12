@@ -3,26 +3,18 @@
 import { useEffect, useState } from 'react';
 import { useFetchBikes } from '@/api/bikes/useBike';
 import { tableHeaders } from '@/constans/BikeTableConstans';
-import { gravelBikes, rows } from '@/Mock/bikeTableMocked';
 import BikeTableTabs from '@/sections/Bike/Table/BikeTableTabs';
-import IconButton from '@/ui/atmos/IconButton';
 import LoadingPage from '@/ui/molecules/Loading/LoadingPage';
-import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
-import { sortByProperty } from '@/utils/table-utils';
-import { Icon } from '@iconify/react';
 import Box from '@mui/material/Box';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
 import Paper from '@mui/material/Paper';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { SelectChangeEvent } from '@mui/material/Select';
 import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
+import '@/styles/Bike/bikeTable.css';
 
 import { IBike } from '@/types/Bike/bike.types';
 import { IComponents } from '@/types/Bike/Components/components.types';
@@ -91,13 +83,13 @@ export default function BikeTable({ user }: BikeTableProps) {
   //     setSortDirection(newSortDirection);
   //   }
   // };
-  
 
   //na małymekranie jak są nazwy kolumn to żeby dało sie przewijać w bk zamiast zeby znikały po prawo
   return (
     <TableContainer
       sx={{ boxShadow: '2px 2px 8px', borderRadius: 5, p: 1, maxWidth: 1200 }}
       component={Paper}
+      className='custom-scrollbar overflow-x-auto'
     >
       <Box sx={{ display: 'flex' }}>
         <BikeTableTabs
@@ -110,8 +102,8 @@ export default function BikeTable({ user }: BikeTableProps) {
 
       <Table
         sx={{
-          minWidth:'100%',
-          minHeight:500,
+          minWidth: '100%',
+          minHeight: 500,
           boxShadow: 30,
           paddingTop: 50,
           position: 'relative',
@@ -154,7 +146,7 @@ export default function BikeTable({ user }: BikeTableProps) {
         </TableHead>
 
         {isLoading ? (
-          <div className='absolute left-1/3  flex h-[400px] items-center justify-center'>
+          <div className='absolute left-1/3 flex h-[400px] items-center justify-center'>
             <LoadingPage />
           </div>
         ) : (

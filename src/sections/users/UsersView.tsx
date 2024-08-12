@@ -16,28 +16,21 @@ const UsersView = () => {
     return <ErrorCard refetch={refetch} />;
   }
 
-  // if (isLoading) {
-  //   return <LoadingPage />;
-  // }
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   if (!users || users.length === 0) {
     return <NoUsersMessage />;
   }
 
-
   // czemu h nie jest 100% ?
   return (
-    <section className='h-auto '>
-      {isLoading ? (
-        <LoadingPage />
-      ) : (
-        <>
-          <UsersList>
-            {users &&
-              users.map((user) => <UserCard key={user.username} user={user} />)}
-          </UsersList>
-        </>
-      )}
+    <section className='h-full '>
+      <UsersList>
+        {users &&
+          users.map((user) => <UserCard key={user.username} user={user} />)}
+      </UsersList>
     </section>
   );
 };
