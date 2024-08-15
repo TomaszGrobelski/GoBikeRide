@@ -1,7 +1,7 @@
 import * as z from 'zod';
 
 export const schema = z.object({
-  type: z.string().min(1, 'Nazwa jest wymagana'),
+  name: z.string().min(1, 'Nazwa jest wymagana'),
   maintenanceDate: z
     .date()
     .min(new Date(), 'Data konserwacji nie może być z przyszłości'),

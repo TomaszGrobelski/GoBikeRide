@@ -30,7 +30,7 @@ export const removeBike = async (bikeId: number): Promise<void> => {
 
 export const addComponent = async (newComponent: {
   bikeId: number;
-  type: string;
+  name: string;
   maintenanceDate: Date;
   currentState: string;
   currentMileageKm: number;
@@ -41,4 +41,19 @@ export const addComponent = async (newComponent: {
     newComponent,
   );
   return response.data;
+};
+
+export const deleteComponent = async ({
+  componentId,
+}: {
+  componentId: number;
+}) => {
+  try {
+    const response = await axios.delete(
+      `${endpoints.bike.components.all}/${componentId}`,
+    );
+    return response;
+  } catch (error) {
+    throw error;
+  }
 };

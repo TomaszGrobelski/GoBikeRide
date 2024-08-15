@@ -1,5 +1,6 @@
 export interface IComponents {
-  type: string;
+  id: number;
+  name: string;
   brand: string;
   model: string;
   maintenanceDate: Date;

@@ -38,7 +38,7 @@ model Bike {
 model Component {
   id               Int      @id @default(autoincrement())
   bikeId           Int
-  type             String
+  name             String
   brand            String
   model            String
   maintenanceDate  DateTime

@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const {
       bikeId,
-      type,
+      name,
       // brand,
       // model,
       maintenanceDate,
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
 
     if (
       !bikeId ||
-      !type ||
+      !name ||
       // !brand ||
       // !model ||
       !maintenanceDate ||
@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
     const component = await prisma.component.create({
       data: {
         bikeId: Number(bikeId),
-        type,
+        name,
         brand: 'coś',
         model: 'Ktos',
         maintenanceDate: new Date(maintenanceDate),

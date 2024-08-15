@@ -55,7 +55,7 @@ export default function AddBikeModal({ user }: AddBikeModalProps) {
   };
 
   return (
-    <div>
+    <div className='relative right-10'>
       <Button onClick={handleOpen}>
         <Icon icon='basil:add-outline' fontSize={26} />
         Dodaj rower

@@ -23,87 +23,104 @@ interface IBikeTableBody {
   displayedData: IComponents[];
   handleChange: (event: SelectChangeEvent<string>) => void;
   condition: string;
+  handleRefetch: VoidFunction;
 }
 
 const BikeTableBody = ({
   displayedData,
   handleChange,
   condition,
+  handleRefetch,
 }: IBikeTableBody) => {
   const openModal = useModalStore((state) => state.openModal);
+  const closeModal = useModalStore((state) => state.closeModal);
+
+  const handleDeleteSuccess = () => {
+    closeModal();
+    // handleRefetch();
+  };
+
   const openEditModal = () =>
     openModal({ children: <EditComponentModalContent /> });
-  const openDeleteModal = () =>
-    openModal({ children: <DeleteComponentModalContent /> });
+
+  const openDeleteModal = (brand: string, componentId: number) =>
+    openModal({
+      children: (
+        <DeleteComponentModalContent
+          handleDeleteSuccess={handleDeleteSuccess}
+          handleRefetch={handleRefetch}
+          title={brand}
+          componentId={componentId}
+        />
+      ),
+    });
 
   return (
-    <div>
-      <TableBody>
-        {displayedData.map((row) => (
-          <TableRow
-            key={row.type}
-            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-          >
-            <TableCell component='th' scope='row' align='center'>
-              {row.brand}
-            </TableCell>
-            <TableCell align='center'>
-              {convertToDdMmYyyyFormat(row.maintenanceDate)}
-            </TableCell>
-            <TableCell align='center'>
-              <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth>
-                  <InputLabel id='demo-simple-select-label'>
-                    {row.currentState}
-                  </InputLabel>
-                  <Select
-                    labelId='demo-simple-select-label'
-                    id='demo-simple-select'
-                    value={condition}
-                    label={row.currentState}
-                    onChange={handleChange}
-                  >
-                    <MenuItem value={5}>Bardzo Dobry</MenuItem>
-                    <MenuItem value={4}>Dobry</MenuItem>
-                    <MenuItem value={3}>Sredni</MenuItem>
-                    <MenuItem value={2}>Zły</MenuItem>
-                    <MenuItem value={1}>Bardo zły</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-            </TableCell>
-            <TableCell align='center'>{row.currentMileageKm}</TableCell>
-            <TableCell align='center'>{row.maintenanceCost}</TableCell>
-            <TableCell align='center'>
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                <button onClick={openEditModal}>
-                  <LightTooltip title='Edytuj' placement='top'>
-                    <div>
-                      <IconButton
-                        icon='ic:baseline-edit'
-                        color='#5F286B'
-                        ariaLabel={`Edytuj ${row.type} `}
-                      />
-                    </div>
-                  </LightTooltip>
-                </button>
-                <button onClick={openDeleteModal}>
-                  <LightTooltip title='Usuń' placement='top'>
-                    <div>
-                      <IconButton
-                        icon='basil:trash-solid'
-                        color='#5F286B'
-                        ariaLabel={`Usuń ${row.type} `}
-                      />
-                    </div>
-                  </LightTooltip>
-                </button>
-              </Box>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </div>
+    <TableBody>
+      {displayedData.map((row) => (
+        <TableRow
+          key={row.id}
+          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+        >
+          <TableCell component='th' scope='row' align='center'>
+            {row.name}
+          </TableCell>
+          <TableCell align='center'>
+            {convertToDdMmYyyyFormat(row.maintenanceDate)}
+          </TableCell>
+          <TableCell align='center'>
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel key={row.id} id='demo-simple-select-label'>
+                  {row.currentState}
+                </InputLabel>
+                <Select
+                  labelId='demo-simple-select-label'
+                  id='demo-simple-select'
+                  value={condition}
+                  label={row.currentState}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={5}>Bardzo Dobry</MenuItem>
+                  <MenuItem value={4}>Dobry</MenuItem>
+                  <MenuItem value={3}>Sredni</MenuItem>
+                  <MenuItem value={2}>Zły</MenuItem>
+                  <MenuItem value={1}>Bardo zły</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </TableCell>
+          <TableCell align='center'>{row.currentMileageKm}</TableCell>
+          <TableCell align='center'>{row.maintenanceCost}</TableCell>
+          <TableCell align='center'>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <button onClick={openEditModal}>
+                <LightTooltip title='Edytuj' placement='top'>
+                  <div>
+                    <IconButton
+                      icon='ic:baseline-edit'
+                      color='#5F286B'
+                      ariaLabel={`Edytuj ${row.name} `}
+                    />
+                  </div>
+                </LightTooltip>
+              </button>
+              <button onClick={() => openDeleteModal(row.brand, row.id)}>
+                <LightTooltip title='Usuń' placement='top'>
+                  <div>
+                    <IconButton
+                      icon='basil:trash-solid'
+                      color='#5F286B'
+                      ariaLabel={`Usuń ${row.name} `}
+                    />
+                  </div>
+                </LightTooltip>
+              </button>
+            </Box>
+          </TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
   );
 };
 

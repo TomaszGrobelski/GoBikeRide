@@ -17,7 +17,7 @@ import dayjs, { Dayjs } from 'dayjs';
 
 import 'dayjs/locale/pl';
 
-import TextField, { TextFieldProps } from '@mui/material/TextField';
+import { TextFieldProps } from '@mui/material/TextField';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as z from 'zod';
 
@@ -41,20 +41,21 @@ const AddNewComponent = () => {
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     console.log(data);
     await addComponent({
-      bikeId: 3,
-      type: data.type,
+      bikeId: 3, // zmienić żeby dla danego Bike ID użytkownika było
+      name: data.name,
       maintenanceDate: data.maintenanceDate,
       currentState: data.currentState,
       currentMileageKm: parseFloat(data.currentMileageKm),
       maintenanceCost: parseFloat(data.maintenanceCost),
     });
     reset({
-      type: '',
+      name: '',
       maintenanceDate: undefined,
       currentState: '',
       currentMileageKm: '',
       maintenanceCost: '',
     });
+
   };
 
   return (
@@ -64,13 +65,13 @@ const AddNewComponent = () => {
     >
       <TableCell component='th' scope='row' align='center'>
         <input
-          {...register('type')}
-          type='text'
-          id='type'
+          {...register('name')}
+          name='name'
+          id='name'
           placeholder='Nazwa osprzętu'
           className='text-center outline-none'
         />
-        {errors.type && <p>errors.type.message</p>}
+        {errors.name && <p>{errors.name.message}</p>}
       </TableCell>
 
       <TableCell align='center' className='w-3/4'>

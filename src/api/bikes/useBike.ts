@@ -7,7 +7,13 @@ import {
 
 import { IBike } from '@/types/Bike/bike.types';
 
-import { addBike, addComponent, fetchBikes, removeBike } from './bikeQueries';
+import {
+  addBike,
+  addComponent,
+  deleteComponent,
+  fetchBikes,
+  removeBike,
+} from './bikeQueries';
 
 export const useFetchBikes = (userId: number) => {
   return useQuery({
@@ -42,14 +48,30 @@ export const useAddComponent = () => {
   return useMutation({
     mutationFn: (newComponent: {
       bikeId: number;
-      type: string;
+      name: string;
       maintenanceDate: Date;
       currentState: string;
       currentMileageKm: number;
       maintenanceCost: number;
     }) => addComponent(newComponent),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['bikes'] }); 
+      queryClient.invalidateQueries({ queryKey: ['components'] });
+    },
+  });
+};
+
+export const useDeleteComponent = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (componentId: number) => {
+      await deleteComponent({ componentId });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['component'] });
+    },
+    onError: (error: unknown) => {
+      console.error('Error deleting post:', error);
     },
   });
 };

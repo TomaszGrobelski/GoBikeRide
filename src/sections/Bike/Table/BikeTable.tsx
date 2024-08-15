@@ -39,7 +39,7 @@ export default function BikeTable({ user }: BikeTableProps) {
     throw new Error('User is not defined');
   }
 
-  const { data: bikes, isLoading, isError } = useFetchBikes(user.id);
+  const { data: bikes, isLoading, isError, refetch } = useFetchBikes(user.id);
 
   const [condition, setCondition] = useState('');
   const [selectedBike, setSelectedBike] = useState<string>('');
@@ -84,10 +84,20 @@ export default function BikeTable({ user }: BikeTableProps) {
   //   }
   // };
 
+  const handleRefetch = () => {
+    refetch();
+  };
+
   //na małymekranie jak są nazwy kolumn to żeby dało sie przewijać w bk zamiast zeby znikały po prawo
   return (
     <TableContainer
-      sx={{ boxShadow: '2px 2px 8px', borderRadius: 5, p: 1, maxWidth: 1200 }}
+      sx={{
+        boxShadow: '2px 2px 8px',
+        borderRadius: 5,
+        p: 1,
+        maxWidth: 1200,
+        // width: '100%',
+      }}
       component={Paper}
       className='custom-scrollbar overflow-x-auto'
     >
@@ -102,7 +112,7 @@ export default function BikeTable({ user }: BikeTableProps) {
 
       <Table
         sx={{
-          minWidth: '100%',
+          minWidth: 150,
           minHeight: 500,
           boxShadow: 30,
           paddingTop: 50,
@@ -110,7 +120,7 @@ export default function BikeTable({ user }: BikeTableProps) {
         }}
         aria-label='Tablica komponentów rowerowych'
       >
-        <TableHead>
+        <TableHead className='overflow-x-auto'>
           <TableRow>
             {tableHeaders.map((header) => (
               <TableCell
@@ -155,9 +165,12 @@ export default function BikeTable({ user }: BikeTableProps) {
               displayedData={displayedData}
               handleChange={handleChange}
               condition={condition}
+              handleRefetch={handleRefetch}
             />
 
-            <AddNewComponent />
+            <AddNewComponent
+            //  handleRefetch={handleRefetch}
+            />
           </>
         )}
       </Table>
