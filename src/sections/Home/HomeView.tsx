@@ -16,13 +16,16 @@ import { TextEffect } from './TextEffect';
 
 const HomeView = () => {
   return (
-    <section className='relative pt-10 flex flex-col items-center justify-between overflow-x-clip bg-white'>
+    <section className='relative flex flex-col items-center justify-between overflow-x-clip bg-white pt-10'>
       <div className='font-weight-[400] sticky top-16 mx-5 mt-20 flex min-h-[500px] w-full flex-col items-center justify-center gap-10 pb-32 pl-10 font-poppins text-[#102532]'>
         <div className='absolute -top-80 left-[800px] -z-30 h-[1000px] w-[1000px] animate-slideRightAndBack rounded-full bg-purple-200 blur-[500px]'></div>
-        <TextEffect as='h1' className='max-w-[1000px] font-roboto text-[48px] font-500 leading-tight tracking-tight'>
+        <TextEffect
+          as='h1'
+          className='max-w-[1000px] font-roboto text-[48px] font-500 leading-tight tracking-tight'
+        >
           {/* <h1 className='max-w-[1000px] font-roboto text-[48px] font-500 leading-tight tracking-tight'> */}
-            Tworzymy wyjątkową aplikację dzięki kompleksowemu wsparciu i
-            fachowym wskazówkom
+          Tworzymy wyjątkową aplikację dzięki kompleksowemu wsparciu i fachowym
+          wskazówkom
           {/* </h1> */}
         </TextEffect>
         <p className='max-w-[1000px] text-[24px] italic leading-tight tracking-tight'>
@@ -77,7 +80,7 @@ const HomeView = () => {
             ))}
           </div>
           <Link href='/dashboard/premium'>
-            <button className='mb-5 rounded-lg border-[1px] bg-mainPurple px-3 py-2 text-white shadow-md'>
+            <button className='bg-mainColor mb-5 rounded-lg border-[1px] px-3 py-2 text-white shadow-md'>
               Sprawdź!
             </button>
           </Link>

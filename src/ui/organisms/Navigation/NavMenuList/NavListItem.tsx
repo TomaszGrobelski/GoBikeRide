@@ -29,10 +29,10 @@ const NavListItem = ({ isExpanded, item }: NavListItemProps) => {
       placement='right'
     >
       <li
-        className={`flex w-full justify-start text-nowrap rounded-lg border-[1px] border-b-8 border-r-8 border-mainPurple shadow-md backdrop-blur-xl duration-300 hover:translate-x-[4px] hover:translate-y-[4px] hover:border-b-4 hover:border-r-4 ${
+        className={`border-mainColor flex w-full justify-start text-nowrap rounded-lg border-[1px] border-b-8 border-r-8 shadow-md backdrop-blur-xl duration-300 hover:translate-x-[4px] hover:translate-y-[4px] hover:border-b-4 hover:border-r-4 ${
           isActive
-            ? 'pointer-events-none border-b-4 border-r-4 border-stone-300 bg-mainPurple text-white'
-            : 'hover:bg-mainPurple hover:text-white'
+            ? 'bg-mainColor pointer-events-none border-b-4 border-r-4 border-stone-300 text-white'
+            : 'hover:bg-mainColor hover:text-white'
         }`}
       >
         <Link
@@ -44,12 +44,12 @@ const NavListItem = ({ isExpanded, item }: NavListItemProps) => {
           <Icon icon={item.icon} width={20} height={20} />
 
           <motion.p
-            className={`'flex-grow ' `}
+            className={`'flex-grow '`}
             animate={{
               opacity: isExpanded ? 0 : 1,
               width: isExpanded ? 0 : 70,
             }}
-            exit={{ opacity: 0, width: 20}}
+            exit={{ opacity: 0, width: 20 }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
           >
             {!isExpanded && item.title}

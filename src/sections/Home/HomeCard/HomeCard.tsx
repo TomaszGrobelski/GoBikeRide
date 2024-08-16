@@ -38,7 +38,7 @@ const HomeCard: React.FC<HomeCardProps> = ({
       </div>
 
       <div className='space-y-10 font-poppins lg:w-1/2'>
-        <h2 className='text-wrap text-[24px] text-secoundSea sm:text-[38px] gradient-text border-bottom-gradient'>
+        <h2 className='text-wrap text-[24px] text-secoundSea gradient-text border-bottom-gradient sm:text-[38px]'>
           {title}
         </h2>
 
@@ -51,7 +51,7 @@ const HomeCard: React.FC<HomeCardProps> = ({
         </ul>
 
         <Link href={linkHref} className='inline-block'>
-          <button className='rounded-lg border-[1px] bg-secoundSea p-5 text-white transition-all duration-300 hover:bg-mainPurple'>
+          <button className='hover:bg-mainColor rounded-lg border-[1px] bg-secoundSea p-5 text-white transition-all duration-300'>
             Zobacz więcej
           </button>
         </Link>

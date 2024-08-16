@@ -1,5 +1,6 @@
 import { useDeletePost } from '@/api/posts/usePost';
 import { useModalStore } from '@/store/useModalStore';
+import DeleteButton from '@/ui/atmos/Buttons/DeleteButton';
 
 interface DeletePostModalContentProps {
   postId: number;
@@ -28,13 +29,8 @@ const DeletePostModalContent = ({ postId }: DeletePostModalContentProps) => {
         >
           Anuluj
         </button>
-        <button
-          onClick={handleDeletePost}
-          disabled={isPending}
-          className='self-end rounded-md border-[1px] bg-red-600 p-1 px-6 text-white hover:bg-red-500'
-        >
-          Usuń
-        </button>
+        <DeleteButton onClick={handleDeletePost} disabled={isPending} />
+
       </div>
     </div>
   );

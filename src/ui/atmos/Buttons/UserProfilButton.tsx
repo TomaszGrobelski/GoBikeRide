@@ -9,7 +9,7 @@ const UserProfileButton = ({ userId, ...props }: UserProfileButtonProps) => {
   return (
     <Link href={`profile/${userId}`}>
       <button
-        className='rounded-2xl border-[1px] bg-mainPurple p-2 px-6 text-white '
+        className='bg-mainColor rounded-2xl border-[1px] p-2 px-6 text-white'
         {...props}
       >
         Zobacz profil

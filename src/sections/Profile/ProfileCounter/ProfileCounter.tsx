@@ -10,7 +10,7 @@ interface IProfileCounter {
 }
 const ProfileCounter = ({ user }: IProfileCounter) => {
   return (
-    <div className='flex items-center justify-center gap-14 rounded-2xl p-10 shadow-md shadow-mainPurple'>
+    <div className='shadow-mainColor flex items-center justify-center gap-14 rounded-2xl p-10 shadow-md'>
       <CounterCard
         value={user.bikes_count}
         title='Rowery'

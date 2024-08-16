@@ -12,7 +12,7 @@ interface NavMenuProps {
 
 const NavMenu = ({ isExpanded }: NavMenuProps) => {
   return (
-    <nav className='flex h-full flex-col'>
+    <nav className='flex h-full flex-col text-[14px] font-semibold'>
       <ul className='relative flex h-full flex-col items-center justify-start gap-4'>
         {menuList.map((item) => (
           <NavListItem key={item.title} isExpanded={isExpanded} item={item} />

@@ -12,10 +12,10 @@ const ThemeSwitch = () => {
   };
 
   return (
-    <div className='relative w-20'>
+    <div className='absolute right-4 top-3 w-20'>
       <button
         onClick={toggleTheme}
-        className={`flex items-center justify-center gap-1 rounded-full border-[2px] ${isChecked ? 'border-black' : 'border-white'} bg-[#F8207F] p-2 px-5 focus:outline-none dark:border-white`}
+        className={`flex items-center justify-center gap-1 rounded-full border-[2px] ${isChecked ? 'border-black' : 'border-white'} bg-mainColor p-2 px-5 focus:outline-none dark:border-white`}
         aria-label='Przełącz motyw'
       >
         <div

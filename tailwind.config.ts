@@ -29,12 +29,15 @@ const config: Config = {
           'linear-gradient(to top,#110A36,#251462, #341B82, #4C27B5, #6B3AEF, #8961F2, #A587F5)',
       },
       colors: {
-        mainPurple: '#874491',
-        // mainPurple: '#102532',
+        mainColor: '#B1C181',
+        // mainColor: '#798A65',
+        // mainColor: '#874491',
+        // mainColor: '#102532',
         secoundSea: '#102532',
       },
       backgroundColor: {
-        lightBackground: '#F8F9F9',
+        // lightBackground: '#F8F9F9',
+        lightBackground: '#F7F7F7',
       },
       boxShadow: {
         custom: '10px 10px 10px black',

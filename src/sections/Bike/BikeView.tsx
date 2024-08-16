@@ -16,7 +16,7 @@ const BikeView = () => {
   }
 
   return (
-    <section className='flex flex-col items-center space-y-16 p-6'>
+    <section className='flex flex-col items-center space-y-16 p-6 h-full'>
       <p className='max-w-[650px] self-start text-balance rounded-3xl bg-white p-4 px-6 text-[20px] leading-tight tracking-tight shadow-sm  shadow-secoundSea'>
         Każdy osprzęt roweru ma swoje unikalne wymagania. Twoja tabela pomoże Ci
         śledzić stan wszystkich części Twojego roweru. Zarządzaj, modyfikuj,

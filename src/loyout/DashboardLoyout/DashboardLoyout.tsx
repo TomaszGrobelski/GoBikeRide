@@ -68,7 +68,7 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
         <Typography
           variant='h1'
           sx={{ fontSize: '2rem' }}
-          className='pl-6 pt-16 font-roboto font-bold text-black dark:text-slate-50'
+          className='pl-6 pt-20 font-roboto font-bold text-black dark:text-slate-50'
         >
           {sectionName}
         </Typography>

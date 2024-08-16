@@ -55,32 +55,43 @@ const AddNewComponent = () => {
       currentMileageKm: '',
       maintenanceCost: '',
     });
-
   };
 
   return (
     <TableRow
       key='New component'
-      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+      sx={{
+        '&:last-child td, &:last-child th': { border: 0, borderTop: 1, py: 5 },
+      }}
     >
-      <TableCell component='th' scope='row' align='center'>
+      <TableCell
+        component='th'
+        scope='row'
+        align='center'
+        sx={{ verticalAlign: 'middle' }}
+      >
         <input
           {...register('name')}
           name='name'
           id='name'
           placeholder='Nazwa osprzętu'
-          className='text-center outline-none'
+          className='min-h-16 text-center outline-none'
         />
-        {errors.name && <p>{errors.name.message}</p>}
+        {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
       </TableCell>
 
-      <TableCell align='center' className='w-3/4'>
+      <TableCell
+        align='center'
+        className='w-3/4'
+        sx={{ verticalAlign: 'middle' }}
+      >
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='pl'>
           <Controller
             name='maintenanceDate'
             control={control}
             render={({ field: { onChange, value, ref } }) => (
               <DatePicker
+                className='min-h-16'
                 value={value ? dayjs(value) : null}
                 onChange={(date: Dayjs | null) =>
                   onChange(date ? date.toDate() : null)
@@ -90,17 +101,19 @@ const AddNewComponent = () => {
                     fullWidth: true,
                     inputRef: ref,
                     error: !!errors.maintenanceDate,
-                    helperText: errors.maintenanceDate?.message,
+                    // helperText: 'Wymagane',
                   } as TextFieldProps,
                 }}
               />
             )}
           />
         </LocalizationProvider>
-        {errors.maintenanceDate && <p>{errors.maintenanceDate.message}</p>}
+        {errors.maintenanceDate && (
+          <p className='text-red-500'>{errors.maintenanceDate.message}</p>
+        )}
       </TableCell>
 
-      <TableCell align='center'>
+      <TableCell align='center' sx={{ verticalAlign: 'middle' }}>
         <Box sx={{ minWidth: 120 }}>
           <FormControl fullWidth>
             <InputLabel id='demo-simple-select-label'></InputLabel>
@@ -109,6 +122,7 @@ const AddNewComponent = () => {
               labelId='demo-simple-select-label'
               id='demo-simple-select'
               label='Stan'
+              className='min-h-16'
             >
               <MenuItem value='Bardzo Dobry'>Bardzo Dobry</MenuItem>
               <MenuItem value='Dobry'>Dobry</MenuItem>
@@ -118,7 +132,9 @@ const AddNewComponent = () => {
             </Select>
           </FormControl>
         </Box>
-        {errors.currentState && <p>{errors.currentState.message}</p>}
+        {errors.currentState && (
+          <p className='text-red-500'>{errors.currentState.message}</p>
+        )}
       </TableCell>
 
       <TableCell align='center'>
@@ -127,9 +143,11 @@ const AddNewComponent = () => {
           type='text'
           id='currentMileageKm'
           placeholder='Przebieg'
-          className='text-center outline-none'
+          className='min-h-16 text-center outline-none'
         />
-        {errors.currentMileageKm && <p>{errors.currentMileageKm.message}</p>}
+        {errors.currentMileageKm && (
+          <p className='text-red-500'>{errors.currentMileageKm.message}</p>
+        )}
       </TableCell>
 
       <TableCell align='center'>
@@ -138,9 +156,11 @@ const AddNewComponent = () => {
           type='text'
           id='maintenanceCost'
           placeholder='Koszt konserwacji'
-          className='text-center outline-none'
+          className='min-h-16 text-center outline-none '
         />
-        {errors.maintenanceCost && <p>{errors.maintenanceCost.message}</p>}
+        {errors.maintenanceCost && (
+          <p className='text-red-500'>{errors.maintenanceCost.message}</p>
+        )}
       </TableCell>
 
       <TableCell align='center'>
@@ -151,6 +171,7 @@ const AddNewComponent = () => {
             color='#5F286B'
             onClick={handleSubmit(onSubmit)}
             disabled={isPending || isSubmitting}
+            size={24}
           />
         </Box>
       </TableCell>

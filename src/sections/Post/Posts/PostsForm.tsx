@@ -116,7 +116,7 @@ const PostsForm = ({ refetch, user }: IPostsForm) => {
           <Icon
             icon='clarity:picture-solid'
             aria-label='Add image'
-            className='cursor-pointer rounded-md text-mainPurple'
+            className='text-mainColor cursor-pointer rounded-md'
             width={30}
           />
         </label>
@@ -126,7 +126,6 @@ const PostsForm = ({ refetch, user }: IPostsForm) => {
           onChange={handleImageUpload}
           id='imageUpload'
           className='hidden'
-          
         />
 
         <div className='flex w-full justify-end'>

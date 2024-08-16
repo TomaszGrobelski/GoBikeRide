@@ -37,18 +37,26 @@ const Likes = ({ likes, postId, userId, refetch }: ILikes) => {
       <button
         disabled={isPending}
         onClick={handleLike}
-        className='flex items-center gap-3 rounded-xl border-[1px] px-3 py-1 transition-all duration-300 hover:border-red-600'
+        className={`flex items-center gap-3 rounded-xl border-[1px] px-3 py-1 transition-all duration-300 hover:border-red-600 ${
+          likes.some((like) => like.userId === userId) ? 'border-red-500' : ''
+        }`}
+        // className=' flex items-center gap-3 rounded-xl border-[1px] px-3 py-1 transition-all duration-300 hover:border-red-600'
       >
-        <Icon
-          icon='prime:heart-fill'
-          fontSize={22}
-          className={
-            likes.some((like) => like.userId === userId)
-              ? 'text-red-500'
-              : 'text-gray-500'
-          }
-        />
-        <span>Polub</span>
+        <span className='custom_hear_like'>
+          <Icon
+            icon='prime:heart-fill'
+            fontSize={22}
+            className={
+              likes.some((like) => like.userId === userId)
+                ? 'text-red-500'
+                : 'text-gray-500'
+            }
+          />
+        </span>
+
+        <span>
+          {likes.some((like) => like.userId === userId) ? 'Lubię to' : 'Polub'}
+        </span>
       </button>
       <div className='flex flex-wrap -space-x-3'>
         {likes &&
@@ -64,7 +72,7 @@ const Likes = ({ likes, postId, userId, refetch }: ILikes) => {
                     like.user.avatar_url || '/default-avatars/male-avatar.png'
                   }
                   alt={`${like.user.username} avatar`}
-                  className='inline-block h-8 w-8 cursor-pointer rounded-full bg-white ring-1 ring-mainPurple'
+                  className='ring-mainColor inline-block h-8 w-8 cursor-pointer rounded-full bg-white ring-1'
                   width={50}
                   height={50}
                 />

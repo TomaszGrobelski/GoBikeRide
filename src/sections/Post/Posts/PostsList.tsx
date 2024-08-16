@@ -9,8 +9,8 @@ import CommentsList from '../Comments/CommentsList';
 import PostContent from './PostContent';
 import PostsDrowdown from './PostsDrowdown';
 import PostSkeleton from './PostSkeleton';
-import UserInformation from './UserInformation';
 import ReportPost from './ReportPost';
+import UserInformation from './UserInformation';
 
 interface IPostsList {
   refetch: () => Promise<any>;

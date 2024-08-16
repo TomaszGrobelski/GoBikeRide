@@ -31,7 +31,7 @@ const CommentForm = ({ refetch, user, postId }: CommentFormProps) => {
       console.error('Error adding comment:', error);
     }
   };
-  
+
   return (
     <div className='flex flex-col gap-4 border-t-[1px] pt-6'>
       <div className='flex items-center gap-2'>
@@ -40,14 +40,14 @@ const CommentForm = ({ refetch, user, postId }: CommentFormProps) => {
           width={40}
           height={40}
           alt='awatar użytkownika'
-          className='self-start rounded-full ring-1 ring-secoundSea mt-2'
+          className='mt-2 self-start rounded-full ring-1 ring-secoundSea'
         />
         <CommentTextArea onChange={handleTextAreaChange} />
       </div>
       <button
         onClick={handleSubmit}
         disabled={isPending}
-        className='self-end rounded-lg border-[1px] bg-mainPurple px-4 py-2 text-white'
+        className='bg-mainColor self-end rounded-lg border-[1px] px-4 py-2 text-white'
       >
         {isPending ? 'dodaje' : 'Skomentuj'}
       </button>

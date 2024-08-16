@@ -11,7 +11,7 @@ interface IProfileInformation {
 }
 const ProfileInformation = ({ user }: IProfileInformation) => {
   return (
-    <div className='space-y-4 rounded-2xl p-10 shadow-md shadow-mainPurple'>
+    <div className='shadow-mainColor space-y-4 rounded-2xl p-10 shadow-md'>
       <div className='flex items-center gap-2'>
         <Image
           className='rounded-full shadow-xl'
@@ -28,7 +28,7 @@ const ProfileInformation = ({ user }: IProfileInformation) => {
             </span>
           </div>
           <div className='flex items-center gap-3'>
-            <button className='rounded-lg border-[1px] px-2 py-1 shadow-lg transition-all duration-300 hover:border-mainPurple hover:text-mainPurple'>
+            <button className='hover:border-mainColor hover:text-mainColor rounded-lg border-[1px] px-2 py-1 shadow-lg transition-all duration-300'>
               Wgraj nowe zdjęcie
             </button>
             <button className='rounded-lg border-[1px] px-2 py-1 shadow-lg transition-all duration-300 hover:bg-red-600 hover:text-white'>
@@ -44,7 +44,7 @@ const ProfileInformation = ({ user }: IProfileInformation) => {
         <CalendarCheck />
         {convertToDdMmYyyyFormat(user.createdAt)}
       </p>
-      
+
       <div className='flex items-center'>
         <p>Preferowany styl jazdy:</p>
         <ProfileRidingStyle />

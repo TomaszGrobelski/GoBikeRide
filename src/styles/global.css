@@ -10,6 +10,7 @@
 html {
   height: 100%;
   overflow-x: hidden;
+
 }
 
 html::-webkit-scrollbar {
@@ -30,6 +31,6 @@ html::-webkit-scrollbar-thumb:hover {
   background: #a0a0a0;
 }
 
-body {
+/* body {  powoduje, ze dropdown z post źle sie otweira i go nie widać 
   height: 100%;
-}
+} */
