@@ -17,6 +17,7 @@ import dayjs, { Dayjs } from 'dayjs';
 
 import 'dayjs/locale/pl';
 
+import { Icon } from '@iconify/react/dist/iconify.js';
 import { TextFieldProps } from '@mui/material/TextField';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -39,15 +40,19 @@ const AddNewComponent = () => {
   const { mutate: addComponent, isPending } = useAddComponent();
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    console.log(data);
-    await addComponent({
-      bikeId: 3, // zmienić żeby dla danego Bike ID użytkownika było
+    const newComponent = {
       name: data.name,
       maintenanceDate: data.maintenanceDate,
       currentState: data.currentState,
       currentMileageKm: parseFloat(data.currentMileageKm),
       maintenanceCost: parseFloat(data.maintenanceCost),
+    };
+
+    await addComponent({
+      bikeId: 3,
+      ...newComponent,
     });
+
     reset({
       name: '',
       maintenanceDate: undefined,
@@ -156,7 +161,7 @@ const AddNewComponent = () => {
           type='text'
           id='maintenanceCost'
           placeholder='Koszt konserwacji'
-          className='min-h-16 text-center outline-none '
+          className='min-h-16 text-center outline-none'
         />
         {errors.maintenanceCost && (
           <p className='text-red-500'>{errors.maintenanceCost.message}</p>
@@ -165,14 +170,18 @@ const AddNewComponent = () => {
 
       <TableCell align='center'>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <IconButton
-            icon='basil:add-outline'
-            ariaLabel='Dodaj nowy element'
-            color='#5F286B'
-            onClick={handleSubmit(onSubmit)}
-            disabled={isPending || isSubmitting}
-            size={24}
-          />
+          {isPending ? (
+            <Icon icon='line-md:loading-loop' fontSize={24} />
+          ) : (
+            <IconButton
+              icon='basil:add-outline'
+              ariaLabel='Dodaj nowy element'
+              color='#5F286B'
+              onClick={handleSubmit(onSubmit)}
+              disabled={isPending || isSubmitting}
+              size={24}
+            />
+          )}
         </Box>
       </TableCell>
     </TableRow>

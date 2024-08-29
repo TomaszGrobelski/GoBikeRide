@@ -1,11 +1,4 @@
-import {
-  useMutation,
-  useQuery,
-  useQueryClient,
-  UseQueryResult,
-} from '@tanstack/react-query';
-
-import { IBike } from '@/types/Bike/bike.types';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import {
   addBike,
@@ -55,7 +48,7 @@ export const useAddComponent = () => {
       maintenanceCost: number;
     }) => addComponent(newComponent),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['components'] });
+      queryClient.invalidateQueries({ queryKey: ['bikes'] });
     },
   });
 };
@@ -68,7 +61,7 @@ export const useDeleteComponent = () => {
       await deleteComponent({ componentId });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['component'] });
+      queryClient.invalidateQueries({ queryKey: ['bikes'] });
     },
     onError: (error: unknown) => {
       console.error('Error deleting post:', error);

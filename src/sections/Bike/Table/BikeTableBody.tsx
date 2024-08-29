@@ -23,21 +23,18 @@ interface IBikeTableBody {
   displayedData: IComponents[];
   handleChange: (event: SelectChangeEvent<string>) => void;
   condition: string;
-  handleRefetch: VoidFunction;
 }
 
 const BikeTableBody = ({
   displayedData,
   handleChange,
   condition,
-  handleRefetch,
 }: IBikeTableBody) => {
   const openModal = useModalStore((state) => state.openModal);
   const closeModal = useModalStore((state) => state.closeModal);
 
   const handleDeleteSuccess = () => {
     closeModal();
-    // handleRefetch();
   };
 
   const openEditModal = () =>
@@ -48,7 +45,6 @@ const BikeTableBody = ({
       children: (
         <DeleteComponentModalContent
           handleDeleteSuccess={handleDeleteSuccess}
-          handleRefetch={handleRefetch}
           title={brand}
           componentId={componentId}
         />

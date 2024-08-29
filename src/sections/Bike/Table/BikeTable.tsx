@@ -39,7 +39,7 @@ export default function BikeTable({ user }: BikeTableProps) {
     throw new Error('User is not defined');
   }
 
-  const { data: bikes, isLoading, isError, refetch } = useFetchBikes(user.id);
+  const { data: bikes, isLoading, isError } = useFetchBikes(user.id);
 
   const [condition, setCondition] = useState('');
   const [selectedBike, setSelectedBike] = useState<string>('');
@@ -84,8 +84,12 @@ export default function BikeTable({ user }: BikeTableProps) {
   //   }
   // };
 
-  const handleRefetch = () => {
-    refetch();
+  // problem taki że jak dodaje na sucho to później nie da sie odrazu usunać bo nie ma dostępuu do ID ktore tworzne jest (chyba ) w na backendzie
+  const handleAddComponent = (newComponent: IComponents) => {
+    setDisplayedData((prevDisplayedData) => [
+      ...prevDisplayedData,
+      newComponent,
+    ]);
   };
 
   //na małymekranie jak są nazwy kolumn to żeby dało sie przewijać w bk zamiast zeby znikały po prawo
@@ -165,12 +169,9 @@ export default function BikeTable({ user }: BikeTableProps) {
               displayedData={displayedData}
               handleChange={handleChange}
               condition={condition}
-              handleRefetch={handleRefetch}
             />
 
-            <AddNewComponent
-            //  handleRefetch={handleRefetch}
-            />
+            <AddNewComponent />
           </>
         )}
       </Table>

@@ -5,22 +5,16 @@ interface IDeleteComponentModalContent {
   componentId: number;
   title: string;
   handleDeleteSuccess: VoidFunction;
-  handleRefetch: VoidFunction;
 }
 const DeleteComponentModalContent = ({
   componentId,
   title,
   handleDeleteSuccess,
-  handleRefetch,
 }: IDeleteComponentModalContent) => {
   const { mutate: deleteComponent, isPending } = useDeleteComponent();
 
   const handleDeleteComponent = async () => {
-    console.log('Deleting component...');
     await deleteComponent(componentId);
-    console.log('Refetching data...');
-    await handleRefetch();
-    console.log('Handling delete success...');
     await handleDeleteSuccess();
   };
   return (
