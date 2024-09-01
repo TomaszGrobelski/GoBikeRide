@@ -26,12 +26,14 @@ const PremiumView = () => {
             title={pricingList.standard.title}
             pricingCardList={pricingList.standard.features}
             price={pricingList.standard.price}
+            buttonContent={pricingList.standard.buttonContent}
           />
           <PricingCard
             title={pricingList.premium.title}
             pricingCardList={pricingList.premium.features}
             isPremium={true}
             price={pricingList.premium.price}
+            buttonContent={pricingList.premium.buttonContent}
           />
         </div>
       </div>

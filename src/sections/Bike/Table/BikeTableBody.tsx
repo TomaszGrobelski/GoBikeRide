@@ -4,7 +4,9 @@ import { ChangeEvent } from 'react';
 import { useModalStore } from '@/store/useModalStore';
 import IconButton from '@/ui/atmos/IconButton';
 import { LightTooltip } from '@/ui/atmos/Tooltip/LightTooltip';
+import LoadingPage from '@/ui/molecules/Loading/LoadingPage';
 import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
+import { getCurrentBackgroundColor } from '@/utils/table/colors-utils';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -23,12 +25,14 @@ interface IBikeTableBody {
   displayedData: IComponents[];
   handleChange: (event: SelectChangeEvent<string>) => void;
   condition: string;
+  isLoading: boolean;
 }
 
 const BikeTableBody = ({
   displayedData,
   handleChange,
   condition,
+  isLoading,
 }: IBikeTableBody) => {
   const openModal = useModalStore((state) => state.openModal);
   const closeModal = useModalStore((state) => state.closeModal);
@@ -51,6 +55,13 @@ const BikeTableBody = ({
       ),
     });
 
+  if (isLoading) {
+    return (
+      <div className='absolute left-1/3 flex h-[400px] items-center justify-center'>
+        <LoadingPage />
+      </div>
+    );
+  }
   return (
     <TableBody>
       {displayedData.map((row) => (
@@ -58,7 +69,7 @@ const BikeTableBody = ({
           key={row.id}
           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
-          <TableCell component='th' scope='row' align='center' >
+          <TableCell component='th' scope='row' align='center'>
             {row.name}
           </TableCell>
           <TableCell align='center'>
@@ -67,22 +78,17 @@ const BikeTableBody = ({
           <TableCell align='center'>
             <Box sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
-                <InputLabel key={row.id} id='demo-simple-select-label'>
-                  {row.currentState}
-                </InputLabel>
-                <Select
-                  labelId='demo-simple-select-label'
-                  id='demo-simple-select'
-                  value={condition}
-                  label={row.currentState}
-                  onChange={handleChange}
+                <div
+                  key={row.id}
+                  className='flex min-h-[40px] items-center justify-center rounded-lg text-[#000000] shadow-md shadow-gray-500'
+                  style={{
+                    backgroundColor: getCurrentBackgroundColor(
+                      row.currentState,
+                    ),
+                  }}
                 >
-                  <MenuItem value={5}>Bardzo Dobry</MenuItem>
-                  <MenuItem value={4}>Dobry</MenuItem>
-                  <MenuItem value={3}>Sredni</MenuItem>
-                  <MenuItem value={2}>Zły</MenuItem>
-                  <MenuItem value={1}>Bardo zły</MenuItem>
-                </Select>
+                  {row.currentState}
+                </div>
               </FormControl>
             </Box>
           </TableCell>
@@ -90,7 +96,10 @@ const BikeTableBody = ({
           <TableCell align='center'>{row.maintenanceCost}</TableCell>
           <TableCell align='center'>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              <button onClick={openEditModal}>
+              <button
+                onClick={openEditModal}
+                className='rounded-full hover:bg-gray-100'
+              >
                 <LightTooltip title='Edytuj' placement='top'>
                   <div>
                     <IconButton
@@ -101,7 +110,10 @@ const BikeTableBody = ({
                   </div>
                 </LightTooltip>
               </button>
-              <button onClick={() => openDeleteModal(row.brand, row.id)}>
+              <button
+                onClick={() => openDeleteModal(row.brand, row.id)}
+                className='rounded-full hover:bg-gray-100'
+              >
                 <LightTooltip title='Usuń' placement='top'>
                   <div>
                     <IconButton

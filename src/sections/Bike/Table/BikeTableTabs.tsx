@@ -8,8 +8,8 @@ import { IBike } from '@/types/Bike/bike.types';
 
 interface IBikeTableTabs {
   bikes: IBike[] | undefined;
-  setSelectedBike: Dispatch<SetStateAction<string>>;
-  selectedBike: string;
+  setSelectedBike: Dispatch<SetStateAction<IBike | null>>;
+  selectedBike: string | undefined;
 }
 
 export default function BikeTableTabs({
@@ -17,8 +17,12 @@ export default function BikeTableTabs({
   setSelectedBike,
   selectedBike,
 }: IBikeTableTabs) {
+  // const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  //   setSelectedBike(newValue);
+  // };
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setSelectedBike(newValue);
+    const selected = bikes?.find((bike) => bike.brand === newValue) || null;
+    setSelectedBike(selected); 
   };
 
   return (

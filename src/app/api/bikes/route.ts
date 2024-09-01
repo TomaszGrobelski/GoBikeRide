@@ -19,6 +19,7 @@ export async function GET(req: NextRequest) {
         userId: String(userId),
       },
       select: {
+        id: true,
         userId: true,
         brand: true,
         model: true,

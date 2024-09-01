@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAddBike } from '@/api/bikes/useBike';
 import CloseButton from '@/ui/atmos/Buttons/CloseButton';
+import { LightTooltip } from '@/ui/atmos/Tooltip/LightTooltip';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import Box from '@mui/material/Box';
@@ -19,9 +20,10 @@ type FormFields = z.infer<typeof schema>;
 
 interface AddBikeModalProps {
   user: IUser | undefined;
+  isLimited: boolean;
 }
 
-export default function AddBikeModal({ user }: AddBikeModalProps) {
+export default function AddBikeModal({ user, isLimited }: AddBikeModalProps) {
   const {
     register,
     handleSubmit,
@@ -41,10 +43,10 @@ export default function AddBikeModal({ user }: AddBikeModalProps) {
   };
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    if(!user){
-      return
+    if (!user) {
+      return;
     }
-    
+
     await addBikeMutation.mutateAsync({
       userId: user?.id,
       brand: data.brand,
@@ -56,10 +58,23 @@ export default function AddBikeModal({ user }: AddBikeModalProps) {
 
   return (
     <div className='relative right-10'>
-      <Button onClick={handleOpen}>
-        <Icon icon='basil:add-outline' fontSize={26} />
-        Dodaj rower
-      </Button>
+      {isLimited ? (
+        <LightTooltip
+          title='Nie można dodać więcej niż 3 rowery'
+          placement='top'
+        >
+          <Button sx={{ color: 'gray' }} className='text-gray-400'>
+            <Icon icon='basil:add-outline' fontSize={26} />
+            Dodaj rower
+          </Button>
+        </LightTooltip>
+      ) : (
+        <Button onClick={handleOpen}>
+          <Icon icon='basil:add-outline' fontSize={26} />
+          Dodaj rower
+        </Button>
+      )}
+
       <Modal
         open={open}
         onClose={handleClose}

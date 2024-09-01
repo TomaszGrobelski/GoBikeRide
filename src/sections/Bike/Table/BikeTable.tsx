@@ -23,6 +23,7 @@ import { IUser } from '@/types/User/user.types';
 import AddBikeModal from './AddBikeModal/AddBikeModal';
 import AddNewComponent from './AddNewComponent/AddNewComponent';
 import BikeTableBody from './BikeTableBody';
+import BikeTableHead from './BikeTableHead';
 
 interface IFilters {}
 const defaultFilters: IFilters = {
@@ -41,8 +42,9 @@ export default function BikeTable({ user }: BikeTableProps) {
 
   const { data: bikes, isLoading, isError } = useFetchBikes(user.id);
 
+  const [isLimited, setIsLimited] = useState<boolean>(false);
   const [condition, setCondition] = useState('');
-  const [selectedBike, setSelectedBike] = useState<string>('');
+  const [selectedBike, setSelectedBike] = useState<IBike | null>(null);
   const [displayedData, setDisplayedData] = useState<IComponents[]>([]);
 
   // const [filters, setFilters] = useState<IFilters>(defaultFilters);
@@ -51,7 +53,8 @@ export default function BikeTable({ user }: BikeTableProps) {
 
   useEffect(() => {
     if (bikes && bikes.length > 0) {
-      const initialBike = bikes[0].brand;
+      setIsLimited(bikes.length > 2);
+      const initialBike = bikes[0];
       setSelectedBike(initialBike);
       setDisplayedData(bikes[0].components || []);
     }
@@ -59,7 +62,9 @@ export default function BikeTable({ user }: BikeTableProps) {
 
   useEffect(() => {
     if (selectedBike && bikes) {
-      const bike = bikes.find((bike: IBike) => bike.brand === selectedBike);
+      const bike = bikes.find(
+        (bike: IBike) => bike.brand === selectedBike.brand,
+      );
       setDisplayedData(bike?.components || []);
     }
   }, [selectedBike, bikes]);
@@ -91,14 +96,16 @@ export default function BikeTable({ user }: BikeTableProps) {
       newComponent,
     ]);
   };
+  console.log(bikes?.length);
 
   //na małymekranie jak są nazwy kolumn to żeby dało sie przewijać w bk zamiast zeby znikały po prawo
+  // Po dodaniu nowego componentu w innych Tabach, żeby nie cofało do pierwszego
   return (
     <TableContainer
       sx={{
         boxShadow: '2px 2px 8px',
         borderRadius: 5,
-        p: 1,
+        p: 3,
         maxWidth: 1200,
         // width: '100%',
       }}
@@ -108,10 +115,10 @@ export default function BikeTable({ user }: BikeTableProps) {
       <Box sx={{ display: 'flex' }}>
         <BikeTableTabs
           bikes={bikes}
-          selectedBike={selectedBike}
+          selectedBike={selectedBike?.brand}
           setSelectedBike={setSelectedBike}
         />
-        <AddBikeModal user={user} />
+        <AddBikeModal isLimited={isLimited} user={user} />
       </Box>
 
       <Table
@@ -124,56 +131,16 @@ export default function BikeTable({ user }: BikeTableProps) {
         }}
         aria-label='Tablica komponentów rowerowych'
       >
-        <TableHead className='overflow-x-auto'>
-          <TableRow>
-            {tableHeaders.map((header) => (
-              <TableCell
-                key={header.name}
-                align={header.align}
-                onClick={() =>
-                  handleSortChange(header.value as keyof IComponents)
-                }
-                style={{ cursor: `${header.sortable ? 'pointer' : ''}` }}
-              >
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: 160,
-                  }}
-                >
-                  {header.name}
-                  {/* {sortBy === header.value && (
-                    <Icon
-                      icon={
-                        sortDirection === 'asc'
-                          ? 'mingcute:arrow-up-fill'
-                          : 'mingcute:arrow-down-fill'
-                      }
-                    />
-                  )} */}
-                </Box>
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
+        <BikeTableHead handleSortChange={handleSortChange} />
 
-        {isLoading ? (
-          <div className='absolute left-1/3 flex h-[400px] items-center justify-center'>
-            <LoadingPage />
-          </div>
-        ) : (
-          <>
-            <BikeTableBody
-              displayedData={displayedData}
-              handleChange={handleChange}
-              condition={condition}
-            />
+        <BikeTableBody
+          displayedData={displayedData}
+          handleChange={handleChange}
+          condition={condition}
+          isLoading={isLoading}
+        />
 
-            <AddNewComponent />
-          </>
-        )}
+        {!isLoading && <AddNewComponent bikeId={selectedBike?.id} />}
       </Table>
     </TableContainer>
   );

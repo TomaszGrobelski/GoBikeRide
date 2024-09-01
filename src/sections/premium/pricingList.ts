@@ -16,6 +16,7 @@ export  const pricingList = {
           description: 'Jeden rower w rowerowni',
         },
       ],
+      buttonContent: 'Aktualna darmowa wersja'
     },
     premium: {
       title: 'Premium',
@@ -40,5 +41,6 @@ export  const pricingList = {
           description: 'Dostęp beta do nowych funkcjonalności aplikacji',
         },
       ],
+      buttonContent:'Kup Pakiet Premium'
     },
   };

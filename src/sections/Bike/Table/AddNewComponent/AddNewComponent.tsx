@@ -26,7 +26,11 @@ import { schema } from '../new-component.schema';
 
 type FormFields = z.infer<typeof schema>;
 
-const AddNewComponent = () => {
+interface IAddNewComponent {
+  bikeId: number | undefined;
+}
+
+const AddNewComponent = ({ bikeId }: IAddNewComponent) => {
   const {
     register,
     handleSubmit,
@@ -40,6 +44,10 @@ const AddNewComponent = () => {
   const { mutate: addComponent, isPending } = useAddComponent();
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    if (bikeId === undefined) {
+      console.error('Bike ID is undefined'); // obsłużyć/ Toast ?
+      return;
+    }
     const newComponent = {
       name: data.name,
       maintenanceDate: data.maintenanceDate,
@@ -48,8 +56,8 @@ const AddNewComponent = () => {
       maintenanceCost: parseFloat(data.maintenanceCost),
     };
 
-    await addComponent({
-      bikeId: 3,
+    addComponent({
+      bikeId: bikeId,
       ...newComponent,
     });
 
