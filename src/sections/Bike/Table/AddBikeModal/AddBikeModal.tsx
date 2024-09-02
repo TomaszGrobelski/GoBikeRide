@@ -95,12 +95,12 @@ export default function AddBikeModal({ user, isLimited }: AddBikeModalProps) {
             onSubmit={handleSubmit(onSubmit)}
             className='flex flex-col gap-1'
           >
-            <label htmlFor=''>Marka roweru</label>
+            <label htmlFor=''>Nazwa roweru</label>
             <input
               {...register('brand')}
               className='rounded-md border-[1px] border-[#5F286B] bg-white pl-2 pt-1 text-black outline-none'
               type='text'
-              placeholder='Marka roweru'
+              placeholder='Nazwa roweru'
             />
             {errors.brand && (
               <div className='text-red-500'>{errors.brand.message}</div>

@@ -16,6 +16,10 @@ import TableRow from '@mui/material/TableRow';
 
 import '@/styles/Bike/bikeTable.css';
 
+import DeleteButton from '@/ui/atmos/Buttons/DeleteButton';
+import { LightTooltip } from '@/ui/atmos/Tooltip/LightTooltip';
+import { Icon } from '@iconify/react/dist/iconify.js';
+
 import { IBike } from '@/types/Bike/bike.types';
 import { IComponents } from '@/types/Bike/Components/components.types';
 import { IUser } from '@/types/User/user.types';
@@ -24,6 +28,7 @@ import AddBikeModal from './AddBikeModal/AddBikeModal';
 import AddNewComponent from './AddNewComponent/AddNewComponent';
 import BikeTableBody from './BikeTableBody';
 import BikeTableHead from './BikeTableHead';
+import BikeSettings from './ManageBikes/BikeSettings';
 
 interface IFilters {}
 const defaultFilters: IFilters = {
@@ -37,7 +42,7 @@ interface BikeTableProps {
 
 export default function BikeTable({ user }: BikeTableProps) {
   if (!user) {
-    throw new Error('User is not defined');
+    throw new Error('User is not defined'); // ma wywalić do strony logowania
   }
 
   const { data: bikes, isLoading, isError } = useFetchBikes(user.id);
@@ -96,7 +101,6 @@ export default function BikeTable({ user }: BikeTableProps) {
       newComponent,
     ]);
   };
-  console.log(bikes?.length);
 
   //na małymekranie jak są nazwy kolumn to żeby dało sie przewijać w bk zamiast zeby znikały po prawo
   // Po dodaniu nowego componentu w innych Tabach, żeby nie cofało do pierwszego
@@ -119,6 +123,8 @@ export default function BikeTable({ user }: BikeTableProps) {
           setSelectedBike={setSelectedBike}
         />
         <AddBikeModal isLimited={isLimited} user={user} />
+
+        <BikeSettings bikes={bikes} />
       </Box>
 
       <Table

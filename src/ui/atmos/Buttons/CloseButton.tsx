@@ -11,7 +11,7 @@ const CloseButton = ({ setOpen, className }: ICloseButton) => {
       <Icon
         icon='ic:round-close'
         color='red'
-        fontSize={20}
+        fontSize={22}
         className={twMerge('absolute right-2 top-2 cursor-pointer', className)}
       />
     </button>
