@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useRemoveBike } from '@/api/bikes/useBike';
+import { useRemoveBike, useUpdateBike } from '@/api/bikes/useBike';
 import CloseButton from '@/ui/atmos/Buttons/CloseButton';
 import DeleteButton from '@/ui/atmos/Buttons/DeleteButton';
+import ManageButton from '@/ui/atmos/Buttons/ManageButton';
 import SaveButton from '@/ui/atmos/Buttons/SaveButton';
 import CustomInput from '@/ui/atmos/Input/CustomInput';
-import { LightTooltip } from '@/ui/atmos/Tooltip/LightTooltip';
-import { Icon } from '@iconify/react/dist/iconify.js';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
@@ -18,8 +17,11 @@ interface IBikeSettings {
 
 const BikeSettings = ({ bikes }: IBikeSettings) => {
   const [open, setOpen] = useState(false);
+  const [bikeBrands, setBikeBrands] = useState<{ [key: number]: string }>({});
 
-  const { mutate: deleteBike } = useRemoveBike();
+  const { mutate: deleteBike, isPending: isDeletePending } = useRemoveBike();
+  const { mutate: updateBike, isPending: isUpdatePending } = useUpdateBike();
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -27,24 +29,27 @@ const BikeSettings = ({ bikes }: IBikeSettings) => {
     deleteBike(id);
   };
 
-  const handleSaveBike = () => {};
+  const handleSaveBike = (id: number, model: string) => {
+    const newBrand = bikeBrands[id] || '';
+    const originalBrand = bikes?.find((bike) => bike.id === id)?.brand;
+
+    if (newBrand === originalBrand || !newBrand.trim()) {
+      return;
+    }
+
+    updateBike({ bikeId: id, brand: newBrand, model });
+  };
+
+  const handleBrandChange = (id: number, value: string) => {
+    setBikeBrands((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
 
   return (
     <>
-      <LightTooltip title='Zarządzaj rowerami' placement='top'>
-        <div>
-          <button
-            onClick={handleOpen}
-            className='grid h-16 w-16 place-items-center rounded-full bg-mainColor'
-          >
-            <Icon
-              icon='oui:app-index-management'
-              fontSize={32}
-              className='text-white'
-            />
-          </button>
-        </div>
-      </LightTooltip>
+      <ManageButton handleOpen={handleOpen} tooltipTitle='Zarządzaj rowerami' />
 
       <Modal
         open={open}
@@ -77,13 +82,22 @@ const BikeSettings = ({ bikes }: IBikeSettings) => {
             {bikes?.map((bike) => (
               <div key={bike.id} className='flex items-end gap-4'>
                 <CustomInput
-                  label='Zmień nazwe roweru'
+                  label='Zmień nazwę roweru'
                   defaultValue={bike.brand}
+                  onChange={(e) => handleBrandChange(bike.id, e.target.value)}
                 />
 
-                <SaveButton onClick={handleSaveBike} />
+                <SaveButton
+                  onClick={() => handleSaveBike(bike.id, bike.model)}
+                  isLoading={isUpdatePending}
+                  disabled={isUpdatePending}
+                />
 
-                <DeleteButton onClick={() => handleDeleteBike(bike.id)} />
+                <DeleteButton
+                  onClick={() => handleDeleteBike(bike.id)}
+                  isLoading={isDeletePending}
+                  disabled={isDeletePending}
+                />
               </div>
             ))}
           </div>

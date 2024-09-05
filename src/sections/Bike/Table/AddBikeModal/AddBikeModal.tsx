@@ -4,6 +4,7 @@ import CloseButton from '@/ui/atmos/Buttons/CloseButton';
 import { LightTooltip } from '@/ui/atmos/Tooltip/LightTooltip';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Icon } from '@iconify/react/dist/iconify.js';
+import { Checkbox } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -116,6 +117,11 @@ export default function AddBikeModal({ user, isLimited }: AddBikeModalProps) {
             {errors.model && (
               <div className='text-red-500'>{errors.model.message}</div>
             )}
+
+            <div>
+              <Checkbox defaultChecked />
+              <span>Dodaj domyślne podzespoły</span>
+            </div>
 
             <button
               type='submit'

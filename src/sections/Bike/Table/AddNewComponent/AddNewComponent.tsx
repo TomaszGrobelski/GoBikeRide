@@ -88,7 +88,7 @@ const AddNewComponent = ({ bikeId }: IAddNewComponent) => {
           name='name'
           id='name'
           placeholder='Nazwa osprzętu'
-          className='min-h-16 text-center outline-none'
+          className='min-h-12 border-b-1 text-center outline-none'
         />
         {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
       </TableCell>
@@ -156,7 +156,7 @@ const AddNewComponent = ({ bikeId }: IAddNewComponent) => {
           type='text'
           id='currentMileageKm'
           placeholder='Przebieg'
-          className='min-h-16 text-center outline-none'
+          className='min-h-12 border-b-1 text-center outline-none'
         />
         {errors.currentMileageKm && (
           <p className='text-red-500'>{errors.currentMileageKm.message}</p>
@@ -169,7 +169,7 @@ const AddNewComponent = ({ bikeId }: IAddNewComponent) => {
           type='text'
           id='maintenanceCost'
           placeholder='Koszt konserwacji'
-          className='min-h-16 text-center outline-none'
+          className='min-h-12 border-b-1 text-center outline-none'
         />
         {errors.maintenanceCost && (
           <p className='text-red-500'>{errors.maintenanceCost.message}</p>

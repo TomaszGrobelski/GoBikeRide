@@ -24,6 +24,18 @@ export const addBike = async (
   return response.data;
 };
 
+export const updateBike = async (
+  bikeId: number,
+  brand: string,
+  model: string,
+): Promise<IBike> => {
+  const response = await axios.put(`${endpoints.bike.all}/${bikeId}`, {
+    brand,
+    model,
+  });
+  return response.data;
+};
+
 export const removeBike = async (bikeId: number): Promise<void> => {
   await axios.delete(`${endpoints.bike.all}/${bikeId}`);
 };

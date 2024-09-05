@@ -6,7 +6,10 @@ import {
   deleteComponent,
   fetchBikes,
   removeBike,
+  updateBike,
 } from './bikeQueries';
+
+// onError obsłuzyć....
 
 export const useFetchBikes = (userId: number) => {
   return useQuery({
@@ -20,6 +23,20 @@ export const useAddBike = () => {
   return useMutation({
     mutationFn: (newBike: { userId: number; brand: string; model: string }) =>
       addBike(newBike.userId, newBike.brand, newBike.model),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['bikes'] });
+    },
+  });
+};
+
+export const useUpdateBike = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (updatedBike: {
+      bikeId: number;
+      brand: string;
+      model: string;
+    }) => updateBike(updatedBike.bikeId, updatedBike.brand, updatedBike.model),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['bikes'] });
     },

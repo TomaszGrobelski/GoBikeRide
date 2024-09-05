@@ -25,6 +25,9 @@ export async function GET(req: NextRequest) {
         model: true,
         components: true,
       },
+      orderBy: {
+        createdAt: 'asc',
+      },
     });
 
     return NextResponse.json(bikes);
@@ -66,5 +69,3 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-
-
