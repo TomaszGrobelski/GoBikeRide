@@ -15,11 +15,13 @@ export const addBike = async (
   userId: number,
   brand: string,
   model: string,
+  addDefaultComponents: boolean,
 ): Promise<IBike> => {
   const response = await axios.post(endpoints.bike.all, {
     userId,
     brand,
     model,
+    addDefaultComponents,
   });
   return response.data;
 };

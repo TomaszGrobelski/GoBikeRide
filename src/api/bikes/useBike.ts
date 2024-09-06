@@ -21,8 +21,18 @@ export const useFetchBikes = (userId: number) => {
 export const useAddBike = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (newBike: { userId: number; brand: string; model: string }) =>
-      addBike(newBike.userId, newBike.brand, newBike.model),
+    mutationFn: (newBike: {
+      userId: number;
+      brand: string;
+      model: string;
+      addDefaultComponents: boolean;
+    }) =>
+      addBike(
+        newBike.userId,
+        newBike.brand,
+        newBike.model,
+        newBike.addDefaultComponents,
+      ),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['bikes'] });
     },

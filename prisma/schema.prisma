@@ -39,8 +39,6 @@ model Component {
   id               Int      @id @default(autoincrement())
   bikeId           Int
   name             String
-  brand            String
-  model            String
   maintenanceDate  DateTime
   currentState     String
   currentMileageKm Float

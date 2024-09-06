@@ -8,6 +8,8 @@ import TableRow from '@mui/material/TableRow';
 
 import '@/styles/Bike/bikeTable.css';
 
+import { Icon } from '@iconify/react/dist/iconify.js';
+
 import { IComponents } from '@/types/Bike/Components/components.types';
 
 interface IBikeTableHead {
@@ -34,6 +36,7 @@ const BikeTableHead = ({ handleSortChange }: IBikeTableHead) => {
               }}
             >
               {header.name}
+              {/* <Icon icon="noto-v1:money-bag" fontSize={22} />  PRZEMYŚLEĆ, czy nie dać Samych ikon zamiast nudnych nazw */}
               {/* {sortBy === header.value && (
               <Icon
                 icon={

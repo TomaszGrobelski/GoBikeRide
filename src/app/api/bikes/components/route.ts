@@ -9,8 +9,6 @@ export async function POST(req: NextRequest) {
     const {
       bikeId,
       name,
-      // brand,
-      // model,
       maintenanceDate,
       currentState,
       currentMileageKm,
@@ -20,8 +18,6 @@ export async function POST(req: NextRequest) {
     if (
       !bikeId ||
       !name ||
-      // !brand ||
-      // !model ||
       !maintenanceDate ||
       !currentState ||
       !currentMileageKm ||
@@ -45,8 +41,6 @@ export async function POST(req: NextRequest) {
       data: {
         bikeId: Number(bikeId),
         name,
-        brand: 'coś',
-        model: 'Ktos',
         maintenanceDate: new Date(maintenanceDate),
         currentState,
         currentMileageKm,

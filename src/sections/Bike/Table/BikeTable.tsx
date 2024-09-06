@@ -19,6 +19,7 @@ import '@/styles/Bike/bikeTable.css';
 import DeleteButton from '@/ui/atmos/Buttons/DeleteButton';
 import { LightTooltip } from '@/ui/atmos/Tooltip/LightTooltip';
 import { Icon } from '@iconify/react/dist/iconify.js';
+import { green } from '@mui/material/colors';
 
 import { IBike } from '@/types/Bike/bike.types';
 import { IComponents } from '@/types/Bike/Components/components.types';
@@ -111,12 +112,13 @@ export default function BikeTable({ user }: BikeTableProps) {
         borderRadius: 5,
         p: 3,
         maxWidth: 1200,
+
         // width: '100%',
       }}
       component={Paper}
       className='custom-scrollbar overflow-x-auto'
     >
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex'}}>
         <BikeTableTabs
           bikes={bikes}
           selectedBike={selectedBike?.brand}

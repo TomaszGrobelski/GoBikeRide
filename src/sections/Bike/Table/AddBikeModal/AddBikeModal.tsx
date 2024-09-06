@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAddBike } from '@/api/bikes/useBike';
+import AddButton from '@/ui/atmos/Buttons/AddButton';
 import CloseButton from '@/ui/atmos/Buttons/CloseButton';
 import { LightTooltip } from '@/ui/atmos/Tooltip/LightTooltip';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -16,6 +17,7 @@ import { IUser } from '@/types/User/user.types';
 
 import { schema } from './add-bike-modal.schema';
 import { style } from './add-bike-modal.style';
+import AddBikeCheckBox from './AddBikeCheckBox';
 
 type FormFields = z.infer<typeof schema>;
 
@@ -36,6 +38,7 @@ export default function AddBikeModal({ user, isLimited }: AddBikeModalProps) {
 
   const addBikeMutation = useAddBike();
   const [open, setOpen] = useState(false);
+  const [addDefaultComponents, setAddDefaultComponents] = useState(true);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -52,6 +55,7 @@ export default function AddBikeModal({ user, isLimited }: AddBikeModalProps) {
       userId: user?.id,
       brand: data.brand,
       model: data.model,
+      addDefaultComponents,
     });
     reset();
     handleClose();
@@ -64,7 +68,14 @@ export default function AddBikeModal({ user, isLimited }: AddBikeModalProps) {
           title='Nie można dodać więcej niż 3 rowery'
           placement='top'
         >
-          <Button sx={{ color: 'gray' }} className='text-gray-400'>
+          <Button
+            sx={{
+              color: 'green', 
+              '& .MuiButton-endIcon': {
+                color: 'green', 
+              },
+            }}
+          >
             <Icon icon='basil:add-outline' fontSize={26} />
             Dodaj rower
           </Button>
@@ -118,22 +129,12 @@ export default function AddBikeModal({ user, isLimited }: AddBikeModalProps) {
               <div className='text-red-500'>{errors.model.message}</div>
             )}
 
-            <div>
-              <Checkbox defaultChecked />
-              <span>Dodaj domyślne podzespoły</span>
-            </div>
+            <AddBikeCheckBox
+              checked={addDefaultComponents}
+              onChange={setAddDefaultComponents}
+            />
 
-            <button
-              type='submit'
-              disabled={isSubmitting}
-              className='flex h-[26px] w-[70px] items-center justify-center self-end rounded-md border-[1px] border-[#5F286B] font-poppins'
-            >
-              {isSubmitting ? (
-                <Icon icon='line-md:loading-loop' fontSize={20} />
-              ) : (
-                'Dodaj'
-              )}
-            </button>
+            <AddButton isSubmitting={isSubmitting} />
           </form>
         </Box>
       </Modal>
