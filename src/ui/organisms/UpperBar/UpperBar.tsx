@@ -22,44 +22,6 @@ const UpperBar = () => {
     >
       <CustomDropDown user={user} />
 
-      {/* <LightTooltip title='Powiadomienia' placement='bottom'>
-        <div className='rounded-full hover:bg-gray-200'>
-          <IconButton
-            icon='ic:round-notification-important'
-            ariaLabel='Otwórz powiadomienia'
-          />
-        </div>
-      </LightTooltip>
-
-      <DropdownMenu.Root>
-        <DropdownMenu.Trigger asChild>
-          <div>
-            <LightTooltip title='Użytkownik' placement='bottom'>
-              <button>
-                <UserAvatar />
-              </button>
-            </LightTooltip>
-          </div>
-        </DropdownMenu.Trigger>
-
-        <DropdownMenu.Portal>
-          <DropdownMenu.Content
-            className='DropdownMenuContent realtive min-h-[100px] min-w-[150px] space-y-3 rounded-md border-[1px] bg-white px-3 py-4 font-poppins text-secoundSea shadow-md'
-            sideOffset={5}
-          >
-            <DropdownMenu.Item className='DropdownMenuItem absolute top-3 flex w-[120px] cursor-pointer items-center gap-2 p-1 transition-all duration-150 hover:border-b-1 hover:border-mainColor'>
-              <Icon icon='iconamoon:profile-circle-light' />
-              <Link href={`/dashboard/profile/${user?.id}`}>Profil</Link>
-            </DropdownMenu.Item>
-
-            <DropdownMenu.Item className='DropdownMenuItem absolute top-10 flex h-8 w-[120px] cursor-pointer items-center gap-2 p-1 transition-all duration-150 hover:border-b-1 hover:border-mainColor'>
-              <Icon icon='carbon:settings' />
-              <Link href='/dashboard/settings'>Ustawienia</Link>
-            </DropdownMenu.Item>
-          </DropdownMenu.Content>
-        </DropdownMenu.Portal>
-      </DropdownMenu.Root> */}
-
       <ThemeSwitch />
     </div>
   );

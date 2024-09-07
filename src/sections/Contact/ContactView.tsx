@@ -15,7 +15,7 @@ const ContactView = () => {
           alignItems: 'center',
           gap: 10,
           paddingTop: 10,
-          maxWidth: 1500
+          maxWidth: 1500,
         }}
       >
         <HeaderContact />
@@ -43,6 +43,7 @@ const ContactView = () => {
               <Typography
                 className='h-[160px] text-balance text-center'
                 variant='body1'
+              
               >
                 Jeśli napotkałeś jakiekolwiek problemy podczas korzystania z
                 naszej strony lub masz pytania, jesteśmy tutaj, aby pomóc!

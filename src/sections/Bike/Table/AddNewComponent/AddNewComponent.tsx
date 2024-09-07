@@ -17,14 +17,15 @@ import dayjs, { Dayjs } from 'dayjs';
 
 import 'dayjs/locale/pl';
 
+import TableTextField from '@/ui/atmos/Input/TableTextField';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { TextFieldProps } from '@mui/material/TextField';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { schema } from '../new-component.schema';
+import { tableRowSchema } from '../new-component.schema';
 
-type FormFields = z.infer<typeof schema>;
+type FormFields = z.infer<typeof tableRowSchema>;
 
 interface IAddNewComponent {
   bikeId: number | undefined;
@@ -38,7 +39,7 @@ const AddNewComponent = ({ bikeId }: IAddNewComponent) => {
     control,
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(tableRowSchema),
   });
 
   const { mutate: addComponent, isPending } = useAddComponent();
@@ -74,7 +75,12 @@ const AddNewComponent = ({ bikeId }: IAddNewComponent) => {
     <TableRow
       key='New component'
       sx={{
-        '&:last-child td, &:last-child th': { border: 0, borderTop: 1, py: 5 },
+        '&:last-child td, &:last-child th': {
+          border: 0,
+          borderTop: 1,
+          py: 5,
+          borderColor: '#B1C181',
+        },
       }}
     >
       <TableCell
@@ -83,14 +89,13 @@ const AddNewComponent = ({ bikeId }: IAddNewComponent) => {
         align='center'
         sx={{ verticalAlign: 'middle' }}
       >
-        <input
-          {...register('name')}
+        <TableTextField
           name='name'
           id='name'
           placeholder='Nazwa osprzętu'
-          className='min-h-12 border-b-1 text-center outline-none'
+          register={register}
+          error={errors.name}
         />
-        {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
       </TableCell>
 
       <TableCell
@@ -151,29 +156,21 @@ const AddNewComponent = ({ bikeId }: IAddNewComponent) => {
       </TableCell>
 
       <TableCell align='center'>
-        <input
-          {...register('currentMileageKm')}
-          type='text'
+        <TableTextField
+          name='currentMileageKm'
           id='currentMileageKm'
-          placeholder='Przebieg'
-          className='min-h-12 border-b-1 text-center outline-none'
+          register={register}
+          error={errors.currentMileageKm}
         />
-        {errors.currentMileageKm && (
-          <p className='text-red-500'>{errors.currentMileageKm.message}</p>
-        )}
       </TableCell>
 
       <TableCell align='center'>
-        <input
-          {...register('maintenanceCost')}
-          type='text'
+        <TableTextField
+          name='maintenanceCost'
           id='maintenanceCost'
-          placeholder='Koszt konserwacji'
-          className='min-h-12 border-b-1 text-center outline-none'
+          register={register}
+          error={errors.maintenanceCost}
         />
-        {errors.maintenanceCost && (
-          <p className='text-red-500'>{errors.maintenanceCost.message}</p>
-        )}
       </TableCell>
 
       <TableCell align='center'>

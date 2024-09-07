@@ -61,6 +61,7 @@ export default function AddBikeModal({ user, isLimited }: AddBikeModalProps) {
     handleClose();
   };
 
+  // Przycisk zrobić Inny kolor niż niebieski, albo swój tworzyć
   return (
     <div className='relative right-10'>
       {isLimited ? (
@@ -70,9 +71,9 @@ export default function AddBikeModal({ user, isLimited }: AddBikeModalProps) {
         >
           <Button
             sx={{
-              color: 'green', 
+              color: 'green',
               '& .MuiButton-endIcon': {
-                color: 'green', 
+                color: 'green',
               },
             }}
           >

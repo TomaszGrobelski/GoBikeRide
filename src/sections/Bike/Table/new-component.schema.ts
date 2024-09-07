@@ -1,6 +1,6 @@
 import * as z from 'zod';
 
-export const schema = z.object({
+export const tableRowSchema = z.object({
   name: z.string().min(1, 'Nazwa wymagana'),
   maintenanceDate: z.date({ required_error: 'Data wymagana' }),
   currentState: z.string().min(1, 'Stan wymagany'),

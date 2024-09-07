@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react';
 
 interface IIconButton {
   icon: string;
-  ariaLabel: string;
+  ariaLabel?: string;
   size?: number;
   onClick?: VoidFunction;
   className?: string;
@@ -22,7 +22,7 @@ const IconButton = ({
   return (
     <button
       onClick={onClick}
-      className={`IconButton flex h-10 w-10 items-center justify-center rounded-full hover:scale-110 ${className} `}
+      className={`flex h-10 w-10 items-center justify-center rounded-full hover:scale-110 ${className} `}
       aria-label={ariaLabel}
       disabled={disabled}
     >

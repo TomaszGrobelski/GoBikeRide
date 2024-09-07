@@ -20,7 +20,9 @@ const ContactBox = ({ title, icon, children }: IContactBox) => {
         >
           {title}
         </Typography>
-        <Typography align='center'>{children}</Typography>
+        <Typography component='div' align='center'>
+          {children}
+        </Typography>
       </div>
     </Box>
   );

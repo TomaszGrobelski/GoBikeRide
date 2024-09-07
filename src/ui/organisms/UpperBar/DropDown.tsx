@@ -47,9 +47,8 @@ export default function CustomDropDown({ user }: ICustomDropDown) {
       id: 1,
       label: 'Notyfication',
       title: (
-        <IconButton
+        <Icon
           icon='ic:round-notification-important'
-          ariaLabel='Otwórz powiadomienia'
         />
       ),
       content: (

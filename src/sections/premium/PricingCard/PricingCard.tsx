@@ -1,11 +1,9 @@
-'use client';
-
-import IconButton from '@/ui/atmos/IconButton';
 import { Icon } from '@iconify/react';
 
 import PricingCardItem from './PricingCardItem';
 
 interface ICardItem {
+  id: string;
   description: string;
 }
 interface IPricingCard {
@@ -28,12 +26,12 @@ const PricingCard = ({
       <div className='absolute -bottom-[30rem] -left-[30rem] h-96 w-96 rounded-full bg-mainColor blur-[400px]'></div>
       <div className='space-y-2 border-b-[1px] pb-2'>
         <p className='flex h-10 items-center gap-4 text-[22px] font-bold text-secoundSea'>
-          {title}{' '}
+          {title}
           <span>
             {isPremium && (
-              <div className='rounded-md bg-yellow-500 px-2 py-1 text-[14px] font-semibold text-white'>
+              <span className='rounded-md bg-yellow-500 px-2 py-1 text-[14px] font-semibold text-white'>
                 Najlepsza opcja
-              </div>
+              </span>
             )}
           </span>
         </p>
@@ -46,9 +44,9 @@ const PricingCard = ({
       </div>
 
       <ul className='flex-1 space-y-5'>
-        {pricingCardList.map((item) => (
+        {pricingCardList.map((item, index) => (
           <PricingCardItem
-            key={item.description}
+            key={item.id}
             description={item.description}
             isPremium={isPremium}
           />
