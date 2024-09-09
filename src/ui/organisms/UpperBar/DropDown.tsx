@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { paths } from '@/routes/paths';
 import IconButton from '@/ui/atmos/IconButton';
 import { cn } from '@/utils/classMerge';
 import { Icon } from '@iconify/react/dist/iconify.js';
@@ -46,11 +47,7 @@ export default function CustomDropDown({ user }: ICustomDropDown) {
     {
       id: 1,
       label: 'Notyfication',
-      title: (
-        <Icon
-          icon='ic:round-notification-important'
-        />
-      ),
+      title: <Icon icon='ic:round-notification-important' />,
       content: (
         <div className='w-full'>
           <p className='text-left text-zinc-700'>0 powiadomień</p>
@@ -73,14 +70,14 @@ export default function CustomDropDown({ user }: ICustomDropDown) {
       title: <User className='h-5 w-5' />,
       content: (
         <div className='realtive min-h-[60px]'>
-          <Link href={`/dashboard/profile/${user?.id}`}>
-            <div className='hover:border-mainColor absolute left-3 top-14 flex w-[110px] cursor-pointer items-center gap-2 p-1 transition-all duration-150 hover:border-b-1'>
+          <Link href={`${paths.dashboard.profil}/${user?.id}`}>
+            <div className='absolute left-3 top-14 flex w-[110px] cursor-pointer items-center gap-2 p-1 transition-all duration-150 hover:border-b-1 hover:border-mainColor'>
               <Icon icon='iconamoon:profile-circle-light' />
               <p>Profil</p>
             </div>
           </Link>
-          <Link href='/dashboard/settings'>
-            <div className='hover:border-mainColor absolute left-3 top-24 flex w-[110px] cursor-pointer items-center gap-2 p-1 transition-all duration-150 hover:border-b-1'>
+          <Link href={`${paths.dashboard.settings}`}>
+            <div className='absolute left-3 top-24 flex w-[110px] cursor-pointer items-center gap-2 p-1 transition-all duration-150 hover:border-b-1 hover:border-mainColor'>
               <Icon icon='carbon:settings' />
               <p>Ustawienia</p>
             </div>
@@ -104,7 +101,7 @@ export default function CustomDropDown({ user }: ICustomDropDown) {
                 key={item.id}
                 aria-label={item.label}
                 className={cn(
-                  'relative flex h-9 w-9 shrink-0 scale-100 select-none appearance-none items-center justify-center rounded-lg text-zinc-500 transition-colors  hover:bg-zinc-100 hover:text-zinc-800 focus-visible:ring-2 active:scale-[0.98]',
+                  'relative flex h-9 w-9 shrink-0 scale-100 select-none appearance-none items-center justify-center rounded-lg text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-800 focus-visible:ring-2 active:scale-[0.98]',
                   active === item.id ? 'bg-zinc-100 text-zinc-800' : '',
                 )}
                 type='button'

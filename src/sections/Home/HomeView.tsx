@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { paths } from '@/routes/paths';
 import GradientBox from '@/ui/atmos/Boxes/GradientBox';
 import CardInformation from '@/ui/molecules/Cards/CardInformation';
 import { Icon } from '@iconify/react/dist/iconify.js';
@@ -79,8 +80,8 @@ const HomeView = () => {
               />
             ))}
           </div>
-          <Link href='/dashboard/premium'>
-            <button className='bg-mainColor mb-5 rounded-lg border-[1px] px-3 py-2 text-white shadow-md'>
+          <Link href={`${paths.dashboard.premium}`}>
+            <button className='mb-5 rounded-lg border-[1px] bg-mainColor px-3 py-2 text-white shadow-md'>
               Sprawdź!
             </button>
           </Link>

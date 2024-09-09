@@ -20,6 +20,8 @@ export const paths = {
     posts: `${BASE_PATHS.DASHBOARD}/posts`,
     users: `${BASE_PATHS.DASHBOARD}/users`,
     contact: `${BASE_PATHS.DASHBOARD}/contact`,
-    premium: `${BASE_PATHS.DASHBOARD}/premium`
+    premium: `${BASE_PATHS.DASHBOARD}/premium`,
+    profil: `${BASE_PATHS.DASHBOARD}/profil`,
+    settings: `${BASE_PATHS.DASHBOARD}/settings`,
   }
 };

@@ -5,6 +5,7 @@ import '../../styles/global.css';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useRegistration } from '@/contexts/RegistrationContext';
+import { paths } from '@/routes/paths';
 import {
   Form,
   FormControl,
@@ -63,16 +64,17 @@ const SignIn = () => {
 
       if (!success) {
         toast.error('Nie udało się zalogować. Sprawdź dane logowania.');
-        console.log(message);
+        console.log(message, 'Nie udało sie zalogować');
       } else if (success) {
         if (session) {
           const { error } = await supabase.auth.setSession(session);
           toast.error(error?.message);
         }
-        router.push('/dashboard/hero');
+        router.push(paths.dashboard.home);
       }
     } catch (error) {
       toast.error('Wystąpił błąd podczas logowania.');
+      console.log(error, 'jakis error');
     }
   };
 
