@@ -1,26 +1,32 @@
 import { ChangeEvent, useState } from 'react';
 import { useModalStore } from '@/store/useModalStore';
 import TableIconButton from '@/ui/atmos/Buttons/TableButtons/TableIconButton';
-import TableTextField from '@/ui/atmos/Input/TableTextField';
 import LoadingPage from '@/ui/molecules/Loading/LoadingPage';
 import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
 import { getCurrentBackgroundColor } from '@/utils/table/colors-utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
-import { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import TextField from '@mui/material/TextField'; // Nowy import
+import TextField, { TextFieldProps } from '@mui/material/TextField'; // Nowy import
 
-import { useForm } from 'react-hook-form';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import dayjs, { Dayjs } from 'dayjs';
+import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { IComponents } from '@/types/Bike/Components/components.types';
 
 import DeleteComponentModalContent from './ModalContent/DeleteComponentModalContent';
 import { tableRowSchema } from './new-component.schema';
+import TableDatePicker from './TableComponents/TableDatePicker';
+import TableTextField from './TableComponents/TableTextField';
 
 interface IBikeTableBody {
   displayedData: IComponents[];
@@ -41,6 +47,7 @@ const BikeTableBody = ({
     handleSubmit,
     reset,
     control,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
     resolver: zodResolver(tableRowSchema),
@@ -55,31 +62,37 @@ const BikeTableBody = ({
     closeModal();
   };
 
-  const openDeleteModal = (brand: string, componentId: number) =>
+  const openDeleteModal = (name: string, componentId: number) =>
     openModal({
       children: (
         <DeleteComponentModalContent
           handleDeleteSuccess={handleDeleteSuccess}
-          title={brand}
+          title={name}
           componentId={componentId}
         />
       ),
     });
 
   const handleEdit = (row: IComponents) => {
-
-
     setEditingRowId(row.id);
-    setEditedRowData(row); 
-  };
 
+    setValue('name', row.name);
+    setValue(
+      'maintenanceDate',
+      row.maintenanceDate ? new Date(row.maintenanceDate) : new Date(),
+    );
+    setValue('currentState', row.currentState);
+    setValue('currentMileageKm', row.currentMileageKm);
+    setValue('maintenanceCost', row.maintenanceCost);
+  };
+  console.log(editedRowData);
 
   const handleSave = () => {
     setEditingRowId(null);
     setEditedRowData({});
   };
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: SelectChangeEvent<string>) => {
     const { name, value } = e.target;
 
     setEditedRowData((prevData) => ({
@@ -106,7 +119,6 @@ const BikeTableBody = ({
           <TableCell component='th' scope='row' align='center'>
             {editingRowId === row.id ? (
               <TableTextField
-                value={editedRowData.name}
                 name='name'
                 id={`name-${row.id}`}
                 register={register}
@@ -115,21 +127,16 @@ const BikeTableBody = ({
                 placeholder='Nazwa osprzętu'
               />
             ) : (
-              // <TextField
-              //   value={editedRowData.name}
-              //   onChange={handleInputChange}
-              //   name='name'
-              // />
               row.name
             )}
           </TableCell>
 
           <TableCell align='center'>
             {editingRowId === row.id ? (
-              <TextField
-                value={editedRowData.maintenanceDate}
-                onChange={handleInputChange}
+              <TableDatePicker
                 name='maintenanceDate'
+                control={control}
+                errors={errors}
               />
             ) : (
               convertToDdMmYyyyFormat(row.maintenanceDate)
@@ -137,6 +144,44 @@ const BikeTableBody = ({
           </TableCell>
 
           <TableCell align='center'>
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                {editingRowId === row.id ? (
+                  <Select
+                    {...register('currentState')}
+                    // defaultValue={editedRowData.currentState || ''}
+                    // value={editedRowData.currentState || ''}
+                    onChange={handleInputChange}
+                    name='currentState'
+                    className='min-h-16'
+                  >
+                    <MenuItem value='Bardzo Dobry'>Bardzo Dobry</MenuItem>
+                    <MenuItem value='Dobry'>Dobry</MenuItem>
+                    <MenuItem value='Sredni'>Sredni</MenuItem>
+                    <MenuItem value='Zły'>Zły</MenuItem>
+                    <MenuItem value='Bardo zły'>Bardo zły</MenuItem>
+                  </Select>
+                ) : (
+                  <div
+                    key={row.id}
+                    className='flex min-h-[40px] items-center justify-center rounded-lg text-[#000000] shadow-md shadow-gray-500'
+                    style={{
+                      backgroundColor: getCurrentBackgroundColor(
+                        row.currentState,
+                      ),
+                    }}
+                  >
+                    {row.currentState}
+                  </div>
+                )}
+              </FormControl>
+            </Box>
+            {errors.currentState && (
+              <p className='text-red-500'>{errors.currentState.message}</p>
+            )}
+          </TableCell>
+
+          {/* <TableCell align='center'>
             <Box sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
                 {editingRowId === row.id ? (
@@ -160,14 +205,17 @@ const BikeTableBody = ({
                 )}
               </FormControl>
             </Box>
-          </TableCell>
+          </TableCell> */}
 
           <TableCell align='center'>
             {editingRowId === row.id ? (
-              <TextField
-                value={editedRowData.currentMileageKm}
-                onChange={handleInputChange}
+              <TableTextField
                 name='currentMileageKm'
+                id={`currentMileageKm-${row.id}`}
+                register={register}
+                onChange={handleInputChange}
+                error={errors.currentMileageKm}
+                placeholder='Aktualny przebieg'
               />
             ) : (
               row.currentMileageKm
@@ -176,10 +224,13 @@ const BikeTableBody = ({
 
           <TableCell align='center'>
             {editingRowId === row.id ? (
-              <TextField
-                value={editedRowData.maintenanceCost}
-                onChange={handleInputChange}
+              <TableTextField
                 name='maintenanceCost'
+                id={`maintenanceCost-${row.id}`}
+                register={register}
+                onChange={handleInputChange}
+                error={errors.maintenanceCost}
+                placeholder='Koszt konserwacji'
               />
             ) : (
               row.maintenanceCost
@@ -205,7 +256,7 @@ const BikeTableBody = ({
               )}
 
               <TableIconButton
-                onClick={() => openDeleteModal(row.brand, row.id)}
+                onClick={() => openDeleteModal(row.name, row.id)}
                 aria-label={`Usuń ${row.name}`}
                 icon='basil:trash-solid'
                 tooltip='Usuń'

@@ -17,13 +17,13 @@ import dayjs, { Dayjs } from 'dayjs';
 
 import 'dayjs/locale/pl';
 
-import TableTextField from '@/ui/atmos/Input/TableTextField';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { TextFieldProps } from '@mui/material/TextField';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 import { tableRowSchema } from '../new-component.schema';
+import TableTextField from '../TableComponents/TableTextField';
 
 type FormFields = z.infer<typeof tableRowSchema>;
 
@@ -53,8 +53,8 @@ const AddNewComponent = ({ bikeId }: IAddNewComponent) => {
       name: data.name,
       maintenanceDate: data.maintenanceDate,
       currentState: data.currentState,
-      currentMileageKm: parseFloat(data.currentMileageKm),
-      maintenanceCost: parseFloat(data.maintenanceCost),
+      currentMileageKm: data.currentMileageKm,
+      maintenanceCost: data.maintenanceCost,
     };
 
     addComponent({
@@ -66,8 +66,8 @@ const AddNewComponent = ({ bikeId }: IAddNewComponent) => {
       name: '',
       maintenanceDate: undefined,
       currentState: '',
-      currentMileageKm: '',
-      maintenanceCost: '',
+      currentMileageKm: undefined,
+      maintenanceCost: undefined,
     });
   };
 
