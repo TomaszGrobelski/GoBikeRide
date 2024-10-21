@@ -1,3 +1,4 @@
+import AnimatedUsersLikeList from '@/ui/molecules/Likes/AnimatedUsersLikeList';
 import Likes from '@/ui/molecules/Likes/Likes';
 import { Icon } from '@iconify/react/dist/iconify.js';
 
@@ -22,7 +23,6 @@ const PostsList = ({ posts, user, refetch }: IPostsList) => {
   if (!user || !posts) {
     return <PostSkeleton />;
   }
-
   return (
     <div className='flex w-full flex-col items-center gap-16'>
       {posts &&
@@ -52,6 +52,7 @@ const PostsList = ({ posts, user, refetch }: IPostsList) => {
                 userId={user.id}
                 refetch={refetch}
               />
+              
 
               <CommentForm user={user} postId={post.id} refetch={refetch} />
 

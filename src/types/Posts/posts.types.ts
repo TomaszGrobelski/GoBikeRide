@@ -11,3 +11,15 @@ export interface IPost {
   user: IUser;
   comments: IComment[];
 }
+
+export interface ILike {
+  id: number;
+  postId: number;
+  userId: number;
+  createdAt: string;
+  user: IUser;
+}
+
+export interface ILikes {
+  likes: ILike[];
+}

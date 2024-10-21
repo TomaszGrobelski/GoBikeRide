@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { paths } from '@/routes/paths';
 import UserAvatar from '@/ui/atmos/UserAvatar/UserAvatar';
 import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
 
@@ -14,7 +15,7 @@ const UserInformation = ({ user, createdAt }: UserInformationProps) => {
   return (
     <div className='flex gap-4'>
       <Link
-        href={`/dashboard/profile/${user.id}`}
+        href={`${paths.dashboard.profil}/${user.id}`}
         className='flex items-center'
       >
         <UserAvatar />

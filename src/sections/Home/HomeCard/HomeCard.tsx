@@ -31,9 +31,10 @@ const HomeCard: React.FC<HomeCardProps> = ({
         <Image
           src={imageSrc}
           alt={altText}
-          layout='fill'
-          objectFit='cover'
-          className='rounded-2xl shadow-md shadow-white'
+          fill
+          sizes='100%'
+          priority
+          className='rounded-2xl shadow-md shadow-white object-cover'
         />
       </div>
 

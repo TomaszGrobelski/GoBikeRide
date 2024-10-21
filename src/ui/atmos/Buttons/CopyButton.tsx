@@ -1,13 +1,13 @@
 'use client';
 
-import { HTMLAttributes, ReactNode } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import copy from 'copy-to-clipboard';
 import { toast, Toaster } from 'sonner';
 
 import { CopyButtonStyle } from '@/styles/Components/Buttons/Buttons.styles';
 
-interface ICopyButton extends HTMLAttributes<HTMLButtonElement> {
+interface ICopyButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   textToCopy: string;
 }
