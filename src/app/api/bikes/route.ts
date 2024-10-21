@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
         components: true,
       },
       orderBy: {
-        createdAt: 'asc',
+        updateAt: 'desc',
       },
     });
 
@@ -56,11 +56,10 @@ export async function POST(req: NextRequest) {
       where: { userId: String(userId) },
     });
 
-
     if (bikeCount >= 3) {
       return NextResponse.json(
         { message: 'You cannot add more than 3 bikes.' },
-        { status: 403 }, 
+        { status: 403 },
       );
     }
 

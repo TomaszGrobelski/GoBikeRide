@@ -7,6 +7,7 @@ import {
   fetchBikes,
   removeBike,
   updateBike,
+  updateComponent,
 } from './bikeQueries';
 
 // onError obsłuzyć....
@@ -92,6 +93,28 @@ export const useDeleteComponent = () => {
     },
     onError: (error: unknown) => {
       console.error('Error deleting post:', error);
+    },
+  });
+};
+
+export const useUpdateComponent = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (updatedComponent: {
+      componentId: string;
+      bikeId: number | string;
+      name: string;
+      maintenanceDate: Date;
+      currentState: string;
+      currentMileageKm: number;
+      maintenanceCost: number;
+    }) => updateComponent(updatedComponent),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['bikes'] });
+    },
+    onError: (error) => {
+      console.error('Error updating component:', error);
     },
   });
 };

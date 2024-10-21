@@ -1,4 +1,5 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
+import { useUpdateComponent } from '@/api/bikes/useBike';
 import { useModalStore } from '@/store/useModalStore';
 import TableIconButton from '@/ui/atmos/Buttons/TableButtons/TableIconButton';
 import LoadingPage from '@/ui/molecules/Loading/LoadingPage';
@@ -12,13 +13,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import TextField, { TextFieldProps } from '@mui/material/TextField'; // Nowy import
-
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import dayjs, { Dayjs } from 'dayjs';
-import { Controller, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { IComponents } from '@/types/Bike/Components/components.types';
@@ -45,19 +40,21 @@ const BikeTableBody = ({
   const {
     register,
     handleSubmit,
-    reset,
     control,
     setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
     resolver: zodResolver(tableRowSchema),
   });
+
+  const { mutate: updateComponentMutation, isPending: isUpdating } =
+    useUpdateComponent();
+
   const openModal = useModalStore((state) => state.openModal);
   const closeModal = useModalStore((state) => state.closeModal);
 
   const [editingRowId, setEditingRowId] = useState<number | null>(null);
   const [editedRowData, setEditedRowData] = useState<Partial<IComponents>>({});
-
   const handleDeleteSuccess = () => {
     closeModal();
   };
@@ -82,14 +79,35 @@ const BikeTableBody = ({
       row.maintenanceDate ? new Date(row.maintenanceDate) : new Date(),
     );
     setValue('currentState', row.currentState);
-    setValue('currentMileageKm', row.currentMileageKm);
-    setValue('maintenanceCost', row.maintenanceCost);
+    setValue('currentMileageKm', row.currentMileageKm.toString());
+    setValue('maintenanceCost', row.maintenanceCost.toString());
   };
-  console.log(editedRowData);
 
-  const handleSave = () => {
-    setEditingRowId(null);
-    setEditedRowData({});
+  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    if (!editingRowId) {
+      return;
+    }
+
+    const updatedComponent = {
+      name: data.name,
+      maintenanceDate: data.maintenanceDate,
+      currentState: data.currentState,
+      currentMileageKm: parseFloat(data.currentMileageKm),
+      maintenanceCost: parseFloat(data.maintenanceCost),
+    };
+
+    try {
+      await updateComponentMutation({
+        componentId: String(editingRowId),
+        bikeId:
+          displayedData.find((row) => row.id === editingRowId)?.bikeId || '',
+        ...updatedComponent,
+      });
+
+      setEditingRowId(null);
+    } catch (error) {
+      console.error('Error updating component:', error);
+    }
   };
 
   const handleInputChange = (e: SelectChangeEvent<string>) => {
@@ -149,8 +167,7 @@ const BikeTableBody = ({
                 {editingRowId === row.id ? (
                   <Select
                     {...register('currentState')}
-                    // defaultValue={editedRowData.currentState || ''}
-                    // value={editedRowData.currentState || ''}
+                    value={editedRowData.currentState || row.currentState}
                     onChange={handleInputChange}
                     name='currentState'
                     className='min-h-16'
@@ -180,32 +197,6 @@ const BikeTableBody = ({
               <p className='text-red-500'>{errors.currentState.message}</p>
             )}
           </TableCell>
-
-          {/* <TableCell align='center'>
-            <Box sx={{ minWidth: 120 }}>
-              <FormControl fullWidth>
-                {editingRowId === row.id ? (
-                  <TextField
-                    value={editedRowData.currentState}
-                    onChange={handleInputChange}
-                    name='currentState'
-                  />
-                ) : (
-                  <div
-                    key={row.id}
-                    className='flex min-h-[40px] items-center justify-center rounded-lg text-[#000000] shadow-md shadow-gray-500'
-                    style={{
-                      backgroundColor: getCurrentBackgroundColor(
-                        row.currentState,
-                      ),
-                    }}
-                  >
-                    {row.currentState}
-                  </div>
-                )}
-              </FormControl>
-            </Box>
-          </TableCell> */}
 
           <TableCell align='center'>
             {editingRowId === row.id ? (
@@ -241,17 +232,23 @@ const BikeTableBody = ({
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               {editingRowId === row.id ? (
                 <TableIconButton
-                  onClick={handleSave}
+                  onClick={handleSubmit(onSubmit)}
                   aria-label={`Zapisz ${row.name}`}
                   icon='ic:baseline-save'
                   tooltip='Zapisz'
+                  disabled={isUpdating}
                 />
               ) : (
                 <TableIconButton
                   onClick={() => handleEdit(row)}
                   aria-label={`Edytuj ${row.name}`}
-                  icon='ic:baseline-edit'
+                  icon={
+                    isUpdating
+                      ? 'eos-icons:three-dots-loading'
+                      : 'ic:baseline-edit'
+                  }
                   tooltip='Edytuj'
+                  disabled={isUpdating}
                 />
               )}
 
@@ -260,6 +257,7 @@ const BikeTableBody = ({
                 aria-label={`Usuń ${row.name}`}
                 icon='basil:trash-solid'
                 tooltip='Usuń'
+                disabled={isUpdating}
               />
             </Box>
           </TableCell>

@@ -14,9 +14,13 @@ import { IComponents } from '@/types/Bike/Components/components.types';
 
 interface IBikeTableHead {
   handleSortChange: (columnName: keyof IComponents) => void;
+  sortOptions: {
+    field: keyof IComponents; // Field to sort by
+    direction: 'asc' | 'desc'; // Sort direction
+  };
 }
 
-const BikeTableHead = ({ handleSortChange }: IBikeTableHead) => {
+const BikeTableHead = ({ handleSortChange, sortOptions }: IBikeTableHead) => {
   return (
     <TableHead className='overflow-x-auto'>
       <TableRow>
@@ -36,16 +40,16 @@ const BikeTableHead = ({ handleSortChange }: IBikeTableHead) => {
               }}
             >
               {header.name}
-              {/* <Icon icon="noto-v1:money-bag" fontSize={22} />  PRZEMYŚLEĆ, czy nie dać Samych ikon zamiast nudnych nazw */}
-              {/* {sortBy === header.value && (
-              <Icon
-                icon={
-                  sortDirection === 'asc'
-                    ? 'mingcute:arrow-up-fill'
-                    : 'mingcute:arrow-down-fill'
-                }
-              />
-            )} */}
+              {header.sortable && sortOptions.field === header.value && (
+                <Icon
+                  icon={
+                    sortOptions.direction === 'asc'
+                      ? 'mingcute:arrow-up-fill'
+                      : 'mingcute:arrow-down-fill'
+                  }
+                  style={{ marginLeft: 8 }} // Spacing between header name and icon
+                />
+              )}
             </Box>
           </TableCell>
         ))}

@@ -1,4 +1,5 @@
 export interface IComponents {
+  bikeId: number;
   id: number;
   name: string;
   brand: string;

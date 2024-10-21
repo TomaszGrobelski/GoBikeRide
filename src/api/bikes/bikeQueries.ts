@@ -71,3 +71,18 @@ export const deleteComponent = async ({
     throw error;
   }
 };
+
+export const updateComponent = async (updatedComponent: {
+  componentId: string;
+  name: string;
+  maintenanceDate: Date;
+  currentState: string;
+  currentMileageKm: number;
+  maintenanceCost: number;
+}): Promise<IComponents> => {
+  const response = await axios.put(
+    endpoints.bike.components.all,
+    updatedComponent,
+  );
+  return response.data;
+};

@@ -4,22 +4,31 @@ export const sortByProperty = <T>(
   direction: 'asc' | 'desc' = 'asc'
 ): T[] => {
   const sorted = [...data].sort((a, b) => {
-    const valueA = (a[key] as unknown) || '';
-    const valueB = (b[key] as unknown) || '';
+    const valueA = a[key];
+    const valueB = b[key];
 
+    // Handle sorting for strings
     if (typeof valueA === 'string' && typeof valueB === 'string') {
       return direction === 'asc'
         ? valueA.localeCompare(valueB)
         : valueB.localeCompare(valueA);
-    } else if (typeof valueA === 'number' && typeof valueB === 'number') {
+    }
+    
+    // Handle sorting for numbers
+    if (typeof valueA === 'number' && typeof valueB === 'number') {
       return direction === 'asc' ? valueA - valueB : valueB - valueA;
-    } else if (valueA instanceof Date && valueB instanceof Date) {
+    }
+
+    // Handle sorting for dates
+    if (valueA instanceof Date && valueB instanceof Date) {
       return direction === 'asc'
         ? valueA.getTime() - valueB.getTime()
         : valueB.getTime() - valueA.getTime();
-    } else {
-      return 0;
     }
+
+    // Handle cases where types may not match or are not comparable
+    return 0; // This keeps the original order for incomparable types
   });
+
   return sorted;
 };

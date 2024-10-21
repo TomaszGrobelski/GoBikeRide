@@ -30,12 +30,12 @@ import AddNewComponent from './AddNewComponent/AddNewComponent';
 import BikeTableBody from './BikeTableBody';
 import BikeTableHead from './BikeTableHead';
 import BikeSettings from './ManageBikes/BikeSettings';
+import { sortByProperty } from '@/utils/table-utils';
 
-interface IFilters {}
-const defaultFilters: IFilters = {
-  // sortBy: 'name',
-  // sortDirection: 'asc'
-};
+interface SortOptions<T> {
+  field: keyof T;
+  direction: 'asc' | 'desc';
+}
 
 interface BikeTableProps {
   user: IUser | undefined;
@@ -53,9 +53,10 @@ export default function BikeTable({ user }: BikeTableProps) {
   const [selectedBike, setSelectedBike] = useState<IBike | null>(null);
   const [displayedData, setDisplayedData] = useState<IComponents[]>([]);
 
-  // const [filters, setFilters] = useState<IFilters>(defaultFilters);
-  // const [sortBy, setSortBy] = useState<keyof IBike>('brand');
-  // const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+  const [sortOptions, setSortOptions] = useState<SortOptions<IComponents>>({
+    field: 'name',
+    direction: 'asc',
+  });
 
   useEffect(() => {
     if (bikes && bikes.length > 0) {
@@ -75,32 +76,32 @@ export default function BikeTable({ user }: BikeTableProps) {
     }
   }, [selectedBike, bikes]);
 
+  useEffect(() => {
+    if (selectedBike) {
+      const bike = bikes?.find((bike: IBike) => bike.brand === selectedBike.brand);
+      const sortedData = sortByProperty(bike?.components || [], sortOptions.field, sortOptions.direction);
+      setDisplayedData(sortedData);
+    }
+  }, [selectedBike, sortOptions,bikes]);
+
   const handleChange = (event: SelectChangeEvent) => {
     setCondition(event.target.value as string);
   };
 
   const handleSortChange = (columnName: keyof IComponents) => {
-    // Tutaj możesz dodać logikę sortowania
-  };
-  // const handleSortChange = (columnName: keyof BikeTableRow) => {
-  //   const header = tableHeaders.find((header) => header.value === columnName);
-  //   if (header && header.sortable) {
-  //     const newSortDirection =
-  //       columnName.toLowerCase() === sortBy.toLowerCase() &&
-  //       sortDirection === 'asc'
-  //         ? 'desc'
-  //         : 'asc';
-  //     setSortBy(columnName);
-  //     setSortDirection(newSortDirection);
-  //   }
-  // };
-
-  // problem taki że jak dodaje na sucho to później nie da sie odrazu usunać bo nie ma dostępuu do ID ktore tworzne jest (chyba ) w na backendzie
-  const handleAddComponent = (newComponent: IComponents) => {
-    setDisplayedData((prevDisplayedData) => [
-      ...prevDisplayedData,
-      newComponent,
-    ]);
+    setSortOptions((prevOptions) => {
+      if (columnName === prevOptions.field) {
+        return {
+          ...prevOptions,
+          direction: prevOptions.direction === 'asc' ? 'desc' : 'asc',
+        };
+      } else {
+        return {
+          field: columnName,
+          direction: 'asc',
+        };
+      }
+    });
   };
 
   //na małymekranie jak są nazwy kolumn to żeby dało sie przewijać w bk zamiast zeby znikały po prawo
@@ -118,7 +119,7 @@ export default function BikeTable({ user }: BikeTableProps) {
       component={Paper}
       className='custom-scrollbar overflow-x-auto'
     >
-      <Box sx={{ display: 'flex'}}>
+      <Box sx={{ display: 'flex' }}>
         <BikeTableTabs
           bikes={bikes}
           selectedBike={selectedBike?.brand}
@@ -139,7 +140,7 @@ export default function BikeTable({ user }: BikeTableProps) {
         }}
         aria-label='Tablica komponentów rowerowych'
       >
-        <BikeTableHead handleSortChange={handleSortChange} />
+        <BikeTableHead handleSortChange={handleSortChange} sortOptions={sortOptions} />
 
         <BikeTableBody
           displayedData={displayedData}

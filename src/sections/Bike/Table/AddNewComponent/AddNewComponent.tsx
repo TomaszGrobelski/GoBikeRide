@@ -53,8 +53,8 @@ const AddNewComponent = ({ bikeId }: IAddNewComponent) => {
       name: data.name,
       maintenanceDate: data.maintenanceDate,
       currentState: data.currentState,
-      currentMileageKm: data.currentMileageKm,
-      maintenanceCost: data.maintenanceCost,
+      currentMileageKm: parseFloat(data.currentMileageKm),
+      maintenanceCost: parseFloat(data.maintenanceCost),
     };
 
     addComponent({
@@ -66,8 +66,8 @@ const AddNewComponent = ({ bikeId }: IAddNewComponent) => {
       name: '',
       maintenanceDate: undefined,
       currentState: '',
-      currentMileageKm: undefined,
-      maintenanceCost: undefined,
+      currentMileageKm: '',
+      maintenanceCost: '',
     });
   };
 
@@ -159,6 +159,7 @@ const AddNewComponent = ({ bikeId }: IAddNewComponent) => {
         <TableTextField
           name='currentMileageKm'
           id='currentMileageKm'
+          placeholder='Aktualny przebieg'
           register={register}
           error={errors.currentMileageKm}
         />
@@ -168,6 +169,7 @@ const AddNewComponent = ({ bikeId }: IAddNewComponent) => {
         <TableTextField
           name='maintenanceCost'
           id='maintenanceCost'
+          placeholder='Koszt konserwacji'
           register={register}
           error={errors.maintenanceCost}
         />

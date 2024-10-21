@@ -25,12 +25,20 @@ export async function DELETE(
       );
     }
 
+    const bikeId = component.bikeId; 
+
     await prisma.component.delete({
       where: { id: Number(componentId) },
     });
 
+    await prisma.bike.update({
+      where: { id: bikeId },
+      data: { updateAt: new Date() }, 
+    });
+
     return NextResponse.json({ message: 'Component deleted successfully' });
   } catch (error) {
+    console.error('Error deleting component:', error);
     return NextResponse.json(
       { message: 'Internal server error' },
       { status: 500 },
