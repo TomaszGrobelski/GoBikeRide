@@ -7,7 +7,7 @@ export const tableHeaders = [
   },
   {
     name: 'Data konserwacji',
-    value: 'lastMaintenanceDate',
+    value: 'maintenanceDate',
     align: 'right' as const,
     sortable: true
   },
@@ -19,7 +19,7 @@ export const tableHeaders = [
   },
   {
     name: 'Aktualny przebieg [km]',
-    value: 'mileage',
+    value: 'currentMileageKm',
     align: 'right' as const,
     sortable: true
   },

@@ -5,7 +5,6 @@ import { IPost } from '@/types/Posts/posts.types';
 
 import { endpoints } from '../endpoints/endpoints';
 
-
 const LIMIT = 5;
 export async function fetchPosts({
   pageParam = 1,
@@ -35,6 +34,15 @@ export async function fetchPosts({
     throw error;
   }
 }
+
+export const addPost = async (postData: {
+  userId: string;
+  description: string;
+  imageUrl: string;
+}) => {
+  const response = await axios.post(endpoints.posts.all, postData);
+  return response.data;
+};
 
 export const deletePost = async ({ postId }: { postId: number }) => {
   try {

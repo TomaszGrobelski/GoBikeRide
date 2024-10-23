@@ -2,17 +2,20 @@
 
 import React, { ChangeEvent, useState } from 'react';
 import Image from 'next/image';
-import { endpoints } from '@/api/endpoints/endpoints';
+import { useAddPost } from '@/api/posts/usePost';
 import { TextFieldVariants } from '@/ui/molecules/RHF/RHFConstans';
-import RHFTextField from '@/ui/molecules/RHF/RHFTextField';
+import { uploadImage } from '@/utils/Post/post.utils';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Icon } from '@iconify/react';
+import { TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import axios from 'axios';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast, Toaster } from 'sonner';
 
 import { IUser } from '@/types/User/user.types';
-import { supabase } from '@/lib/supabase';
+
+import { postSchema } from './post.schema';
 
 interface IPostsForm {
   refetch: () => Promise<any>;
@@ -21,8 +24,16 @@ interface IPostsForm {
 
 const PostsForm = ({ refetch, user }: IPostsForm) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [description, setDescription] = useState<string>('');
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(postSchema),
+  });
+  const { mutate: addPost, isPending } = useAddPost();
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -33,59 +44,32 @@ const PostsForm = ({ refetch, user }: IPostsForm) => {
     };
 
     if (file) {
-      setImageFile(file);
+      setValue('imageFile', file);
       reader.readAsDataURL(file);
     }
   };
 
-  const handleDescriptionChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setDescription(e.target.value);
-  };
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const userId = user?.id ? String(user.id) : undefined;
 
-  const handlePublishPost = async () => {
-    if (!imageFile || !description) {
-      toast.error('Proszę wybrać zdjęcie i wpisać opis.');
+    if (!userId) {
       return;
     }
 
+    const description = data.description;
+    const imageFile = data.imageFile as File;
+
     try {
-      const userId = user?.id;
-      const uniqueFileName = `${Date.now()}-${imageFile.name}`;
-      const filePath = `${userId}/${uniqueFileName}`;
-
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('Posts')
-        .upload(filePath, imageFile);
-
-      if (uploadError) {
-        throw uploadError;
-      }
-      const imageUrl =
-        'https://zzntmujpyfyxzfyqwerd.supabase.co/storage/v1/object/public/' +
-        uploadData.fullPath;
-
-      if (uploadData) {
-        try {
-          const response = await axios.post(endpoints.posts.all, {
-            userId,
-            description,
-            imageUrl,
-          });
-          console.log(response, 'response');
-          toast.success('Post został dodany');
-          await refetch();
-          setDescription(' ');
-          setImagePreview(null);
-        } catch (error) {
-          console.log(error);
-          toast.error('Wystąpił błąd podczas przesyłania danych.');
-        }
+      const imageUrl = await uploadImage(userId, imageFile);
+      if (imageUrl) {
+        await addPost({ userId, description, imageUrl });
+        await refetch();
+        setValue('description', '');
+        setValue('imageFile', null);
+        setImagePreview(null);
       }
     } catch (error) {
-      console.log(error);
-      toast.error('Wystąpił błąd podczas przesyłania pliku.');
+      console.error('Error uploading post:', error);
     }
   };
 
@@ -100,48 +84,77 @@ const PostsForm = ({ refetch, user }: IPostsForm) => {
           height={400}
         />
       )}
-      <RHFTextField
-        label='Opisz swoją podróż 🚴'
-        variant={TextFieldVariants.STANDARD}
-        multiline
-        onChange={handleDescriptionChange}
-      />
-      <div className='flex w-full items-center justify-end'>
-        <label htmlFor='imageUpload'>
-          {/* <IconButton
-                icon='clarity:picture-solid'
-                ariaLabel='Add image'
-                className='rounded-md bg-[#031F56]'
-              /> */}
-          <Icon
-            icon='clarity:picture-solid'
-            aria-label='Add image'
-            className='text-mainColor cursor-pointer rounded-md'
-            width={30}
-          />
-        </label>
-        <input
-          type='file'
-          accept='image/*'
-          onChange={handleImageUpload}
-          id='imageUpload'
-          className='hidden'
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <TextField
+          {...register('description')}
+          label='Opisz swoją podróż 🚴'
+          variant={TextFieldVariants.OUTLINED}
+          multiline
+          error={!!errors.description}
+          className='min-h-10 w-[600px]'
+          InputProps={{
+            sx: {
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#404248', // Change border color
+              },
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#102532', // Change border color when focused
+              },
+              '&:hover .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#4d4d50', // Change border color on hover
+              },
+            },
+          }}
+          InputLabelProps={{
+            sx: {
+              color: '#102532', // Change the label color
+              '&.Mui-focused': {
+                color: '#102532', // Change label color when focused
+              },
+            },
+          }}
         />
+        <div className='flex w-full items-center justify-end'>
+          <label htmlFor='imageUpload'>
+            <Icon
+              icon='clarity:picture-solid'
+              aria-label='Add image'
+              className='cursor-pointer rounded-md text-mainColor'
+              width={30}
+            />
+          </label>
+          <input
+            {...register('imageFile')}
+            type='file'
+            accept='image/*'
+            onChange={handleImageUpload}
+            id='imageUpload'
+            className='hidden'
+          />
 
-        <div className='flex w-full justify-end'>
-          <Button
-            onClick={handlePublishPost}
-            sx={{ background: '#5f286b' }}
-            variant='contained'
-          >
-            Opublikuj
-          </Button>
+          <div className='mt-2 flex w-full justify-end'>
+            <Button
+              // onClick={handlePublishPost}
+              type='submit'
+              disabled={isPending}
+              sx={{
+                background: '#93a266',
+                '&:hover': {
+                  backgroundColor: '#102532',
+                },
+              }}
+              variant='contained'
+            >
+              Opublikuj
+            </Button>
+          </div>
         </div>
-      </div>
+      </form>
 
       <Toaster
         toastOptions={{
           style: {
+            marginTop: '3rem',
             fontSize: '1.2rem',
           },
         }}

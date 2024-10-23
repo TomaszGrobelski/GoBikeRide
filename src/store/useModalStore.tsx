@@ -16,7 +16,7 @@ export const useModalStore = create<ModalState>()((set) => ({
   closeModal: () => set({ isOpen: false, children: null }),
 }));
 
-export default function Modal() {
+export default function Modal(p0: (state: any) => any) {
   const isOpen = useModalStore((state) => state.isOpen);
   const closeModal = useModalStore((state) => state.closeModal);
   const children = useModalStore((state) => state.children);

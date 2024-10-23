@@ -36,7 +36,7 @@ const BikeTableHead = ({ handleSortChange, sortOptions }: IBikeTableHead) => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: 160,
+                width: 170,
               }}
             >
               {header.name}
@@ -47,7 +47,7 @@ const BikeTableHead = ({ handleSortChange, sortOptions }: IBikeTableHead) => {
                       ? 'mingcute:arrow-up-fill'
                       : 'mingcute:arrow-down-fill'
                   }
-                  style={{ marginLeft: 8 }} // Spacing between header name and icon
+                  style={{ marginLeft: 4 }}
                 />
               )}
             </Box>

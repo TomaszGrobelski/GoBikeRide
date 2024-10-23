@@ -18,6 +18,7 @@ import '@/styles/Bike/bikeTable.css';
 
 import DeleteButton from '@/ui/atmos/Buttons/DeleteButton';
 import { LightTooltip } from '@/ui/atmos/Tooltip/LightTooltip';
+import { sortByProperty } from '@/utils/table-utils';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { green } from '@mui/material/colors';
 
@@ -30,7 +31,6 @@ import AddNewComponent from './AddNewComponent/AddNewComponent';
 import BikeTableBody from './BikeTableBody';
 import BikeTableHead from './BikeTableHead';
 import BikeSettings from './ManageBikes/BikeSettings';
-import { sortByProperty } from '@/utils/table-utils';
 
 interface SortOptions<T> {
   field: keyof T;
@@ -78,11 +78,17 @@ export default function BikeTable({ user }: BikeTableProps) {
 
   useEffect(() => {
     if (selectedBike) {
-      const bike = bikes?.find((bike: IBike) => bike.brand === selectedBike.brand);
-      const sortedData = sortByProperty(bike?.components || [], sortOptions.field, sortOptions.direction);
+      const bike = bikes?.find(
+        (bike: IBike) => bike.brand === selectedBike.brand,
+      );
+      const sortedData = sortByProperty(
+        bike?.components || [],
+        sortOptions.field,
+        sortOptions.direction,
+      );
       setDisplayedData(sortedData);
     }
-  }, [selectedBike, sortOptions,bikes]);
+  }, [selectedBike, sortOptions, bikes]);
 
   const handleChange = (event: SelectChangeEvent) => {
     setCondition(event.target.value as string);
@@ -140,7 +146,10 @@ export default function BikeTable({ user }: BikeTableProps) {
         }}
         aria-label='Tablica komponentów rowerowych'
       >
-        <BikeTableHead handleSortChange={handleSortChange} sortOptions={sortOptions} />
+        <BikeTableHead
+          handleSortChange={handleSortChange}
+          sortOptions={sortOptions}
+        />
 
         <BikeTableBody
           displayedData={displayedData}

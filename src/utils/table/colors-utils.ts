@@ -17,7 +17,7 @@ export const getCurrentBackgroundColor = (state: string): string => {
       return CurrentStateColors.Sredni;
     case 'Zły':
       return CurrentStateColors.Zly;
-    case 'Bardzo Zły':
+    case 'Bardzo zły':
       return CurrentStateColors.BardzoZly;
     default:
       return '#FFFFFF';

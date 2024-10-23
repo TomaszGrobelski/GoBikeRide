@@ -7,27 +7,26 @@ export const sortByProperty = <T>(
     const valueA = a[key];
     const valueB = b[key];
 
-    // Handle sorting for strings
+    const isDateA = !isNaN(Date.parse(valueA as unknown as string));
+    const isDateB = !isNaN(Date.parse(valueB as unknown as string));
+
+    if (isDateA && isDateB) {
+      const dateA = new Date(valueA as unknown as string);
+      const dateB = new Date(valueB as unknown as string);
+      return direction === 'asc' ? dateA.getTime() - dateB.getTime() : dateB.getTime() - dateA.getTime();
+    }
+
     if (typeof valueA === 'string' && typeof valueB === 'string') {
       return direction === 'asc'
         ? valueA.localeCompare(valueB)
         : valueB.localeCompare(valueA);
     }
     
-    // Handle sorting for numbers
     if (typeof valueA === 'number' && typeof valueB === 'number') {
       return direction === 'asc' ? valueA - valueB : valueB - valueA;
     }
 
-    // Handle sorting for dates
-    if (valueA instanceof Date && valueB instanceof Date) {
-      return direction === 'asc'
-        ? valueA.getTime() - valueB.getTime()
-        : valueB.getTime() - valueA.getTime();
-    }
-
-    // Handle cases where types may not match or are not comparable
-    return 0; // This keeps the original order for incomparable types
+    return 0; 
   });
 
   return sorted;

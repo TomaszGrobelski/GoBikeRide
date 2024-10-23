@@ -99,3 +99,50 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+export async function PUT(req: NextRequest) {
+  try {
+    const body = await req.json();
+    const { postId, description, imageUrl } = body;
+
+    if (!postId) {
+      return NextResponse.json(
+        { message: 'Brakujące postId' },
+        { status: 400 },
+      );
+    }
+
+    const post = await prisma.post.findUnique({
+      where: { id: postId },
+    });
+
+    if (!post) {
+      return NextResponse.json(
+        { message: 'Post nie został znaleziony' },
+        { status: 404 },
+      );
+    }
+
+    if (!description && !imageUrl) {
+      return NextResponse.json(
+        { message: 'Nie przekazano danych do aktualizacji' },
+        { status: 400 },
+      );
+    }
+
+    const updatedPost = await prisma.post.update({
+      where: { id: postId },
+      data: {
+        ...(description && { description }),
+        ...(imageUrl && { imageUrl }),
+      },
+    });
+
+    return NextResponse.json(updatedPost, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { message: 'Wewnętrzny błąd serwera' },
+      { status: 500 },
+    );
+  }
+}

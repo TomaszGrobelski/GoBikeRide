@@ -146,7 +146,7 @@ const AddNewComponent = ({ bikeId }: IAddNewComponent) => {
               <MenuItem value='Dobry'>Dobry</MenuItem>
               <MenuItem value='Sredni'>Sredni</MenuItem>
               <MenuItem value='Zły'>Zły</MenuItem>
-              <MenuItem value='Bardo zły'>Bardo zły</MenuItem>
+              <MenuItem value='Bardzo zły'>Bardzo zły</MenuItem>
             </Select>
           </FormControl>
         </Box>
