@@ -12,7 +12,7 @@ import {
 
 // onError obsłuzyć....
 
-export const useFetchBikes = (userId: number) => {
+export const useFetchBikes = (userId: string) => {
   return useQuery({
     queryKey: ['bikes', userId],
     queryFn: () => fetchBikes(userId),
@@ -23,7 +23,7 @@ export const useAddBike = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (newBike: {
-      userId: number;
+      userId: string;
       brand: string;
       model: string;
       addDefaultComponents: boolean;

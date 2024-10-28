@@ -32,7 +32,7 @@ const PostsList = ({ posts, user, refetch }: IPostsList) => {
               key={post.id}
               className='relative w-full max-w-[800px] space-y-6 rounded-3xl border-[1px] p-10 shadow-sm shadow-white'
             >
-              {isUserPost && <PostDropdown postId={post.id} post={post} />}
+              {isUserPost && <PostDropdown post={post} />}
 
               {!isUserPost && <ReportPost />}
 

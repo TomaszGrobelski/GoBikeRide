@@ -53,11 +53,19 @@ export const deletePost = async ({ postId }: { postId: number }) => {
   }
 };
 
+export const updatePost = async (postData: {
+  postId: number;
+  description: string;
+}) => {
+  const response = await axios.put(endpoints.posts.all, postData);
+  return response.data;
+};
+
 export const likePost = async ({
   userId,
   postId,
 }: {
-  userId: number;
+  userId: string;
   postId: number;
 }) => {
   try {

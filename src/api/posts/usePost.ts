@@ -5,7 +5,13 @@ import {
   useQueryClient,
 } from '@tanstack/react-query';
 
-import { addPost, deletePost, fetchPosts, likePost } from './postQueries';
+import {
+  addPost,
+  deletePost,
+  fetchPosts,
+  likePost,
+  updatePost,
+} from './postQueries';
 
 // export const useFetchPosts = () => {
 //   return useQuery(['posts'], () => fetchPosts());
@@ -39,7 +45,7 @@ export const useDeletePost = () => {
 export const useLike = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<void, Error, { userId: number; postId: number }>({
+  return useMutation<void, Error, { userId: string; postId: number }>({
     mutationFn: async ({ userId, postId }) => {
       await likePost({ userId, postId });
     },
@@ -63,6 +69,27 @@ export const useAddPost = () => {
     }) => {
       const newPost = await addPost(postData);
       return newPost;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
+    },
+    onError: (error: unknown) => {
+      console.error('Error adding post:', error);
+    },
+  });
+};
+
+export const useUpdatePost = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (postData: {
+      postId: number;
+      description: string;
+      imageUrl?: string;
+    }) => {
+      const editedPost = await updatePost(postData);
+      return editedPost;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['posts'] });

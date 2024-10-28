@@ -6,7 +6,7 @@ export const addComment = async ({
   postId,
   content,
 }: {
-  userId: number;
+  userId: string;
   postId: number;
   content: string;
 }) => {

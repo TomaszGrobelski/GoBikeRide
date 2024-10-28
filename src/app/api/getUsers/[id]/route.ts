@@ -19,6 +19,7 @@ export async function GET(
         posts_count: true,
         routes_count: true,
         bikes_count: true,
+        socialMedia:true,
       },
     });
 

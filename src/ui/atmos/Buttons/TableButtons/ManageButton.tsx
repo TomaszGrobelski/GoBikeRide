@@ -1,6 +1,6 @@
 import React from 'react';
+import { LightTooltip } from '@/ui/atmos/Tooltip/LightTooltip';
 import { Icon } from '@iconify/react/dist/iconify.js';
-import { LightTooltip } from '../Tooltip/LightTooltip';
 
 interface IManageButton {
   handleOpen: VoidFunction;

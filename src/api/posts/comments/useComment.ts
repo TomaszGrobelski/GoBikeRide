@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addComment } from './commentQueries';
 
 interface AddCommentParams {
-  userId: number;
+  userId: string;
   postId: number;
   content: string;
 }

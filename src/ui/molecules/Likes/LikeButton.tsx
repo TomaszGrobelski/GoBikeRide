@@ -5,7 +5,7 @@ import { ILike } from '@/types/Posts/posts.types';
 
 interface ILikeButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   likes: ILike[];
-  userId: number;
+  userId: string;
 }
 const LikeButton = ({ likes, userId, ...props }: ILikeButton) => {
   return (

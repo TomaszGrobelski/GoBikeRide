@@ -8,3 +8,19 @@ export const fetchUser = async (): Promise<IUserResponse> => {
   const response = await axios.get(endpoints.session.current);
   return response.data.user;
 };
+
+export const fetchSocialMedia = async (userId: string) => {
+  const response = await axios.get(`/api/social-media/${userId}`);
+  return response.data;
+};
+
+export const updateSocial = async (socialData: {
+  userId: string;
+  instagram: string | undefined;
+  facebook: string | undefined;
+  twitter: string | undefined;
+}) => {
+  const response = await axios.put(`${endpoints.profil}/${socialData.userId}`, socialData);
+  return response.data;
+};
+

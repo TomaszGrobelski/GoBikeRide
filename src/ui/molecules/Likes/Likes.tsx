@@ -14,7 +14,7 @@ interface ILikes {
   refetch: () => Promise<any>;
   likes: ILike[];
   postId: number;
-  userId: number;
+  userId: string;
 }
 
 const Likes = ({ likes, postId, userId, refetch }: ILikes) => {

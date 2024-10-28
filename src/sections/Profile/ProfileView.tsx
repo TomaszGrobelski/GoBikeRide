@@ -25,6 +25,8 @@ const ProfileView = () => {
     return <div>Nie znaleziono użytkownika, powrót do logowania...</div>;
   }
 
+  console.log(user);
+
   return (
     <section className='flex max-w-[1000px] flex-col ml-20 justify-evenly gap-10 '>
       <ProfileTabs />
@@ -33,7 +35,7 @@ const ProfileView = () => {
 
       <ProfileCounter user={user} />
 
-      <ProfileSocial />
+      <ProfileSocial user={user} />
     </section>
   );
 };

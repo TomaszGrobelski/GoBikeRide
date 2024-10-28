@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import EditProfilButton from '@/ui/atmos/Buttons/Profil/EditProfilButton';
 import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
 import { CalendarCheck, Instagram, User } from 'lucide-react';
 
@@ -11,7 +12,7 @@ interface IProfileInformation {
 }
 const ProfileInformation = ({ user }: IProfileInformation) => {
   return (
-    <div className='shadow-mainColor space-y-4 rounded-2xl p-10 shadow-md'>
+    <div className='space-y-4 rounded-2xl p-10 shadow-md shadow-mainColor'>
       <div className='flex items-center gap-2'>
         <Image
           className='rounded-full shadow-xl'
@@ -28,9 +29,7 @@ const ProfileInformation = ({ user }: IProfileInformation) => {
             </span>
           </div>
           <div className='flex items-center gap-3'>
-            <button className='hover:border-mainColor hover:text-mainColor rounded-lg border-[1px] px-2 py-1 shadow-lg transition-all duration-300'>
-              Wgraj nowe zdjęcie
-            </button>
+            <EditProfilButton>Wgraj nowe zdjęcie</EditProfilButton>
             <button className='rounded-lg border-[1px] px-2 py-1 shadow-lg transition-all duration-300 hover:bg-red-600 hover:text-white'>
               Usuń zdjęcie
             </button>

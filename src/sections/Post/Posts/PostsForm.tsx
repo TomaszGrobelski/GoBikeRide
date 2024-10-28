@@ -84,32 +84,32 @@ const PostsForm = ({ refetch, user }: IPostsForm) => {
           height={400}
         />
       )}
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className='w-full' onSubmit={handleSubmit(onSubmit)}>
         <TextField
           {...register('description')}
           label='Opisz swoją podróż 🚴'
           variant={TextFieldVariants.OUTLINED}
           multiline
           error={!!errors.description}
-          className='min-h-10 w-[600px]'
+          className='min-h-10 w-[100%]'
           InputProps={{
             sx: {
               '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: '#404248', // Change border color
+                borderColor: '#404248', 
               },
               '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                borderColor: '#102532', // Change border color when focused
+                borderColor: '#102532',
               },
               '&:hover .MuiOutlinedInput-notchedOutline': {
-                borderColor: '#4d4d50', // Change border color on hover
+                borderColor: '#4d4d50', 
               },
             },
           }}
           InputLabelProps={{
             sx: {
-              color: '#102532', // Change the label color
+              color: '#102532', 
               '&.Mui-focused': {
-                color: '#102532', // Change label color when focused
+                color: '#102532',
               },
             },
           }}
@@ -134,7 +134,6 @@ const PostsForm = ({ refetch, user }: IPostsForm) => {
 
           <div className='mt-2 flex w-full justify-end'>
             <Button
-              // onClick={handlePublishPost}
               type='submit'
               disabled={isPending}
               sx={{

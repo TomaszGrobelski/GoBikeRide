@@ -3,7 +3,7 @@ import { IComment } from './comment/comment.types';
 
 export interface IPost {
   id: number;
-  userId: number;
+  userId: string;
   imageUrl: string;
   description: string;
   createdAt: Date;
@@ -15,7 +15,7 @@ export interface IPost {
 export interface ILike {
   id: number;
   postId: number;
-  userId: number;
+  userId: string;
   createdAt: string;
   user: IUser;
 }

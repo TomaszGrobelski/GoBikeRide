@@ -8,26 +8,30 @@ import { IPost } from '@/types/Posts/posts.types';
 import useClickOutside from '@/hooks/use-ClickOutside';
 
 import EditPostModalContent from './Modals/EditPostModalContent';
+import { postSchema } from './post.schema';
 
 interface PostsDrowdownProps {
-  postId: number;
   post: IPost;
 }
 
-const PostDropdown = ({ postId, post }: PostsDrowdownProps) => {
+const PostDropdown = ({ post }: PostsDrowdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null); 
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const handleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  const openModal = useModalStore((state) => state.openModal);
+  const { openModal, closeModal } = useModalStore((state) => ({
+    openModal: state.openModal,
+    closeModal: state.closeModal,
+  }));
+
   const openEditModal = () =>
     openModal({
-      children: <EditPostModalContent post={post} />,
+      children: <EditPostModalContent post={post} closeModal={closeModal} />,
     });
   const openDeleteModal = () =>
-    openModal({ children: <DeletePostModalContent postId={postId} /> });
+    openModal({ children: <DeletePostModalContent postId={post.id} /> });
 
   useClickOutside(dropdownRef, () => setIsOpen(false));
 

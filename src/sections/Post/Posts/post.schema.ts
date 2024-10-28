@@ -13,3 +13,10 @@ export const postSchema = z.object({
     )
     .refine((file) => !!file, 'Obraz jest wymagany'),
 });
+
+export const updateSchema = z.object({
+  description: z
+    .string()
+    .min(5, 'Opis musi mieć co najmniej 5 znaków')
+    .nonempty('Opis jest wymagany')
+});
