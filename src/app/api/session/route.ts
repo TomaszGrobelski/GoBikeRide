@@ -9,7 +9,13 @@ export async function GET(req: NextRequest) {
 
   const {
     data: { user },
+    error
   } = await supabase.auth.getUser();
+
+  if (error) {
+    console.error('Error fetching user:', error);
+    return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
+  }
 
   if (!user) {
     return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
