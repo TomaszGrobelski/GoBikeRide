@@ -17,8 +17,8 @@ export function createServerClient() {
             cookiesToSet.forEach(({ name, value, options }) => {
               const cookieOptions = {
                 ...options,
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production' // Flaga która powoduje, że secure tylko na produkcji jest true, a lokalnie jest false
+                // httpOnly: true,
+                // secure: process.env.NODE_ENV === 'production' 
               };
               cookieStore.set(name, value, cookieOptions);
             });
