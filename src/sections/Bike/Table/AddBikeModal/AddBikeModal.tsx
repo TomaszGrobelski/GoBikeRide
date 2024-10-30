@@ -18,7 +18,7 @@ import { IUser } from '@/types/User/user.types';
 import { schema } from './add-bike-modal.schema';
 import { style } from './add-bike-modal.style';
 import AddBikeCheckBox from './AddBikeCheckBox';
-
+ 
 type FormFields = z.infer<typeof schema>;
 
 interface AddBikeModalProps {

@@ -19,7 +19,7 @@ const CommentsList = ({ comments }: ICommentsList) => {
             
             <UserAvatar />
 
-            <div className='flex flex-col items-start py-2 px-4 gap-4 bg-gray-300 w-full rounded-xl'>
+            <div className='flex flex-col items-start py-2 px-4 gap-4 bg-[#819b336b] w-full rounded-xl'>
 
               <div>
                 <p className=' font-semibold text-[14px]'>{comment.user.username}</p>

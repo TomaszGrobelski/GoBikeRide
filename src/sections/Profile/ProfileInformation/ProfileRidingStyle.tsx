@@ -13,19 +13,20 @@ const ProfileRidingStyle = () => {
   };
 
   return (
-    <Box sx={{ minWidth: 100, height: 40 }}>
+    <Box sx={{ minWidth: 100, height: 30 }}>
       <FormControl fullWidth>
-        <InputLabel id='demo-simple-select-label'>Age</InputLabel>
+        {/* <InputLabel id='demo-simple-select-label'>Age</InputLabel> */}
         <Select
           labelId='demo-simple-select-label'
           id='demo-simple-select'
           value={age}
-          label='Age'
+          label='Styl jazdy'
           onChange={handleChange}
+          sx={{ height: 30 }}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem value={10}>Szosowy</MenuItem>
+          <MenuItem value={20}>Gravel</MenuItem>
+          <MenuItem value={30}>Górski</MenuItem>
         </Select>
       </FormControl>
     </Box>

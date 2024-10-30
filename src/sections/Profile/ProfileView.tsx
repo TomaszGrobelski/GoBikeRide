@@ -2,11 +2,14 @@
 
 import { useParams } from 'next/navigation';
 import { useUserById } from '@/api/users/useUser';
+import ErrorCard from '@/ui/molecules/Error/ErrorCard';
+import LoadingPage from '@/ui/molecules/Loading/LoadingPage';
 
 import ProfileCounter from './ProfileCounter/ProfileCounter';
 import ProfileInformation from './ProfileInformation/ProfileInformation';
 import ProfileSocial from './ProfileSocial/ProfileSocial';
 import ProfileTabs from './ProfileTabs';
+import UserNotLogged from '@/ui/molecules/Error/UserNotLogged';
 
 const ProfileView = () => {
   const params = useParams() as { id: string };
@@ -15,20 +18,18 @@ const ProfileView = () => {
   const { data: user, isLoading, error } = useUserById(id);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingPage />;
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <ErrorCard />;
   }
   if (!user) {
-    return <div>Nie znaleziono użytkownika, powrót do logowania...</div>;
+    return <UserNotLogged />;
   }
 
-  console.log(user);
-
   return (
-    <section className='flex max-w-[1000px] flex-col ml-20 justify-evenly gap-10 '>
+    <section className='ml-20 flex max-w-[1000px] flex-col justify-evenly gap-10'>
       <ProfileTabs />
 
       <ProfileInformation user={user} />
