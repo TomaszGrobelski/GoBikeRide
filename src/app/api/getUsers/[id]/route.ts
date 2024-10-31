@@ -3,10 +3,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } },
-) {
+export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   const { id } = params;
 
   try {
@@ -16,10 +13,11 @@ export async function GET(
         id: true,
         username: true,
         createdAt: true,
-        posts_count: true,
-        routes_count: true,
-        bikes_count: true,
-        socialMedia:true,
+        socialMedia: true,
+        bikes: true,
+        posts: true,
+        respect: true,
+        mainMethod: true,
       },
     });
 
@@ -30,9 +28,6 @@ export async function GET(
     return NextResponse.json(user);
   } catch (error) {
     console.error('Error fetching user:', error);
-    return NextResponse.json(
-      { message: 'Error fetching user' },
-      { status: 500 },
-    );
+    return NextResponse.json({ message: 'Error fetching user' }, { status: 500 });
   }
 }

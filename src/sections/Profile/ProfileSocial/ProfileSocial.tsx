@@ -14,9 +14,10 @@ import { socialMediaSchema } from './socialMedia.schema';
 type SocialMediaFormData = z.infer<typeof socialMediaSchema>;
 interface IProfileSocial {
   user: IUser;
+  isCurrentUserProfile: boolean;
 }
 
-const ProfileSocial = ({ user }: IProfileSocial) => {
+const ProfileSocial = ({ user, isCurrentUserProfile }: IProfileSocial) => {
   const updateSocialMediaMutation = useUpdateSocialMedia();
   const editSocial = useBoolean(false);
 
@@ -141,13 +142,14 @@ const ProfileSocial = ({ user }: IProfileSocial) => {
           )}
         </div>
 
-        {editSocial.value ? (
-          <button type='submit' className='mt-4 rounded bg-blue-500 p-2 text-white'>
-            Zapisz
-          </button>
-        ) : (
-          <EditProfilButton onClick={editSocial.setTrue}>Edytuj swoje social media</EditProfilButton>
-        )}
+        {isCurrentUserProfile &&
+          (editSocial.value ? (
+            <button type='submit' className='mt-4 rounded bg-blue-500 p-2 text-white'>
+              Zapisz
+            </button>
+          ) : (
+            <EditProfilButton onClick={editSocial.setTrue}>Edytuj swoje social media</EditProfilButton>
+          ))}
       </form>
     </div>
   );

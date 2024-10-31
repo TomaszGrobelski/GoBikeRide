@@ -7,6 +7,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum MainMethod {
+  Szosowy
+  Gravel
+  Gorski
+}
+
 model User {
   id           String   @id @default(uuid())
   email        String   @unique
@@ -14,9 +20,8 @@ model User {
   password     String
   createdAt    DateTime @default(now())
   updateAt     DateTime @updatedAt
-  bikes_count  Float?   @default(0) @db.Real
-  posts_count  Float?   @default(0) @db.Real
-  routes_count Float?   @default(0) @db.Real
+  respect      Int      @default(0)
+  mainMethod   MainMethod?
   avatar_url   String?
   bikes        Bike[]
   posts        Post[]

@@ -1,16 +1,20 @@
 import Image from 'next/image';
 import EditProfilButton from '@/ui/atmos/Buttons/Profil/EditProfilButton';
 import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
+import { Icon } from '@iconify/react/dist/iconify.js';
 import { CalendarCheck, Instagram, User } from 'lucide-react';
 
 import { IUser } from '@/types/User/user.types';
 
 import ProfileRidingStyle from './ProfileRidingStyle';
+import MainMethodBox from '@/ui/atmos/mainMethod/MainMethod';
+
 
 interface IProfileInformation {
   user: IUser;
 }
 const ProfileInformation = ({ user }: IProfileInformation) => {
+  console.log(user);
   return (
     <div className='space-y-4 rounded-2xl p-10 shadow-md shadow-mainColor'>
       <div className='flex items-center gap-2'>
@@ -24,9 +28,7 @@ const ProfileInformation = ({ user }: IProfileInformation) => {
         <div className='flex w-full items-center justify-between'>
           <div>
             <p>Zdjęcie profilowe</p>
-            <span className='text-[14px] text-gray-700'>
-              PNG, JPEG poniżej 15MB
-            </span>
+            <span className='text-[14px] text-gray-700'>PNG, JPEG poniżej 15MB</span>
           </div>
           <div className='flex items-center gap-3'>
             <EditProfilButton>Wgraj nowe zdjęcie</EditProfilButton>
@@ -36,16 +38,25 @@ const ProfileInformation = ({ user }: IProfileInformation) => {
           </div>
         </div>
       </div>
+
       <p className='flex items-center gap-2'>
-        <User /> {user.username}
+        <User color='#102532' /> {user.username}
       </p>
+
       <p className='flex items-center gap-2'>
-        <CalendarCheck />
+        <CalendarCheck color='#102532' />
         {convertToDdMmYyyyFormat(user.createdAt)}
       </p>
 
       <div className='flex items-center gap-2'>
+        <Icon icon='bxs:cool' fontSize={24} color='#FFB800' />
+        <p>Respect:</p>
+        <p>{user.respect}</p>
+      </div>
+
+      <div className='flex items-center gap-2'>
         <p>Preferowany styl jazdy:</p>
+        <MainMethodBox method={user.mainMethod} />
         <ProfileRidingStyle />
         <p></p>
       </div>

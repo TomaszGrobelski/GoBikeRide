@@ -24,10 +24,11 @@ const CopyButton = ({ children, textToCopy, ...props }: ICopyButton) => {
         toastOptions={{
           style: {
             fontSize: '1rem',
+            marginTop: '3rem',
           },
         }}
         richColors
-        position='bottom-right'
+        position='top-right'
       />
       <CopyButtonStyle className='mt-5' onClick={copyToClipboard} {...props}>
         {children} <Icon icon='mage:copy' fontSize={22} />

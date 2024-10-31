@@ -9,20 +9,13 @@ interface IProfileCounter {
   user: IUser;
 }
 const ProfileCounter = ({ user }: IProfileCounter) => {
+  console.log(user);
   return (
-    <div className='shadow-mainColor flex items-center justify-center gap-14 rounded-2xl p-10 shadow-md flex-wrap'>
-      <CounterCard
-        value={user.bikes_count}
-        title='Rowery'
-        icon={iconList.rowery.icon}
-      />
+    <div className='flex flex-wrap items-center justify-center gap-14 rounded-2xl p-10 shadow-md shadow-mainColor'>
+      <CounterCard value={user.bikes.length} title='Rowery' icon={iconList.rowery.icon} />
       <CounterCard value={0} title='Trasy' icon={iconList.trasy.icon} />
       <CounterCard value={0} title='Kilometry' icon={iconList.kilometry.icon} />
-      <CounterCard
-        value={user.posts_count}
-        title='Posty'
-        icon={iconList.posty.icon}
-      />
+      <CounterCard value={user.posts.length} title='Posty' icon={iconList.posty.icon} />
     </div>
   );
 };
