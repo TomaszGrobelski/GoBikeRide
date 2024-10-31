@@ -13,13 +13,12 @@ export async function GET() {
         bikes: true,
         posts: true,
         respect: true,
-        mainMethod:true,
+        mainMethod: true,
       },
     });
 
     return NextResponse.json(users);
   } catch (error) {
-    console.error('Error fetching users:', error);
     return NextResponse.json({ message: 'Error fetching users' }, { status: 500 });
   }
 }

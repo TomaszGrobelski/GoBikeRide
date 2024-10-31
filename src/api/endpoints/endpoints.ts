@@ -26,5 +26,8 @@ export const endpoints = {
   session: {
     current: `${baseUrl}/session`,
   },
-  profil: `${baseUrl}/profil/social/`,
+  profil: {
+    social: `${baseUrl}/profil/social/`,
+    respect: `${baseUrl}/profil/respect/`, 
+  },
 };

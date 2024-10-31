@@ -1,5 +1,3 @@
-import { Icon } from '@iconify/react/dist/iconify.js';
-
 import { IUser } from '@/types/User/user.types';
 
 import CounterCard from './CounterCard';
@@ -9,7 +7,6 @@ interface IProfileCounter {
   user: IUser;
 }
 const ProfileCounter = ({ user }: IProfileCounter) => {
-  console.log(user);
   return (
     <div className='flex flex-wrap items-center justify-center gap-14 rounded-2xl p-10 shadow-md shadow-mainColor'>
       <CounterCard value={user.bikes.length} title='Rowery' icon={iconList.rowery.icon} />

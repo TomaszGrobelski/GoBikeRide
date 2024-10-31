@@ -20,7 +20,13 @@ export const updateSocial = async (socialData: {
   facebook: string | undefined;
   twitter: string | undefined;
 }) => {
-  const response = await axios.put(`${endpoints.profil}/${socialData.userId}`, socialData);
+  const response = await axios.put(`${endpoints.profil.social}/${socialData.userId}`, socialData);
   return response.data;
 };
 
+
+
+export const updateRespect = async (giverId: string, receiverId: string, action: 'increment' | 'decrement') => {
+  const response = await axios.put(`${endpoints.profil.respect}/${receiverId}`, { giverId, action });
+  return response.data;
+};

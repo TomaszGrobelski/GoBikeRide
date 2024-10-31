@@ -28,7 +28,7 @@ const ProfileView = () => {
   if (error) {
     return <ErrorCard />;
   }
-  if (!user) {
+  if (!user || !currentUser) {
     return <UserNotLogged />;
   }
 
@@ -36,7 +36,7 @@ const ProfileView = () => {
     <section className='ml-20 flex max-w-[1000px] flex-col justify-evenly gap-10'>
       <ProfileTabs />
 
-      <ProfileInformation user={user} />
+      <ProfileInformation user={user} currentUser={currentUser} />
 
       <ProfileCounter user={user} />
 

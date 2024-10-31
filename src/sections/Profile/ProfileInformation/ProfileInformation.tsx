@@ -1,20 +1,37 @@
 import Image from 'next/image';
+import { useUpdateRespect } from '@/api/user/useUser';
 import EditProfilButton from '@/ui/atmos/Buttons/Profil/EditProfilButton';
+import MainMethodBox from '@/ui/atmos/mainMethod/MainMethod';
 import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
 import { Icon } from '@iconify/react/dist/iconify.js';
-import { CalendarCheck, Instagram, User } from 'lucide-react';
+import { CalendarCheck, Instagram, ThumbsUp, User } from 'lucide-react';
 
 import { IUser } from '@/types/User/user.types';
 
 import ProfileRidingStyle from './ProfileRidingStyle';
-import MainMethodBox from '@/ui/atmos/mainMethod/MainMethod';
-
 
 interface IProfileInformation {
   user: IUser;
+  currentUser: IUser;
 }
-const ProfileInformation = ({ user }: IProfileInformation) => {
-  console.log(user);
+const ProfileInformation = ({ user, currentUser }: IProfileInformation) => {
+  const { mutate: updateRespect, isPending } = useUpdateRespect();
+
+  const handleRespect = async (action: 'increment' | 'decrement') => {
+    const giverId = currentUser.id;
+    const receiverId = user.id;
+
+    try {
+      await updateRespect({ giverId, receiverId, action });
+    } catch (error) {
+      console.error('Error updating respect:', error);
+    }
+  };
+
+  const hasGivenRespect = (user.receivedRespects || []).some(
+    (respect) => respect.giverId === currentUser.id, // This checks if the current user is the giver
+  );
+
   return (
     <div className='space-y-4 rounded-2xl p-10 shadow-md shadow-mainColor'>
       <div className='flex items-center gap-2'>
@@ -52,6 +69,23 @@ const ProfileInformation = ({ user }: IProfileInformation) => {
         <Icon icon='bxs:cool' fontSize={24} color='#FFB800' />
         <p>Respect:</p>
         <p>{user.respect}</p>
+        {!hasGivenRespect ? (
+          <button
+            onClick={() => handleRespect('increment')}
+            disabled={isPending}
+            className='hover mb-1 ml-2 flex items-center justify-center'
+          >
+            <ThumbsUp strokeWidth={2.5} size={22} className='hover:scale-110' />
+          </button>
+        ) : (
+          <button
+            onClick={() => handleRespect('decrement')}
+            disabled={isPending}
+            className='hover ml-2 mt-1 flex items-center justify-center'
+          >
+            <ThumbsUp strokeWidth={2.5} size={22} className='rotate-180 hover:scale-110' />
+          </button>
+        )}
       </div>
 
       <div className='flex items-center gap-2'>

@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { ISocialMedia, IUser } from '@/types/User/user.types';
 
-import { fetchSocialMedia, fetchUser, updateSocial } from './userQueries';
+import { fetchSocialMedia, fetchUser, updateRespect, updateSocial } from './userQueries';
 
 // Hook to fetch user data
 export const useUser = () => {
@@ -30,7 +30,6 @@ export const useUpdateSocialMedia = () => {
       facebook: string | undefined;
       twitter: string | undefined;
     }) => {
-      console.log('Social Data:', socialData); // Log socialData here
       return updateSocial(socialData);
     },
     onSuccess: () => {
@@ -38,6 +37,30 @@ export const useUpdateSocialMedia = () => {
     },
     onError: (error) => {
       console.error('Error updating social media:', error);
+    },
+  });
+};
+
+export const useUpdateRespect = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({
+      giverId,
+      receiverId,
+      action,
+    }: {
+      giverId: string;
+      receiverId: string;
+      action: 'increment' | 'decrement';
+    }) => {
+      return updateRespect(giverId, receiverId, action);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+    },
+    onError: (error) => {
+      console.error('Error updating respect:', error);
     },
   });
 };

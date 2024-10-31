@@ -18,6 +18,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
         posts: true,
         respect: true,
         mainMethod: true,
+        receivedRespects:true,
       },
     });
 

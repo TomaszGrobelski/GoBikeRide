@@ -7,6 +7,12 @@ export enum MainMethod {
   Gorski,
 }
 
+interface IUserReceivedRespect {
+  id: string;
+  giverId: string;
+  receiverId: string;
+}
+
 export interface IUser {
   id: string;
   username: string;
@@ -17,6 +23,7 @@ export interface IUser {
   posts: IPost[];
   bikes: IBike[];
   mainMethod: MainMethod;
+  receivedRespects?: IUserReceivedRespect[];
 }
 
 export interface ISocialMedia {
