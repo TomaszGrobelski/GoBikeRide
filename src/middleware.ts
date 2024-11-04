@@ -1,12 +1,17 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
 import { authRedirectMiddleware } from './middleware/authRedirectMiddleware';
+
 import { updateSession } from './middleware/updateSessionMiddleware';
 
 export async function middleware(request: NextRequest) {
   // if (request.nextUrl.pathname.startsWith('/api/')) {
   //   return NextResponse.next();
   // } OPCJA druga zamiast wpiswać w matcher, żeby /api dopuszcało
+
+
+
+
 
   let response = await updateSession(request);
 
