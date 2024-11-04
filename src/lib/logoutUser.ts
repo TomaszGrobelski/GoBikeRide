@@ -10,12 +10,12 @@ export async function logoutUser() {
   if (error) {
     return {
       success: false,
-      message: error.message
+      message: error.message,
     };
   }
 
   return {
     success: true,
-    message: 'Wylogowanie zakończone sukcesem'
+    message: 'Wylogowanie zakończone sukcesem',
   };
 }

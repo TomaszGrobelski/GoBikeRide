@@ -76,12 +76,12 @@ export default function CustomDropDown({ user }: ICustomDropDown) {
               <p>Profil</p>
             </div>
           </Link>
-          <Link href={`${paths.dashboard.settings}`}>
+          {/* <Link href={`${paths.dashboard.settings}`}>
             <div className='absolute left-3 top-24 flex w-[110px] cursor-pointer items-center gap-2 p-1 transition-all duration-150 hover:border-b-1 hover:border-mainColor'>
               <Icon icon='carbon:settings' />
               <p>Ustawienia</p>
             </div>
-          </Link>
+          </Link> */}
         </div>
       ),
     },

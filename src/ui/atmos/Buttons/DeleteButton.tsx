@@ -4,8 +4,9 @@ import { Icon } from '@iconify/react/dist/iconify.js';
 interface IDeleteButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClick: VoidFunction;
   isLoading?: boolean;
+  title?: string;
 }
-const DeleteButton = ({ onClick, isLoading, ...props }: IDeleteButton) => {
+const DeleteButton = ({ onClick, isLoading, title, ...props }: IDeleteButton) => {
   return (
     <button
       onClick={onClick}
@@ -19,7 +20,7 @@ const DeleteButton = ({ onClick, isLoading, ...props }: IDeleteButton) => {
           <Icon icon='fa6-regular:trash-can' fontSize={18} />
         )}
       </div>
-      Usuń
+      {title ? title : 'Usuń'}
     </button>
   );
 };

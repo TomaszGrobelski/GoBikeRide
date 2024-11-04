@@ -111,7 +111,6 @@ export default function BikeTable({ user }: BikeTableProps) {
   };
 
   //na małymekranie jak są nazwy kolumn to żeby dało sie przewijać w bk zamiast zeby znikały po prawo
-  // Po dodaniu nowego componentu w innych Tabach, żeby nie cofało do pierwszego
   return (
     <TableContainer
       sx={{
@@ -131,7 +130,7 @@ export default function BikeTable({ user }: BikeTableProps) {
           selectedBike={selectedBike?.brand}
           setSelectedBike={setSelectedBike}
         />
-        <AddBikeModal isLimited={isLimited} user={user} />
+        <AddBikeModal isLimited={isLimited} user={user} bikes={bikes} />
 
         <BikeSettings bikes={bikes} />
       </Box>

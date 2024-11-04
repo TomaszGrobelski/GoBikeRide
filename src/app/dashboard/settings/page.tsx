@@ -1,7 +1,7 @@
-import React from 'react';
+import SettingsView from '@/sections/Profile/SettingsView';
 
 const Settings = () => {
-  return <div>Settings</div>;
+  return <SettingsView />;
 };
 
 export default Settings;

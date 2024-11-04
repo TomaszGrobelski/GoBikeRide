@@ -44,7 +44,7 @@ const SignIn = () => {
     toastMounted.setTrue();
     if (toastMounted.value && registeredSuccessfully) {
       toast.success(
-        'Pomyślnie utworzono konto, aby móc się zalogować, potwierdź swój adres e-mail',
+        'Konto zostało pomyślnie utworzone',
       );
       setRegisteredSuccessfully(false);
     }

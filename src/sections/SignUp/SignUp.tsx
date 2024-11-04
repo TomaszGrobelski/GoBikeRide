@@ -8,14 +8,7 @@ import { useRouter } from 'next/navigation';
 import { endpoints } from '@/api/endpoints/endpoints';
 import { useRegistration } from '@/contexts/RegistrationContext';
 import { paths } from '@/routes/paths';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/ui/atmos/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/ui/atmos/form';
 import { Input } from '@/ui/atmos/Form/Input';
 import SubmitButton from '@/ui/atmos/SubmitButton';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -70,22 +63,15 @@ const SignUp = () => {
           });
 
           if (response.status === 201) {
-            // router.push(paths.auth.signIn);
             router.push(paths.dashboard.home);
             setRegisteredSuccessfully(true);
-            toast.success(
-              'Konto zostało pomyślnie utworzone. Zaloguj się, aby kontynuować.',
-            );
+            toast.success('Konto zostało pomyślnie utworzone. Zaloguj się, aby kontynuować.');
           } else {
-            toast.error(
-              `Wystąpił błąd podczas rejestracji: ${response.data.message}`,
-            );
+            toast.error(`Wystąpił błąd podczas rejestracji: ${response.data.message}`);
           }
         } catch (error: any) {
           console.log(error);
-          toast.error(
-            `Wystąpił błąd podczas rejestracji: ${error.response?.data?.message || error.message}`,
-          );
+          toast.error(`Wystąpił błąd podczas rejestracji: ${error.response?.data?.message || error.message}`);
           console.error('Błąd podczas rejestracji:', error);
         }
       }
@@ -111,10 +97,7 @@ const SignUp = () => {
       />
       <div className='flex h-full w-1/2 items-center justify-center'>
         <Form {...form}>
-          <form
-            className='flex flex-col gap-3'
-            onSubmit={form.handleSubmit(onSubmit)}
-          >
+          <form className='flex flex-col gap-3' onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
               name='username'
@@ -148,11 +131,7 @@ const SignUp = () => {
                 <FormItem>
                   <FormLabel>Hasło</FormLabel>
                   <FormControl>
-                    <Input
-                      type='password'
-                      placeholder='Wprowadź hasło'
-                      {...field}
-                    />
+                    <Input type='password' placeholder='Wprowadź hasło' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -165,32 +144,22 @@ const SignUp = () => {
                 <FormItem>
                   <FormLabel>Powtórz hasło</FormLabel>
                   <FormControl>
-                    <Input
-                      type='password'
-                      placeholder='Powtórz swoje hasło'
-                      {...field}
-                    />
+                    <Input type='password' placeholder='Powtórz swoje hasło' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <SubmitButton disabled={isSubmitting.value}>
-              {isSubmitting.value ? (
-                <Icon icon='line-md:loading-loop' fontSize={22} />
-              ) : (
-                <p>Zarejestrój</p>
-              )}
+              {isSubmitting.value ? <Icon icon='line-md:loading-loop' fontSize={22} /> : <p>Zarejestrój</p>}
             </SubmitButton>
           </form>
         </Form>
       </div>
       <div className='flex h-full w-1/2 flex-col items-center justify-center space-y-6 rounded-br-lg rounded-tr-lg bg-gradient-to-br from-[#38B98C] to-[#3AA8AE] font-poppins text-[14px] text-white'>
-        <h2 className='text-center  text-[50px] font-semibold'>
-          Masz już konto ?
-        </h2>
+        <h2 className='text-center text-[50px] font-semibold'>Masz już konto ?</h2>
         <Link href={paths.auth.signIn}>
-          <button className='rounded-full bg-white px-9 py-4 font-bold text-black tracking-wider'>
+          <button className='rounded-full bg-white px-9 py-4 font-bold tracking-wider text-black'>
             Powrot do logowania
           </button>
         </Link>

@@ -22,13 +22,26 @@ export function createServerClient() {
               };
               cookieStore.set(name, value, cookieOptions);
             });
-          } catch {
-            
+          } catch (error) {
+            console.error('Error setting cookies:', error);
           }
-        }
-      }
-    }
+        },
+      },
+    },
   );
 
   return supabase;
+}
+
+export function removeAllCookies() {
+  const cookieStore = cookies();
+
+  try {
+    const allCookies = cookieStore.getAll();
+    allCookies.forEach(({ name }) => {
+      cookieStore.set(name, '', { expires: new Date(0) }); // Ustawia ciasteczko jako wygasłe
+    });
+  } catch (error) {
+    console.error('Error removing cookies:', error);
+  }
 }

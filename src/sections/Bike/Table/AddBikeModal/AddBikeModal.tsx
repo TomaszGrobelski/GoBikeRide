@@ -13,24 +13,27 @@ import Typography from '@mui/material/Typography';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { IBikeResponse } from '@/types/Api/apiResponse';
 import { IUser } from '@/types/User/user.types';
 
 import { schema } from './add-bike-modal.schema';
 import { style } from './add-bike-modal.style';
 import AddBikeCheckBox from './AddBikeCheckBox';
- 
+
 type FormFields = z.infer<typeof schema>;
 
 interface AddBikeModalProps {
   user: IUser | undefined;
   isLimited: boolean;
+  bikes: IBikeResponse;
 }
 
-export default function AddBikeModal({ user, isLimited }: AddBikeModalProps) {
+export default function AddBikeModal({ user, isLimited, bikes }: AddBikeModalProps) {
   const {
     register,
     handleSubmit,
     reset,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
     resolver: zodResolver(schema),
@@ -51,6 +54,15 @@ export default function AddBikeModal({ user, isLimited }: AddBikeModalProps) {
       return;
     }
 
+    if (bikes) {
+      const isDuplicate = bikes.some((bike) => bike.brand.toLowerCase() === data.brand.toLowerCase());
+
+      if (isDuplicate) {
+        setError('brand', { message: 'Rower o tej samej nazwie już istnieje' });
+        return;
+      }
+    }
+
     await addBikeMutation.mutateAsync({
       userId: user?.id,
       brand: data.brand,
@@ -61,14 +73,10 @@ export default function AddBikeModal({ user, isLimited }: AddBikeModalProps) {
     handleClose();
   };
 
-  // Przycisk zrobić Inny kolor niż niebieski, albo swój tworzyć
   return (
     <div className='relative right-10'>
       {isLimited ? (
-        <LightTooltip
-          title='Nie można dodać więcej niż 3 rowery'
-          placement='top'
-        >
+        <LightTooltip title='Nie można dodać więcej niż 3 rowery' placement='top'>
           <Button
             sx={{
               color: 'green',
@@ -96,18 +104,10 @@ export default function AddBikeModal({ user, isLimited }: AddBikeModalProps) {
       >
         <Box sx={style}>
           <CloseButton setOpen={setOpen} />
-          <Typography
-            className='text-black'
-            id='modal-modal-title'
-            variant='h6'
-            component='h2'
-          >
+          <Typography className='text-black' id='modal-modal-title' variant='h6' component='h2'>
             Dodaj nowy rower
           </Typography>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className='flex flex-col gap-1'
-          >
+          <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-1'>
             <label htmlFor=''>Nazwa roweru</label>
             <input
               {...register('brand')}
@@ -115,9 +115,7 @@ export default function AddBikeModal({ user, isLimited }: AddBikeModalProps) {
               type='text'
               placeholder='Nazwa roweru'
             />
-            {errors.brand && (
-              <div className='text-red-500'>{errors.brand.message}</div>
-            )}
+            {errors.brand && <div className='text-red-500'>{errors.brand.message}</div>}
 
             <label htmlFor=''>Model roweru</label>
             <input
@@ -126,14 +124,9 @@ export default function AddBikeModal({ user, isLimited }: AddBikeModalProps) {
               type='text'
               placeholder='Model roweru'
             />
-            {errors.model && (
-              <div className='text-red-500'>{errors.model.message}</div>
-            )}
+            {errors.model && <div className='text-red-500'>{errors.model.message}</div>}
 
-            <AddBikeCheckBox
-              checked={addDefaultComponents}
-              onChange={setAddDefaultComponents}
-            />
+            <AddBikeCheckBox checked={addDefaultComponents} onChange={setAddDefaultComponents} />
 
             <AddButton isSubmitting={isSubmitting} />
           </form>

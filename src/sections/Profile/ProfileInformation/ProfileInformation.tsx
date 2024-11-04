@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useUpdateRespect } from '@/api/user/useUser';
+import ProfilBox from '@/ui/atmos/Boxes/ProfilBox';
 import EditProfilButton from '@/ui/atmos/Buttons/Profil/EditProfilButton';
 import MainMethodBox from '@/ui/atmos/mainMethod/MainMethod';
 import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
@@ -33,7 +34,7 @@ const ProfileInformation = ({ user, currentUser }: IProfileInformation) => {
   );
 
   return (
-    <div className='space-y-4 rounded-2xl p-10 shadow-md shadow-mainColor'>
+    <ProfilBox>
       <div className='flex items-center gap-2'>
         <Image
           className='rounded-full shadow-xl'
@@ -94,7 +95,7 @@ const ProfileInformation = ({ user, currentUser }: IProfileInformation) => {
         <ProfileRidingStyle />
         <p></p>
       </div>
-    </div>
+    </ProfilBox>
   );
 };
 

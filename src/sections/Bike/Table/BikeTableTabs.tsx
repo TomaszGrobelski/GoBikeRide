@@ -17,9 +17,7 @@ export default function BikeTableTabs({
   setSelectedBike,
   selectedBike,
 }: IBikeTableTabs) {
-  // const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-  //   setSelectedBike(newValue);
-  // };
+
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     const selected = bikes?.find((bike) => bike.brand === newValue) || null;
     setSelectedBike(selected);
@@ -34,14 +32,14 @@ export default function BikeTableTabs({
         aria-label='secondary tabs example'
         sx={{
           borderBottom: 1,
-          borderColor: 'transparent', // Ukrywa domyślne obramowanie
+          borderColor: 'transparent', 
           '& .MuiTabs-indicator': {
-            backgroundColor: 'green', // Kolor wskaźnika
+            backgroundColor: 'green', 
           },
           '& .MuiTab-root': {
-            color: '#B1C181', // Kolor tekstu zakładek
+            color: '#B1C181', 
             '&.Mui-selected': {
-              color: '#B1C181', // Kolor tekstu dla wybranej zakładki
+              color: '#B1C181', 
             },
           },
         }}

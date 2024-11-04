@@ -1,4 +1,5 @@
 import { useUpdateSocialMedia } from '@/api/user/useUser';
+import ProfilBox from '@/ui/atmos/Boxes/ProfilBox';
 import EditProfilButton from '@/ui/atmos/Buttons/Profil/EditProfilButton';
 import RHFTextField from '@/ui/molecules/RHF/RHFTextField';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -56,7 +57,7 @@ const ProfileSocial = ({ user, isCurrentUserProfile }: IProfileSocial) => {
   };
 
   return (
-    <div className='flex flex-col items-center justify-center gap-6 rounded-2xl p-10 shadow-md shadow-mainColor'>
+    <ProfilBox className='flex flex-col items-center justify-center gap-6'>
       <p className='text-[20px]'>Social media</p>
 
       <form onSubmit={handleSubmit(onSubmit)} className='flex w-full flex-col gap-4'>
@@ -151,7 +152,7 @@ const ProfileSocial = ({ user, isCurrentUserProfile }: IProfileSocial) => {
             <EditProfilButton onClick={editSocial.setTrue}>Edytuj swoje social media</EditProfilButton>
           ))}
       </form>
-    </div>
+    </ProfilBox>
   );
 };
 

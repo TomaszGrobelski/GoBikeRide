@@ -29,5 +29,6 @@ export const endpoints = {
   profil: {
     social: `${baseUrl}/profil/social/`,
     respect: `${baseUrl}/profil/respect/`, 
+    delete: `${baseUrl}/profil/delete/`, 
   },
 };
