@@ -41,8 +41,6 @@ export async function updateSession(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = paths.auth.signIn;
 
-    // supabaseResponse.cookies.delete('sb-zzntmujpyfyxzfyqwerd-auth-token');
-    // supabaseResponse.cookies.delete('sb-access-token');
     return NextResponse.redirect(url);
   }
 
