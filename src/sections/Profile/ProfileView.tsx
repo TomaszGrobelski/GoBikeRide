@@ -8,9 +8,6 @@ import ErrorCard from '@/ui/molecules/Error/ErrorCard';
 import UserNotLogged from '@/ui/molecules/Error/UserNotLogged';
 import LoadingPage from '@/ui/molecules/Loading/LoadingPage';
 
-import ProfileCounter from './ProfileCounter/ProfileCounter';
-import ProfileInformation from './ProfileInformation/ProfileInformation';
-import ProfileSocial from './ProfileSocial/ProfileSocial';
 import ProfileTabs from './ProfileTabs';
 import SettingsView from './SettingsView';
 import UserProfilInformation from './UserProfilInformation';
