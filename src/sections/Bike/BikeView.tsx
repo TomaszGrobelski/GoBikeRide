@@ -14,7 +14,7 @@ const BikeView = () => {
   }
 
   if (!user) {
-    return <UserNotLogged />; // Zrobić przekierowanie jak nie zalogowany...
+    return <UserNotLogged isLogged={!user} />; // Zrobić przekierowanie jak nie zalogowany...
   }
 
   return (

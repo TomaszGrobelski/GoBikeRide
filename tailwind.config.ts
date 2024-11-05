@@ -30,9 +30,6 @@ const config: Config = {
       },
       colors: {
         mainColor: '#B1C181',
-        // mainColor: '#798A65',
-        // mainColor: '#874491',
-        // mainColor: '#102532',
         secoundSea: '#102532',
       },
       backgroundColor: {

@@ -36,7 +36,7 @@ const ProfileView = () => {
   }
 
   if (!user || !currentUser) {
-    return <UserNotLogged />;
+    return <UserNotLogged isLogged={!user} />;
   }
 
   return (

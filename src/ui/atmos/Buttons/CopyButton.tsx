@@ -3,38 +3,32 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import copy from 'copy-to-clipboard';
-import { toast, Toaster } from 'sonner';
+import { toast } from 'sonner';
 
 import { CopyButtonStyle } from '@/styles/Components/Buttons/Buttons.styles';
 
+import CustomToaster from '../Toaster/CustomToaster';
+
 interface ICopyButton extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
-  textToCopy: string;
+    children: ReactNode;
+    textToCopy: string;
 }
 
 const CopyButton = ({ children, textToCopy, ...props }: ICopyButton) => {
-  const copyToClipboard = () => {
-    copy(textToCopy);
-    toast.success(`${textToCopy} został skopiowany`);
-  };
+    const copyToClipboard = () => {
+        copy(textToCopy);
+        toast.success(`${textToCopy} został skopiowany`);
+    };
 
-  return (
-    <>
-      <Toaster
-        toastOptions={{
-          style: {
-            fontSize: '1rem',
-            marginTop: '3rem',
-          },
-        }}
-        richColors
-        position='top-right'
-      />
-      <CopyButtonStyle className='mt-5' onClick={copyToClipboard} {...props}>
-        {children} <Icon icon='mage:copy' fontSize={22} />
-      </CopyButtonStyle>
-    </>
-  );
+    return (
+        <>
+            <CustomToaster />
+
+            <CopyButtonStyle className='mt-5' onClick={copyToClipboard} {...props}>
+                {children} <Icon icon='mage:copy' fontSize={22} />
+            </CopyButtonStyle>
+        </>
+    );
 };
 
 export default CopyButton;

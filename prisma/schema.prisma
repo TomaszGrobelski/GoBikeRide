@@ -14,22 +14,24 @@ enum MainMethod {
 }
 
 model User {
-  id               String   @id @default(uuid())
-  email            String   @unique
-  username         String   @unique
-  password         String
-  createdAt        DateTime @default(now())
-  updateAt         DateTime @updatedAt
-  respect          Int      @default(0)
-  mainMethod       MainMethod?
-  avatar_url       String?
-  bikes            Bike[]
-  posts            Post[]
-  likes            Like[]
-  comments         Comment[]
-  socialMedia      SocialMedia? @relation
-  givenRespects    Respect[] @relation("UserGiver")
-  receivedRespects Respect[] @relation("UserReceiver")
+  id                    String         @id @default(uuid())
+  email                 String         @unique
+  username              String         @unique
+  password              String
+  createdAt             DateTime       @default(now())
+  updateAt              DateTime       @updatedAt
+  respect               Int            @default(0)
+  mainMethod            MainMethod?
+  avatar_url            String?
+  bikes                 Bike[]
+  posts                 Post[]
+  likes                 Like[]
+  comments              Comment[]
+  socialMedia           SocialMedia?   @relation
+  givenRespects         Respect[]      @relation("UserGiver")
+  receivedRespects      Respect[]      @relation("UserReceiver")
+  receivedNotifications Notification[] @relation("NotificationReceiver")
+  sentNotifications     Notification[] @relation("NotificationSender")
 }
 
 model Bike {
@@ -40,7 +42,7 @@ model Bike {
   createdAt  DateTime    @default(now())
   updateAt   DateTime    @updatedAt
   user       User        @relation(fields: [userId], references: [id])
-  components Component[] 
+  components Component[]
 }
 
 model Component {
@@ -57,14 +59,15 @@ model Component {
 }
 
 model Post {
-  id          Int      @id @default(autoincrement())
-  userId      String
-  imageUrl    String
-  description String
-  createdAt   DateTime @default(now())
-  user        User     @relation(fields: [userId], references: [id])
-  likes       Like[]
-  comments    Comment[]
+  id            Int            @id @default(autoincrement())
+  userId        String
+  imageUrl      String
+  description   String
+  createdAt     DateTime       @default(now())
+  user          User           @relation(fields: [userId], references: [id])
+  likes         Like[]
+  comments      Comment[]
+  notifications Notification[]
 }
 
 model Like {
@@ -78,40 +81,60 @@ model Like {
   @@unique([userId, postId])
 }
 
-
 model Comment {
-  id          Int      @id @default(autoincrement())
-  userId      String
-  postId      Int
-  content     String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  user        User     @relation(fields: [userId], references: [id])
-  post        Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  id        Int      @id @default(autoincrement())
+  userId    String
+  postId    Int
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([postId])
 }
 
 model SocialMedia {
-  id          Int      @id @default(autoincrement())
-  userId      String   @unique
-  instagram    String?  @db.Text 
-  facebook     String?  @db.Text
-  twitter      String?  @db.Text
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        Int      @id @default(autoincrement())
+  userId    String   @unique
+  instagram String?  @db.Text
+  facebook  String?  @db.Text
+  twitter   String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Respect {
-  id          Int      @id @default(autoincrement())
-  giverId     String
-  receiverId  String
-  createdAt   DateTime @default(now())
-
-  giver       User     @relation("UserGiver", fields: [giverId], references: [id])
-  receiver    User     @relation("UserReceiver", fields: [receiverId], references: [id])
+  id         Int      @id @default(autoincrement())
+  giverId    String
+  receiverId String
+  createdAt  DateTime @default(now())
+  giver      User     @relation("UserGiver", fields: [giverId], references: [id])
+  receiver   User     @relation("UserReceiver", fields: [receiverId], references: [id])
 
   @@unique([giverId, receiverId])
+}
+
+model Notification {
+  id        Int              @id @default(autoincrement())
+  userId    String
+  senderId  String?
+  postId    Int?
+  type      NotificationType
+  message   String
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+  user      User             @relation("NotificationReceiver", fields: [userId], references: [id], onDelete: Cascade)
+  sender    User?            @relation("NotificationSender", fields: [senderId], references: [id])
+  post      Post?            @relation(fields: [postId], references: [id])
+
+  @@index([userId])
+  @@index([postId])
+}
+
+enum NotificationType {
+  Respect
+  Comment
 }

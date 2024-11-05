@@ -61,6 +61,19 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
         respect: newRespect,
       });
     } else if (action === 'decrement') {
+      const existingRespect = await prisma.respect.findUnique({
+        where: {
+          giverId_receiverId: {
+            giverId,
+            receiverId: user.id,
+          },
+        },
+      });
+
+      if (!existingRespect) {
+        return NextResponse.json({ message: 'No existing respect to decrement.' }, { status: 400 });
+      }
+
       const newRespect = Math.max(user.respect - 1, 0);
 
       await prisma.respect.deleteMany({
