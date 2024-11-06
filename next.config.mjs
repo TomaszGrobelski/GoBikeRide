@@ -4,7 +4,8 @@ const nextConfig = {
     domains: [
       'randomuser.me',
       'www.pngwing.com',
-      'zzntmujpyfyxzfyqwerd.supabase.co'
+      'zzntmujpyfyxzfyqwerd.supabase.co',
+      'assets.aceternity.com',
     ] // Chwilowe zezwolenie na pobranie zdjęć ze strony do wyświetlania avatarów w sekcji Czat.
   },
   async redirects() {

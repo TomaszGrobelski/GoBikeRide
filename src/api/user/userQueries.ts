@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { IUserResponse } from '@/types/Api/apiResponse';
-import { RespectAction } from '@/types/User/user.types';
+import { NotyficationType, RespectAction } from '@/types/User/user.types';
 
 import { endpoints } from '../endpoints/endpoints';
 
@@ -36,7 +36,7 @@ export const updateRespect = async (
         await axios.post(`${endpoints.notifications}`, {
             userId: receiverId,
             senderId: giverId,
-            type: 'Respect',
+            type: NotyficationType.RESPECT,
             message: 'dał ci respekt!',
             isRead: false,
         });

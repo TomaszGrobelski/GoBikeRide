@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
-        const { userId, senderId, type, message } = body;
+        const { userId, senderId, type, message, postId } = body;
 
         const userExists = await prisma.user.findUnique({
             where: { id: userId },
@@ -23,6 +23,7 @@ export async function POST(req: NextRequest) {
                 senderId,
                 type,
                 message,
+                postId,
                 isRead: false, 
             },
         });
@@ -37,6 +38,7 @@ export async function POST(req: NextRequest) {
                 senderId,
                 type,
                 message,
+                postId,
                 isRead: false,
             },
         });

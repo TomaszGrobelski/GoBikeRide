@@ -62,9 +62,10 @@ export const useUpdateRespect = () => {
         }) => {
             return updateRespect(giverId, receiverId, action);
         },
-        onSuccess: () => {
+        onSuccess: (data, variables) => {
+            const { receiverId: userId } = variables;
             queryClient.invalidateQueries({ queryKey: ['user'] });
-            queryClient.invalidateQueries({ queryKey: ['notification'] });
+            queryClient.invalidateQueries({ queryKey: ['notification', userId] });
         },
         onError: (error) => {
             console.error('Error updating respect:', error);

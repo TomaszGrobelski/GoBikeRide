@@ -4,17 +4,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useDeleteNotification, useNotification } from '@/api/user/useUser';
 import { paths } from '@/routes/paths';
-import IconButton from '@/ui/atmos/IconButton';
 import { cn } from '@/utils/classMerge';
-import { convertToDdMmYyyyFormat } from '@/utils/date-utils/format-date';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
-import { Folder, MessageCircle, User, WalletCards } from 'lucide-react';
+import { MessageCircle, User } from 'lucide-react';
 import useMeasure from 'react-use-measure';
 
 import { IUserResponse } from '@/types/Api/apiResponse';
-import { INotification, IUser } from '@/types/User/user.types';
+import { INotification } from '@/types/User/user.types';
 import useClickOutside from '@/hooks/use-ClickOutside';
+
+import NotificationItem from './NotificationItem';
 
 const transition = {
     type: 'spring',
@@ -55,23 +55,23 @@ export default function CustomDropDown({ user }: ICustomDropDown) {
         {
             id: 1,
             label: 'Notyfication',
-            title: <Icon icon='ic:round-notification-important' />,
+            title: (
+                <Icon
+                    icon='ic:round-notification-important'
+                    fontSize={20}
+                    color={notifications && notifications.length > 0 ? 'red' : ''}
+                />
+            ),
             content: (
                 <div className='flex w-full flex-col gap-2'>
                     {notifications && notifications.length > 0 ? (
                         notifications.map((notification: INotification) => (
-                            <div key={notification.id} className='relative z-20 w-full rounded-lg bg-gray-300 p-2'>
-                                <button
-                                    onClick={() => handleDeleteNotification(notification.id)}
-                                    disabled={isDeleteNotification}
-                                    className='absolute right-0 top-0 z-50'
-                                >
-                                    <Icon icon='iconamoon:close-fill' fontSize={22} />
-                                </button>
-                                <p className='font-bold'>{notification.sender.username}</p>
-                                <p>{notification.message}</p>
-                                <p>{convertToDdMmYyyyFormat(notification.createdAt)}</p>
-                            </div>
+                            <NotificationItem
+                                key={notification.id}
+                                notification={notification}
+                                handleDeleteNotification={handleDeleteNotification}
+                                isDeleteNotification={isDeleteNotification}
+                            />
                         ))
                     ) : (
                         <p className='text-left text-zinc-700'>0 powiadomień</p>

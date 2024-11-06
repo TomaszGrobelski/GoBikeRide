@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import PostDropdown from '@/sections/Post/Posts/PostDropdown';
 import Likes from '@/ui/molecules/Likes/Likes';
+import { scrollToPost } from '@/utils/scrolls/scrollToPost';
 
 import { IPost } from '@/types/Posts/posts.types';
 import { IUser } from '@/types/User/user.types';
@@ -12,53 +14,51 @@ import ReportPost from './ReportPost';
 import UserInformation from './UserInformation';
 
 interface IPostsList {
-  refetch: () => Promise<any>;
-  posts: IPost[] | undefined;
-  user: IUser | undefined;
+    refetch: () => Promise<any>;
+    posts: IPost[] | undefined;
+    user: IUser | undefined;
 }
 
 const PostsList = ({ posts, user, refetch }: IPostsList) => {
-  if (!user || !posts) {
-    return <PostSkeleton />;
-  }
-  return (
-    <div className='flex w-full flex-col items-center gap-16'>
-      {posts &&
-        posts.map((post) => {
-          const isUserPost = post.userId === user.id;
+  
+    useEffect(() => {
+        scrollToPost();
+    }, []);
 
-          return (
-            <div
-              key={post.id}
-              className='relative w-full max-w-[800px] space-y-6 rounded-3xl border-[1px] p-10 shadow-sm shadow-white'
-            >
-              {isUserPost && <PostDropdown post={post} />}
+    if (!user || !posts) {
+        return <PostSkeleton />;
+    }
 
-              {!isUserPost && <ReportPost />}
+    return (
+        <div className='flex w-full flex-col items-center gap-16'>
+            {posts &&
+                posts.map((post) => {
+                    const isUserPost = post.userId === user.id;
 
-              <UserInformation user={post.user} createdAt={post.createdAt} />
+                    return (
+                        <div
+                            key={post.id}
+                            id={`post-${post.id}`}
+                            className='relative w-full max-w-[800px] space-y-6 rounded-3xl border-[1px] p-10 shadow-sm shadow-white'
+                        >
+                            {isUserPost && <PostDropdown post={post} />}
 
-              <PostContent
-                description={post.description}
-                imageUrl={post.imageUrl}
-                postId={post.id}
-              />
+                            {!isUserPost && <ReportPost />}
 
-              <Likes
-                likes={post.likes || []}
-                postId={post.id}
-                userId={user.id}
-                refetch={refetch}
-              />
+                            <UserInformation user={post.user} createdAt={post.createdAt} />
 
-              <CommentForm user={user} postId={post.id} refetch={refetch} />
+                            <PostContent description={post.description} imageUrl={post.imageUrl} postId={post.id} />
 
-              <CommentsList comments={post.comments} />
-            </div>
-          );
-        })}
-    </div>
-  );
+                            <Likes likes={post.likes || []} postId={post.id} userId={user.id} refetch={refetch} />
+
+                            <CommentForm user={user} postId={post.id} refetch={refetch} postOwnerId={post.userId} />
+
+                            <CommentsList comments={post.comments} />
+                        </div>
+                    );
+                })}
+        </div>
+    );
 };
 
 export default PostsList;

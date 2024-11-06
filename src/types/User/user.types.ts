@@ -12,6 +12,11 @@ export enum RespectAction {
     DECREMENT = 'decrement',
 }
 
+export enum NotyficationType {
+    RESPECT = 'Respect',
+    COMMENT = 'Comment',
+}
+
 interface IUserReceivedRespect {
     id: string;
     giverId: string;
@@ -39,8 +44,9 @@ export interface ISocialMedia {
 
 export interface INotification {
     id: number;
+    postId: number;
     message: string;
     sender: IUser;
     createdAt: Date;
-    type: 'Respect' | 'Comment';
+    type: NotyficationType.RESPECT | NotyficationType.COMMENT;
 }
