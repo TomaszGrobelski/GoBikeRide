@@ -18,8 +18,9 @@ import UserProfileImage from './UserProfileImage';
 interface IProfileInformation {
     user: IUser;
     currentUser: IUser;
+    isCurrentUserProfile: boolean;
 }
-const ProfileInformation = ({ user, currentUser }: IProfileInformation) => {
+const ProfileInformation = ({ user, currentUser, isCurrentUserProfile }: IProfileInformation) => {
     const { mutate: updateRespect, isPending } = useUpdateRespect();
 
     const handleRespect = async (action: RespectAction.INCREMENT | RespectAction.DECREMENT) => {
@@ -37,7 +38,7 @@ const ProfileInformation = ({ user, currentUser }: IProfileInformation) => {
 
     return (
         <ProfilBox>
-            <UserProfileImage user={user} />
+            <UserProfileImage user={user} isCurrentUserProfile={isCurrentUserProfile} />
 
             <UserInfoRow>
                 <User color={colors.secondary} /> {user.username}
@@ -74,8 +75,7 @@ const ProfileInformation = ({ user, currentUser }: IProfileInformation) => {
             <UserInfoRow>
                 <p>Preferowany styl jazdy:</p>
                 <MainMethodBox method={user.mainMethod} />
-                <ProfileRidingStyle />
-                <p></p>
+                {isCurrentUserProfile && <ProfileRidingStyle />}
             </UserInfoRow>
 
             <CustomToaster />

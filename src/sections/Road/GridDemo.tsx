@@ -28,20 +28,20 @@ const items = [
         title: 'Szlak Green Velo',
         description:
             'Poznaj jeden z najdłuższych szlaków rowerowych w Polsce, przebiegający przez wschodnią część kraju.',
-        header: <Image src={dash} alt='bike' className='w-full h-32' />,
-        icon: <Icon icon="healthicons:low-bars" fontSize={24} />,
+        header: <Image src={dash} alt='bike' className='w-full h-32 rounded-xl' />,
+        icon: <Icon icon="healthicons:low-bars" fontSize={24} className=' text-green-800 ' />,
     },
     {
         title: 'Szlak Rowerowy Wokół Tatr',
         description: 'Szlak wokół Tatr, oferujący niezapomniane widoki na góry oraz malownicze wioski.',
         header: <Skeleton />,
-        icon: <Icon icon="healthicons:medium-bars" fontSize={24}  />,
+        icon: <Icon icon="healthicons:medium-bars" fontSize={24} className=' text-orange-400 '   />,
     },
     {
         title: 'Szlak Doliny Bugu',
         description: 'Rowerowa trasa wzdłuż rzeki Bug, prowadząca przez urokliwe miejsca nad brzegiem rzeki.',
         header: <Skeleton />,
-        icon: <Icon icon="healthicons:chart-bars" fontSize={20}  />,
+        icon: <Icon icon="healthicons:high-bars" fontSize={24} className=' text-red-600 '   />,
     },
     {
         title: 'Rowerowy Szlak Mazur',

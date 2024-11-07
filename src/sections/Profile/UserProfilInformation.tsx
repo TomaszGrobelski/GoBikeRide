@@ -16,7 +16,7 @@ interface IUserProfilInformation {
 const UserProfilInformation = ({ user, currentUser, isCurrentUserProfile }: IUserProfilInformation) => {
   return (
     <>
-      <ProfileInformation user={user} currentUser={currentUser} />
+      <ProfileInformation user={user} currentUser={currentUser} isCurrentUserProfile={isCurrentUserProfile} />
 
       <ProfileCounter user={user} />
 

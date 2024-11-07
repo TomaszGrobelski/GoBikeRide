@@ -13,43 +13,47 @@ import SettingsView from './SettingsView';
 import UserProfilInformation from './UserProfilInformation';
 
 const ProfileView = () => {
-  const params = useParams() as { id: string };
-  const { id } = params;
+    const params = useParams() as { id: string };
+    const { id } = params;
 
-  const { data: user, isLoading, error } = useUserById(id);
-  const { data: currentUser } = useUser();
+    const { data: user, isLoading, error } = useUserById(id);
+    const { data: currentUser } = useUser();
 
-  const [activeTab, setActiveTab] = useState('profile');
+    const [activeTab, setActiveTab] = useState('profile');
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setActiveTab(newValue);
-  };
+    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+        setActiveTab(newValue);
+    };
 
-  const isCurrentUserProfile = user?.id === currentUser?.id;
+    const isCurrentUserProfile = user?.id === currentUser?.id;
 
-  if (isLoading) {
-    return <LoadingPage />;
-  }
+    if (isLoading) {
+        return <LoadingPage />;
+    }
 
-  if (error) {
-    return <ErrorCard />;
-  }
+    if (error) {
+        return <ErrorCard />;
+    }
 
-  if (!user || !currentUser) {
-    return <UserNotLogged isLogged={!user} />;
-  }
+    if (!user || !currentUser) {
+        return <UserNotLogged isLogged={!user} />;
+    }
 
-  return (
-    <section className='ml-20 flex max-w-[1000px] flex-col justify-evenly gap-10'>
-      <ProfileTabs value={activeTab} handleChange={handleChange} />
+    return (
+        <section className='ml-20 flex max-w-[1000px] flex-col justify-evenly gap-10'>
+            <ProfileTabs value={activeTab} handleChange={handleChange} isCurrentUserProfile={isCurrentUserProfile} />
 
-      {activeTab === 'profile' && (
-        <UserProfilInformation user={user} currentUser={currentUser} isCurrentUserProfile={isCurrentUserProfile} />
-      )}
+            {activeTab === 'profile' && (
+                <UserProfilInformation
+                    user={user}
+                    currentUser={currentUser}
+                    isCurrentUserProfile={isCurrentUserProfile}
+                />
+            )}
 
-      {activeTab === 'settings' && <SettingsView user={user} />}
-    </section>
-  );
+            {activeTab === 'settings' && isCurrentUserProfile && <SettingsView user={user} />}
+        </section>
+    );
 };
 
 export default ProfileView;

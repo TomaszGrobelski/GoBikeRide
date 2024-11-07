@@ -65,14 +65,6 @@ const CommentForm = ({ refetch, user, postId, postOwnerId }: CommentFormProps) =
                 </Button>
             </div>
 
-            {/* <button
-                onClick={handleSubmit}
-                disabled={isPending}
-                className='self-end rounded-lg border-[1px] bg-mainColor px-4 py-2 text-white'
-            >
-                {isPending ? 'dodaje' : 'Skomentuj'}
-            </button> */}
-
             <CustomToaster />
         </div>
     );

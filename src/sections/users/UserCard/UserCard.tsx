@@ -19,7 +19,7 @@ interface IUserCard {
 
 const UserCard = ({ user }: IUserCard) => {
   return (
-    <CardItem key={user.username}>
+    <CardItem key={user.username} className='max-h-[600px]'>
       <div className='absolute -right-[30rem] -top-[30rem] h-96 w-96 rounded-full bg-mainColor blur-[400px]'></div>
       <div className='absolute -bottom-[30rem] -left-[30rem] h-96 w-96 rounded-full bg-mainColor blur-[400px]'></div>
       <Image src={userImg} alt='zdjęcie avatara' width={100} height={100} />
