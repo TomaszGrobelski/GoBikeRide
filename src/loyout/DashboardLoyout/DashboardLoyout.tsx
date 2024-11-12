@@ -24,9 +24,9 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
   const [isExpanded, setIsExpanded] = useState(!isSmallScreen);
 
   const sectionNames = {
-    bike: 'Rowerownia',
+    bike: 'Garaż',
     'go-bike': 'Go Bike',
-    road: 'Trasa',
+    road: 'Trasy',
     hero: '',
     posts: 'Posty',
     users: 'Lista użytkowników',
