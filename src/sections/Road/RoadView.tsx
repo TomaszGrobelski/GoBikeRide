@@ -1,29 +1,44 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useFetchTrail } from '@/api/road/useRoad';
 
-import { BentoGridDemo } from './GridDemo';
-import map from './map2.png';
+import { Difficulty, ITrail } from '@/types/Road/road.types';
 
-const polylineStyle = {
-    color: 'red',
-    weight: 5,
-};
-
-interface UserLocation {
-    latitude: number;
-    longitude: number;
-}
+import { roadItems } from '../../Mock/roadItemsMock';
+import RoadFilters from './Filters/RoadFilters';
+import RoadBackGround from './RoadBackGround';
+import { RoadsGridList } from './RoadsGridList';
+import RoadTabelContainter from './Table/RoadTabelContainter';
 
 const RoadView = () => {
+    const { data: trailList } = useFetchTrail();
+    const [filteredTrailList, setFilteredTrailList] = useState<ITrail[] | undefined>(trailList);
+
+    console.log(trailList);
+
+    useEffect(() => {
+        if (!trailList) return;
+
+        let filtredList = [...trailList];
+
+        // filtredList = filtredList.filter((item) => item.difficulty === Difficulty.Low);
+
+        setFilteredTrailList(filtredList);
+    }, [trailList]);
+
+    if (!trailList) {
+        return null;
+    }
     return (
         <section className='flex h-full w-full flex-col items-center gap-4 p-2 px-5 pt-5'>
-            <Image src={map} alt='' className='absolute left-0 top-20 -z-10 h-full w-full object-cover blur-[0px]' />
-            <div className='bg-[#E4DCD3] h-screen'>
-              <input type="text" />
-                <BentoGridDemo />
-            </div>
+            <RoadBackGround />
+
+            <RoadTabelContainter>
+                <RoadFilters />
+                <RoadsGridList trailList={filteredTrailList} />
+            </RoadTabelContainter>
         </section>
     );
 };

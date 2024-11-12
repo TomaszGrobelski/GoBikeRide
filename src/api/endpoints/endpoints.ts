@@ -32,4 +32,5 @@ export const endpoints = {
         delete: `${baseUrl}/profil/delete/`,
     },
     notifications: `${baseUrl}/notifications/`,
+    road: `${baseUrl}/road/`,
 };

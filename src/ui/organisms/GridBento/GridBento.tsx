@@ -1,4 +1,6 @@
+import Image from 'next/image';
 import { cn } from '@/utils/classMerge';
+import { Icon } from '@iconify/react/dist/iconify.js';
 
 export const BentoGrid = ({ className, children }: { className?: string; children?: React.ReactNode }) => {
     return (
@@ -7,6 +9,9 @@ export const BentoGrid = ({ className, children }: { className?: string; childre
         </div>
     );
 };
+const Skeleton = () => (
+    <div className='flex h-full min-h-[6rem] w-full flex-1 rounded-xl bg-gradient-to-br from-neutral-200 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800'></div>
+);
 
 export const BentoGridItem = ({
     className,
@@ -18,9 +23,10 @@ export const BentoGridItem = ({
     className?: string;
     title?: string | React.ReactNode;
     description?: string | React.ReactNode;
-    header?: React.ReactNode;
+    header?: string;
     icon?: React.ReactNode;
 }) => {
+    const imageSrc = header || '';
     return (
         <div
             className={cn(
@@ -28,9 +34,23 @@ export const BentoGridItem = ({
                 className,
             )}
         >
-            {header}
+            {header ? (
+                <Image src={imageSrc} alt='image' width={600} height={200} className='max-h-[150px]' />
+            ) : (
+                <Skeleton />
+            )}
+
             <div className='transition duration-200 group-hover/bento:translate-x-2'>
-                {icon}
+                <div className='flex items-center gap-3'>
+                    <div>{icon}</div>
+                    <div className='flex items-center'>
+                        <Icon icon='stash:star-duotone' fontSize={20} />
+                        <Icon icon='stash:star-duotone' fontSize={20} />
+                        <Icon icon='stash:star-duotone' fontSize={20} />
+                        <Icon icon='stash:star-duotone' fontSize={20} />
+                        <Icon icon='stash:star-duotone' fontSize={20} />
+                    </div>
+                </div>
                 <div className='mb-2 mt-2 font-sans font-bold text-neutral-600 dark:text-neutral-200'>{title}</div>
                 <div className='font-sans text-xs font-normal text-neutral-600 dark:text-neutral-300'>
                     {description}

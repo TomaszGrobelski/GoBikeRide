@@ -32,6 +32,7 @@ model User {
   receivedRespects      Respect[]      @relation("UserReceiver")
   receivedNotifications Notification[] @relation("NotificationReceiver")
   sentNotifications     Notification[] @relation("NotificationSender")
+  trial                 Trail []
 }
 
 model Bike {
@@ -137,4 +138,43 @@ model Notification {
 enum NotificationType {
   Respect
   Comment
+}
+
+model Trail {
+  id          Int         @id @default(autoincrement())
+  title       String
+  description String
+  imageUrl    String
+  difficulty  Difficulty
+  province    Province
+  createdAt   DateTime    @default(now())
+  addedById   String
+  addedBy     User        @relation(fields: [addedById], references: [id], onDelete: Cascade)
+
+  @@index([addedById])
+}
+
+enum Difficulty {
+  Low
+  Medium
+  Hard
+}
+
+enum Province {
+  Dolnoslaskie
+  KujawskoPomorskie
+  Lubelskie
+  Lubuskie
+  Lodzkie
+  Malopolskie
+  Mazowieckie
+  Opolskie
+  Podkarpackie
+  Podlaskie
+  Pomorskie
+  Slaskie
+  Swietokrzyskie
+  WarminskoMazurskie
+  Wielkopolskie
+  Zachodniopomorskie
 }
