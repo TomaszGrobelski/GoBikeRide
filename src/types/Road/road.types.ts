@@ -1,4 +1,5 @@
 export enum Difficulty {
+    All = 'All',
     Low = 'Low',
     Medium = 'Medium',
     Hard = 'Hard',
@@ -29,4 +30,11 @@ export interface ITrail {
     difficulty: Difficulty;
     province: Province;
     imageUrl: string;
+    rating: number;
+}
+
+export interface ITrailFilters {
+    name: string;
+    province: Province | '';
+    difficulty: Difficulty;
 }

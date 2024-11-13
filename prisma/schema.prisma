@@ -150,7 +150,8 @@ model Trail {
   createdAt   DateTime    @default(now())
   addedById   String
   addedBy     User        @relation(fields: [addedById], references: [id], onDelete: Cascade)
-
+  rating      Int         @default(0)
+  
   @@index([addedById])
 }
 

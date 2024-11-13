@@ -1,10 +1,12 @@
 import Image from 'next/image';
 import { cn } from '@/utils/classMerge';
 import { Icon } from '@iconify/react/dist/iconify.js';
+import StarRating from '@/utils/road/StarRating';
+import { Province } from '@/types/Road/road.types';
 
 export const BentoGrid = ({ className, children }: { className?: string; children?: React.ReactNode }) => {
     return (
-        <div className={cn('mx-auto grid max-w-7xl grid-cols-1 gap-4 md:auto-rows-[18rem] md:grid-cols-3', className)}>
+        <div className={cn('mx-auto grid max-w-7xl grid-cols-1 gap-4 md:auto-rows-[20rem] md:grid-cols-3', className)}>
             {children}
         </div>
     );
@@ -18,12 +20,16 @@ export const BentoGridItem = ({
     title,
     description,
     header,
+    province,
+    rating,
     icon,
 }: {
     className?: string;
     title?: string | React.ReactNode;
     description?: string | React.ReactNode;
     header?: string;
+    province: Province;
+    rating: number;
     icon?: React.ReactNode;
 }) => {
     const imageSrc = header || '';
@@ -35,7 +41,7 @@ export const BentoGridItem = ({
             )}
         >
             {header ? (
-                <Image src={imageSrc} alt='image' width={600} height={200} className='max-h-[150px]' />
+                <Image src={imageSrc} alt='image' width={600} height={200} className='max-h-[160px] w-full' />
             ) : (
                 <Skeleton />
             )}
@@ -43,16 +49,11 @@ export const BentoGridItem = ({
             <div className='transition duration-200 group-hover/bento:translate-x-2'>
                 <div className='flex items-center gap-3'>
                     <div>{icon}</div>
-                    <div className='flex items-center'>
-                        <Icon icon='stash:star-duotone' fontSize={20} />
-                        <Icon icon='stash:star-duotone' fontSize={20} />
-                        <Icon icon='stash:star-duotone' fontSize={20} />
-                        <Icon icon='stash:star-duotone' fontSize={20} />
-                        <Icon icon='stash:star-duotone' fontSize={20} />
-                    </div>
+                    <StarRating rating={rating} />
                 </div>
-                <div className='mb-2 mt-2 font-sans font-bold text-neutral-600 dark:text-neutral-200'>{title}</div>
-                <div className='font-sans text-xs font-normal text-neutral-600 dark:text-neutral-300'>
+                <p className='text-[14px] text-gray-600'>{province}</p>
+                <div className='mb-2 mt-1 font-sans font-bold text-neutral-600 dark:text-neutral-200'>{title}</div>
+                <div className='truncate font-sans text-xs font-normal text-neutral-600 dark:text-neutral-300'>
                     {description}
                 </div>
             </div>

@@ -7,21 +7,22 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import { Province } from '@/types/Road/road.types';
 
-export default function ProvinceSelect() {
-    const [age, setAge] = React.useState('');
+interface ProvinceSelectProps {
+    onProvinceChange: (province: Province | '') => void;
+}
 
+export default function ProvinceSelect({ onProvinceChange }: ProvinceSelectProps) {
     const handleChange = (event: SelectChangeEvent) => {
-        setAge(event.target.value);
+        onProvinceChange(event.target.value as Province | '');
     };
 
     return (
         <div>
-            <FormControl sx={{  minWidth: 210 }}>
+            <FormControl sx={{ minWidth: 210 }}>
                 <InputLabel id='demo-simple-select-helper-label'>Województwo</InputLabel>
                 <Select
                     labelId='demo-simple-select-helper-label'
                     id='demo-simple-select-helper'
-                    value={age}
                     label='Województwo'
                     onChange={handleChange}
                 >

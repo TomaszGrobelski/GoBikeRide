@@ -3,11 +3,19 @@ import { Icon } from '@iconify/react/dist/iconify.js';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 
-export default function DifficultyTab() {
+import { Difficulty } from '@/types/Road/road.types';
+
+interface DifficultyTabProps {
+    onDifficultyChange: (difficulty: Difficulty) => void;
+}
+
+export default function DifficultyTab({ onDifficultyChange }: DifficultyTabProps) {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
+        const difficulty = [Difficulty.All, Difficulty.Low, Difficulty.Medium, Difficulty.Hard][newValue];
+        onDifficultyChange(difficulty);
     };
 
     return (

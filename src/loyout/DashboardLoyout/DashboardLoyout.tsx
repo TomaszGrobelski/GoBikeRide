@@ -26,7 +26,7 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
   const sectionNames = {
     bike: 'Garaż',
     'go-bike': 'Go Bike',
-    road: 'Trasy',
+    road: '',
     hero: '',
     posts: 'Posty',
     users: 'Lista użytkowników',
