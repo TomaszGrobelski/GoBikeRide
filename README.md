@@ -22,8 +22,8 @@ GoBikeRide is built using the following technologies:
 
 ### Backend:
 - **Supabase** – An open-source Firebase alternative for authentication and database management. It is used for managing user sessions, storing data, and interacting with the database.
-- **SPrisma ORMS** – Used for interacting with the database, providing a high-level API for querying and manipulating data.
-- **SSupabase**S – While not used in the provided code snippet, Supabase is listed as the authentication and database management service.
+- **Prisma ORMS** – Used for interacting with the database, providing a high-level API for querying and manipulating data.
+- **Supabase** – While not used in the provided code snippet, Supabase is listed as the authentication and database management service.
 
 
 ## Features
