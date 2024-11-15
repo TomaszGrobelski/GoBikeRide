@@ -13,7 +13,7 @@ GoBikeRide is a comprehensive cycling application designed to help cyclists keep
 GoBikeRide is built using the following technologies:
 
 ### Frontend:
-- **Next.js** – A React framework that enables server-side rendering and static site generation.
+- **Next.js** – A React framework that enables server-side rendering (SSR), static site generation (SSG), and API routes.
 - **TypeScript** – A superset of JavaScript that adds static types, helping to catch errors early and improve code quality.
 - **Tailwind CSS** – A utility-first CSS framework for building custom designs quickly.
 - **Framer Motion** – A popular library for adding animations and transitions to React applications.
@@ -22,6 +22,8 @@ GoBikeRide is built using the following technologies:
 
 ### Backend:
 - **Supabase** – An open-source Firebase alternative for authentication and database management. It is used for managing user sessions, storing data, and interacting with the database.
+- **SPrisma ORMS** – Used for interacting with the database, providing a high-level API for querying and manipulating data.
+- **SSupabase**S – While not used in the provided code snippet, Supabase is listed as the authentication and database management service.
 
 
 ## Features
