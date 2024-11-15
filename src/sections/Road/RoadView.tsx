@@ -19,8 +19,8 @@ const RoadView = () => {
     }
 
     return (
-        <section className='flex h-full w-full flex-col items-center gap-4 p-2 px-5 pt-5'>
-            <RoadBackGround />
+        <section className='flex h-full bg-secoundSea flex-col items-center justify-center -mt-5  gap-4 p-2 px-5 pt-5'>
+            {/* <RoadBackGround /> */}
 
             <RoadTabelContainter>
                 <RoadFilters filters={filters} setFilters={setFilters} />

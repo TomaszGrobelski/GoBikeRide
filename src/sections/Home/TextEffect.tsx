@@ -1,6 +1,6 @@
 'use client';
 import { motion, Variants } from 'framer-motion';
-import React from 'react';
+import React, { ElementType } from 'react';
 
 type PresetType = 'blur' | 'shake' | 'scale' | 'fade' | 'slide';
 
@@ -118,7 +118,7 @@ export function TextEffect({
   preset,
 }: TextEffectProps) {
   const words = children.split(/(\S+)/);
-  const MotionTag = motion[as as keyof typeof motion];
+  const MotionTag: ElementType = motion[as as keyof typeof motion];
   const selectedVariants = preset
     ? presetVariants[preset]
     : { container: defaultContainerVariants, item: defaultItemVariants };

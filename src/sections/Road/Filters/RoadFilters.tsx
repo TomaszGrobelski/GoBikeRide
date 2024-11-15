@@ -17,7 +17,7 @@ const RoadFilters = ({ filters, setFilters }: IRoadFilters) => {
     const handleDifficultyChange = (difficulty: Difficulty) => setFilters((prev) => ({ ...prev, difficulty }));
 
     return (
-        <div className='flex flex-wrap items-center justify-start gap-5 rounded-lg bg-white p-5'>
+        <div className='flex flex-wrap max-w-7xl w-full  items-center justify-start gap-5 rounded-lg bg-white p-5'>
             <SearchRoad onNameChange={handleNameChange} value={filters.name} />
             <ProvinceSelect onProvinceChange={handleProvinceChange} />
             <DifficultyTab onDifficultyChange={handleDifficultyChange} />

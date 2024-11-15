@@ -6,20 +6,20 @@ export enum Difficulty {
 }
 
 export enum Province {
-    Dolnoslaskie = 'Dolnośląskie',
-    KujawskoPomorskie = 'Kujawsko-Pomorskie',
+    Dolnoslaskie = 'Dolnoslaskie',
+    KujawskoPomorskie = 'KujawskoPomorskie',
     Lubelskie = 'Lubelskie',
     Lubuskie = 'Lubuskie',
-    Lodzkie = 'Łódzkie',
+    Lodzkie = 'Lodzkie',
     Malopolskie = 'Małopolskie',
     Mazowieckie = 'Mazowieckie',
     Opolskie = 'Opolskie',
     Podkarpackie = 'Podkarpackie',
     Podlaskie = 'Podlaskie',
     Pomorskie = 'Pomorskie',
-    Slaskie = 'Śląskie',
-    Swietokrzyskie = 'Świętokrzyskie',
-    WarminskoMazurskie = 'Warmińsko-Mazurskie',
+    Slaskie = 'Slaskie',
+    Swietokrzyskie = 'Swietokrzyskie',
+    WarminskoMazurskie = 'WarminskoMazurskie',
     Wielkopolskie = 'Wielkopolskie',
     Zachodniopomorskie = 'Zachodniopomorskie',
 }

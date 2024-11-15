@@ -60,7 +60,7 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
       <UpperBar />
       <Modal />
       <motion.div
-        className={`relative z-0 flex min-h-full w-full flex-col gap-5 backdrop-blur-md`}
+        className={`relative z-0 flex min-h-full w-full flex-col  backdrop-blur-md`}
         initial={{ marginLeft: isExpanded ? '5rem' : '16rem' }}
         animate={{ marginLeft: isExpanded ? '5rem' : '16rem' }}
         transition={{ duration: 0.5, ease: 'easeInOut' }}
