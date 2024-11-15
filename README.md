@@ -4,6 +4,22 @@ GoBikeRide is a comprehensive cycling application designed to help cyclists keep
 
 ---
 
+## Tech Stack
+
+GoBikeRide is built using the following technologies:
+
+### Frontend:
+- **React** – A JavaScript library for building user interfaces.
+- **Next.js** – A React framework that enables server-side rendering and static site generation.
+- **Tailwind CSS** – A utility-first CSS framework for building custom designs quickly.
+- **Framer Motion** – A popular library for adding animations and transitions to React applications.
+- **React Hook Form** – A library for handling forms in React with minimal re-rendering.
+- **Zod** – A TypeScript-first schema validation library for validating form inputs.
+
+### Backend:
+- **Supabase** – An open-source Firebase alternative for authentication and database management. It is used for managing user sessions, storing data, and interacting with the database.
+
+
 ## Features
 
 ### 1. **User Authentication** 
