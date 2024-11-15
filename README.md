@@ -1,5 +1,7 @@
-# GoBikeRide - README
+# GoBikeRide
+![NikaShop](/public/images/GoBikeRIdeHomePage.png)
 
+## Demo
 [GoBikeRide Project Link](https://go-bike-ride.vercel.app/auth/sign-in)
 
 GoBikeRide is a comprehensive cycling application designed to help cyclists keep track of their rides, maintain their bikes, and connect with other cycling enthusiasts. Whether you're a seasoned cyclist or just starting, GoBikeRide provides all the tools you need to enhance your riding experience.
