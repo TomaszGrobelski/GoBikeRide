@@ -5,7 +5,7 @@ GoBikeRide is a comprehensive cycling application designed to help cyclists keep
 ![NikaShop](/public/images/GoBikeRIdeHomePage.png)
 
 ## Demo
-[Portfolio Project Link](https://portfolio-iota-eight-45.vercel.app/)
+[GoBikeRide Project Link](https://go-bike-ride.vercel.app/dashboard/hero)
 
 
 ---
