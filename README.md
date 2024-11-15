@@ -21,7 +21,7 @@ GoBikeRide is built using the following technologies:
 - **Zod** – A TypeScript-first schema validation library for validating form inputs.
 
 ### Backend:
-- **Supabase** – An open-source Firebase alternative for authentication and database management. It is used for managing user sessions, storing data, and interacting with the database.
+- **Next.js API Routes** – The backend logic is handled by API routes in Next.js, allowing you to write server-side code directly within your project.
 - **Prisma ORMS** – Used for interacting with the database, providing a high-level API for querying and manipulating data.
 - **Supabase** – While not used in the provided code snippet, Supabase is listed as the authentication and database management service.
 
