@@ -9,7 +9,7 @@ export function usePagination<T>({ items, itemsPerPage }: UsePaginationProps<T>)
     const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
-        setCurrentPage(1); // Resetowanie strony, gdy zmienia się lista elementów
+        setCurrentPage(1);
     }, [items]);
 
     const startIndex = (currentPage - 1) * itemsPerPage;

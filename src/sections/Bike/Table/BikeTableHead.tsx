@@ -15,8 +15,8 @@ import { IComponents } from '@/types/Bike/Components/components.types';
 interface IBikeTableHead {
   handleSortChange: (columnName: keyof IComponents) => void;
   sortOptions: {
-    field: keyof IComponents; // Field to sort by
-    direction: 'asc' | 'desc'; // Sort direction
+    field: keyof IComponents; 
+    direction: 'asc' | 'desc'; 
   };
 }
 

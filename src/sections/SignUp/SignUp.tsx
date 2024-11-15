@@ -24,8 +24,6 @@ import { useBoolean } from '@/hooks/use-Boolean';
 
 import { RegisterFormSchema } from './form.schema';
 
-// CI/CD dodać do projektu
-
 const SignUp = () => {
     const router = useRouter();
     const { setRegisteredSuccessfully } = useRegistration();

@@ -4,7 +4,7 @@ interface IStarRating {
     rating: number;
 }
 function StarRating({ rating }: IStarRating) {
-    const totalStars = 5; // Total stars to display
+    const totalStars = 5;
 
     return (
         <div className='flex items-center'>

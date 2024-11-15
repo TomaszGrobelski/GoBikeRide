@@ -10,8 +10,6 @@ import {
     updateComponent,
 } from './bikeQueries';
 
-// onError obsłuzyć....
-
 export const useFetchBikes = (userId: string) => {
     return useQuery({
         queryKey: ['bikes', userId],
@@ -41,6 +39,9 @@ export const useUpdateBike = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['bikes'] });
         },
+        onError: (error) => {
+            alert(`Nie udało się zaktualizować roweru: ${error}`);
+        },
     });
 };
 
@@ -50,6 +51,9 @@ export const useRemoveBike = () => {
         mutationFn: (bikeId: number) => removeBike(bikeId),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['bikes'] });
+        },
+        onError: (error) => {
+            alert(`Nie udało się usunąć roweru: ${error}`);
         },
     });
 };
@@ -68,6 +72,9 @@ export const useAddComponent = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['bikes'] });
         },
+        onError: (error) => {
+            alert(`Nie udało się dodać komponentu: ${error}`);
+        },
     });
 };
 
@@ -81,8 +88,8 @@ export const useDeleteComponent = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['bikes'] });
         },
-        onError: (error: unknown) => {
-            console.error('Error deleting post:', error);
+        onError: (error) => {
+            alert(`Nie udało się usunąć komponentu: ${error}`);
         },
     });
 };
@@ -104,7 +111,7 @@ export const useUpdateComponent = () => {
             queryClient.invalidateQueries({ queryKey: ['bikes'] });
         },
         onError: (error) => {
-            console.error('Error updating component:', error);
+            alert(`Nie udało się zaktualizować komponentu: ${error}`);
         },
     });
 };

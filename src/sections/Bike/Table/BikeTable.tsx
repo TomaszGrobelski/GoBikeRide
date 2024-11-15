@@ -43,7 +43,7 @@ interface BikeTableProps {
 
 export default function BikeTable({ user }: BikeTableProps) {
   if (!user) {
-    throw new Error('User is not defined'); // ma wywalić do strony logowania
+    throw new Error('Użytkownik nie jest zalogowany'); 
   }
 
   const { data: bikes, isLoading, isError } = useFetchBikes(user.id);
@@ -110,7 +110,6 @@ export default function BikeTable({ user }: BikeTableProps) {
     });
   };
 
-  //na małymekranie jak są nazwy kolumn to żeby dało sie przewijać w bk zamiast zeby znikały po prawo
   return (
     <TableContainer
       sx={{
@@ -118,8 +117,6 @@ export default function BikeTable({ user }: BikeTableProps) {
         borderRadius: 5,
         p: 3,
         maxWidth: 1200,
-
-        // width: '100%',
       }}
       component={Paper}
       className='custom-scrollbar overflow-x-auto'

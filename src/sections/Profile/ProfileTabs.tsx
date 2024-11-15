@@ -9,7 +9,6 @@ interface ProfileTabsProps {
     isCurrentUserProfile: boolean;
 }
 
-// Stylowanie zakładek
 const StyledTab = styled(Tab)(({ theme }) => ({
     '&.Mui-selected': {
         color: '#B1C181',

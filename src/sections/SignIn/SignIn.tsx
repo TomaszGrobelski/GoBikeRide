@@ -27,7 +27,6 @@ import SocialLogin from './SocialLogin';
 
 type FormValues = z.infer<typeof LoginFormSchema>;
 
-// Obsługa błędu z konsoli: Email not confirmed, żeby użytkownikowi wyświetlić
 const SignIn = () => {
     const router = useRouter();
     const toastMounted = useBoolean();
@@ -54,11 +53,13 @@ const SignIn = () => {
             const { message, success, session } = await signInAction(formData);
 
             if (!success) {
-                toast.error('Nie udało się zalogować. Sprawdź dane logowania.');
+                toast.error(message || 'Nie udało się zalogować. Sprawdź dane logowania.');
             } else if (success) {
                 if (session) {
                     const { error } = await supabase.auth.setSession(session);
-                    toast.error(error?.message);
+                    if (error) {
+                        toast.error(error.message || 'Wystąpił błąd podczas logowania.');
+                    }
                 }
                 router.push(paths.dashboard.home);
             }
@@ -105,6 +106,10 @@ const SignIn = () => {
                         <SubmitButton>Zaloguj</SubmitButton>
                     </form>
                 </Form>
+                <div>
+                    <p>Email: Testowe@gmail.com</p>
+                    <p>Hasło: Testowe123</p>
+                </div>
             </div>
 
             <RegistrationBox />

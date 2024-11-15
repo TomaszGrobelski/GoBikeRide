@@ -26,7 +26,6 @@ const TableTextField: React.FC<TableTextFieldProps> = ({
         {...register(name)}
         type='text'
         id={id}
-        // value={value}
         placeholder={placeholder}
         className='min-h-12 border-b-1 text-center outline-none'
         {...props}

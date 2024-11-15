@@ -13,10 +13,6 @@ import {
   updatePost,
 } from './postQueries';
 
-// export const useFetchPosts = () => {
-//   return useQuery(['posts'], () => fetchPosts());
-// };
-
 export const useInfiniteFetchPosts = () => {
   return useInfiniteQuery({
     queryKey: ['posts'],

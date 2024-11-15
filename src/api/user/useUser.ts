@@ -19,7 +19,6 @@ export const useUser = () => {
 };
 
 export const useSocialMedia = (userId: string) => {
-    // Nie używane i fetchSocialMedia też ( sprawdzić)
     return useQuery<ISocialMedia | undefined>({
         queryKey: ['socialMedia', userId],
         queryFn: () => fetchSocialMedia(userId),
@@ -42,7 +41,7 @@ export const useUpdateSocialMedia = () => {
             queryClient.invalidateQueries({ queryKey: ['user'] });
         },
         onError: (error) => {
-            console.error('Error updating social media:', error);
+            alert(`Nie udało się zaktualizować social mediów: ${error}`);
         },
     });
 };
@@ -68,7 +67,7 @@ export const useUpdateRespect = () => {
             queryClient.invalidateQueries({ queryKey: ['notification', userId] });
         },
         onError: (error) => {
-            console.error('Error updating respect:', error);
+            alert(`Nie udało się zaktualizować respektu: ${error}`);
         },
     });
 };
@@ -84,9 +83,12 @@ export const useDeleteNotification = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: (notificationId: number) => deleteNotification(notificationId), // Usunięcie notificationId jako argumentu hooka
+        mutationFn: (notificationId: number) => deleteNotification(notificationId),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['notification'] });
+        },
+        onError: (error) => {
+            alert(`Nie udało się usunąć respektu: ${error}`);
         },
     });
 };

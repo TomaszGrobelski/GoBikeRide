@@ -1,4 +1,3 @@
-// const baseUrl = 'http://localhost:3000/api';
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const endpoints = {

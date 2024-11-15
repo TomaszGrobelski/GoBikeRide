@@ -9,7 +9,7 @@ interface HomeCardProps {
   description: string;
   listItems: string[];
   linkHref: string;
-  reverseLayout?: boolean; // Nowy atrybut
+  reverseLayout?: boolean; 
 }
 
 const HomeCard: React.FC<HomeCardProps> = ({
@@ -19,7 +19,7 @@ const HomeCard: React.FC<HomeCardProps> = ({
   description,
   listItems,
   linkHref,
-  reverseLayout = false, // Domyślnie false
+  reverseLayout = false, 
 }) => {
   return (
     <div

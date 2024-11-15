@@ -17,6 +17,6 @@ const LoadingNextPosts = React.forwardRef<HTMLDivElement, ILoadingNextPostsProps
   }
 );
 
-LoadingNextPosts.displayName = 'LoadingNextPosts'; // Dodać nazwę komponentu dla ESLint
+LoadingNextPosts.displayName = 'LoadingNextPosts'; 
 
 export default LoadingNextPosts;

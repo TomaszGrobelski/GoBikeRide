@@ -10,8 +10,6 @@ interface IRespectButton extends ButtonHTMLAttributes<HTMLButtonElement> {
 const RespectButton = ({ onClick, respectType, ...props }: IRespectButton) => {
     return (
         <button
-            // onClick={() => handleRespect(RespectAction.INCREMENT)}
-            // disabled={isPending}
             onClick={onClick}
             className={`hover mb-1 ml-2 flex items-center justify-center ${respectType === RespectAction.DECREMENT ? 'rotate-180' : ''} `}
             {...props}
