@@ -41,7 +41,6 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
     const { id: notificationId } = params;
-    console.log(typeof notificationId);
 
     if (!notificationId) {
         return NextResponse.json({ error: 'Invalid notification ID' }, { status: 400 });

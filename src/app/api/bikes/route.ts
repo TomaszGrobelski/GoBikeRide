@@ -32,9 +32,8 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(bikes);
   } catch (error) {
-    console.error('Error fetching bikes:', error);
     return NextResponse.json(
-      { message: 'Error fetching bikes' },
+      { message: 'Error fetching bikes', error },
       { status: 500 },
     );
   }

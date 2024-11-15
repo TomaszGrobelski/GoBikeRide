@@ -4,12 +4,7 @@ import Link from 'next/link';
 import { paths } from '@/routes/paths';
 import GradientBox from '@/ui/atmos/Boxes/GradientBox';
 import CardInformation from '@/ui/molecules/Cards/CardInformation';
-import { Icon } from '@iconify/react/dist/iconify.js';
-import { Item } from '@radix-ui/react-dropdown-menu';
-import { motion, Variants } from 'framer-motion';
 
-import PricingCard from '../premium/PricingCard/PricingCard';
-import Carousel from './Carousel/Carousel';
 import HomeCard from './HomeCard/HomeCard';
 import { homeCardList } from './HomeCard/homeCardList';
 import { homeCardInfromation } from './homeCardInformation';
@@ -72,14 +67,6 @@ const HomeView = () => {
                     </Link>
                 </GradientBox>
             </div>
-
-            {/* <div className='space-y-4 p-6'>
-        <h3 className='text-xl font-bold'>Wsparcie i kontakt:</h3>
-        <p>
-          Jeśli masz pytania lub potrzebujesz pomocy, skontaktuj się z naszym
-          zespołem wsparcia: support@gobikeride.com
-        </p>
-      </div> */}
         </section>
     );
 };

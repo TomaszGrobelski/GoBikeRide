@@ -23,7 +23,6 @@ export function RoadsGridList({ trailList }: IRoadsGridList) {
         goToPreviousPage,
     } = usePagination<ITrail>({ items: trailList, itemsPerPage: ITEMS_PER_PAGE });
 
-    console.log(paginatedTrailList);
     return (
         <div className='flex h-full flex-col justify-between'>
             <BentoGrid className='mx-auto'>

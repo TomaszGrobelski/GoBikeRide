@@ -28,7 +28,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
 
     return (
         <Link href={linkPath}>
-            <div className='relative z-20 w-full rounded-lg bg-gray-300 p-2'>
+            <div className='relative z-20 font-roboto w-full rounded-lg bg-yellow-300/80 p-2 '>
                 <button
                     onClick={handleDeleteClick}
                     disabled={isDeleteNotification}

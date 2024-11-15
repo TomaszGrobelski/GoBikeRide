@@ -13,7 +13,7 @@ const RoadView = () => {
     const { data: trailList } = useFetchTrail();
 
     const { filteredTrailList, filters, setFilters } = useFilteredTrails(trailList);
-    console.log(trailList);
+
     if (!trailList) {
         return null;
     }

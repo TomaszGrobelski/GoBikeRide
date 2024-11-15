@@ -51,7 +51,6 @@ const SignUp = () => {
             });
 
             if (error) {
-                console.log(error);
                 toast.error('Użytkownicy mogą założyć jedno konto raz na 30 minuty');
             } else if (data) {
                 const userId = data.user?.id;
@@ -71,14 +70,12 @@ const SignUp = () => {
                         toast.error(`Wystąpił błąd podczas rejestracji: ${response.data.message}`);
                     }
                 } catch (error: any) {
-                    console.log(error);
                     toast.error(`Wystąpił błąd podczas rejestracji: ${error.response?.data?.message || error.message}`);
                     console.error('Błąd podczas rejestracji:', error);
                 }
             }
         } catch (error: any) {
             toast.error('Wystąpił błąd podczas rejestracji.');
-            console.error('Błąd podczas rejestracji:', error.message);
         } finally {
             isSubmitting.setFalse();
         }

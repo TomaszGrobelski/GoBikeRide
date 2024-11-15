@@ -55,7 +55,6 @@ const SignIn = () => {
 
             if (!success) {
                 toast.error('Nie udało się zalogować. Sprawdź dane logowania.');
-                console.log(message, 'Nie udało sie zalogować');
             } else if (success) {
                 if (session) {
                     const { error } = await supabase.auth.setSession(session);
@@ -65,7 +64,6 @@ const SignIn = () => {
             }
         } catch (error) {
             toast.error('Wystąpił błąd podczas logowania.');
-            console.log(error, 'jakis error');
         }
     };
 

@@ -6,7 +6,6 @@ const prisma = new PrismaClient();
 export async function DELETE(request: NextRequest, { params }: { params: { id: number } }) {
     const { id: commentId } = params;
 
-    console.log(params);
     try {
         if (!commentId) {
             return NextResponse.json({ message: 'Missing commentId' }, { status: 400 });

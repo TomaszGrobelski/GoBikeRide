@@ -23,7 +23,7 @@ export const homeCardList = [
       'Najlepsze trasy na weekend.',
       'Zdrowie i kondycja dla rowerzystów.',
     ],
-    linkHref: '/tips',
+    linkHref: '/',
     reverseLayout: true,
   },
   {
@@ -33,6 +33,6 @@ export const homeCardList = [
     description:
       'Nie przegap żadnej z najnowszych funkcji i udoskonaleń, które regularnie dodajemy do naszej aplikacji, aby zapewnić Ci najlepsze doświadczenia i najwyższą jakość usług. Jesteśmy zawsze na bieżąco z najnowszymi trendami i technologiami, co pozwala nam wprowadzać innowacje, które ułatwiają Ci korzystanie z aplikacji. Nasze aktualizacje obejmują nie tylko poprawki błędów i optymalizację wydajności, ale również wprowadzenie nowych funkcji, które zwiększają komfort i efektywność korzystania z aplikacji.',
     listItems: ['Nowe trasy dodane!', 'Aktualizacja aplikacji w wersji 2.0.'],
-    linkHref: '/news',
+    linkHref: '/',
   },
 ];

@@ -50,8 +50,6 @@ const DashboardLoyout = ({ children }: IDashboardLayout) => {
     return null;
   }
 
-  //Tak samo jak Modala chyba trzeba zrobić Toasta żeby był dostepna z tego miejsca dla calej aplikacji
-
   return (
     <div
       className={`relative flex min-h-full font-poppins ${theme === 'light' ? 'bg-lightBackground' : 'bg-[#030014]'} `}
