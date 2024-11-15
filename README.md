@@ -84,3 +84,5 @@ GoBikeRide is built using the following technologies:
    - **Settings:** Users can change their password or delete their account from the profile settings.
 
 ---
+
+GoBikeRide is constantly evolving, and we are excited to continue adding more features and improvements. Thank you for using our app, and we hope it enhances your cycling experience! 🚴‍♂️🚴‍♀️
