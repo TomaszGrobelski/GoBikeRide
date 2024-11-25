@@ -33,7 +33,7 @@ const config: Config = {
         secoundSea: '#102532',
       },
       backgroundColor: {
-        // lightBackground: '#F8F9F9',
+        // lightBackground: '#F8F9F9', theme
         lightBackground: '#F7F7F7',
       },
       boxShadow: {
