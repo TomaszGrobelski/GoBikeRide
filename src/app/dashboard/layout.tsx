@@ -15,9 +15,9 @@ const Layout = ({ children }: Props) => {
   return (
     <QueryClientProvider client={queryClient}>
       <DateLocalizationProvider>
-        <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+        {/* <ThemeProvider attribute='class' defaultTheme='system' enableSystem> */}
           <DashboardLoyout>{children}</DashboardLoyout>
-        </ThemeProvider>
+        {/* </ThemeProvider> */}
       </DateLocalizationProvider>
     </QueryClientProvider>
   );
